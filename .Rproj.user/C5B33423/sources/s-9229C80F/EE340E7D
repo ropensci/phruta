@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1627668987904.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EE340E7D",
+    "lastKnownWriteTime" : 1627678888,
+    "last_content_update" : 1627678888172,
+    "path" : "~/MEGAsync/Packages/MacMini/phruta/vignettes/phruta_vignette.Rmd",
+    "project_path" : "vignettes/phruta_vignette.Rmd",
+    "properties" : {
+        "cursorPosition" : "145,22",
+        "scrollLine" : "139",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
