@@ -15,7 +15,7 @@ tree.raxml<-function(folder='2.Alignments', FilePatterns= 'Masked', raxml_exec='
                 f = "a", N = Bootstrap, p = 1234, x = 1234,
                 k=T,
                 exec =raxml_exec ,threads=4,
-                file='PhyloPipeR',
+                file='phruta',
                 outgroup=outgroup, ...)
     setwd(mainDir)
 

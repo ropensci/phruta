@@ -7,7 +7,7 @@ sq.aln<-function(folder='1.CuratedSequences',FilePatterns= 'renamed', mask=T, ..
   filesComplete<-list.files(folder, FilePatterns, full.names = T)
   unlink("2.Alignments", recursive = TRUE)
   dir.create('2.Alignments')
-
+  invisible(
   lapply(seq_along(filesComplete), function(x){
   seqs <- readDNAStringSet(filesComplete[x])
   seqs <- OrientNucleotides(seqs)
@@ -22,5 +22,5 @@ sq.aln<-function(folder='1.CuratedSequences',FilePatterns= 'renamed', mask=T, ..
 
   writeXStringSet(aligned,   file=paste0('2.Alignments/',files[x]))
   })
-
+  )
 }

@@ -1,4 +1,4 @@
-sq.retrieve <- function(clades=NULL, species=NULL, genes, maxseqs=1, maxlength=5000, export=T) {
+sq.retrieve <- function(clades=NULL, species=NULL, genes, maxseqs=1, maxlength=5000) {
 
   ##Find the species
  taxa <- if(!is.null(clades)){
@@ -8,12 +8,14 @@ sq.retrieve <- function(clades=NULL, species=NULL, genes, maxseqs=1, maxlength=5
 	}else{
 	species
 	}
+ unlink("0.Sequences", recursive = TRUE)
+ dir.create('0.Sequences')
 
-  Full_sequences <- lapply(seq_along(genes), function(y) {
-    ret_seqs <- pblapply(seq_along(taxa), function(x) {
+  singleGene <-  function(gene) {
+    ret_seqs <- lapply(seq_along(taxa), function(x) {
       tryCatch({
         targetsp <-
-          paste0(taxa[x], '[ORGN] AND ',genes[y], "[Gene] AND 1:" , maxlength, "[SLEN]")
+          paste0(taxa[x], '[ORGN] AND ',gene, "[Gene] AND 1:" , maxlength, "[SLEN]")
 
         res_rearch <-
           entrez_search(db = "nuccore",
@@ -23,7 +25,7 @@ sq.retrieve <- function(clades=NULL, species=NULL, genes, maxseqs=1, maxlength=5
         if (length(res_rearch$ids) == 0) {
           return(list(
             taxa = taxa[x],
-            gene = genes[y],
+            gene = gene,
             data = F,
             sequences = NA
           ))
@@ -35,49 +37,38 @@ sq.retrieve <- function(clades=NULL, species=NULL, genes, maxseqs=1, maxlength=5
                          rettype = "fasta")
           return(list(
             taxa = taxa[x],
-            gene = genes[y],
+            gene = gene,
             data = F,
             sequences = res_seqs
           ))
         }
 
       }, error=function(e){})})
-  })
-  names(Full_sequences) <- genes
 
 
-  if(export==T){
-    unlink("0.Sequences", recursive = TRUE)
-    dir.create('0.Sequences')
-    lapply(seq_along(genes), function(y) {
+    invisible(
       lapply(seq_along(taxa), function(x) {
-        if(!is.na( Full_sequences[[y]][[x]]$sequences)){
+        if(!is.na(ret_seqs[[x]]$sequences)){
           write(
-            Full_sequences[[y]][[x]]$sequences,
-            paste0('0.Sequences/',genes[y],".fasta"),
+            ret_seqs[[x]]$sequences,
+            paste0('0.Sequences/',gene,".fasta"),
             sep = "\n",
             append = TRUE
           )
         }
       })
-    })
+    )
 
-    unsampled_taxa <- lapply(Full_sequences, function(x){
-      unsampled<-is.na(unlist(lapply(seq_along(x), function(y) x[[y]][[4]])))
-      unlist(lapply(seq_along(x), function(y) x[[y]][[1]]))[unsampled]
-    })
-    unsampled_taxa<-Reduce(intersect, unsampled_taxa)
-    attr(Full_sequences, 'unsampled_taxa') <- unsampled_taxa
 
-    return(Full_sequences)
-  }else{
-    unsampled_taxa <- lapply(Full_sequences, function(x){
-      unsampled<-is.na(unlist(lapply(seq_along(x), function(y) x[[y]][[4]])))
-      unlist(lapply(seq_along(x), function(y) x[[y]][[1]]))[unsampled]
-    })
-    unsampled_taxa<-Reduce(intersect, unsampled_taxa)
-
-    attr(Full_sequences, 'unsampled_taxa') <- unsampled_taxa
-    return(Full_sequences)
   }
+
+  Full_sequences = pblapply(genes, singleGene)
+  names(Full_sequences) <- genes
+#
+#   unsampled_taxa <- lapply(Full_sequences, function(x){
+#       unsampled<-is.na(unlist(lapply(seq_along(x), function(y) x[[y]][[4]])))
+#       unlist(lapply(seq_along(x), function(y) x[[y]][[1]]))[unsampled]
+#   })
+#   unsampled_taxa<-Reduce(intersect, unsampled_taxa)
+#   return(unsampled_taxa)
 }

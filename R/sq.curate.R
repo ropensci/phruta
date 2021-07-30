@@ -9,7 +9,7 @@ sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0
 
     species_names<-unique(AccDat$Species)
 
-    gbifkey <- pblapply(species_names, function(x) name_backbone(name = x, kingdom = kingdom))
+    gbifkey <- lapply(species_names, function(x) name_backbone(name = x, kingdom = kingdom))
     keys<-pblapply(1:length(gbifkey), function(x){
 
       if(as.character(gbifkey[[x]][which(names(gbifkey[[x]]) == "matchType")]) == "NONE"){0}else{
@@ -26,9 +26,9 @@ sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0
       }
 
     })
-    gbif_taxonomy <- pblapply(unlist(keys), function(x) as.data.frame(name_usage(key = x)$data))
+    gbif_taxonomy <- lapply(unlist(keys), function(x) as.data.frame(name_usage(key = x)$data))
     ranks<-c("kingdom", "phylum", "class","order", "family", "genus", "species")
-    Taxonomy_species<-pblapply(seq_along(gbif_taxonomy), function(y){
+    Taxonomy_species<-lapply(seq_along(gbif_taxonomy), function(y){
       sub1<-gbif_taxonomy[[y]]
       cate<-t(data.frame( unlist( lapply(seq_along(ranks), function(x){
         nu<- which(colnames(sub1) == ranks[x])
@@ -72,8 +72,25 @@ sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0
     Full_dataset<-cbind.data.frame(Taxonomy_species, species_names)
     Full_dataset$originalSpeciesName<-Full_dataset$species_names
     Full_dataset$species_names<-sub(" ", "_", Full_dataset$species)
+    Full_dataset<-na.omit(Full_dataset)
 
-    Full_dataset<-Full_dataset[Full_dataset$species_names %in% AccDat$Species,]
+
+    '%nin%'<- Negate('%in%')
+
+    toDel<-AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName),1]
+
+    #Remove any non-species species
+    if( length(toDel)>0 ){
+
+      fastaSeqs<-lapply(fastaSeqs, function(x){
+        x[!names(x) %in% toDel]
+      })
+
+      AccDat<-AccDat[ !AccDat$OriginalNames %in% toDel,]
+
+    }
+
+    Full_dataset<-Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
 
 
     WrongSpecies<-Full_dataset[!apply(Full_dataset, 1, function(x) any(grepl(filterTaxonomicCriteria, x))), ]
@@ -81,8 +98,6 @@ sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0
 
 
     if(nrow(WrongSpecies) > 0){
-      cat('At least one incorrect sequence was found... /n')
-
      seqsToDel<- AccDat[AccDat$Species %in% WrongSpecies,'OriginalNames']
      AccDat<- AccDat[!AccDat$Species %in% WrongSpecies,]
      curatedSeqs<-lapply(fastaSeqs, function(x){
@@ -91,33 +106,44 @@ sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0
       names(curatedSeqs)<- names(fastaSeqs)
 
     }else{
-      cat('Everything looks right. Moving the sequences to a new folder (1.CuratedSequences) /n')
       curatedSeqs<-fastaSeqs
     }
 
     ##Rename incorrect synonyms
 
-    toRename<-Full_dataset[sub(" ","_", Full_dataset$species) != Full_dataset$species_names,]
+    toRename<-Full_dataset[ Full_dataset$originalSpeciesName != Full_dataset$species_names,]
 
 
 ##Export
     unlink("1.CuratedSequences", recursive = TRUE)
     dir.create('1.CuratedSequences')
-    lapply(seq_along(curatedSeqs), function(y) {
+    invisible( lapply(seq_along(curatedSeqs), function(y) {
+      if(length(names(curatedSeqs[[y]]))>1 ){
       ##Original
         write.FASTA(curatedSeqs[[y]], paste0('1.CuratedSequences/',names(curatedSeqs)[y]))
       ##Renamed
         newNames<-sapply(names(curatedSeqs[[y]]), function(x) paste(strsplit(x,' ')[[1]][c(2:3)], collapse = '_' ))
         renamed<-curatedSeqs[[y]]
-        if(nrow(toRename)){
-        newNames<-ifelse(newNames %in% toRename$species_names, sub(" ","_" ,toRename$species), newNames  )
+        if(nrow(toRename)>0){
+        newNames<-ifelse(newNames %in% toRename$originalSpeciesName, toRename$species_names, newNames  )
         }
         names(renamed)<-newNames
         write.FASTA(renamed, paste0('1.CuratedSequences/renamed_',names(curatedSeqs)[y]) )
+      }
     })
+    )
 
-    write.csv(AccDat, '1.CuratedSequences/AccessionTable.csv')
-    write.csv(Full_dataset, '1.CuratedSequences/Taxonomy.csv')
+    AccDat<-AccDat[AccDat$file %in% names(which(table(AccDat$file)>1)),]
+    Full_dataset<-Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
+    newspp<-sapply(AccDat$Species, function(x){
+      Full_dataset[Full_dataset$originalSpeciesName==x,'species_names']
+    })
+    AccDat$OldSpecies<- AccDat$Species
+    AccDat$Species<- newspp
+    row.names(AccDat)<-NULL
+
+    write.csv(AccDat, '1.CuratedSequences/0.AccessionTable.csv')
+    write.csv(Full_dataset, '1.CuratedSequences/1.Taxonomy.csv')
 
 }
 
