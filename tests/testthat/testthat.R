@@ -176,6 +176,8 @@ test_that("sq.add default", {
 
 #Test the pipeline
 
+unlink(list.dirs("."), recursive=TRUE)
+
 test_that("Retrieve sequences", {
   expect_output(sq.retrieve(
         clades = c('Felis', 'Vulpes', 'Phoca'),
@@ -185,12 +187,12 @@ test_that("Retrieve sequences", {
 )
 })
 
-test_that("Curate sequences", {
-  expect_output(
+#test_that("Curate sequences", {
+#  expect_output(
     sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
               kingdom='animals', folder='0.Sequences')
-  )
-})
+#)
+#})
 
 test_that("Align sequences new", {
   expect_invisible(
@@ -210,5 +212,3 @@ expect_snapshot_output(
 sq.add(folderDownloaded='0.Sequences', folderNew='0.AdditionalSequences')
 )
 })
-
-testthat::snapshot_accept('testthat')
