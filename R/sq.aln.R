@@ -16,6 +16,8 @@
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
 #' @importFrom methods as
+#' @importFrom Biostrings writeXStringSet
+#' @import DECIPHER
 #'
 #' @return None
 #'
@@ -52,10 +54,10 @@ sq.aln<-function(folder='1.CuratedSequences',FilePatterns= 'renamed', mask=T, ..
     alignedNoGaps<-RemoveGaps(aligned,removeGaps = "common")
     alignedMasked<- MaskAlignment(alignedNoGaps)
     DNAStr = as(alignedMasked, "DNAStringSet")
-    writeXStringSet(DNAStr,   file=paste0('2.Alignments/Masked_',files[x]))
+    writeXStringSet(DNAStr,   filepath=paste0('2.Alignments/Masked_',files[x]))
   }
 
-  writeXStringSet(aligned,   file=paste0('2.Alignments/',files[x]))
+  writeXStringSet(aligned,   filepath=paste0('2.Alignments/',files[x]))
   })
   )
 }

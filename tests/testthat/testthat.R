@@ -1,7 +1,7 @@
 library(testthat)
 library(phruta)
-library(Biostrings)
-library(DECIPHER)
+#library(Biostrings)
+#library(DECIPHER)
 
 unlink(list.dirs("."), recursive=TRUE)
 

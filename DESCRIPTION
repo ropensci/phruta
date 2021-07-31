@@ -2,10 +2,8 @@ Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
 Version: 0.1.0
-Author@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
-                  role = c("aut", "cre"),
-                    orcid = "0000-0003-1696-4886")
-Maintainer: Cristian Roman Palacios <cromanpa@g.ucla.edu>
+Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
+                  role = c("aut", "cre"))
 Description: The phruta R package is designed to simplify the basic phylogenetic pipeline. 
         Furthermore, the fact that all the intermediate steps are saved in independent folder 
         and all the code is run within the same environment increases reproducibility. 
@@ -18,7 +16,9 @@ Encoding: UTF-8
 LazyData: true
 biocViews: DECIPHER,
            Biostrings
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.5.0),
+        Biostrings,
+        DECIPHER
 Imports: rgbif, 
         pbapply, 
         rentrez, 
