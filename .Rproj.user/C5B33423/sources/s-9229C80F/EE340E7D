@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "EE340E7D",
-    "lastKnownWriteTime" : 1627678888,
-    "last_content_update" : 1627678888172,
+    "lastKnownWriteTime" : 1627690978,
+    "last_content_update" : 1627690978608,
     "path" : "~/MEGAsync/Packages/MacMini/phruta/vignettes/phruta_vignette.Rmd",
     "project_path" : "vignettes/phruta_vignette.Rmd",
     "properties" : {
-        "cursorPosition" : "145,22",
-        "scrollLine" : "139",
+        "cursorPosition" : "127,0",
+        "scrollLine" : "119",
         "tempName" : "Untitled1"
     },
     "read_only" : false,

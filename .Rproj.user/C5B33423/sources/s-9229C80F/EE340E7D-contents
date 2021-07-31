@@ -1,12 +1,18 @@
 ---
 title: "Brief intro to the `phruta` R package"
-output: rmarkdown::html_vignette
 author: Cristian Roman-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
   %\VignetteIndexEntry{Brief intro to the `phruta` R package}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+output:
+  knitr:::html_vignette:
+    toc: true
+    fig_caption: yes
+  pdf_document:
+    highlight: null
+    number_sections: yes
 ---
 
 
@@ -57,16 +63,16 @@ Now, since we're going to retrieve sequences from genbank, we will use the `sq.r
 
 ```{r eval=FALSE}
 sq.retrieve(
-  clades  = c('Felis', 'Vulpes', 'Phoca'),
-  species = 'Manis_pentadactyla' ,
-  genes   = c("A2AB","ADORA3","ADRB2","APOB",
-              "APP","ATP7","BCHE","BDNF",
-              "BMI1","BRCA1","BRCA2","CNR1",
-              "COI","CREM","CYTB","DMP1",
-              "EDG1","ENAM","FBN1","GHR",
-              "IRBP","ND1","ND2","PLCB4",
-              "PNOC","RAG1a","RAG1b","RAG2",
-              "TTN","TYR1","VWF")
+            clades  = c('Felis', 'Vulpes', 'Phoca'),
+            species = 'Manis_pentadactyla' ,
+            genes   = c("A2AB","ADORA3","ADRB2","APOB",
+                      "APP","ATP7","BCHE","BDNF",
+                      "BMI1","BRCA1","BRCA2","CNR1",
+                      "COI","CREM","CYTB","DMP1",
+                      "EDG1","ENAM","FBN1","GHR",
+                      "IRBP","ND1","ND2","PLCB4",
+                      "PNOC","RAG1a","RAG1b","RAG2",
+                      "TTN","TYR1","VWF")
           )
 ```
 
@@ -74,7 +80,9 @@ This function will write all the resulting fasta files into the newly created fo
 
 
 ```{r eval=FALSE}
-sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis', kingdom='animals', folder='0.Sequences')
+sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
+          kingdom='animals', 
+          folder='0.Sequences')
 ```
 
 
@@ -91,7 +99,11 @@ The resulting multiple sequence alignments will be saved to the `2.Alignments` f
 Phylogenetic inference is conducted using the `tree.raxml` function. We need to indicate where the aligned sequences are located (`folder` argument), the patterns of the files in the same folder (`FilePatterns` argument; `Masked` in our case). Well run a total of `100` boostrap replicates and set the outgroup to `Manis_pentadactyla`.
 
 ```{r eval=FALSE}
-tree.raxml(folder='2.Alignments', FilePatterns= 'Masked', raxml_exec='raxmlHPC', Bootstrap=100, outgroup ="Manis_pentadactyla")
+tree.raxml(folder='2.Alignments', 
+           FilePatterns= 'Masked', 
+           raxml_exec='raxmlHPC', 
+           Bootstrap=100, 
+           outgroup ="Manis_pentadactyla")
 ```
 
 The tree (probably the bipartitions is the most relevant one; `RAxML_bipartitions.phruta`) is saved under the `3.Phylogeny` folder. This folder also include additional `RAxML`-related input and output files. Finally, let's perform tree dating in our phylogeny using secondaty calibrations extracted from Scholl and Wiens (2016). Here's a link to the [study](https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334). In short, this study potentially the most comprenhensive and reliable set of trees that summarize the temporal dimension in the evolution across the tree of life. In `phruta`, the trees in School and Wiens (2016) were renamed to match taxonomic groups.
@@ -99,7 +111,9 @@ The tree (probably the bipartitions is the most relevant one; `RAxML_bipartition
 Tree dating is performed using the `tree.dating` function in `phruta`. We have to provide the name of the folder containing the `1.Taxonomy.csv` file created before. We also have to indicate the name of the folder containing the `RAxML_bipartitions.phruta` file. We will scale our phylogeny using `treePL`. 
 
 ```{r eval=FALSE}
-tree.dating(taxonomyFolder="1.CuratedSequences", phylogenyFolder="3.Phylogeny", scale='treePL')
+tree.dating(taxonomyFolder="1.CuratedSequences", 
+            phylogenyFolder="3.Phylogeny", 
+            scale='treePL')
 ```
 
 Running this line will result in a new folder `4.Timetree`, including the different time-calibrated phylogenies obained (if any) and associated secondary calibrations used in the analyses. We found only a couple of overlapping calibration points (family-level constraints):
@@ -114,8 +128,7 @@ Running this line will result in a new folder `4.Timetree`, including the differ
 
 Here's the resulting time-calibrated phylogeny. The whole process this took ~20 minutes to complete in my computer (16 gb RAM, i5).
 
-<img src="tree.png" width="600" border:none />
-
+![Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.](tree.png)
 
 ## Installing RAxML <a name="paragraph2"></a>
 

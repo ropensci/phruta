@@ -126,20 +126,22 @@
 <p>Now, since we’re going to retrieve sequences from genbank, we will use the <code>sq.retrieve</code> function in <code>phruta</code>. This function will create <code>fasta</code> files (saved to your working directory) for the genes where at least one sequence was found in genbank for the target taxa.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.html">sq.retrieve</a></span><span class="op">(</span>
-  clades  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Felis'</span>, <span class="st">'Vulpes'</span>, <span class="st">'Phoca'</span><span class="op">)</span>,
-  species <span class="op">=</span> <span class="st">'Manis_pentadactyla'</span> ,
-  genes   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A2AB"</span>,<span class="st">"ADORA3"</span>,<span class="st">"ADRB2"</span>,<span class="st">"APOB"</span>,
-              <span class="st">"APP"</span>,<span class="st">"ATP7"</span>,<span class="st">"BCHE"</span>,<span class="st">"BDNF"</span>,
-              <span class="st">"BMI1"</span>,<span class="st">"BRCA1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"CNR1"</span>,
-              <span class="st">"COI"</span>,<span class="st">"CREM"</span>,<span class="st">"CYTB"</span>,<span class="st">"DMP1"</span>,
-              <span class="st">"EDG1"</span>,<span class="st">"ENAM"</span>,<span class="st">"FBN1"</span>,<span class="st">"GHR"</span>,
-              <span class="st">"IRBP"</span>,<span class="st">"ND1"</span>,<span class="st">"ND2"</span>,<span class="st">"PLCB4"</span>,
-              <span class="st">"PNOC"</span>,<span class="st">"RAG1a"</span>,<span class="st">"RAG1b"</span>,<span class="st">"RAG2"</span>,
-              <span class="st">"TTN"</span>,<span class="st">"TYR1"</span>,<span class="st">"VWF"</span><span class="op">)</span>
+            clades  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Felis'</span>, <span class="st">'Vulpes'</span>, <span class="st">'Phoca'</span><span class="op">)</span>,
+            species <span class="op">=</span> <span class="st">'Manis_pentadactyla'</span> ,
+            genes   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A2AB"</span>,<span class="st">"ADORA3"</span>,<span class="st">"ADRB2"</span>,<span class="st">"APOB"</span>,
+                      <span class="st">"APP"</span>,<span class="st">"ATP7"</span>,<span class="st">"BCHE"</span>,<span class="st">"BDNF"</span>,
+                      <span class="st">"BMI1"</span>,<span class="st">"BRCA1"</span>,<span class="st">"BRCA2"</span>,<span class="st">"CNR1"</span>,
+                      <span class="st">"COI"</span>,<span class="st">"CREM"</span>,<span class="st">"CYTB"</span>,<span class="st">"DMP1"</span>,
+                      <span class="st">"EDG1"</span>,<span class="st">"ENAM"</span>,<span class="st">"FBN1"</span>,<span class="st">"GHR"</span>,
+                      <span class="st">"IRBP"</span>,<span class="st">"ND1"</span>,<span class="st">"ND2"</span>,<span class="st">"PLCB4"</span>,
+                      <span class="st">"PNOC"</span>,<span class="st">"RAG1a"</span>,<span class="st">"RAG1b"</span>,<span class="st">"RAG2"</span>,
+                      <span class="st">"TTN"</span>,<span class="st">"TYR1"</span>,<span class="st">"VWF"</span><span class="op">)</span>
           <span class="op">)</span></code></pre></div>
 <p>This function will write all the resulting fasta files into the newly created folder <code>0.Sequences</code> located in our working directory. Next, we’re going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We’re going to use the <code>sq.curate</code> function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (<code>filterTaxonomicCriteria</code> argument), which in this case can be just the genera that we’re interested in analyzing. Note that the outgroup’s name is also included in the list. If a the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals and plants (<code>kingdom</code> argument). Hopefully, I will be able to expand this to other groups soon. Note that our downloaded sequences are located in the <code>0.Sequences</code> folder.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/sq.curate.html">sq.curate</a></span><span class="op">(</span>filterTaxonomicCriteria<span class="op">=</span><span class="st">'Felis|Vulpes|Phoca|Manis'</span>, kingdom<span class="op">=</span><span class="st">'animals'</span>, folder<span class="op">=</span><span class="st">'0.Sequences'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/sq.curate.html">sq.curate</a></span><span class="op">(</span>filterTaxonomicCriteria<span class="op">=</span><span class="st">'Felis|Vulpes|Phoca|Manis'</span>,
+          kingdom<span class="op">=</span><span class="st">'animals'</span>, 
+          folder<span class="op">=</span><span class="st">'0.Sequences'</span><span class="op">)</span></code></pre></div>
 <p>Running this line will create the new folder <code>1.CuratedSequences</code> that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (<code>renamed_*</code> prefix), (3) an accession table (<code>0.AccessionTable.csv</code>), and (4) a summary of taxonomic information for all the species sampled in the files (<code>1.Taxonomy.csv</code>). We’ll use the <code>renamed_*</code> and <code>1.Taxonomy.csv</code> files in the next steps.</p>
 <p>Next, we’ll align the sequences that we just curated. For this, we just use <code>sq.aln</code> with default parameters. Note that all the target fasta files are in <code>1.CuratedSequences</code> and they all have the default prefix (<code>renamed_*</code>).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -147,11 +149,17 @@
 <p>The resulting multiple sequence alignments will be saved to the <code>2.Alignments</code> folder. In this folder, we will have two types of files. First, files that are just the raw alignments (same file names as in <code>1.CuratedSequences</code>). Second, sequence alignments that with ambiguous sites removed (<code>renamed_*</code> prefix). We will use the latter set of files in the next steps.</p>
 <p>Phylogenetic inference is conducted using the <code>tree.raxml</code> function. We need to indicate where the aligned sequences are located (<code>folder</code> argument), the patterns of the files in the same folder (<code>FilePatterns</code> argument; <code>Masked</code> in our case). Well run a total of <code>100</code> boostrap replicates and set the outgroup to <code>Manis_pentadactyla</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tree.raxml.html">tree.raxml</a></span><span class="op">(</span>folder<span class="op">=</span><span class="st">'2.Alignments'</span>, FilePatterns<span class="op">=</span> <span class="st">'Masked'</span>, raxml_exec<span class="op">=</span><span class="st">'raxmlHPC'</span>, Bootstrap<span class="op">=</span><span class="fl">100</span>, outgroup <span class="op">=</span><span class="st">"Manis_pentadactyla"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tree.raxml.html">tree.raxml</a></span><span class="op">(</span>folder<span class="op">=</span><span class="st">'2.Alignments'</span>, 
+           FilePatterns<span class="op">=</span> <span class="st">'Masked'</span>, 
+           raxml_exec<span class="op">=</span><span class="st">'raxmlHPC'</span>, 
+           Bootstrap<span class="op">=</span><span class="fl">100</span>, 
+           outgroup <span class="op">=</span><span class="st">"Manis_pentadactyla"</span><span class="op">)</span></code></pre></div>
 <p>The tree (probably the bipartitions is the most relevant one; <code>RAxML_bipartitions.phruta</code>) is saved under the <code>3.Phylogeny</code> folder. This folder also include additional <code>RAxML</code>-related input and output files. Finally, let’s perform tree dating in our phylogeny using secondaty calibrations extracted from Scholl and Wiens (2016). Here’s a link to the <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334">study</a>. In short, this study potentially the most comprenhensive and reliable set of trees that summarize the temporal dimension in the evolution across the tree of life. In <code>phruta</code>, the trees in School and Wiens (2016) were renamed to match taxonomic groups.</p>
 <p>Tree dating is performed using the <code>tree.dating</code> function in <code>phruta</code>. We have to provide the name of the folder containing the <code>1.Taxonomy.csv</code> file created before. We also have to indicate the name of the folder containing the <code>RAxML_bipartitions.phruta</code> file. We will scale our phylogeny using <code>treePL</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tree.dating.html">tree.dating</a></span><span class="op">(</span>taxonomyFolder<span class="op">=</span><span class="st">"1.CuratedSequences"</span>, phylogenyFolder<span class="op">=</span><span class="st">"3.Phylogeny"</span>, scale<span class="op">=</span><span class="st">'treePL'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/tree.dating.html">tree.dating</a></span><span class="op">(</span>taxonomyFolder<span class="op">=</span><span class="st">"1.CuratedSequences"</span>, 
+            phylogenyFolder<span class="op">=</span><span class="st">"3.Phylogeny"</span>, 
+            scale<span class="op">=</span><span class="st">'treePL'</span><span class="op">)</span></code></pre></div>
 <p>Running this line will result in a new folder <code>4.Timetree</code>, including the different time-calibrated phylogenies obained (if any) and associated secondary calibrations used in the analyses. We found only a couple of overlapping calibration points (family-level constraints):</p>
 <table class="table">
 <colgroup>
@@ -198,7 +206,9 @@
 </tbody>
 </table>
 <p>Here’s the resulting time-calibrated phylogeny. The whole process this took ~20 minutes to complete in my computer (16 gb RAM, i5).</p>
-<p><img src="tree.png" width="600" border:none></p>
+<div class="figure">
+<img src="tree.png" alt="Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package."><p class="caption">Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.</p>
+</div>
 </div>
 <div id="installing-raxml" class="section level2">
 <h2 class="hasAnchor">
