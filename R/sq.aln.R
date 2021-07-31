@@ -14,13 +14,12 @@
 #' @param mask Removes ambiguous sites (TRUE or FALSE).
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
-#' @import DECIPHER
 #' @importFrom methods as
 #'
 #' @return None
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sq.retrieve(
 #'             clades = c('Felis', 'Vulpes', 'Phoca'),
 #'             species = 'Manis_pentadactyla' ,

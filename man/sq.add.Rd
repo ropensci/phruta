@@ -23,7 +23,7 @@ downloaded sequences. The sequences in the \code{"0.Sequences"} folder get repla
 Note that new sequences can be added even for just a fraction of the originally downloaded genes.
 }
 \examples{
-\donttest{
+\dontrun{
 sq.add(folderDownloaded='0.Sequences', folderNew='0.AdditionalSequences')
 }
 }

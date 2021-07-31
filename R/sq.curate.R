@@ -20,7 +20,7 @@
 #' @return None
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sq.retrieve(
 #'             clades = c('Felis', 'Vulpes', 'Phoca'),
 #'             species = 'Manis_pentadactyla' ,

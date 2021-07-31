@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brief intro to the `phruta` R package • phruta</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -69,7 +69,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="phruta_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Brief intro to the <code>phruta</code> R package</h1>
@@ -90,7 +90,7 @@
 <ol style="list-style-type: decimal">
 <li><a href="#intro">What is <code>phruta</code></a></li>
 <li><a href="#paragraph0">Functions in <code>phruta</code></a></li>
-<li><a href="#paragraph1">From clade names to time-calibred phylogenies</a></li>
+<li><a href="#paragraph1">From clade names to time-calibrated phylogenies</a></li>
 <li><a href="#paragraph2">Installing RAxML</a></li>
 <li><a href="#paragraph3">Installing PATHd-8 and treePL</a></li>
 </ol>
@@ -116,9 +116,9 @@
 <p>-Fifth, the <code>tree.raxml</code> function allows users to perform tree inference under <code>RAxML</code> for a sequences in a given folder. Note that users should provide a list of outgroup taxa and conduct a bootstrap analysis. This is a wraper to <code><a href="https://rdrr.io/pkg/ips/man/raxml.html">ips::raxml</a></code> and all their arguments can be customized. The current release can only handle unpartitioned analyses without starting trees.</p>
 <p>-Sixth, <code>tree.dating</code> enables users to perform time-calibrations of a given phylogeny using <code><a href="https://rdrr.io/pkg/geiger/man/congruify.phylo.html">geiger::congruify.phylo</a></code>. <code>phruta</code> includes a basic set of comprehensenvisely sampled time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using <code><a href="https://rdrr.io/r/utils/data.html">data(SW.phruta)</a></code>. Please make sure you have at last <em>2</em> groups in common with any of the phylogenies. Finally, analyses can be run under either <code>PATHd-8</code> or <code>treePL</code>.</p>
 </div>
-<div id="from-clade-names-to-time-calibred-phylogenies" class="section level2">
+<div id="from-clade-names-to-time-calibrated-phylogenies" class="section level2">
 <h2 class="hasAnchor">
-<a href="#from-clade-names-to-time-calibred-phylogenies" class="anchor"></a>From clade names to time-calibred phylogenies <a name="paragraph1"></a>
+<a href="#from-clade-names-to-time-calibrated-phylogenies" class="anchor"></a>From clade names to time-calibrated phylogenies <a name="paragraph1"></a>
 </h2>
 <p>Let’s create a phylogeny for a few mammal clades. We’re going to assume that we need to build a tree for the following three genera: <em>Felis, Vulpes</em>, and <em>Phoca</em>. Note that all three genera are within Carnivora. Both <em>Felis</em> and <em>Vulpes</em> are classified in different superfamilies within Fissipedia and <em>Phoca</em> is part of another suborder, Pinnipedia.We’re going to root out tree with another mammal species, a Chinese Pangolin ( <em>Manis pentadactyla</em>). Note that we can also select additional target species that can be or not of the outgroup. However, for simplicity, we will run the analyses using three genera in the outgroup and a single outgroup species.</p>
 <p>So far, we have decided the taxonomic make of our analyses. However, we also need to figure out the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential genes regions to be analized is already available. I will use the same gene regions that were used in Upham et al (2009)’s excellent study <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030">study</a>.</p>
@@ -207,7 +207,7 @@
 </table>
 <p>Here’s the resulting time-calibrated phylogeny. The whole process this took ~20 minutes to complete in my computer (16 gb RAM, i5).</p>
 <div class="figure">
-<img src="tree.png" alt="Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package."><p class="caption">Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.</p>
+<img src="tree.png" alt=""><p class="caption">Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.</p>
 </div>
 </div>
 <div id="installing-raxml" class="section level2">
@@ -215,15 +215,15 @@
 <a href="#installing-raxml" class="anchor"></a>Installing RAxML <a name="paragraph2"></a>
 </h2>
 <p><code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below under <code>conda</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">conda</span> install -c bioconda raxml</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </a></code></pre></div>
-<p>Open <code>r</code> and make sure that the following line does’t throw an error.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> install -c bioconda raxml</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </span></code></pre></div>
+<p>Open <code>r</code> and make sure that the following line doesn’t throw an error.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="st">"raxmlHPC"</span><span class="op">)</span></code></pre></div>
 <p>You may also want to check if <code>RAxML</code> is called using <code>raxmlHPC</code> or something else. This can be set when runnig the in using the <code>tree.raxml</code> using the <code>raxml_exec</code> argument.</p>
 <p>Finally, note that RStudio sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html">system()</a></code>.</p>
 <p>If you’re using macOS + RStudio, close R studio, open the terminal and type.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">open</span> /Applications/RStudio.app</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
 </div>
 <div id="installing-pathd-8-and-treepl" class="section level2">
 <h2 class="hasAnchor">
@@ -242,7 +242,7 @@
 <li>Partitioned analyses in RAxML</li>
 <li>PartitionFinder</li>
 </ul>
-<p>Please keep tunned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!</p>
+<p>Please stay tuned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!</p>
 </div>
 </div>
   </div>
@@ -258,7 +258,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by <a href="http://cromanpa94.github.io/cromanpa/">Cristian Roman Palacios</a>.</p>
 </div>
 
 <div class="pkgdown">

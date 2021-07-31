@@ -13,7 +13,7 @@
 #' @return None
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sq.add(folderDownloaded='0.Sequences', folderNew='0.AdditionalSequences')
 #' }
 #' @export

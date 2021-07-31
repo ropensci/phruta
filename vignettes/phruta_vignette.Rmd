@@ -19,7 +19,7 @@ output:
 # Table of Contents
 1. [What is `phruta`](#intro)
 2. [Functions in `phruta`](#paragraph0)
-3. [From clade names to time-calibred phylogenies](#paragraph1)
+3. [From clade names to time-calibrated phylogenies](#paragraph1)
 4. [Installing RAxML](#paragraph2)
 5. [Installing PATHd-8 and treePL](#paragraph3)
 
@@ -51,7 +51,7 @@ The final two functions in `phruta` focuses on tree interence and dating. These 
   -Sixth, `tree.dating` enables users to perform time-calibrations of a given phylogeny using `geiger::congruify.phylo`. `phruta` includes a basic set of comprehensenvisely sampled time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using `data(SW.phruta)`. Please make sure you have at last *2* groups in common with any of the phylogenies. Finally, analyses can be run under either `PATHd-8` or `treePL`.
 
 
-## From clade names to time-calibred phylogenies <a name="paragraph1"></a>
+## From clade names to time-calibrated phylogenies <a name="paragraph1"></a>
 
 Let's create a phylogeny for a few mammal clades. We're going to assume that we need to build a tree for the following three genera: _Felis, Vulpes_, and _Phoca_. Note that all three genera are within Carnivora. Both _Felis_ and _Vulpes_ are classified in different superfamilies within Fissipedia and _Phoca_ is part of another suborder, Pinnipedia.We're going to root out tree with another mammal species, a Chinese Pangolin ( _Manis pentadactyla_). Note that we can also select additional target species that can be or not of the outgroup. However, for simplicity, we will run the analyses using three genera in the outgroup and a single outgroup species. 
 
@@ -139,7 +139,7 @@ conda install -c bioconda raxml
 conda install -c bioconda/label/cf201901 raxml 
 ```
 
-Open `r` and make sure that the following line does't throw an error. 
+Open `r` and make sure that the following line doesn't throw an error. 
 
 ```{r eval=FALSE}
 system("raxmlHPC")
@@ -169,5 +169,5 @@ I acknowledge that the current release of the package is limited in different wa
   - Partitioned analyses in RAxML
   - PartitionFinder
 
-Please keep tunned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!
+Please stay tuned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!
 

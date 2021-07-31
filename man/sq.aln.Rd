@@ -29,7 +29,7 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
 \code{"2.Alignments"}.'
 }
 \examples{
-\donttest{
+\dontrun{
 sq.retrieve(
             clades = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,

@@ -30,7 +30,7 @@ Note that \code{"treePL"} or \code{"PATHd-8"} must be installed in your PATH. Ho
 Brian O'Meara and Jonathan Chang, respectively.
 }
 \examples{
-\donttest{
+\dontrun{
 sq.retrieve(
             clades = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,

@@ -3,13 +3,13 @@
 #' @name SW.phruta
 #'
 #' @description  Time-calibrated trees from Scholl and Wiens (2016).
-#' Phruta uses them to calibrate resulting phylogenies.
+#' phruta uses them to calibrate resulting phylogenies.
 #'
 #' @docType data
 #'
 #' @usage data(SW.phruta)
 #'
-#' @format An object of class \code{"multiphylo"}; see \code{\link[qtl]{read.tree}}.
+#' @format An object of class \code{"multiphylo"}.
 #'
 #' @keywords datasets
 #'

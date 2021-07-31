@@ -5,7 +5,7 @@
 \alias{SW.phruta}
 \title{Scholl and Wiens (2016) phylogenies}
 \format{
-An object of class \code{"multiphylo"}; see \code{\link[qtl]{read.tree}}.
+An object of class \code{"multiphylo"}.
 }
 \source{
 \href{https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334}{Publication}
@@ -15,7 +15,7 @@ data(SW.phruta)
 }
 \description{
 Time-calibrated trees from Scholl and Wiens (2016).
-Phruta uses them to calibrate resulting phylogenies.
+phruta uses them to calibrate resulting phylogenies.
 }
 \references{
 Scholl, Joshua P., and John J. Wiens.

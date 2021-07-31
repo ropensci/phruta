@@ -18,7 +18,7 @@
 #' @import taxize
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sq.retrieve(
 #'             clades = c('Felis', 'Vulpes', 'Phoca'),
 #'             species = 'Manis_pentadactyla' ,
@@ -87,6 +87,6 @@ sq.retrieve <- function(clades=NULL, species=NULL, genes=NULL, maxseqs=1, maxlen
     )
   }
 
-  invisible( pblapply(genes, singleGene))
+  invisible( pblapply(genes,singleGene))
 
 }

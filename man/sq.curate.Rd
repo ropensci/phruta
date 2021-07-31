@@ -30,7 +30,7 @@ the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSe
 resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.
 }
 \examples{
-\donttest{
+\dontrun{
 sq.retrieve(
             clades = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,

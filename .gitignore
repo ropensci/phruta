@@ -1,3 +1,5 @@
 .travis.yml
 .Rproj.user
 docs
+/doc/
+/Meta/

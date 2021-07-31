@@ -19,7 +19,7 @@
 #' @return None
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sq.retrieve(
 #'             clades = c('Felis', 'Vulpes', 'Phoca'),
 #'             species = 'Manis_pentadactyla' ,
@@ -42,7 +42,7 @@ tree.dating <- function(taxonomyFolder="1.CuratedSequences", phylogenyFolder="3.
   taxonomy <- read.csv(paste0(taxonomyFolder,"/1.Taxonomy.csv"))
   row.names(taxonomy)<-taxonomy$species_names
   TargetTree<-read.tree(paste0(phylogenyFolder,'/RAxML_bipartitions.phruta'))
-  resphy=congruify.phylo(reference=TTOL, target=TargetTree,taxonomy=as.matrix(taxonomy), ...)
+  resphy=congruify.phylo(reference=SW.phruta, target=TargetTree,taxonomy=as.matrix(taxonomy), ...)
   names(resphy) <- c('family', 'order', 'class', 'phyla', 'kingdom')
   resphy<-Filter(Negate(anyNA), resphy)
 

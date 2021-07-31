@@ -33,7 +33,7 @@ Downloads sequences from genbank (nucleotide database) for particular taxa and g
 into a folder called \code{"0.Sequences"}.
 }
 \examples{
-\donttest{
+\dontrun{
 sq.retrieve(
             clades = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,

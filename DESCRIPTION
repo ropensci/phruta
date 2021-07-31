@@ -2,24 +2,26 @@ Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
 Version: 0.1.0
-Author: Cristian Roman-Palacios
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
+                  role = c("aut", "cre"),
+                    orcid = "0000-0003-1696-4886")
+Maintainer: Cristian Roman Palacios <cromanpa@g.ucla.edu>
 Description: The phruta R package is designed to simplify the basic phylogenetic pipeline. 
         Furthermore, the fact that all the intermediate steps are saved in independent folder 
         and all the code is run within the same environment increases reproducibility. 
         phruta retrieves gene sequences, combines newly downloaded and local gene sequences, 
-        and perform sequence alignment.    phruta is also able to perform basic phylogenetic inference under RaXML 
+        and perform sequence alignment. phruta is also able to perform basic phylogenetic inference under RaXML 
         on the resulting sequence alignments. The current release allows users to conduct 
         tree dating based on secondary calibrations. phruta is essentially a wrapper 
         for different R packages and additional software.
 Encoding: UTF-8
 LazyData: true
+biocViews: DECIPHER
 Depends:R (>= 3.5.0)
 Imports:rgbif, 
         pbapply, 
         rentrez, 
         taxize, 
-        DECIPHER, 
         ape,
         ips,
         geiger,

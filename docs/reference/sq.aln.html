@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -166,24 +166,16 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
     <p>None</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='fu'><a href='sq.retrieve.html'>sq.retrieve</a></span><span class='op'>(</span>
             clades <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'Felis'</span>, <span class='st'>'Vulpes'</span>, <span class='st'>'Phoca'</span><span class='op'>)</span>,
             species <span class='op'>=</span> <span class='st'>'Manis_pentadactyla'</span> ,
             genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span><span class='op'>)</span>
            <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;'>══</span>  3 queries  <span style='color: #0000BB;'>═══════════════</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Felis'</span></div><div class='output co'>#&gt; <span style='color: #00BB00;'>✓  Found: </span> Felis</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Vulpes'</span></div><div class='output co'>#&gt; <span style='color: #00BB00;'>✓  Found: </span> Vulpes</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Phoca'</span></div><div class='output co'>#&gt; <span style='color: #00BB00;'>✓  Found: </span> Phoca
-#&gt; <span style='color: #B2B2B2;'>══</span>  Results  <span style='color: #B2B2B2;'>═════════════════</span>
-#&gt; 
-#&gt; • Total: <span style='color: #00BB00;'>3</span> 
-#&gt; • Found: <span style='color: #00BB00;'>3</span> 
-#&gt; • Not Found: <span style='color: #00BB00;'>0</span></div><div class='input'><span class='fu'><a href='sq.curate.html'>sq.curate</a></span><span class='op'>(</span>filterTaxonomicCriteria<span class='op'>=</span><span class='st'>'Felis|Vulpes|Phoca|Manis'</span>,
+<span class='fu'><a href='sq.curate.html'>sq.curate</a></span><span class='op'>(</span>filterTaxonomicCriteria<span class='op'>=</span><span class='st'>'Felis|Vulpes|Phoca|Manis'</span>,
           kingdom<span class='op'>=</span><span class='st'>'animals'</span>, folder<span class='op'>=</span><span class='st'>'0.Sequences'</span><span class='op'>)</span>
 <span class='fu'>sq.aln</span><span class='op'>(</span>folder<span class='op'>=</span><span class='st'>'1.CuratedSequences'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in readDNAStringSet(filesComplete[x]): could not find function "readDNAStringSet"</span></div><div class='input'><span class='co'># }</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -196,7 +188,7 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
 
       <footer>
       <div class="copyright">
-  <p>Developed by The package maintainer.</p>
+  <p>Developed by <a href='http://cromanpa94.github.io/cromanpa/'>Cristian Roman Palacios</a>.</p>
 </div>
 
 <div class="pkgdown">

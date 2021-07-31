@@ -1,1 +1,8 @@
-utils::globalVariables(c("TTOL", "writeXStringSet", "as", "readDNAStringSet", ""))
+utils::globalVariables(c("SW.phruta",
+                         "writeXStringSet",
+                         "as",
+                         "readDNAStringSet",
+                         "OrientNucleotides",
+                         "AlignSeqs",
+                         "RemoveGaps",
+                         "MaskAlignment"))

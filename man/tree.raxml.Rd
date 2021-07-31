@@ -35,7 +35,7 @@ Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
 a given folder (default is \code{"2.Alignments"}).
 }
 \examples{
-\donttest{
+\dontrun{
 sq.retrieve(
             clades = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,
