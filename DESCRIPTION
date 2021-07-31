@@ -27,7 +27,7 @@ Imports: rgbif,
         ips,
         geiger,
         methods,
-        markdown
+        rmarkdown
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
