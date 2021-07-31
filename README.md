@@ -1,7 +1,5 @@
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg)](https://codecov.io/gh/cromanpa94/phruta?branch=main)
-  <!-- badges: end -->
-    <!-- badges: start -->
   [![R-CMD-check](https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/cromanpa94/phruta/actions)
   <!-- badges: end -->
 
