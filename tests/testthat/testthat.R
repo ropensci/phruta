@@ -177,7 +177,7 @@ test_that("sq.add default", {
 #Test the pipeline
 
 test_that("Retrieve sequences", {
-  expect_snapshot_output(sq.retrieve(
+  expect_output(sq.retrieve(
         clades = c('Felis', 'Vulpes', 'Phoca'),
         species = 'Manis_pentadactyla' ,
         genes = c("ADORA3")
@@ -186,7 +186,7 @@ test_that("Retrieve sequences", {
 })
 
 test_that("Curate sequences", {
-  expect_snapshot_output(
+  expect_output(
     sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
               kingdom='animals', folder='0.Sequences')
   )
@@ -211,5 +211,4 @@ sq.add(folderDownloaded='0.Sequences', folderNew='0.AdditionalSequences')
 )
 })
 
-
-
+testthat::snapshot_accept('testthat')
