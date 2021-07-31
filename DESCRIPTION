@@ -27,13 +27,13 @@ Imports: rgbif,
         ips,
         geiger,
         methods,
+        markdown,
         rmarkdown
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
     covr,
-    knitr,
-    rmarkdown
+    knitr
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3
