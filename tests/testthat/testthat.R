@@ -80,15 +80,6 @@ test_that("length of maxseqs and maxlength", {
 })
 
 
-test_that("Non-Null clade", {
-  expect_snapshot_output(sq.retrieve(clades="Psocus",
-                species=NULL,
-                genes="HDFJ",
-                maxseqs=1,
-                maxlength=1))
-})
-
-
 test_that("Silent sq.retrieve", {
   expect_output(sq.retrieve(clades="Psocus",
                                      species=NULL,
