@@ -29,6 +29,20 @@
 
 sq.retrieve <- function(clades=NULL, species=NULL, genes=NULL, maxseqs=1, maxlength=5000) {
 
+ if(is.null(clades) & is.null(species)) stop("Please provide at least one clade or species")
+
+  if(!is.null(clades) ){
+ if(!is.character(clades)) stop("Please provide at character vector for the clade arguments")
+  }
+  if(!is.null(species) ){
+    if(!is.character(species)) stop("Please provide at character vector for  the species arguments")
+  }
+
+ if(is.null(genes)) stop("Please provide the name of at least one gene")
+ if(!is.numeric(maxseqs) | !is.numeric(maxlength)) stop("maxseqs and maxlength must be numeric")
+ if(length(maxseqs)>1 | length(maxlength)>1) stop("Please provide a single number for maxseqs or maxlength")
+
+
  taxa <- if(!is.null(clades)){
   clade.species<-downstream(clades, db = 'itis', downto = 'species', verbose = F)
   clade.species<-do.call(rbind,clade.species)

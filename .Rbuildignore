@@ -5,3 +5,6 @@
 ^pkgdown$
 ^doc$
 ^Meta$
+^codecov\.yml$
+^\.travis\.yml$
+^\.github$

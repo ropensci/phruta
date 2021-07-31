@@ -39,6 +39,9 @@
 
 
 tree.dating <- function(taxonomyFolder="1.CuratedSequences", phylogenyFolder="3.Phylogeny", ...){
+
+  if(is.null(taxonomyFolder) | is.null(phylogenyFolder)) stop("Please provide folder names")
+
   taxonomy <- read.csv(paste0(taxonomyFolder,"/1.Taxonomy.csv"))
   row.names(taxonomy)<-taxonomy$species_names
   TargetTree<-read.tree(paste0(phylogenyFolder,'/RAxML_bipartitions.phruta'))

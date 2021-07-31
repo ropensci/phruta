@@ -9,9 +9,10 @@ sq.aln(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T, ...)
 \arguments{
 \item{folder}{Name of the folder where the sequences to align are stored (character).}
 
-\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character).}
+\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character). Note that
+this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.}
 
-\item{mask}{Removes ambiguous sites (TRUE or FALSE).}
+\item{mask}{Removes ambiguous sites (Logical, TRUE or FALSE).}
 
 \item{...}{Arguments passed to \code{"DECIPHER::AlignSeqs"}.}
 }

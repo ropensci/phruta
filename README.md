@@ -1,3 +1,10 @@
+  <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg)](https://codecov.io/gh/cromanpa94/phruta?branch=main)
+  <!-- badges: end -->
+    <!-- badges: start -->
+  [![R-CMD-check](https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/cromanpa94/phruta/actions)
+  <!-- badges: end -->
+
 ## What is `phruta`
 
 The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Furthermore, the fact that all the intermediate steps are saved in independent folder and all the code is run within the same environment increases reproducibility. `phruta` retrieves gene sequences, combines newly downloaded and local gene sequences, and perform sequence alignment. 

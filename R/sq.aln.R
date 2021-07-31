@@ -10,8 +10,9 @@
 #' \code{"2.Alignments"}.'
 #'
 #' @param folder Name of the folder where the sequences to align are stored (character).
-#' @param FilePatterns A string that is common to all the target files in the relevant folder (character).
-#' @param mask Removes ambiguous sites (TRUE or FALSE).
+#' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
+#'                     this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.
+#' @param mask Removes ambiguous sites (Logical, TRUE or FALSE).
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
 #' @importFrom methods as
@@ -32,6 +33,10 @@
 #' @export
 
 sq.aln<-function(folder='1.CuratedSequences',FilePatterns= 'renamed', mask=T, ...){
+
+  if(is.null(folder)) stop("Folder where curated sequences are saved must be provided")
+  if(!is.logical(mask)) stop("The mask argument must be TRUE or FALSE")
+
   files<-list.files(folder, FilePatterns)
   files<-sub("renamed_",'',files)
   filesComplete<-list.files(folder, FilePatterns, full.names = T)

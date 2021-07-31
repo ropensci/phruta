@@ -16,9 +16,10 @@ Description: The phruta R package is designed to simplify the basic phylogenetic
         for different R packages and additional software.
 Encoding: UTF-8
 LazyData: true
-biocViews: DECIPHER
-Depends:R (>= 3.5.0)
-Imports:rgbif, 
+biocViews: DECIPHER,
+           Biostrings
+Depends: R (>= 3.5.0)
+Imports: rgbif, 
         pbapply, 
         rentrez, 
         taxize, 
@@ -27,6 +28,11 @@ Imports:rgbif,
         geiger,
         methods
 RoxygenNote: 7.1.1
-Suggests: knitr, rmarkdown
+Suggests: 
+    testthat (>= 3.0.0),
+    covr,
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
 License: MIT + file LICENSE
+Config/testthat/edition: 3

@@ -24,7 +24,7 @@ None
 }
 \description{
 After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that thid function provides two summary datasets. First, the accession numbers.
+information. Note that this function provides two summary datasets. First, the accession numbers.
 Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSequences"}. The
 resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.

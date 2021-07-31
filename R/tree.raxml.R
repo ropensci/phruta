@@ -4,9 +4,10 @@
 #' a given folder (default is \code{"2.Alignments"}).
 #'
 #' @param folder Name of the folder where the sequences to align are stored (character).
-#' @param FilePatterns A string that is common to all the target files in the relevant folder (character).
+#' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
+#'                     this argument can be set to \code{"NULL"} if no specific pattern wants to be analized.
 #' @param raxml_exec Where to find \code{"RAxML"} or how to run it from the console? (string).
-#' @param Bootstrap Number of boostrap replicates (numeric).
+#' @param Bootstrap Number of bootstrap replicates (numeric).
 #' @param outgroup A single string of comma-separated tip labels to be used as outgroup in
 #'                 \code{"RAxML"} See \code{"RAxML"} documentation for more details (character).
 #' @param ... Arguments passed to \code{"ips::raxml"}.
@@ -32,6 +33,11 @@
 #' @export
 
 tree.raxml<-function(folder='2.Alignments', FilePatterns= 'Masked', raxml_exec='raxmlHPC', Bootstrap=100, outgroup,...){
+
+    if(is.null(folder)) stop("Please provide folder names")
+    if(!is.character(raxml_exec)) stop("Please provide a raxml_exec argument of class character")
+    if(!is.numeric(Bootstrap) ) stop("Please provide a number for the Bootstrap argument")
+    if(Bootstrap == 0 ) stop("Please indicate more than a single bootstrap replicate")
 
     files_fullNames<-list.files(folder, FilePatterns, full.names=T)
     files<-list.files(folder, 'Masked')

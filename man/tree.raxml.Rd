@@ -16,11 +16,12 @@ tree.raxml(
 \arguments{
 \item{folder}{Name of the folder where the sequences to align are stored (character).}
 
-\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character).}
+\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character). Note that
+this argument can be set to \code{"NULL"} if no specific pattern wants to be analized.}
 
 \item{raxml_exec}{Where to find \code{"RAxML"} or how to run it from the console? (string).}
 
-\item{Bootstrap}{Number of boostrap replicates (numeric).}
+\item{Bootstrap}{Number of bootstrap replicates (numeric).}
 
 \item{outgroup}{A single string of comma-separated tip labels to be used as outgroup in
 \code{"RAxML"} See \code{"RAxML"} documentation for more details (character).}

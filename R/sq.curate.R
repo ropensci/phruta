@@ -1,7 +1,7 @@
 #' Curate sequences from genbank
 #'
 #' After downloading sequences from genbank, this function curates sequences based on taxonomic
-#' information. Note that thid function provides two summary datasets. First, the accession numbers.
+#' information. Note that this function provides two summary datasets. First, the accession numbers.
 #' Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 #' the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSequences"}. The
 #' resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.
@@ -32,6 +32,11 @@
 #' @export
 
 sq.curate <- function(filterTaxonomicCriteria=NULL, kingdom='animals', folder='0.Sequences'){
+
+  if(is.null(filterTaxonomicCriteria)) stop("Please provide filtering pattern in the filterTaxonomicCriteria argument")
+  if(length(filterTaxonomicCriteria)>1) stop("Use a single string in the filterTaxonomicCriteria argument. \n SOLUTION: Split multiple criteria using |")
+  if(is.null(folder)) stop("Folder where curated sequences are saved must be provided")
+  match.arg(kingdom, c("animals", "plants"))
 
   fastaSeqs<-lapply(list.files(folder, full.names = T), read.FASTA)
   names(fastaSeqs) <- list.files(folder, full.names = F)
