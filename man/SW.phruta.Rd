@@ -19,8 +19,8 @@ phruta uses them to calibrate resulting phylogenies.
 }
 \references{
 Scholl, Joshua P., and John J. Wiens.
-           "Diversification rates and species richness
-           across the Tree of Life." Proceedings of the Royal
-           Society B: Biological Sciences 283.1838 (2016): 20161334.
+"Diversification rates and species richness
+across the Tree of Life." Proceedings of the Royal
+Society B: Biological Sciences 283.1838 (2016): 20161334.
 }
 \keyword{datasets}

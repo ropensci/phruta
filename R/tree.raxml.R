@@ -19,46 +19,48 @@
 #' @examples
 #' \dontrun{
 #' sq.retrieve(
-#'             clades = c('Felis', 'Vulpes', 'Phoca'),
-#'             species = 'Manis_pentadactyla' ,
-#'             genes = c("ADORA3")
-#'            )
-#' sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-#'           kingdom='animals', folder='0.Sequences')
-#' sq.aln(folder='1.CuratedSequences')
-#' tree.raxml(folder='2.Alignments', FilePatterns= 'Masked',
-#'            raxml_exec='raxmlHPC', Bootstrap=100,
-#'            outgroup ="Manis_pentadactyla")
-#'}
+#'   clades = c("Felis", "Vulpes", "Phoca"),
+#'   species = "Manis_pentadactyla",
+#'   genes = c("ADORA3")
+#' )
+#' sq.curate(
+#'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+#'   kingdom = "animals", folder = "0.Sequences"
+#' )
+#' sq.aln(folder = "1.CuratedSequences")
+#' tree.raxml(
+#'   folder = "2.Alignments", FilePatterns = "Masked",
+#'   raxml_exec = "raxmlHPC", Bootstrap = 100,
+#'   outgroup = "Manis_pentadactyla"
+#' )
+#' }
 #' @export
 
-tree.raxml<-function(folder='2.Alignments', FilePatterns= 'Masked', raxml_exec='raxmlHPC', Bootstrap=100, outgroup,...){
+tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_exec = "raxmlHPC", Bootstrap = 100, outgroup, ...) {
+  if (is.null(folder)) stop("Please provide folder names")
+  if (!is.character(raxml_exec)) stop("Please provide a raxml_exec argument of class character")
+  if (!is.numeric(Bootstrap)) stop("Please provide a number for the Bootstrap argument")
+  if (Bootstrap == 0) stop("Please indicate more than a single bootstrap replicate")
 
-    if(is.null(folder)) stop("Please provide folder names")
-    if(!is.character(raxml_exec)) stop("Please provide a raxml_exec argument of class character")
-    if(!is.numeric(Bootstrap) ) stop("Please provide a number for the Bootstrap argument")
-    if(Bootstrap == 0 ) stop("Please indicate more than a single bootstrap replicate")
+  files_fullNames <- list.files(folder, FilePatterns, full.names = T)
+  files <- list.files(folder, "Masked")
+  seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
+  names(seq) <- files
 
-    files_fullNames<-list.files(folder, FilePatterns, full.names=T)
-    files<-list.files(folder, 'Masked')
-    seq<- lapply(lapply(files_fullNames,  read.FASTA), as.matrix)
-    names(seq)<-files
-
-    concatenated<-do.call(cbind.DNAbin,c(seq,
-                                         fill.with.gaps = TRUE))
-    unlink("3.Phylogeny", recursive = TRUE)
-    dir.create('3.Phylogeny')
-    mainDir<-getwd()
-    setwd(paste0(mainDir,'/',"3.Phylogeny" ))
-    tr <- raxml(DNAbin=concatenated, m = "GTRGAMMA",
-                f = "a", N = Bootstrap, p = 1234, x = 1234,
-                k=T,
-                exec =raxml_exec ,threads=4,
-                file='phruta',
-                outgroup=outgroup, ...)
-    setwd(mainDir)
-
+  concatenated <- do.call(cbind.DNAbin, c(seq,
+    fill.with.gaps = TRUE
+  ))
+  unlink("3.Phylogeny", recursive = TRUE)
+  dir.create("3.Phylogeny")
+  mainDir <- getwd()
+  setwd(paste0(mainDir, "/", "3.Phylogeny"))
+  tr <- raxml(
+    DNAbin = concatenated, m = "GTRGAMMA",
+    f = "a", N = Bootstrap, p = 1234, x = 1234,
+    k = T,
+    exec = raxml_exec, threads = 4,
+    file = "phruta",
+    outgroup = outgroup, ...
+  )
+  setwd(mainDir)
 }
-
-
-

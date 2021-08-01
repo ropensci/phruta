@@ -38,15 +38,19 @@ a given folder (default is \code{"2.Alignments"}).
 \examples{
 \dontrun{
 sq.retrieve(
-            clades = c('Felis', 'Vulpes', 'Phoca'),
-            species = 'Manis_pentadactyla' ,
-            genes = c("ADORA3")
-           )
-sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-          kingdom='animals', folder='0.Sequences')
-sq.aln(folder='1.CuratedSequences')
-tree.raxml(folder='2.Alignments', FilePatterns= 'Masked',
-           raxml_exec='raxmlHPC', Bootstrap=100,
-           outgroup ="Manis_pentadactyla")
+  clades = c("Felis", "Vulpes", "Phoca"),
+  species = "Manis_pentadactyla",
+  genes = c("ADORA3")
+)
+sq.curate(
+  filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+  kingdom = "animals", folder = "0.Sequences"
+)
+sq.aln(folder = "1.CuratedSequences")
+tree.raxml(
+  folder = "2.Alignments", FilePatterns = "Masked",
+  raxml_exec = "raxmlHPC", Bootstrap = 100,
+  outgroup = "Manis_pentadactyla"
+)
 }
 }

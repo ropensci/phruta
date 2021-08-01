@@ -24,6 +24,6 @@ Note that new sequences can be added even for just a fraction of the originally 
 }
 \examples{
 \dontrun{
-sq.add(folderDownloaded='0.Sequences', folderNew='0.AdditionalSequences')
+sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
 }
 }

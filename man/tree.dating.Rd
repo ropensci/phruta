@@ -32,17 +32,23 @@ Brian O'Meara and Jonathan Chang, respectively.
 \examples{
 \dontrun{
 sq.retrieve(
-            clades = c('Felis', 'Vulpes', 'Phoca'),
-            species = 'Manis_pentadactyla' ,
-            genes = c("ADORA3")
-           )
-sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-          kingdom='animals', folder='0.Sequences')
-sq.aln(folder='1.CuratedSequences')
-tree.raxml(folder='2.Alignments', FilePatterns= 'Masked',
-           raxml_exec='raxmlHPC', Bootstrap=100,
-           outgroup ="Manis_pentadactyla")
- tree.dating(taxonomyFolder="1.CuratedSequences",
- phylogenyFolder="3.Phylogeny", scale='treePL')
+  clades = c("Felis", "Vulpes", "Phoca"),
+  species = "Manis_pentadactyla",
+  genes = c("ADORA3")
+)
+sq.curate(
+  filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+  kingdom = "animals", folder = "0.Sequences"
+)
+sq.aln(folder = "1.CuratedSequences")
+tree.raxml(
+  folder = "2.Alignments", FilePatterns = "Masked",
+  raxml_exec = "raxmlHPC", Bootstrap = 100,
+  outgroup = "Manis_pentadactyla"
+)
+tree.dating(
+  taxonomyFolder = "1.CuratedSequences",
+  phylogenyFolder = "3.Phylogeny", scale = "treePL"
+)
 }
 }

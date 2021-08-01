@@ -32,12 +32,14 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
 \examples{
 \dontrun{
 sq.retrieve(
-            clades = c('Felis', 'Vulpes', 'Phoca'),
-            species = 'Manis_pentadactyla' ,
-            genes = c("ADORA3")
-           )
-sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-          kingdom='animals', folder='0.Sequences')
-sq.aln(folder='1.CuratedSequences')
+  clades = c("Felis", "Vulpes", "Phoca"),
+  species = "Manis_pentadactyla",
+  genes = c("ADORA3")
+)
+sq.curate(
+  filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+  kingdom = "animals", folder = "0.Sequences"
+)
+sq.aln(folder = "1.CuratedSequences")
 }
 }

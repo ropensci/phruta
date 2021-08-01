@@ -24,40 +24,41 @@
 #' @examples
 #' \dontrun{
 #' sq.retrieve(
-#'             clades = c('Felis', 'Vulpes', 'Phoca'),
-#'             species = 'Manis_pentadactyla' ,
-#'             genes = c("ADORA3")
-#'            )
-#' sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-#'           kingdom='animals', folder='0.Sequences')
-#' sq.aln(folder='1.CuratedSequences')
-#'}
+#'   clades = c("Felis", "Vulpes", "Phoca"),
+#'   species = "Manis_pentadactyla",
+#'   genes = c("ADORA3")
+#' )
+#' sq.curate(
+#'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+#'   kingdom = "animals", folder = "0.Sequences"
+#' )
+#' sq.aln(folder = "1.CuratedSequences")
+#' }
 #' @export
 
-sq.aln<-function(folder='1.CuratedSequences',FilePatterns= 'renamed', mask=T, ...){
+sq.aln <- function(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T, ...) {
+  if (is.null(folder)) stop("Folder where curated sequences are saved must be provided")
+  if (!is.logical(mask)) stop("The mask argument must be TRUE or FALSE")
 
-  if(is.null(folder)) stop("Folder where curated sequences are saved must be provided")
-  if(!is.logical(mask)) stop("The mask argument must be TRUE or FALSE")
-
-  files<-list.files(folder, FilePatterns)
-  files<-sub("renamed_",'',files)
-  filesComplete<-list.files(folder, FilePatterns, full.names = T)
+  files <- list.files(folder, FilePatterns)
+  files <- sub("renamed_", "", files)
+  filesComplete <- list.files(folder, FilePatterns, full.names = T)
   unlink("2.Alignments", recursive = TRUE)
-  dir.create('2.Alignments')
+  dir.create("2.Alignments")
   invisible(
-  lapply(seq_along(filesComplete), function(x){
-  seqs <- readDNAStringSet(filesComplete[x])
-  seqs <- OrientNucleotides(seqs)
-  aligned <- AlignSeqs(seqs, ...)
+    lapply(seq_along(filesComplete), function(x) {
+      seqs <- readDNAStringSet(filesComplete[x])
+      seqs <- OrientNucleotides(seqs)
+      aligned <- AlignSeqs(seqs, ...)
 
-  if(mask){
-    alignedNoGaps<-RemoveGaps(aligned,removeGaps = "common")
-    alignedMasked<- MaskAlignment(alignedNoGaps)
-    DNAStr = as(alignedMasked, "DNAStringSet")
-    writeXStringSet(DNAStr,   filepath=paste0('2.Alignments/Masked_',files[x]))
-  }
+      if (mask) {
+        alignedNoGaps <- RemoveGaps(aligned, removeGaps = "common")
+        alignedMasked <- MaskAlignment(alignedNoGaps)
+        DNAStr <- as(alignedMasked, "DNAStringSet")
+        writeXStringSet(DNAStr, filepath = paste0("2.Alignments/Masked_", files[x]))
+      }
 
-  writeXStringSet(aligned,   filepath=paste0('2.Alignments/',files[x]))
-  })
+      writeXStringSet(aligned, filepath = paste0("2.Alignments/", files[x]))
+    })
   )
 }

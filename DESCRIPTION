@@ -4,14 +4,13 @@ Title: Phylogenetic Reconstruction and Time-dating
 Version: 0.1.0
 Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
                   role = c("aut", "cre"))
-Description: The phruta R package is designed to simplify the basic phylogenetic pipeline. 
-        Furthermore, the fact that all the intermediate steps are saved in independent folder 
-        and all the code is run within the same environment increases reproducibility. 
-        phruta retrieves gene sequences, combines newly downloaded and local gene sequences, 
-        and perform sequence alignment. phruta is also able to perform basic phylogenetic inference under RaXML 
-        on the resulting sequence alignments. The current release allows users to conduct 
-        tree dating based on secondary calibrations. phruta is essentially a wrapper 
-        for different R packages and additional software.
+Description: The phruta R package is designed to simplify the basic 
+            phylogenetic pipeline. Specifically, all code is run within 
+            the same program and data from intermediate steps are saved in 
+            independent folders. Furthrmore, all code is run within the 
+            same environment which increases the reproducibility of your analysis. 
+            phruta retrieves gene sequences, combines newly downloaded and local 
+            gene sequences, and performs sequence alignments. 
 Encoding: UTF-8
 LazyData: true
 biocViews: DECIPHER,
@@ -19,14 +18,15 @@ biocViews: DECIPHER,
 Depends: R (>= 3.5.0),
         Biostrings,
         DECIPHER
-Imports: rgbif, 
-        pbapply, 
-        rentrez, 
-        taxize, 
-        ape,
-        ips,
-        geiger,
-        methods
+Imports: 
+    rgbif,
+    pbapply,
+    rentrez,
+    taxize,
+    ape,
+    ips,
+    geiger,
+    methods
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
@@ -39,3 +39,4 @@ VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3
 Language: en-US
+Roxygen: list(markdown = TRUE)

@@ -35,9 +35,9 @@ into a folder called \code{"0.Sequences"}.
 \examples{
 \dontrun{
 sq.retrieve(
-            clades = c('Felis', 'Vulpes', 'Phoca'),
-            species = 'Manis_pentadactyla' ,
-            genes = c("ADORA3")
-           )
+  clades = c("Felis", "Vulpes", "Phoca"),
+  species = "Manis_pentadactyla",
+  genes = c("ADORA3")
+)
 }
 }
