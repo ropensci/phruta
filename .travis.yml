@@ -8,8 +8,7 @@ r_build_args: --no-build-vignettes --no-manual
 r_check_args: --no-build-vignettes --no-manual --timings
 branches:
   only:
-  - master
-  - stable
+  - main
 r_github_packages:
   - r-lib/covr
 after_success:
