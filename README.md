@@ -18,7 +18,7 @@ The `phruta` R package is designed to simplify the basic phylogenetic pipeline. 
 
 ```
 library(devtools) 
-install_github("hadley/dplyr")
+install_github("cromanpa94/phruta")
 ```
 
 
