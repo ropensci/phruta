@@ -26,14 +26,14 @@ Imports:
     ape,
     ips,
     geiger,
-    methods,
-    markdown,
-    rmarkdown,
+    methods
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),
     covr,
     knitr,
+    markdown,
+    rmarkdown,
     spelling
 VignetteBuilder: knitr
 License: MIT + file LICENSE
