@@ -31,8 +31,11 @@ install:
   - Rscript -e "devtools::install_deps(dep = TRUE)"
   - Rscript -e "devtools::install_github('cromanpa94/phruta')"
 os:
-  - windows
   - linux
   - osx
 warnings_are_errors: false
+osx_image: xcode11.4
+addons:
+  apt:
+    update: true
 
