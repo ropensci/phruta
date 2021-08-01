@@ -1,7 +1,8 @@
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg)](https://codecov.io/gh/cromanpa94/phruta?branch=main)
   [![R-CMD-check](https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/cromanpa94/phruta/actions)
-"[![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)" [![](https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg)](https://github.com/cromanpa94/phruta)
+  [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)  
+  [![](https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg)](https://github.com/cromanpa94/phruta)
   <!-- badges: end -->
 
 # `phruta` <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
