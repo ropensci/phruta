@@ -33,4 +33,7 @@ install:
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
   - Rscript -e "devtools::install_deps(dep = TRUE)"
   - Rscript -e "devtools::install_github('cromanpa94/phruta')"
-
+os:
+  - windows
+  - linux
+  - osx
