@@ -29,7 +29,6 @@ The `phruta` R package is designed to simplify the basic phylogenetic pipeline. 
 
 `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
 
-![](logo.png){width=100px}
 
 ## Functions in `phruta`
 The current release of `phruta` includes a set of six major functions. All six functions form a pipeline within `phruta` to output a time-calibrated phylogeny. However, users interested in using their own files at any stage can run each function independently.  
