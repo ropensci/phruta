@@ -75,7 +75,7 @@
       <h1 data-toc-skip>Brief intro to the <code>phruta</code> R package</h1>
                         <h4 class="author">Cristian Roman-Palacios</h4>
             
-            <h4 class="date">First created on 2021-07-30. Updated on 2021-07-31</h4>
+            <h4 class="date">First created on 2021-07-30. Updated on 2021-08-01</h4>
       
       
       <div class="hidden name"><code>phruta_vignette.Rmd</code></div>
@@ -98,31 +98,32 @@
 <h2 class="hasAnchor">
 <a href="#what-is-phruta" class="anchor"></a>What is <code>phruta</code> <a name="intro"></a>
 </h2>
-<p>The <code>phruta</code> R package is designed to simplify the basic phylogenetic pipeline. Furthermore, the fact that all the intermediate steps are saved in independent folder and all the code is run within the same environment increases reproducibility. <code>phruta</code> retrieves gene sequences, combines newly downloaded and local gene sequences, and perform sequence alignment.</p>
-<p><code>phruta</code> is also able to perform basic phylogenetic inference under <code>RAxML</code> on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. <code>phruta</code> is essentially a wrapper for different R packages and additional software.</p>
+<p>The <code>phruta</code> R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. <code>phruta</code> retrieves gene sequences, combines newly downloaded and local gene sequences, and performs sequence alignments.</p>
+<p><code>phruta</code> is also able to perform basic phylogenetic inference under <code>RAxML</code> on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. <code>phruta</code> is essentially a wrapper for alternative R packages and software.</p>
 </div>
-<div id="functions-in-fruta" class="section level2">
+<div id="functions-in-phruta" class="section level2">
 <h2 class="hasAnchor">
-<a href="#functions-in-fruta" class="anchor"></a>Functions in <code>fruta</code>
+<a href="#functions-in-phruta" class="anchor"></a>Functions in <code>phruta</code>
 </h2>
-<p>The current release of <code>fruta</code> includes a set of six different major functions. If users are interested in using their own files at any stage, each of the functions can be used independently. However, there is a general sequence that can be used to generate a pipeline within <code>fruta</code>. Note that all the functions for which their primary output are sequences (aligned or unaligned) are listed under <code>sq.*</code>. All the files that output phylogenies (time-calibrated or not) are listed under <code>tree.*</code>.</p>
+<p>The current release of <code>phruta</code> includes a set of six major functions. All six functions form a pipeline within <code>phruta</code> to output a time-calibrated phylogeny. However, users interested in using their own files at any stage can run each function independently.</p>
+<p>Note that all the functions for which their primary output are sequences (aligned or unaligned) are listed under <code>sq.*</code>. All the files that output phylogenies (time-calibrated or not) are listed under <code>tree.*</code>.</p>
 <ul>
-<li><p>First, <code>sq.retrieve</code> retrieves gene sequences for taxa of interest. This function saves all the resulting <code>fasta</code> files in a new directory.</p></li>
-<li><p>Second, <code>sq.add</code> allow users to include local sequences to the sequences that were retrieved from genbank in the previous step. Note that <code>sq.add</code> is optional. However, if this function is run, the user will have available the originally downloaded sequences, the local sequences, and the combined set of sequences in three independent folders.</p></li>
-<li><p>Third, the <code>sq.curate</code> function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the gbif taxonomic backbone for each of the species in the dataset. If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and rename sequences.</p></li>
-<li><p>Fourth, <code>sq.aln</code> performs multiple sequence alignment on <code>fasta</code> files. Currently, <code>phruta</code> uses the <code>DECIPHER</code> R package for this. This package allows for adjusting sequence orientation and masking.</p></li>
+<li><p>First, <code>sq.retrieve</code> retrieves gene sequences for taxa of interest. This function saves all the resulting <code>fasta</code> files in a new directory, <code>0.Sequences</code>.</p></li>
+<li><p>Second, <code>sq.add</code> allows users to include local sequences to those retrieved from genbank in the previous step. This function saves all the resulting <code>fasta</code> files in two directories, combined sequences in <code>0.Sequences</code> and local sequences in <code>0.AdditionalSequences</code> (originally downloaded sequences are moved to <code>0.0.OriginalDownloaded</code> at this step). Note that <code>sq.add</code> is optional.</p></li>
+<li><p>Third, the <code>sq.curate</code> function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the Global Biodiversity Information Facility (GBIF) database’s taxonomic backbone. If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and renames sequences.</p></li>
+<li><p>Fourth, <code>sq.aln</code> performs multiple sequence alignment on <code>fasta</code> files. Currently, <code>phruta</code> uses the <a href="http://www2.decipher.codes/"><code>DECIPHER</code> R package</a>, here. This package allows for adjusting sequence orientation and masking (removing ambiguous sites).</p></li>
 </ul>
-<p>The final two functions in <code>phruta</code> focuses on tree interence and dating. These two functions depend on external software that needs to be installed (and tested) before using them. Please make sure <code>RAxML</code>, <code>PATHd-8</code>, and <code>treePL</code> are installed and can be called within <code>R</code> using the <code><a href="https://rdrr.io/r/base/system.html">system()</a></code> function. Note that you can choose between <code>PATHd-8</code>, and <code>treePL</code>. More details on how to install <code>RAxML</code> are provided <a href="#paragraph2">below</a>. Similarly, we provide details on how to install <code>PATHd-8</code>, and <code>treePL</code> <a href="#paragraph3">below</a>.</p>
-<p>-Fifth, the <code>tree.raxml</code> function allows users to perform tree inference under <code>RAxML</code> for a sequences in a given folder. Note that users should provide a list of outgroup taxa and conduct a bootstrap analysis. This is a wraper to <code><a href="https://rdrr.io/pkg/ips/man/raxml.html">ips::raxml</a></code> and all their arguments can be customized. The current release can only handle unpartitioned analyses without starting trees.</p>
-<p>-Sixth, <code>tree.dating</code> enables users to perform time-calibrations of a given phylogeny using <code><a href="https://rdrr.io/pkg/geiger/man/congruify.phylo.html">geiger::congruify.phylo</a></code>. <code>phruta</code> includes a basic set of comprehensenvisely sampled time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using <code><a href="https://rdrr.io/r/utils/data.html">data(SW.phruta)</a></code>. Please make sure you have at last <em>2</em> groups in common with any of the phylogenies. Finally, analyses can be run under either <code>PATHd-8</code> or <code>treePL</code>.</p>
+<p>The final two functions in <code>phruta</code> focus on tree inference and dating. These two functions depend on external software that needs to be installed (<strong>and tested</strong>) before running. Please make sure both <code>RAxML</code> and <code>PATHd-8</code> or <code>treePL</code> are installed and can be called within <code>R</code> using the <code><a href="https://rdrr.io/r/base/system.html">system()</a></code> function. Note that you can choose between <code>PATHd-8</code> and <code>treePL</code>. More details on how to install <code>RAxML</code> are provided <a href="#paragraph2">below</a>. Similarly, we provide details on how to install <code>PATHd-8</code> and <code>treePL</code> <a href="#paragraph3">below</a>.</p>
+<p>-Fifth, the <code>tree.raxml</code> function allows users to perform tree inference under <code>RAxML</code> for sequences in a given folder. This is a wraper to <code><a href="https://rdrr.io/pkg/ips/man/raxml.html">ips::raxml</a></code> and eaach of the arguments can be customized. The current release of <code>phruta</code> can manage unpartitioned analyses without starting trees.</p>
+<p>-Sixth, <code>tree.dating</code> enables users to perform time-calibrations of a given phylogeny using <code><a href="https://rdrr.io/pkg/geiger/man/congruify.phylo.html">geiger::congruify.phylo</a></code>. <code>phruta</code> includes a basic set of comprehensenvisely sampled, time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using <code><a href="https://rdrr.io/r/utils/data.html">data(SW.phruta)</a></code>. Please make sure you have at least <strong>two</strong> groups in common with each of the phylogenies. Similarily, users can choose to run either <code>PATHd-8</code> or <code>treePL</code>.</p>
 </div>
-<div id="from-clade-names-to-time-calibrated-phylogenies" class="section level2">
+<div id="tutorial-clade-names-to-time-calibrated-phylogenies" class="section level2">
 <h2 class="hasAnchor">
-<a href="#from-clade-names-to-time-calibrated-phylogenies" class="anchor"></a>From clade names to time-calibrated phylogenies <a name="paragraph1"></a>
+<a href="#tutorial-clade-names-to-time-calibrated-phylogenies" class="anchor"></a>Tutorial: Clade names to time-calibrated phylogenies <a name="paragraph1"></a>
 </h2>
-<p>Let’s create a phylogeny for a few mammal clades. We’re going to assume that we need to build a tree for the following three genera: <em>Felis, Vulpes</em>, and <em>Phoca</em>. Note that all three genera are within Carnivora. Both <em>Felis</em> and <em>Vulpes</em> are classified in different superfamilies within Fissipedia and <em>Phoca</em> is part of another suborder, Pinnipedia.We’re going to root out tree with another mammal species, a Chinese Pangolin ( <em>Manis pentadactyla</em>). Note that we can also select additional target species that can be or not of the outgroup. However, for simplicity, we will run the analyses using three genera in the outgroup and a single outgroup species.</p>
-<p>So far, we have decided the taxonomic make of our analyses. However, we also need to figure out the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential genes regions to be analized is already available. I will use the same gene regions that were used in Upham et al (2009)’s excellent study <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030">study</a>.</p>
-<p>Before we move on, please make sure that you you have <a href="http://rfunction.com/archives/1001">set a working directory for this project</a>. <em>Please do not forget to set the working directory to a particular folder</em>. All the files will be saved to the working directory.</p>
+<p>Let’s create a phylogeny for a few mammal clades. Assume that we need to build a tree for the following three genera: <em>Felis, Vulpes</em>, and <em>Phoca</em>. Note that all three genera are within Carnivora. Both <em>Felis</em> and <em>Vulpes</em> are classified in different superfamilies within Fissipedia and <em>Phoca</em> is part of another suborder, Pinnipedia. We’re going to root our tree with another mammal species, a Chinese Pangolin ( <em>Manis pentadactyla</em>). Users can select additional target species, however, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.</p>
+<p>So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analized is already available. I will use the same gene regions as in the excellent <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030">Upham et al (2009)</a>.</p>
+<p>Before we move on, please make sure that you you have <a href="http://rfunction.com/archives/1001">set a working directory for this project</a> as all the files will be saved to the current working directory.</p>
 <p>Now, since we’re going to retrieve sequences from genbank, we will use the <code>sq.retrieve</code> function in <code>phruta</code>. This function will create <code>fasta</code> files (saved to your working directory) for the genes where at least one sequence was found in genbank for the target taxa.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.html">sq.retrieve</a></span><span class="op">(</span>
@@ -137,30 +138,32 @@
                       <span class="st">"PNOC"</span>,<span class="st">"RAG1a"</span>,<span class="st">"RAG1b"</span>,<span class="st">"RAG2"</span>,
                       <span class="st">"TTN"</span>,<span class="st">"TYR1"</span>,<span class="st">"VWF"</span><span class="op">)</span>
           <span class="op">)</span></code></pre></div>
-<p>This function will write all the resulting fasta files into the newly created folder <code>0.Sequences</code> located in our working directory. Next, we’re going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We’re going to use the <code>sq.curate</code> function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (<code>filterTaxonomicCriteria</code> argument), which in this case can be just the genera that we’re interested in analyzing. Note that the outgroup’s name is also included in the list. If a the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals and plants (<code>kingdom</code> argument). Hopefully, I will be able to expand this to other groups soon. Note that our downloaded sequences are located in the <code>0.Sequences</code> folder.</p>
+<p>This function will write all the resulting fasta files into the newly created folder <code>0.Sequences</code> located in our working directory.</p>
+<p>Next, we’re going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We’re going to use the <code>sq.curate</code> function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (<code>filterTaxonomicCriteria</code> argument), which in this case can be just the genera that we’re interested in analyzing. Note that the outgroup’s name is also included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (<code>kingdom</code> argument). Hopefully, I will be able to expand this to other kingdoms soon.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.curate.html">sq.curate</a></span><span class="op">(</span>filterTaxonomicCriteria<span class="op">=</span><span class="st">'Felis|Vulpes|Phoca|Manis'</span>,
           kingdom<span class="op">=</span><span class="st">'animals'</span>, 
           folder<span class="op">=</span><span class="st">'0.Sequences'</span><span class="op">)</span></code></pre></div>
 <p>Running this line will create the new folder <code>1.CuratedSequences</code> that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (<code>renamed_*</code> prefix), (3) an accession table (<code>0.AccessionTable.csv</code>), and (4) a summary of taxonomic information for all the species sampled in the files (<code>1.Taxonomy.csv</code>). We’ll use the <code>renamed_*</code> and <code>1.Taxonomy.csv</code> files in the next steps.</p>
-<p>Next, we’ll align the sequences that we just curated. For this, we just use <code>sq.aln</code> with default parameters. Note that all the target fasta files are in <code>1.CuratedSequences</code> and they all have the default prefix (<code>renamed_*</code>).</p>
+<p>Next, we’ll align the sequences that we just curated. For this, we just use <code>sq.aln</code> with default parameters.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.aln.html">sq.aln</a></span><span class="op">(</span>folder<span class="op">=</span><span class="st">'1.CuratedSequences'</span><span class="op">)</span></code></pre></div>
-<p>The resulting multiple sequence alignments will be saved to the <code>2.Alignments</code> folder. In this folder, we will have two types of files. First, files that are just the raw alignments (same file names as in <code>1.CuratedSequences</code>). Second, sequence alignments that with ambiguous sites removed (<code>renamed_*</code> prefix). We will use the latter set of files in the next steps.</p>
-<p>Phylogenetic inference is conducted using the <code>tree.raxml</code> function. We need to indicate where the aligned sequences are located (<code>folder</code> argument), the patterns of the files in the same folder (<code>FilePatterns</code> argument; <code>Masked</code> in our case). Well run a total of <code>100</code> boostrap replicates and set the outgroup to <code>Manis_pentadactyla</code>.</p>
+<p>The resulting multiple sequence alignments will be saved to the <code>2.Alignments</code> folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in <code>1.CuratedSequences</code>) and (2) alignments with ambiguous sites removed (<code>Masked_*</code> prefix). We will use the latter set of files in the next steps.</p>
+<p>Phylogenetic inference is conducted using the <code>tree.raxml</code> function. We need to indicate where the aligned sequences are located (<code>folder</code> argument), the patterns of the files in the same folder (<code>FilePatterns</code> argument; “Masked” in our case). We’ll run a total of 100 boostrap replicates and set the outgroup to “Manis_pentadactyla”.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.raxml.html">tree.raxml</a></span><span class="op">(</span>folder<span class="op">=</span><span class="st">'2.Alignments'</span>, 
            FilePatterns<span class="op">=</span> <span class="st">'Masked'</span>, 
            raxml_exec<span class="op">=</span><span class="st">'raxmlHPC'</span>, 
            Bootstrap<span class="op">=</span><span class="fl">100</span>, 
            outgroup <span class="op">=</span><span class="st">"Manis_pentadactyla"</span><span class="op">)</span></code></pre></div>
-<p>The tree (probably the bipartitions is the most relevant one; <code>RAxML_bipartitions.phruta</code>) is saved under the <code>3.Phylogeny</code> folder. This folder also include additional <code>RAxML</code>-related input and output files. Finally, let’s perform tree dating in our phylogeny using secondaty calibrations extracted from Scholl and Wiens (2016). Here’s a link to the <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334">study</a>. In short, this study potentially the most comprenhensive and reliable set of trees that summarize the temporal dimension in the evolution across the tree of life. In <code>phruta</code>, the trees in School and Wiens (2016) were renamed to match taxonomic groups.</p>
-<p>Tree dating is performed using the <code>tree.dating</code> function in <code>phruta</code>. We have to provide the name of the folder containing the <code>1.Taxonomy.csv</code> file created before. We also have to indicate the name of the folder containing the <code>RAxML_bipartitions.phruta</code> file. We will scale our phylogeny using <code>treePL</code>.</p>
+<p>The trees are saved in <code>3.Phylogeny</code>. Likely, the bipartitions tree, “RAxML_bipartitions.phruta”, is the most relevant. <code>3.Phylogeny</code> also includes additional <code>RAxML</code>-related input and output files.</p>
+<p>Finally, let’s perform tree dating in our phylogeny using secondary calibrations extracted from <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334">Scholl and Wiens (2016)</a>. This study curated potentially the most comprenhensive and reliable set of trees to summarize the temporal dimension in evolution across the tree of life. In <code>phruta</code>, the trees from Scholl and Wiens (2016) were renamed to match taxonomic groups.</p>
+<p>Tree dating is performed using the <code>tree.dating</code> function in <code>phruta</code>. We have to provide the name of the folder containing the <code>1.Taxonomy.csv</code> file created in <code>sq.curate</code>. We also have to indicate the name of the folder containing the <code>RAxML_bipartitions.phruta</code> file. We will scale our phylogeny using <code>treePL</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.dating.html">tree.dating</a></span><span class="op">(</span>taxonomyFolder<span class="op">=</span><span class="st">"1.CuratedSequences"</span>, 
             phylogenyFolder<span class="op">=</span><span class="st">"3.Phylogeny"</span>, 
             scale<span class="op">=</span><span class="st">'treePL'</span><span class="op">)</span></code></pre></div>
-<p>Running this line will result in a new folder <code>4.Timetree</code>, including the different time-calibrated phylogenies obained (if any) and associated secondary calibrations used in the analyses. We found only a couple of overlapping calibration points (family-level constraints):</p>
+<p>Running this line will result in a new folder <code>4.Timetree</code>, including the different time-calibrated phylogenies obained (if any) and associated secondary calibrations used in the analyses. We found only a few overlapping calibration points (family-level constraints):</p>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -205,7 +208,7 @@
 </tr>
 </tbody>
 </table>
-<p>Here’s the resulting time-calibrated phylogeny. The whole process this took ~20 minutes to complete in my computer (16 gb RAM, i5).</p>
+<p>Here’s the resulting time-calibrated phylogeny. The whole process took ~20 minutes to complete on my computer (16 gb RAM, i5).</p>
 <div class="figure">
 <img src="tree.png" alt=""><p class="caption">Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.</p>
 </div>
@@ -214,33 +217,37 @@
 <h2 class="hasAnchor">
 <a href="#installing-raxml" class="anchor"></a>Installing RAxML <a name="paragraph2"></a>
 </h2>
-<p><code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below under <code>conda</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> install -c bioconda raxml</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </span></code></pre></div>
-<p>Open <code>r</code> and make sure that the following line doesn’t throw an error.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p><code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below in <code>conda</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> install -c bioconda raxml</span></code></pre></div>
+<p>Open <code>R</code> and make sure that the following line doesn’t throw an error.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="st">"raxmlHPC"</span><span class="op">)</span></code></pre></div>
-<p>You may also want to check if <code>RAxML</code> is called using <code>raxmlHPC</code> or something else. This can be set when runnig the in using the <code>tree.raxml</code> using the <code>raxml_exec</code> argument.</p>
-<p>Finally, note that RStudio sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html">system()</a></code>.</p>
-<p>If you’re using macOS + RStudio, close R studio, open the terminal and type.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
+<p>You may also want to check if <code>RAxML</code> is called using <code>raxmlHPC</code> or something else. This can be set when running <code>tree.raxml</code> using the <code>raxml_exec</code> argument.</p>
+<p>Finally, note that <code>RStudio</code> sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html">system()</a></code>.</p>
+<p>With issues, if you’re running macOS, try running RStudio from the command line. Close RStudio, open the terminal, and type:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
 </div>
 <div id="installing-pathd-8-and-treepl" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-pathd-8-and-treepl" class="anchor"></a>Installing PATHd-8 and treePL <a name="paragraph3"></a>
 </h2>
-<p>There are excellent guides for installing <code>PATHd-8</code> and <code>treePL</code>. I just want to summarize two potentially relevant options. First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code>. I summarized the code <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4">here</a>. Second, you can use homebrew to install <code>treePL</code> (<code>brew install brewsci/bio/treepl</code>). This latter is thanks to Jonathan Chang</p>
+<p>There are excellent guides for installing <code>PATHd-8</code> and <code>treePL</code>. Here, I summarize two potentially relevant options.</p>
+<p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code>. I summarized the code <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4">here</a>.</p>
+<p>Second, you can use homebrew to install <code>treePL</code>, thanks to Jonathan Chang.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
 </div>
 <div id="future-developments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#future-developments" class="anchor"></a>Future developments</h2>
-<p>I acknowledge that the current release of the package is limited in different ways. However, next releases will focus on improving the following aspects.</p>
+<p>I acknowledge that the current release of the package is limited in different ways. Next releases will focus on improving the following aspects:</p>
 <ul>
 <li>Expand taxonomic cleaning for non-animal/plant groups</li>
 <li>Taxonomic tree constraints</li>
 <li>Starting trees in RAxML</li>
 <li>Partitioned analyses in RAxML</li>
 <li>PartitionFinder</li>
+<li><a href="https://github.com/ms609/Roguer/" class="uri">https://github.com/ms609/Roguer/</a></li>
 </ul>
 <p>Please stay tuned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!</p>
 </div>

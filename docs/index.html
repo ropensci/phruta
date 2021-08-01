@@ -79,13 +79,21 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><!-- badges: start --> <a href="https://codecov.io/gh/cromanpa94/phruta?branch=main"><img src="https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/cromanpa94/phruta/actions"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-blue.svg"></a> <a href="https://travis-ci.org/cromanpa94/phruta"><img src="https://travis-ci.org/cromanpa94/phruta.svg?branch=main"></a> <a href="https://github.com/cromanpa94/phruta"><img src="https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg"></a> <a href="https://github.com/cromanpa94/phruta/actions"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <!-- badges: end --></p>
+<p><!-- badges: start --> <a href="https://codecov.io/gh/cromanpa94/phruta?branch=main"><img src="https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/cromanpa94/phruta/actions"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-blue.svg"></a> <a href="https://github.com/cromanpa94/phruta"><img src="https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg"></a> <!-- badges: end --></p>
 <div id="what-is-phruta" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-phruta" class="anchor"></a>What is <code>phruta</code>
 </h2>
-<p>The <code>phruta</code> R package is designed to simplify the basic phylogenetic pipeline. Furthermore, the fact that all the intermediate steps are saved in independent folder and all the code is run within the same environment increases reproducibility. <code>phruta</code> retrieves gene sequences, combines newly downloaded and local gene sequences, and perform sequence alignment.</p>
-<p><code>phruta</code> is also able to perform basic phylogenetic inference under <code>RAxML</code> on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. <code>phruta</code> is essentially a wrapper for different R packages and additional software.</p>
+<p>The <code>phruta</code> R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. <code>phruta</code> retrieves gene sequences, combines newly downloaded and local gene sequences, and performs sequence alignments.</p>
+<p><code>phruta</code> is also able to perform basic phylogenetic inference under <code>RAxML</code> on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. <code>phruta</code> is essentially a wrapper for alternative R packages and software.</p>
+</div>
+<div id="installing-phruta" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installing-phruta" class="anchor"></a>Installing <code>phruta</code>
+</h2>
+<p><code>phruta</code> is currently only available through <code>GitHub</code>. It can be easily installed using the following code.</p>
+<pre><code><a href="https://devtools.r-lib.org/">library(devtools) 
+install_github("hadley/dplyr")</a></code></pre>
 </div>
 
   </div>

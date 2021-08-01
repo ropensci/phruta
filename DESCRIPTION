@@ -33,7 +33,9 @@ Suggests:
     covr,
     knitr,
     markdown,
-    rmarkdown
+    rmarkdown,
+    spelling
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3
+Language: en-US
