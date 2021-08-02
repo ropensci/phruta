@@ -41,15 +41,15 @@ sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folde
 
   fastaSeqs <- lapply(list.files(folder, full.names = T), read.FASTA)
   names(fastaSeqs) <- list.files(folder, full.names = F)
-  seqNames <- sapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_"))
-  seqAccN <- sapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][1], collapse = "_"))
+  seqNames <- unlist(sapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")))
+  seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][1], collapse = "_")))
   AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)), "AccN" = seqAccN, "Species" = seqNames)
-  AccDat$file <- rep(list.files(folder, full.names = F), sapply(fastaSeqs, length))
+  AccDat$file <- rep(list.files(folder, full.names = F), unlist(lapply(fastaSeqs, length)))
 
   species_names <- unique(AccDat$Species)
 
   gbifkey <- lapply(species_names, function(x) name_backbone(name = x, kingdom = kingdom))
-  keys <- pblapply(1:length(gbifkey), function(x) {
+  keys <- pblapply(seq_along(gbifkey), function(x) {
     if (as.character(gbifkey[[x]][which(names(gbifkey[[x]]) == "matchType")]) == "NONE") {
       0
     } else {
@@ -140,7 +140,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folde
       ## Original
       write.FASTA(curatedSeqs[[y]], paste0("1.CuratedSequences/", names(curatedSeqs)[y]))
       ## Renamed
-      newNames <- sapply(names(curatedSeqs[[y]]), function(x) paste(strsplit(x, " ")[[1]][c(2:3)], collapse = "_"))
+      newNames <- unlist(lapply(names(curatedSeqs[[y]]), function(x) paste(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")))
       renamed <- curatedSeqs[[y]]
       if (nrow(toRename) > 0) {
         newNames <- ifelse(newNames %in% toRename$originalSpeciesName, toRename$species_names, newNames)
@@ -152,9 +152,9 @@ sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folde
 
   AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > 1)), ]
   Full_dataset <- Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
-  newspp <- sapply(AccDat$Species, function(x) {
+  newspp <- unlist(lapply(AccDat$Species, function(x) {
     Full_dataset[Full_dataset$originalSpeciesName == x, "species_names"]
-  })
+  }))
 
   AccDat$OldSpecies <- AccDat$Species
   AccDat$Species <- newspp

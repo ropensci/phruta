@@ -1,5 +1,5 @@
-library(testthat)
-library(phruta)
+# library(testthat)
+# library(phruta)
 # library(Biostrings)
 # library(DECIPHER)
 
@@ -198,7 +198,7 @@ test_that("Retrieve sequences", {
   expect_output(sq.retrieve(
     clades = c("Felis", "Vulpes", "Phoca"),
     species = "Manis_pentadactyla",
-    genes = c("ADORA3")
+    genes = "ADORA3"
   ))
 })
 
