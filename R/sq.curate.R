@@ -41,7 +41,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folde
 
   fastaSeqs <- lapply(list.files(folder, full.names = T), read.FASTA)
   names(fastaSeqs) <- list.files(folder, full.names = F)
-  seqNames <- unlist(sapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")))
+  seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")))
   seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x) paste0(strsplit(x, " ")[[1]][1], collapse = "_")))
   AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)), "AccN" = seqAccN, "Species" = seqNames)
   AccDat$file <- rep(list.files(folder, full.names = F), unlist(lapply(fastaSeqs, length)))
