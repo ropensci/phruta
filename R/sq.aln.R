@@ -17,6 +17,7 @@
 #'
 #' @importFrom methods as
 #' @importFrom Biostrings writeXStringSet
+#' @importFrom Biostrings readDNAStringSet
 #' @import DECIPHER
 #'
 #' @return None

@@ -37,6 +37,7 @@
 #' @export
 
 tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_exec = "raxmlHPC", Bootstrap = 100, outgroup, ...) {
+
   if (is.null(folder)) stop("Please provide folder names")
   if (!is.character(raxml_exec)) stop("Please provide a raxml_exec argument of class character")
   if (!is.numeric(Bootstrap)) stop("Please provide a number for the Bootstrap argument")
@@ -54,6 +55,7 @@ tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_e
   dir.create("3.Phylogeny")
   mainDir <- getwd()
   setwd(paste0(mainDir, "/", "3.Phylogeny"))
+  tryCatch({
   tr <- raxml(
     DNAbin = concatenated, m = "GTRGAMMA",
     f = "a", N = Bootstrap, p = 1234, x = 1234,
@@ -62,5 +64,9 @@ tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_e
     file = "phruta",
     outgroup = outgroup, ...
   )
+  }, error=function(e){
+    setwd(mainDir)
+    cat("ERROR :",conditionMessage(e), "\n")
+    })
   setwd(mainDir)
 }
