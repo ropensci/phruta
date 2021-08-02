@@ -15,9 +15,7 @@ Encoding: UTF-8
 LazyData: true
 biocViews: DECIPHER,
            Biostrings
-Depends: R (>= 3.5.0),
-        Biostrings,
-        DECIPHER
+Depends: R (>= 3.5.0)
 Imports: 
     rgbif,
     pbapply,
@@ -26,7 +24,9 @@ Imports:
     ape,
     ips,
     geiger,
-    methods
+    methods,
+    DECIPHER,
+    Biostrings
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),

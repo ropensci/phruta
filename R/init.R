@@ -1,6 +1,6 @@
 .onAttach <- function(libname, pkgname) {
   message <- c(
-    "       ", "\U0002705", "  Thank you for using the {prhtura} R package!   ",
+    "       ", "\U0002705", "  Thank you for using the {phruta} R package!   ",
     "\U0002705", "\n", "\n                        ", "\U0001F642",
     "Happy coding!!", "\U0001F642", "\n                       ",
     "\U0001F34A", "\U0001F34D", "\U0001F350", "\U0001F95D", "\U0001F965",
@@ -8,7 +8,4 @@
   )
   packageStartupMessage(paste(message, collapse = ""))
 }
-
-
-
 
