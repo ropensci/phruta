@@ -1,3 +1,6 @@
+library(DECIPHER)
+library(Biostrings)
+
 unlink(list.dirs("."), recursive = TRUE)
 
 # context("Loading sample trees")
