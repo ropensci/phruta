@@ -1,8 +1,3 @@
-# library(testthat)
-# library(phruta)
-# library(Biostrings)
-# library(DECIPHER)
-
 unlink(list.dirs("."), recursive = TRUE)
 
 # context("Loading sample trees")
