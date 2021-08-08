@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • phruta</title>
+<title>RogueNaRok within phruta — tree.roguetaxa • phruta</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="RogueNaRok within phruta — tree.roguetaxa" />
+<meta property="og:description" content="Implements the RogueNaRok algorithm for rogue taxon identification within phruta" />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,96 +121,57 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>RogueNaRok within phruta</h1>
+    
+    <div class="hidden name"><code>tree.roguetaxa.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Implements the RogueNaRok algorithm for rogue taxon identification within phruta</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>tree.roguetaxa</span><span class='op'>(</span>folder <span class='op'>=</span> <span class='st'>"3.Phylogeny"</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="SW.phruta.html">SW.phruta</a></code> </p>
-        </td>
-        <td><p>Scholl and Wiens (2016) phylogenies</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sq.add.html">sq.add()</a></code> </p>
-        </td>
-        <td><p>Add local sequences to previously downloaded sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sq.aln.html">sq.aln()</a></code> </p>
-        </td>
-        <td><p>Align sequences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sq.curate.html">sq.curate()</a></code> </p>
-        </td>
-        <td><p>Curate sequences from genbank</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sq.partitionfinderv1.html">sq.partitionfinderv1()</a></code> </p>
-        </td>
-        <td><p>Run Partitionfinder v.1</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sq.retrieve.html">sq.retrieve()</a></code> </p>
-        </td>
-        <td><p>Retrieve sequences from genbank</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tree.constraint.html">tree.constraint()</a></code> </p>
-        </td>
-        <td><p>Tree inference under RAxML</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tree.dating.html">tree.dating()</a></code> </p>
-        </td>
-        <td><p>Tree dating under treePL or</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tree.raxml.html">tree.raxml()</a></code> </p>
-        </td>
-        <td><p>Tree inference under RAxML</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tree.roguetaxa.html">tree.roguetaxa()</a></code> </p>
-        </td>
-        <td><p>RogueNaRok within phruta</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>folder</th>
+      <td><p>Name of the folder where the sequences to align are stored (character).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to <code>"Rogue::RogueTaxa"</code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='sq.retrieve.html'>sq.retrieve</a></span><span class='op'>(</span>
+  clades <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Felis"</span>, <span class='st'>"Vulpes"</span>, <span class='st'>"Phoca"</span><span class='op'>)</span>,
+  species <span class='op'>=</span> <span class='st'>"Manis_pentadactyla"</span>,
+  genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='fu'><a href='sq.curate.html'>sq.curate</a></span><span class='op'>(</span>
+  filterTaxonomicCriteria <span class='op'>=</span> <span class='st'>"Felis|Vulpes|Phoca|Manis"</span>,
+  kingdom <span class='op'>=</span> <span class='st'>"animals"</span>, folder <span class='op'>=</span> <span class='st'>"0.Sequences"</span>
+<span class='op'>)</span>
+<span class='fu'><a href='sq.aln.html'>sq.aln</a></span><span class='op'>(</span>folder <span class='op'>=</span> <span class='st'>"1.CuratedSequences"</span><span class='op'>)</span>
+<span class='fu'><a href='tree.raxml.html'>tree.raxml</a></span><span class='op'>(</span>
+  folder <span class='op'>=</span> <span class='st'>"2.Alignments"</span>, FilePatterns <span class='op'>=</span> <span class='st'>"Masked"</span>,
+  raxml_exec <span class='op'>=</span> <span class='st'>"raxmlHPC"</span>, Bootstrap <span class='op'>=</span> <span class='fl'>100</span>,
+  outgroup <span class='op'>=</span> <span class='st'>"Manis_pentadactyla"</span>
+<span class='op'>)</span>
+<span class='fu'>tree.roguetaxa</span><span class='op'>(</span>folder <span class='op'>=</span> <span class='st'>"3.Phylogeny"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
