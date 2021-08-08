@@ -16,7 +16,7 @@
 #' sq.retrieve(
 #'   clades = c("Felis", "Vulpes", "Phoca"),
 #'   species = "Manis_pentadactyla",
-#'   genes = c("ADORA3")
+#'   genes = c("ADORA3", "CYTB")
 #' )
 #' sq.curate(
 #'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
@@ -52,7 +52,7 @@ tree.constraint <- function(taxonomy_folder = "1.CuratedSequences",
       Topology <- gsub(names(clades[i]), clades[[i]], Topology)
     }
   } else {
-    cstByClade <- getListConstraints(taxonomy, byClades = T)
+    cstByClade <- invisible(getListConstraints(taxonomy,targetColumns, byClades = T))
     Topology1 <- Topology
     TopologyOriginal <- Topology
     Topology <- sub(";", "", Topology, fixed = T)

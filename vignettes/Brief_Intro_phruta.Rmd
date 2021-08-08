@@ -1,6 +1,6 @@
 ---
 title: "Introduction to the `phruta` R package"
-author: Cristian Roman-Palacios
+author: Cristian Román-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
   %\VignetteIndexEntry{Brief intro to the `phruta` R package}

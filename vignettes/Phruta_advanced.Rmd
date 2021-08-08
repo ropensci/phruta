@@ -1,6 +1,6 @@
 ---
 title: "Advanced methods in the `phruta` R package" 
-author: Cristian Roman-Palacios
+author: Cristian Román-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
   %\VignetteIndexEntry{Advanced methods in the `phruta` R package}
@@ -76,6 +76,9 @@ tree.constraint(
  )
 ```
 
+![Tree constraints ingroup+outgroup (example shown based on a much limited number of genes; see the examples in the package).](IngroupOutgroup.jpg)
+
+
 ### Particular clades
 
 In this constraint type, `phruta` will create a constraint tree for particular clades. For instance, let's assume that we only need to create a tree constraining the monophyly within two genera and their sister relationships:
@@ -90,13 +93,14 @@ tree.constraint( taxonomy_folder = "1.CuratedSequences",
 
 Note that the key aspect in here is the `Topology` argument. It is a newick tree.
 
+![Tree constraints by clade (example shown based on a much limited number of genes; see the examples in the package).](byclade.jpg)
 
 ## Running PartitionFinder in `phruta` <a name="paragraph2"></a>
 
 With the current version of `phruta`, users are able to run PartitionFinder v1 within R. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names ( `masked` in our case), and which models will be run in PartitionFinder. This function will download PartitionFinder, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.
 
 ```{r eval=FALSE}
-sq.partitionfinder1(folderAlignments = "2.Alignments",
+sq.partitionfinderv1(folderAlignments = "2.Alignments",
                     FilePatterns = "Masked",
                     models = "all"
  )

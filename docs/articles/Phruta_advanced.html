@@ -146,6 +146,9 @@
                 Topology <span class="op">=</span> <span class="st">"((ingroup), outgroup);"</span>,
                 outgroup <span class="op">=</span> <span class="st">"Manis_pentadactyla"</span>
  <span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="IngroupOutgroup.jpg" alt=""><p class="caption">Tree constraints ingroup+outgroup (example shown based on a much limited number of genes; see the examples in the package).</p>
+</div>
 </div>
 <div id="particular-clades" class="section level3">
 <h3 class="hasAnchor">
@@ -158,6 +161,9 @@
                  Topology <span class="op">=</span> <span class="st">"((Felis), (Phoca));"</span>
  <span class="op">)</span></code></pre></div>
 <p>Note that the key aspect in here is the <code>Topology</code> argument. It is a newick tree.</p>
+<div class="figure">
+<img src="byclade.jpg" alt=""><p class="caption">Tree constraints by clade (example shown based on a much limited number of genes; see the examples in the package).</p>
+</div>
 </div>
 </div>
 <div id="running-partitionfinder-in-phruta" class="section level2">
@@ -166,7 +172,7 @@
 </h2>
 <p>With the current version of <code>phruta</code>, users are able to run PartitionFinder v1 within R. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names ( <code>masked</code> in our case), and which models will be run in PartitionFinder. This function will download PartitionFinder, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">sq.partitionfinder1</span><span class="op">(</span>folderAlignments <span class="op">=</span> <span class="st">"2.Alignments"</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/sq.partitionfinderv1.html">sq.partitionfinderv1</a></span><span class="op">(</span>folderAlignments <span class="op">=</span> <span class="st">"2.Alignments"</span>,
                     FilePatterns <span class="op">=</span> <span class="st">"Masked"</span>,
                     models <span class="op">=</span> <span class="st">"all"</span>
  <span class="op">)</span></code></pre></div>

@@ -1,7 +1,8 @@
 #' Tree inference under RAxML
 #'
 #' Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
-#' a given folder (default is \code{"2.Alignments"}).
+#' a given folder (default is \code{"2.Alignments"}). Note that you need at least two
+#' gene regions to run a partitioned analysis.
 #'
 #' @param folder Name of the folder where the sequences to align are stored (character).
 #' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
@@ -23,7 +24,7 @@
 #' sq.retrieve(
 #'   clades = c("Felis", "Vulpes", "Phoca"),
 #'   species = "Manis_pentadactyla",
-#'   genes = c("ADORA3")
+#'   genes = c("ADORA3", "CYTB")
 #' )
 #' sq.curate(
 #'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",

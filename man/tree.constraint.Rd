@@ -33,7 +33,7 @@ a given folder (default is \code{"2.Alignments"}).
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",

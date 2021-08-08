@@ -36,14 +36,15 @@ None
 }
 \description{
 Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
-a given folder (default is \code{"2.Alignments"}).
+a given folder (default is \code{"2.Alignments"}). Note that you need at least two
+gene regions to run a partitioned analysis.
 }
 \examples{
 \dontrun{
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",

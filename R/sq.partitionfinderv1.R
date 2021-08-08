@@ -1,6 +1,7 @@
 #' Run Partitionfinder v.1
 #'
 #' This function runs partitionfinder v1 within phruta. For now, all analyses are based on genes.
+#' Please note that you need at least two gene regions to run partitionfinder.
 #'
 #' @param folderAlignments Name of the folder where the sequences to align are stored (character).
 #' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
@@ -20,14 +21,14 @@
 #' sq.retrieve(
 #'   clades = c("Felis", "Vulpes", "Phoca"),
 #'   species = "Manis_pentadactyla",
-#'   genes = c("ADORA3")
+#'   genes = c("ADORA3", "CYTB")
 #' )
 #' sq.curate(
 #'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
 #'   kingdom = "animals", folder = "0.Sequences"
 #' )
 #' sq.aln(folder = "1.CuratedSequences")
-#' sq.partitionfinder1(
+#' sq.partitionfinderv1(
 #'   folderAlignments = "2.Alignments",
 #'   FilePatterns = "Masked",
 #'   models = "all"

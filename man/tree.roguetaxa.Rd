@@ -22,7 +22,7 @@ Implements the RogueNaRok algorithm for rogue taxon identification within phruta
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
