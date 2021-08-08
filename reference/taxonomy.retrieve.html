@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a list of constraints given a taxonomic dataset — getListConstraints • phruta</title>
+<title>Curate sequences from genbank — taxonomy.retrieve • phruta</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,12 @@
 
 
 
-<meta property="og:title" content="Get a list of constraints given a taxonomic dataset — getListConstraints" />
-<meta property="og:description" content="Internal used to generate tree constraints" />
+<meta property="og:title" content="Curate sequences from genbank — taxonomy.retrieve" />
+<meta property="og:description" content="After downloading sequences from genbank, this function curates sequences based on taxonomic
+information. Note that this function provides two summary datasets. First, the accession numbers.
+Second, the taxonomic information for each species in the database. The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved to &quot;1.CuratedSequences&quot;. The
+resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -126,19 +130,51 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a list of constraints given a taxonomic dataset</h1>
+    <h1>Curate sequences from genbank</h1>
     
-    <div class="hidden name"><code>getListConstraints.Rd</code></div>
+    <div class="hidden name"><code>taxonomy.retrieve.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal used to generate tree constraints</p>
+    <p>After downloading sequences from genbank, this function curates sequences based on taxonomic
+information. Note that this function provides two summary datasets. First, the accession numbers.
+Second, the taxonomic information for each species in the database. The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved to <code>"1.CuratedSequences"</code>. The
+resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getListConstraints</span><span class='op'>(</span><span class='va'>dataset</span>, <span class='va'>targetColumns</span>, byClades <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>taxonomy.retrieve</span><span class='op'>(</span>species_names <span class='op'>=</span> <span class='cn'>NULL</span>, database <span class='op'>=</span> <span class='st'>"gbif"</span>, kingdom <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>species_names</th>
+      <td><p>A vector of species names</p></td>
+    </tr>
+    <tr>
+      <th>database</th>
+      <td><p>A name of a database with taxonomic information. 'gbif' only
+works for animals and plants. Databases follows taxize::classification</p></td>
+    </tr>
+    <tr>
+      <th>kingdom</th>
+      <td><p>Optional and only used when database='gbif'. Two possible options: "animals" or "plants."</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>data.frame of taxonomic information for the target species (valid in the database)</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>taxonomy.retrieve</span><span class='op'>(</span>species_names<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Felis_catus"</span>, <span class='st'>"PREDICTED:_Vulpes"</span>,
+ <span class='st'>"Phoca_largha"</span>, <span class='st'>"PREDICTED:_Phoca"</span> ,
+ <span class='st'>"PREDICTED:_Manis"</span> , <span class='st'>"Felis_silvestris"</span> , <span class='st'>"Felis_nigripes"</span><span class='op'>)</span>,
+ database<span class='op'>=</span><span class='st'>'gbif'</span>, kingdom<span class='op'>=</span><span class='st'>'animals'</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
