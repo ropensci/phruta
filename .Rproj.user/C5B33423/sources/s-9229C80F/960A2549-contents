@@ -1,5 +1,0 @@
-## What is `phruta`
-
-The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Furthermore, the fact that all the intermediate steps are saved in independent folder and all the code is run within the same environment increases reproducibility. `phruta` retrieves gene sequences, combines newly downloaded and local gene sequences, and perform sequence alignment. 
-
-`phruta` is also able to perform basic phylogenetic inference under `RaXML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for different R packages and additional software.

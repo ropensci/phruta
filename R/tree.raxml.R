@@ -10,9 +10,11 @@
 #' @param Bootstrap Number of bootstrap replicates (numeric).
 #' @param outgroup A single string of comma-separated tip labels to be used as outgroup in
 #'                 \code{"RAxML"} See \code{"RAxML"} documentation for more details (character).
+#' @param partitioned Whether analyses should be partitioned by gene (Logical).
 #' @param ... Arguments passed to \code{"ips::raxml"}.
 #'
 #' @importFrom ips raxml
+#' @importFrom ips raxml.partitions
 #'
 #' @return None
 #'
@@ -36,7 +38,9 @@
 #' }
 #' @export
 
-tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_exec = "raxmlHPC", Bootstrap = 100, outgroup, ...) {
+tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked",
+                       raxml_exec = "raxmlHPC", Bootstrap = 100, outgroup,
+                       partitioned=F, ...) {
 
   if (is.null(folder)) stop("Please provide folder names")
   if (!is.character(raxml_exec)) stop("Please provide a raxml_exec argument of class character")
@@ -49,24 +53,44 @@ tree.raxml <- function(folder = "2.Alignments", FilePatterns = "Masked", raxml_e
   names(seq) <- files
 
   concatenated <- do.call(cbind.DNAbin, c(seq,
-    fill.with.gaps = TRUE
+                                          fill.with.gaps = TRUE
   ))
   unlink("3.Phylogeny", recursive = TRUE)
   dir.create("3.Phylogeny")
   mainDir <- getwd()
   setwd(paste0(mainDir, "/", "3.Phylogeny"))
-  tryCatch({
-  tr <- raxml(
-    DNAbin = concatenated, m = "GTRGAMMA",
-    f = "a", N = Bootstrap, p = 1234, x = 1234,
-    k = T,
-    exec = raxml_exec, threads = 4,
-    file = "phruta",
-    outgroup = outgroup, ...
-  )
-  }, error=function(e){
-    setwd(mainDir)
-    cat("ERROR :",conditionMessage(e), "\n")
+
+  if(partitioned ==T){
+    partitions<-do.call(raxml.partitions, seq)
+
+    tryCatch({
+      tr <- raxml(
+        DNAbin = concatenated, m = "GTRGAMMA",
+        f = "a", N = Bootstrap, p = 1234, x = 1234,
+        k = T,
+        exec = raxml_exec, threads = 4,
+        file = "phruta",
+        outgroup = outgroup,partitions=partitions,
+        ...
+      )
+    }, error=function(e){
+      setwd(mainDir)
+      cat("ERROR :",conditionMessage(e), "\n")
     })
+  }else{
+    tryCatch({
+      tr <- raxml(
+        DNAbin = concatenated, m = "GTRGAMMA",
+        f = "a", N = Bootstrap, p = 1234, x = 1234,
+        k = T,
+        exec = raxml_exec, threads = 4,
+        file = "phruta",
+        outgroup = outgroup, ...
+      )
+    }, error=function(e){
+      setwd(mainDir)
+      cat("ERROR :",conditionMessage(e), "\n")
+    })
+  }
   setwd(mainDir)
 }
