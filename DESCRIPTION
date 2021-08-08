@@ -1,7 +1,7 @@
 Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
                   role = c("aut", "cre"))
 Description: The phruta R package is designed to simplify the basic 

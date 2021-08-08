@@ -42,7 +42,6 @@ sq.aln(folder = "1.CuratedSequences")
 sq.partitionfinder1(
   folderAlignments = "2.Alignments",
   FilePatterns = "Masked",
-  folderPartitionFinder = "2.1.PartitionFinderv1",
   models = "all"
 )
 }

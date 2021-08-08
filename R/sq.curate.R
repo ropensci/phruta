@@ -4,18 +4,21 @@
 #' information. Note that this function provides two summary datasets. First, the accession numbers.
 #' Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 #' the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSequences"}. The
-#' resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.
+#' resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone.
 #'
 #' @param filterTaxonomicCriteria A single string of terms (delimited using "|") listing all the
 #'                                strings that could be used to identify the species that should
 #'                                be in the dataset (character).
-#' @param kingdom Two options: animals or plants (character).
+#' @param database A name of a database with taxonomic information. Although 'gbif' is faster,
+#'                 it only has information for animals and plants. Other databases follow taxize::classification.
+#' @param kingdom Optional and only used when database='gbif'. Two possible options: "animals" or "plants."
 #' @param folder The name of the folder where the original sequences are (character).
 #'
 #' @import stats
 #' @import utils
 #' @import ape
 #' @import rgbif
+#' @import taxize
 #'
 #' @return None
 #'
@@ -28,16 +31,16 @@
 #' )
 #' sq.curate(
 #'   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
-#'   kingdom = "animals", folder = "0.Sequences"
+#'   database = "gbif", kingdom = "animals",
+#'   folder = "0.Sequences"
 #' )
 #' }
 #' @export
 
-sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folder = "0.Sequences") {
+sq.curate <- function(filterTaxonomicCriteria = NULL, database = "gbif" , kingdom = NULL, folder = "0.Sequences") {
   if (is.null(filterTaxonomicCriteria)) stop("Please provide filtering pattern in the filterTaxonomicCriteria argument")
   if (length(filterTaxonomicCriteria) > 1) stop("Use a single string in the filterTaxonomicCriteria argument. \n SOLUTION: Split multiple criteria using |")
   if (is.null(folder)) stop("Folder where curated sequences are saved must be provided")
-  match.arg(kingdom, c("animals", "plants"))
 
   fastaSeqs <- lapply(list.files(folder, full.names = T), read.FASTA)
   names(fastaSeqs) <- list.files(folder, full.names = F)
@@ -48,36 +51,12 @@ sq.curate <- function(filterTaxonomicCriteria = NULL, kingdom = "animals", folde
 
   species_names <- unique(AccDat$Species)
 
-  gbifkey <- lapply(species_names, function(x) name_backbone(name = x, kingdom = kingdom))
-  keys <- pblapply(seq_along(gbifkey), function(x) {
-    if (as.character(gbifkey[[x]][which(names(gbifkey[[x]]) == "matchType")]) == "NONE") {
-      0
-    } else {
-      if (length(which(names(gbifkey[[x]]) == "acceptedUsageKey")) == 0) {
-        as.character(gbifkey[[x]][which(names(gbifkey[[x]]) == "usageKey")])
-      } else {
-        as.character(gbifkey[[x]][which(names(gbifkey[[x]]) == "acceptedUsageKey")])
-      }
-    }
-  })
-
-  gbif_taxonomy <- lapply(unlist(keys), function(x) as.data.frame(name_usage(key = x)$data))
-  ranks <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
-  Taxonomy_species <- lapply(seq_along(gbif_taxonomy), function(y) {
-    sub1 <- gbif_taxonomy[[y]]
-    cate <- t(data.frame(unlist(lapply(seq_along(ranks), function(x) {
-      nu <- which(colnames(sub1) == ranks[x])
-      if (length(nu) != 1) {
-        NA
-      } else {
-        sub1[, nu]
-      }
-    }))))
-    colnames(cate) <- ranks
-    row.names(cate) <- NULL
-    cate
-  })
-  Taxonomy_species <- do.call(rbind.data.frame, Taxonomy_species)
+  Taxonomy_species<-if(database=='gbif' ){
+  taxonomy.retrieve(species_names=species_names, database='gbif',
+                                      kingdom=kingdom)
+  }else{
+    taxonomy.retrieve(species_names=species_names, database='itis')
+  }
 
   # Remove PREDICTED species
   if (length(grep("PREDICTED", AccDat$Species)) > 0) {
