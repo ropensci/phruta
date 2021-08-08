@@ -34,6 +34,6 @@ tree.raxml(
   raxml_exec = "raxmlHPC", Bootstrap = 100,
   outgroup = "Manis_pentadactyla"
 )
-tree.roguetaxa(folder='3.Phylogeny')
+tree.roguetaxa(folder = "3.Phylogeny")
 }
 }

@@ -178,12 +178,11 @@ brew install brewsci/bio/treepl
 
 I acknowledge that the current release of the package is limited in different ways. Next releases will focus on improving the following aspects:
 
-  - Expand taxonomic cleaning for non-animal/plant groups
-  - Taxonomic tree constraints
-  - Starting trees in RAxML
-  - Partitioned analyses in RAxML
-  - PartitionFinder
-  - https://github.com/ms609/Roguer/
+  - Expand taxonomic cleaning for non-animal/plant groups (Ok)
+  - Taxonomic tree constraints (Ok)
+  - Partitioned analyses in RAxML (Ok)
+  - PartitionFinder (V1 Ok)
+  - https://github.com/ms609/Roguer/ (Ok)
 
 Please stay tuned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!
 

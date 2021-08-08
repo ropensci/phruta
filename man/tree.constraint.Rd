@@ -19,7 +19,7 @@ tree.constraint(
 
 \item{Topology}{A string summarizing the desired topological constraint in newick format.}
 
-\item{outgroup}{Optional and only requiered when the topology argument is not "((ingroup), outgroup);".}
+\item{outgroup}{Optional and only required when the topology argument is not "((ingroup), outgroup);".}
 }
 \value{
 None
@@ -40,15 +40,16 @@ sq.curate(
   kingdom = "animals", folder = "0.Sequences"
 )
 
-tree.constraint(taxonomy_folder="1.CuratedSequences",
-               TaxonomyConstraints=T,
-               targetColumns=c("kingdom","phylum","class","order","family","genus","species_names"),
-               Topology="((ingroup), outgroup);",
-               outgroup="Manis_pentadactyla")
-tree.constraint(taxonomy_folder="1.CuratedSequences",
-               TaxonomyConstraints=T,
-               targetColumns=c("kingdom","phylum","class","order","family","genus","species_names"),
-               Topology="((Felis), (Phoca));",
-               outgroup="Manis_pentadactyla")
+tree.constraint(
+  taxonomy_folder = "1.CuratedSequences",
+  targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+  Topology = "((ingroup), outgroup);",
+  outgroup = "Manis_pentadactyla"
+)
+tree.constraint(
+  taxonomy_folder = "1.CuratedSequences",
+  targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+  Topology = "((Felis), (Phoca));"
+)
 }
 }

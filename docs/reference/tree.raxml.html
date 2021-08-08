@@ -140,6 +140,7 @@ a given folder (default is <code>"2.Alignments"</code>).</p>
   raxml_exec <span class='op'>=</span> <span class='st'>"raxmlHPC"</span>,
   Bootstrap <span class='op'>=</span> <span class='fl'>100</span>,
   <span class='va'>outgroup</span>,
+  partitioned <span class='op'>=</span> <span class='cn'>F</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -167,6 +168,10 @@ this argument can be set to <code>"NULL"</code> if no specific pattern wants to 
       <th>outgroup</th>
       <td><p>A single string of comma-separated tip labels to be used as outgroup in
 <code>"RAxML"</code> See <code>"RAxML"</code> documentation for more details (character).</p></td>
+    </tr>
+    <tr>
+      <th>partitioned</th>
+      <td><p>Whether analyses should be partitioned by gene (Logical).</p></td>
     </tr>
     <tr>
       <th>...</th>

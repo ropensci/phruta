@@ -27,15 +27,15 @@
 #'   raxml_exec = "raxmlHPC", Bootstrap = 100,
 #'   outgroup = "Manis_pentadactyla"
 #' )
-#' tree.roguetaxa(folder='3.Phylogeny')
+#' tree.roguetaxa(folder = "3.Phylogeny")
 #' }
 #' @export
 
-tree.roguetaxa<-function(folder='3.Phylogeny',...){
-  trees <- read.tree(paste0(folder,"/RAxML_bootstrap.phruta"))
-  BestTree<-read.tree(paste0(folder,"/RAxML_bipartitions.phruta"))
-  RT<-RogueTaxa(trees, bestTree=BestTree, ...)
+tree.roguetaxa <- function(folder = "3.Phylogeny", ...) {
+  trees <- read.tree(paste0(folder, "/RAxML_bootstrap.phruta"))
+  BestTree <- read.tree(paste0(folder, "/RAxML_bipartitions.phruta"))
+  RT <- RogueTaxa(trees, bestTree = BestTree, ...)
   unlink("3.1.RogueTaxa", recursive = TRUE)
-  dir.create('3.1.RogueTaxa')
-  write.csv(RT, '3.1.RogueTaxa/RogueTaxa.csv')
+  dir.create("3.1.RogueTaxa")
+  write.csv(RT, "3.1.RogueTaxa/RogueTaxa.csv")
 }
