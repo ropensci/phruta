@@ -41,7 +41,8 @@ getListConstraints <- function(dataset, targetColumns, byClades = F) {
       } else {
         nextLev
       }
-      targetGroups <- classification[names(classification) == additionalLevels[x]][[1]]
+      targetGroups <-
+        classification[names(classification) == additionalLevels[x]][[1]]
       if (x == 1) {
         nextLevNested <- list()
         for (i in 1:length(targetGroups)) {
@@ -71,7 +72,8 @@ getListConstraints <- function(dataset, targetColumns, byClades = F) {
       } else {
         nextLev
       }
-      targetGroups <- classification[names(classification) == additionalLevels[x]][[1]]
+      targetGroups <-
+        classification[names(classification) == additionalLevels[x]][[1]]
       if (x == 1) {
         nextLevNested <- list()
         for (i in 1:length(targetGroups)) {

@@ -1,26 +1,36 @@
 #' Add local sequences to previously downloaded sequences
 #'
-#' This function adds sequences located in a particular folder (default is \code{"0.AdditionalSequences"}) to
-#' fasta files in another folder (default is \code{"0.Sequences"}). Files must be in FASTA format and names
-#' of the files should perfectly match the ones in the previously downloaded folder (e.g. \code{"0.Sequences"}).
-#' This function creates a third new folder \code{"0.0.OriginalDownloaded"} containing the originally
-#' downloaded sequences. The sequences in the \code{"0.Sequences"} folder get replaced with the combined ones.
-#' Note that new sequences can be added even for just a fraction of the originally downloaded genes.
+#' This function adds sequences located in a particular folder
+#' (default is \code{"0.AdditionalSequences"}) to
+#' fasta files in another folder (default is \code{"0.Sequences"}).
+#' Files must be in FASTA format and names
+#' of the files should perfectly match the ones in the previously
+#' downloaded folder (e.g. \code{"0.Sequences"}).
+#' This function creates a third new folder \code{"0.0.OriginalDownloaded"}
+#' containing the originally
+#' downloaded sequences. The sequences in the \code{"0.Sequences"} folder get
+#' replaced with the combined ones.
+#' Note that new sequences can be added even for just a fraction of the
+#' originally downloaded genes.
 #'
-#' @param folderDownloaded Name of the folder with dowloaded sequences (character).
-#' @param folderNew Name of the folder with local sequences (character).
+#' @param folderDownloaded Name of the folder with dowloaded sequences.
+#' @param folderNew Name of the folder with local sequences.
 #'
 #' @return None
 #'
 #' @examples
 #' \dontrun{
-#' sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
+#' sq.add(folderDownloaded = "0.Sequences",
+#'        folderNew = "0.AdditionalSequences")
 #' }
 #' @export
 
-sq.add <- function(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences") {
-  if (is.null(folderDownloaded) | is.null(folderNew)) stop("Please provide folder names")
-  if (!is.character(folderDownloaded) | !is.character(folderNew)) stop("Folder names must be of class character")
+sq.add <- function(folderDownloaded = "0.Sequences",
+                   folderNew = "0.AdditionalSequences") {
+  if (is.null(folderDownloaded) | is.null(folderNew))
+    stop("Please provide folder names")
+  if (!is.character(folderDownloaded) | !is.character(folderNew))
+    stop("Folder names must be of class character")
 
   ds.namesFull <- list.files(folderDownloaded, full.names = T)
   ds.names <- list.files(folderDownloaded)

@@ -1,8 +1,10 @@
 #' RogueNaRok within phruta
 #'
-#' Implements the RogueNaRok algorithm for rogue taxon identification within phruta
+#' Implements the RogueNaRok algorithm for rogue taxon identification
+#' within phruta
 #'
-#' @param folder Name of the folder where the sequences to align are stored (character).
+#' @param folder Name of the folder where the sequences to align are
+#'               stored (character).
 #' @param ... Arguments passed to \code{"Rogue::RogueTaxa"}.
 #'
 #' @importFrom Rogue RogueTaxa

@@ -1,12 +1,17 @@
 #' Run Partitionfinder v.1
 #'
-#' This function runs partitionfinder v1 within phruta. For now, all analyses are based on genes.
+#' This function runs partitionfinder v1 within phruta. For now,
+#' all analyses are based on genes.
 #' Please note that you need at least two gene regions to run partitionfinder.
 #'
-#' @param folderAlignments Name of the folder where the sequences to align are stored (character).
-#' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
-#'                     this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.
-#' @param folderPartitionFinder Name of the new folder where the output files are stored (string).
+#' @param folderAlignments Name of the folder where the sequences to align are
+#'                         stored (character).
+#' @param FilePatterns A string that is common to all the target files in the
+#'                     relevant folder (character). Note that
+#'                     this argument can be set to \code{"NULL"} if no specific
+#'                     pattern wants to be analyzed.
+#' @param folderPartitionFinder Name of the new folder where the output files
+#'                              are stored (string).
 #' @param models Models to run in partitionfinder (string).
 #'
 #' @importFrom ape read.FASTA
@@ -38,7 +43,7 @@
 
 sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
                                  FilePatterns = "Masked",
-                                 folderPartitionFinder = "2.1.PartitionFinderv1",
+                                 folderPartitionFinder ="2.1.PartitionFinderv1",
                                  models = "all") {
   files_fullNames <- list.files(folderAlignments, FilePatterns, full.names = T)
   files <- list.files(folderAlignments, FilePatterns)
@@ -57,15 +62,18 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
 
   ## Set partitions
   if ("PartitionFinder.tar.gz" %in% list.files() == FALSE) {
-    download.file("https://github.com/brettc/partitionfinder/archive/v1.1.1.zip", "PartitionFinder.tar.gz")
+   download.file("https://github.com/brettc/partitionfinder/archive/v1.1.1.zip",
+                 "PartitionFinder.tar.gz")
     untar("PartitionFinder.tar.gz")
   }
 
-  config_file <- readLines("partitionfinder-1.1.1/examples/nucleotide/partition_finder.cfg")
+  config_file <-
+    readLines("partitionfinder-1.1.1/examples/nucleotide/partition_finder.cfg")
 
   block <- list()
   for (i in 1:nrow(partitions)) {
-    block[[i]] <- paste0("GENE_", i, " ", "=", " ", partitions[i, 3], " ", "-", " ", partitions[i, 4], ";")
+    block[[i]] <- paste0("GENE_", i, " ", "=", " ",
+                         partitions[i, 3], " ", "-", " ", partitions[i, 4], ";")
   }
 
   conf_fi_mod <- config_file[-c(16:24)]
@@ -76,7 +84,8 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
   writeLines(newconf, paste0(folderPartitionFinder, "/partition_finder.cfg"))
 
   tofile <- paste0(folderPartitionFinder, "/partition_finder.cfg")
-  system(paste0("python ./partitionfinder-1.1.1/PartitionFinder.py", " ", tofile), wait = T)
+  system(paste0("python ./partitionfinder-1.1.1/PartitionFinder.py", " ",
+                tofile), wait = T)
 
   unlink("partitionfinder-1.1.1", recursive = TRUE)
   unlink("PartitionFinder.tar.gz", recursive = TRUE)

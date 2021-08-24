@@ -225,24 +225,26 @@ test_that("Add sequences", {
 })
 
 
-##Test constraints
+## Test constraints
 
 taxonomy <- read.csv("1.CuratedSequences/1.Taxonomy.csv")
 test_that("Generate list of constraints, not by clade", {
   expect_true(
     class(getListConstraints(taxonomy,
-                             targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-                             byClades = F)
-    ) == "list")
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      byClades = F
+    )) == "list"
+  )
 })
 
 
 test_that("Generate list of constraints, by clade", {
   expect_true(
     class(getListConstraints(taxonomy,
-                       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-                       byClades = T)
-  ) == "list")
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      byClades = T
+    )) == "list"
+  )
 })
 
 
@@ -267,24 +269,22 @@ test_that("Tree constraints ingroup/outgroup", {
   )
 })
 
-##PartitionFinder
+## PartitionFinder
 
-test_that("Tree constraints ingroup/outgroup", {
-  expect_snapshot_output(
-sq.partitionfinderv1(
-  folderAlignments = "2.Alignments",
-  FilePatterns = "Masked",
-  models = "all"
-)
-)
-})
+# test_that("Tree constraints ingroup/outgroup", {
+#  expect_snapshot_output(
+# sq.partitionfinderv1(
+#  folderAlignments = "2.Alignments",
+#  FilePatterns = "Masked",
+#  models = "all"
+# )
+# )
+# })
 
-#Tree rogue
+# Tree rogue
 
 test_that("Error when running tree rogue", {
   expect_error(
-tree.roguetaxa(folder = "3.Phylogeny")
-)
+    tree.roguetaxa(folder = "3.Phylogeny")
+  )
 })
-
-

@@ -3,15 +3,20 @@
 #' Perform multiple sequence alignment on all the fasta files
 #' saved in a given folder. Alignment is conducted using
 #' \code{"BiocManager::install("DECIPHER")"}. Note that this function first
-#' optimizes the direction of the sequences, then aligns using \code{"BDECIPHER"},
-#' and finally masks the resulting alignment (optionally but does it per default). The
+#' optimizes the direction of the sequences, then aligns
+#' using \code{"BDECIPHER"}, and finally masks the resulting
+#' alignment (optionally but does it per default). The
 #' masking step includes removing common gaps across all the species and removing
-#' highly ambiguous positions. The resulting aligned sequences are stored to a new folder
+#' highly ambiguous positions. The resulting aligned sequences
+#' are stored to a new folder
 #' \code{"2.Alignments"}.'
 #'
-#' @param folder Name of the folder where the sequences to align are stored (character).
-#' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
-#'                     this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.
+#' @param folder Name of the folder where the sequences to align
+#'               are stored (character).
+#' @param FilePatterns A string that is common to all the target
+#'                     files in the relevant folder (character). Note that
+#'                     this argument can be set to \code{"NULL"} if no specific
+#'                     pattern wants to be analyzed.
 #' @param mask Removes ambiguous sites (Logical, TRUE or FALSE).
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
@@ -37,9 +42,13 @@
 #' }
 #' @export
 
-sq.aln <- function(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T, ...) {
-  if (is.null(folder)) stop("Folder where curated sequences are saved must be provided")
-  if (!is.logical(mask)) stop("The mask argument must be TRUE or FALSE")
+sq.aln <- function(folder = "1.CuratedSequences",
+                   FilePatterns = "renamed",
+                   mask = T, ...) {
+  if (is.null(folder))
+    stop("Folder where curated sequences are saved must be provided")
+  if (!is.logical(mask))
+    stop("The mask argument must be TRUE or FALSE")
 
   files <- list.files(folder, FilePatterns)
   files <- sub("renamed_", "", files)
@@ -56,7 +65,9 @@ sq.aln <- function(folder = "1.CuratedSequences", FilePatterns = "renamed", mask
         alignedNoGaps <- RemoveGaps(aligned, removeGaps = "common")
         alignedMasked <- MaskAlignment(alignedNoGaps)
         DNAStr <- as(alignedMasked, "DNAStringSet")
-        writeXStringSet(DNAStr, filepath = paste0("2.Alignments/Masked_", files[x]))
+        writeXStringSet(DNAStr,
+                        filepath = paste0("2.Alignments/Masked_",
+                                          files[x]))
       }
 
       writeXStringSet(aligned, filepath = paste0("2.Alignments/", files[x]))
