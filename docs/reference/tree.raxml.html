@@ -48,7 +48,8 @@
 
 <meta property="og:title" content="Tree inference under RAxML — tree.raxml" />
 <meta property="og:description" content="Performs tree inference under &quot;RAxML&quot; for aligned fasta sequences in
-a given folder (default is &quot;2.Alignments&quot;)." />
+a given folder (default is &quot;2.Alignments&quot;). Note that you need at least two
+gene regions to run a partitioned analysis." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -81,7 +82,7 @@ a given folder (default is &quot;2.Alignments&quot;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -104,7 +105,10 @@ a given folder (default is &quot;2.Alignments&quot;)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/phruta_vignette.html">Brief intro to the `phruta` R package</a>
+      <a href="../articles/Brief_Intro_phruta.html">Introduction to the `phruta` R package</a>
+    </li>
+    <li>
+      <a href="../articles/Phruta_advanced.html">Advanced methods in the `phruta` R package</a>
     </li>
   </ul>
 </li>
@@ -131,7 +135,8 @@ a given folder (default is &quot;2.Alignments&quot;)." />
 
     <div class="ref-description">
     <p>Performs tree inference under <code>"RAxML"</code> for aligned fasta sequences in
-a given folder (default is <code>"2.Alignments"</code>).</p>
+a given folder (default is <code>"2.Alignments"</code>). Note that you need at least two
+gene regions to run a partitioned analysis.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tree.raxml</span><span class='op'>(</span>
@@ -140,6 +145,7 @@ a given folder (default is <code>"2.Alignments"</code>).</p>
   raxml_exec <span class='op'>=</span> <span class='st'>"raxmlHPC"</span>,
   Bootstrap <span class='op'>=</span> <span class='fl'>100</span>,
   <span class='va'>outgroup</span>,
+  partitioned <span class='op'>=</span> <span class='cn'>F</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -169,6 +175,10 @@ this argument can be set to <code>"NULL"</code> if no specific pattern wants to 
 <code>"RAxML"</code> See <code>"RAxML"</code> documentation for more details (character).</p></td>
     </tr>
     <tr>
+      <th>partitioned</th>
+      <td><p>Whether analyses should be partitioned by gene (Logical).</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed to <code>"ips::raxml"</code>.</p></td>
     </tr>
@@ -183,7 +193,7 @@ this argument can be set to <code>"NULL"</code> if no specific pattern wants to 
 <span class='fu'><a href='sq.retrieve.html'>sq.retrieve</a></span><span class='op'>(</span>
   clades <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Felis"</span>, <span class='st'>"Vulpes"</span>, <span class='st'>"Phoca"</span><span class='op'>)</span>,
   species <span class='op'>=</span> <span class='st'>"Manis_pentadactyla"</span>,
-  genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span><span class='op'>)</span>
+  genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span>, <span class='st'>"CYTB"</span><span class='op'>)</span>
 <span class='op'>)</span>
 <span class='fu'><a href='sq.curate.html'>sq.curate</a></span><span class='op'>(</span>
   filterTaxonomicCriteria <span class='op'>=</span> <span class='st'>"Felis|Vulpes|Phoca|Manis"</span>,

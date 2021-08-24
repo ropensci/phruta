@@ -1,9 +1,11 @@
 Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
-                  role = c("aut", "cre"))
+                  role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-1696-4886"))
+URL: https://github.com/cromanpa94/phruta, https://cromanpa94.github.io/phruta/
 Description: The phruta R package is designed to simplify the basic 
             phylogenetic pipeline. Specifically, all code is run within 
             the same program and data from intermediate steps are saved in 
@@ -26,7 +28,8 @@ Imports:
     geiger,
     methods,
     DECIPHER,
-    Biostrings
+    Biostrings,
+    Rogue
 RoxygenNote: 7.1.1
 Suggests: 
     testthat (>= 3.0.0),

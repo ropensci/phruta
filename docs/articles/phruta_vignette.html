@@ -76,13 +76,13 @@
 
       
 
-      </header><script src="phruta_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="phruta_vignette_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Brief intro to the <code>phruta</code> R package</h1>
                         <h4 class="author">Cristian Roman-Palacios</h4>
             
-            <h4 class="date">First created on 2021-07-30. Updated on 2021-08-01</h4>
+            <h4 class="date">First created on 2021-07-30. Updated on 2021-08-07</h4>
       
       
       <div class="hidden name"><code>phruta_vignette.Rmd</code></div>
@@ -225,15 +225,15 @@
 <a href="#installing-raxml" class="anchor"></a>Installing RAxML <a name="paragraph2"></a>
 </h2>
 <p><code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below in <code>conda</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">conda</span> install -c bioconda raxml</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda/label/cf201901 raxml </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda raxml</span></code></pre></div>
 <p>Open <code>R</code> and make sure that the following line doesn’t throw an error.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="st">"raxmlHPC"</span><span class="op">)</span></code></pre></div>
 <p>You may also want to check if <code>RAxML</code> is called using <code>raxmlHPC</code> or something else. This can be set when running <code>tree.raxml</code> using the <code>raxml_exec</code> argument.</p>
 <p>Finally, note that <code>RStudio</code> sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html">system()</a></code>.</p>
 <p>With issues, if you’re running macOS, try running RStudio from the command line. Close RStudio, open the terminal, and type:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
 </div>
 <div id="installing-pathd-8-and-treepl" class="section level2">
 <h2 class="hasAnchor">
@@ -242,19 +242,19 @@
 <p>There are excellent guides for installing <code>PATHd-8</code> and <code>treePL</code>. Here, I summarize two potentially relevant options.</p>
 <p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code>. I summarized the code <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4">here</a>.</p>
 <p>Second, you can use homebrew to install <code>treePL</code>, thanks to Jonathan Chang.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
 </div>
 <div id="future-developments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#future-developments" class="anchor"></a>Future developments</h2>
 <p>I acknowledge that the current release of the package is limited in different ways. Next releases will focus on improving the following aspects:</p>
 <ul>
-<li>Expand taxonomic cleaning for non-animal/plant groups</li>
-<li>Taxonomic tree constraints</li>
-<li>Starting trees in RAxML</li>
-<li>Partitioned analyses in RAxML</li>
-<li>PartitionFinder</li>
-<li><a href="https://github.com/ms609/Roguer/" class="uri">https://github.com/ms609/Roguer/</a></li>
+<li>Expand taxonomic cleaning for non-animal/plant groups (Ok)</li>
+<li>Taxonomic tree constraints (Ok)</li>
+<li>Partitioned analyses in RAxML (Ok)</li>
+<li>PartitionFinder (V1 Ok)</li>
+<li>
+<a href="https://github.com/ms609/Roguer/" class="uri">https://github.com/ms609/Roguer/</a> (Ok)</li>
 </ul>
 <p>Please stay tuned for updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!</p>
 </div>

@@ -10,6 +10,7 @@ tree.raxml(
   raxml_exec = "raxmlHPC",
   Bootstrap = 100,
   outgroup,
+  partitioned = F,
   ...
 )
 }
@@ -26,6 +27,8 @@ this argument can be set to \code{"NULL"} if no specific pattern wants to be ana
 \item{outgroup}{A single string of comma-separated tip labels to be used as outgroup in
 \code{"RAxML"} See \code{"RAxML"} documentation for more details (character).}
 
+\item{partitioned}{Whether analyses should be partitioned by gene (Logical).}
+
 \item{...}{Arguments passed to \code{"ips::raxml"}.}
 }
 \value{
@@ -33,14 +36,15 @@ None
 }
 \description{
 Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
-a given folder (default is \code{"2.Alignments"}).
+a given folder (default is \code{"2.Alignments"}). Note that you need at least two
+gene regions to run a partitioned analysis.
 }
 \examples{
 \dontrun{
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",

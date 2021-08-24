@@ -51,7 +51,7 @@
 information. Note that this function provides two summary datasets. First, the accession numbers.
 Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 the gbif taxonomic backbone. The resulting files are saved to &quot;1.CuratedSequences&quot;. The
-resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone." />
+resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -84,7 +84,7 @@ resulting files also have the most recent curated taxonomy following the gbif ta
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -107,7 +107,10 @@ resulting files also have the most recent curated taxonomy following the gbif ta
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/phruta_vignette.html">Brief intro to the `phruta` R package</a>
+      <a href="../articles/Brief_Intro_phruta.html">Introduction to the `phruta` R package</a>
+    </li>
+    <li>
+      <a href="../articles/Phruta_advanced.html">Advanced methods in the `phruta` R package</a>
     </li>
   </ul>
 </li>
@@ -137,12 +140,13 @@ resulting files also have the most recent curated taxonomy following the gbif ta
 information. Note that this function provides two summary datasets. First, the accession numbers.
 Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 the gbif taxonomic backbone. The resulting files are saved to <code>"1.CuratedSequences"</code>. The
-resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.</p>
+resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sq.curate</span><span class='op'>(</span>
   filterTaxonomicCriteria <span class='op'>=</span> <span class='cn'>NULL</span>,
-  kingdom <span class='op'>=</span> <span class='st'>"animals"</span>,
+  database <span class='op'>=</span> <span class='st'>"gbif"</span>,
+  kingdom <span class='op'>=</span> <span class='cn'>NULL</span>,
   folder <span class='op'>=</span> <span class='st'>"0.Sequences"</span>
 <span class='op'>)</span></pre>
 
@@ -156,8 +160,13 @@ strings that could be used to identify the species that should
 be in the dataset (character).</p></td>
     </tr>
     <tr>
+      <th>database</th>
+      <td><p>A name of a database with taxonomic information. Although 'gbif' is faster,
+it only has information for animals and plants. Other databases follow taxize::classification.</p></td>
+    </tr>
+    <tr>
       <th>kingdom</th>
-      <td><p>Two options: animals or plants (character).</p></td>
+      <td><p>Optional and only used when database='gbif'. Two possible options: "animals" or "plants."</p></td>
     </tr>
     <tr>
       <th>folder</th>
@@ -174,11 +183,12 @@ be in the dataset (character).</p></td>
 <span class='fu'><a href='sq.retrieve.html'>sq.retrieve</a></span><span class='op'>(</span>
   clades <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Felis"</span>, <span class='st'>"Vulpes"</span>, <span class='st'>"Phoca"</span><span class='op'>)</span>,
   species <span class='op'>=</span> <span class='st'>"Manis_pentadactyla"</span>,
-  genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span><span class='op'>)</span>
+  genes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ADORA3"</span>, <span class='st'>"CYTB"</span><span class='op'>)</span>
 <span class='op'>)</span>
 <span class='fu'>sq.curate</span><span class='op'>(</span>
   filterTaxonomicCriteria <span class='op'>=</span> <span class='st'>"Felis|Vulpes|Phoca|Manis"</span>,
-  kingdom <span class='op'>=</span> <span class='st'>"animals"</span>, folder <span class='op'>=</span> <span class='st'>"0.Sequences"</span>
+  database <span class='op'>=</span> <span class='st'>"gbif"</span>, kingdom <span class='op'>=</span> <span class='st'>"animals"</span>,
+  folder <span class='op'>=</span> <span class='st'>"0.Sequences"</span>
 <span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>

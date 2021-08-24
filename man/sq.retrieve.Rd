@@ -37,7 +37,7 @@ into a folder called \code{"0.Sequences"}.
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 }
 }

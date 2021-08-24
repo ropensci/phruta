@@ -6,7 +6,8 @@
 \usage{
 sq.curate(
   filterTaxonomicCriteria = NULL,
-  kingdom = "animals",
+  database = "gbif",
+  kingdom = NULL,
   folder = "0.Sequences"
 )
 }
@@ -15,7 +16,10 @@ sq.curate(
 strings that could be used to identify the species that should
 be in the dataset (character).}
 
-\item{kingdom}{Two options: animals or plants (character).}
+\item{database}{A name of a database with taxonomic information. Although 'gbif' is faster,
+it only has information for animals and plants. Other databases follow taxize::classification.}
+
+\item{kingdom}{Optional and only used when database='gbif'. Two possible options: "animals" or "plants."}
 
 \item{folder}{The name of the folder where the original sequences are (character).}
 }
@@ -27,18 +31,19 @@ After downloading sequences from genbank, this function curates sequences based 
 information. Note that this function provides two summary datasets. First, the accession numbers.
 Second, the taxonomic information for each species in the database. The taxonomy strictly follows
 the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSequences"}. The
-resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.
+resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone.
 }
 \examples{
 \dontrun{
 sq.retrieve(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
-  genes = c("ADORA3")
+  genes = c("ADORA3", "CYTB")
 )
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
-  kingdom = "animals", folder = "0.Sequences"
+  database = "gbif", kingdom = "animals",
+  folder = "0.Sequences"
 )
 }
 }
