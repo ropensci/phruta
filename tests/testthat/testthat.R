@@ -1,6 +1,3 @@
-library(DECIPHER)
-library(Biostrings)
-
 unlink(list.dirs("."), recursive = TRUE)
 
 # context("Loading sample trees")
@@ -196,7 +193,7 @@ test_that("Retrieve sequences", {
   expect_output(sq.retrieve(
     clades = c("Felis", "Vulpes", "Phoca"),
     species = "Manis_pentadactyla",
-    genes = "ADORA3"
+    genes = c("ADORA3", "CYTB")
   ))
 })
 
@@ -227,3 +224,68 @@ test_that("Add sequences", {
     sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
   )
 })
+
+
+##Test constraints
+
+taxonomy <- read.csv("1.CuratedSequences/1.Taxonomy.csv")
+test_that("Generate list of constraints, not by clade", {
+  expect_true(
+    class(getListConstraints(taxonomy,
+                             targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+                             byClades = F)
+    ) == "list")
+})
+
+
+test_that("Generate list of constraints, by clade", {
+  expect_true(
+    class(getListConstraints(taxonomy,
+                       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+                       byClades = T)
+  ) == "list")
+})
+
+
+test_that("Tree constraints non ingroup/outgroup", {
+  expect_snapshot_output(
+    tree.constraint(
+      taxonomy_folder = "1.CuratedSequences",
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      Topology = "((Felis), (Phoca));"
+    )
+  )
+})
+
+
+test_that("Tree constraints ingroup/outgroup", {
+  expect_snapshot_output(
+    tree.constraint(
+      taxonomy_folder = "1.CuratedSequences",
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      outgroup = "Phoca_largha"
+    )
+  )
+})
+
+##PartitionFinder
+
+test_that("Tree constraints ingroup/outgroup", {
+  expect_snapshot_output(
+sq.partitionfinderv1(
+  folderAlignments = "2.Alignments",
+  FilePatterns = "Masked",
+  models = "all"
+)
+)
+})
+
+#Tree rogue
+
+test_that("Error when running tree rogue", {
+  expect_error(
+tree.roguetaxa(folder = "3.Phylogeny")
+)
+})
+
+

@@ -1,4 +1,5 @@
 library(testthat)
 library(phruta)
-
+library(DECIPHER)
+library(Biostrings)
 test_check("phruta")
