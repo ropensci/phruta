@@ -1,7 +1,6 @@
 unlink(list.dirs("."), recursive = TRUE)
 
 # context("Loading sample trees")
-
 test_that("load sample phylogenies", {
   data("SW.phruta")
   expect_equal(length(SW.phruta), 5)
