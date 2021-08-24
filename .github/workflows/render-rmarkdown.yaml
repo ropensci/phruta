@@ -27,16 +27,18 @@ jobs:
           path: $HOME/.local/share/renv
           key: r-${{ hashFiles('renv.lock') }}
           restore-keys: r-
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages("rmarkdown")'
 
-      - name: Install packages
-        run: |
-          R -e 'install.packages("renv", "rmarkdown")'
-          R -e 'renv::restore()'
+      #- name: Install packages
+      #  run: |
+      #    R -e 'install.packages("renv", "rmarkdown")'
+      #    R -e 'renv::restore()'
 
       - name: Render Rmarkdown files
         run: |
           RMD_PATH=($(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '[.]Rmd$'))
-          Rscript -e 'for (f in commandArgs(TRUE)) if (file.exists(f)) rmarkdown::render(f)' ${RMD_PATH[*]} 
+          Rscript -e 'for (f in commandArgs(TRUE)) if (file.exists(f)) rmarkdown::render(f)' ${RMD_PATH[*]}
 
       - name: Commit results
         run: |
