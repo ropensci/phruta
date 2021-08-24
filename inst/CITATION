@@ -1,0 +1,10 @@
+citHeader("To cite phruta in publications use:")
+
+citEntry(
+  entry    = "misc",
+  title    = "The phruta R package: Phylogenetic Reconstruction and Time-dating",
+  author   = "Cristian Román-Palacios",
+  year     = "2021",
+  textVersion = paste(
+ "Román-Palacios, C. (2021). The phruta R package: Phylogenetic Reconstruction and Time-dating.")
+  )
