@@ -285,6 +285,7 @@ test_that("Taxonomy out of gbif", {
       species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                       "Phoca_largha", "PREDICTED:_Phoca" ,
                       "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
-      database='itis'))
+      database='itis')
     == "data.frame")
+  )
 })
