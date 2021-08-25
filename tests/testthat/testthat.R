@@ -278,13 +278,3 @@ test_that("Error when running tree rogue", {
     tree.roguetaxa(folder = "3.Phylogeny")
   )
 })
-
-
-test_that("Taxonomy out of gbif", {
-  expect_true(
-    class(taxonomy.retrieve(
-      species_names = c("Felis_catus", "PREDICTED:_Vulpes",
-                        "Phoca_largha", "PREDICTED:_Phoca" ,
-                        "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
-      database = 'itis')) == "data.frame")
-})
