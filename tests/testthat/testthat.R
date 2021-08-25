@@ -271,16 +271,6 @@ test_that("Tree constraints ingroup/outgroup", {
 
 ## PartitionFinder
 
-# test_that("Tree constraints ingroup/outgroup", {
-#  expect_snapshot_output(
-# sq.partitionfinderv1(
-#  folderAlignments = "2.Alignments",
-#  FilePatterns = "Masked",
-#  models = "all"
-# )
-# )
-# })
-
 # Tree rogue
 
 test_that("Error when running tree rogue", {
