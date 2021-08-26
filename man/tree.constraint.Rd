@@ -13,13 +13,17 @@ tree.constraint(
 )
 }
 \arguments{
-\item{taxonomy_folder}{Name of the folder where the 1.Taxonomy file is stored.}
+\item{taxonomy_folder}{Name of the folder where the
+1.Taxonomy file is stored.}
 
-\item{targetColumns}{Where to find \code{"RAxML"} or how to run it from the console? (string).}
+\item{targetColumns}{Where to find \code{"RAxML"}
+or how to run it from the console? (string).}
 
-\item{Topology}{A string summarizing the desired topological constraint in newick format.}
+\item{Topology}{A string summarizing the desired topological
+constraint in newick format.}
 
-\item{outgroup}{Optional and only required when the topology argument is not "((ingroup), outgroup);".}
+\item{outgroup}{Optional and only required when the topology
+argument is not "((ingroup), outgroup);".}
 }
 \value{
 None
@@ -42,13 +46,15 @@ sq.curate(
 
 tree.constraint(
   taxonomy_folder = "1.CuratedSequences",
-  targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+  targetColumns = c("kingdom", "phylum", "class", "order", "family",
+  "genus", "species_names"),
   Topology = "((ingroup), outgroup);",
   outgroup = "Manis_pentadactyla"
 )
 tree.constraint(
   taxonomy_folder = "1.CuratedSequences",
-  targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+  targetColumns = c("kingdom", "phylum", "class", "order", "family",
+  "genus", "species_names"),
   Topology = "((Felis), (Phoca));"
 )
 }

@@ -7,7 +7,8 @@
 tree.roguetaxa(folder = "3.Phylogeny", ...)
 }
 \arguments{
-\item{folder}{Name of the folder where the sequences to align are stored (character).}
+\item{folder}{Name of the folder where the sequences to align are
+stored (character).}
 
 \item{...}{Arguments passed to \code{"Rogue::RogueTaxa"}.}
 }
@@ -15,7 +16,8 @@ tree.roguetaxa(folder = "3.Phylogeny", ...)
 None
 }
 \description{
-Implements the RogueNaRok algorithm for rogue taxon identification within phruta
+Implements the RogueNaRok algorithm for rogue taxon identification
+within phruta
 }
 \examples{
 \dontrun{

@@ -11,10 +11,12 @@ tree.dating(
 )
 }
 \arguments{
-\item{taxonomyFolder}{Name of the folder where \code{"1.Taxonomy.csv"}, created duing the
+\item{taxonomyFolder}{Name of the folder where \code{"1.Taxonomy.csv"},
+created duing the
 \code{"sq.curate"} step, is stored (character).}
 
-\item{phylogenyFolder}{Name of the folder where \code{"RAxML_bipartitions.phruta"}, created duing the
+\item{phylogenyFolder}{Name of the folder where
+\code{"RAxML_bipartitions.phruta"}, created duing the
 \code{"tree.raxml"} step, is stored (character).}
 
 \item{...}{Arguments passed to \code{"geiger::congruify.phylo"}.}
@@ -23,11 +25,14 @@ tree.dating(
 None
 }
 \description{
-Performs tree dating under \code{"treePL"} or \code{"PATHd-8"} based on secondary calibrations.
-Note that \code{"treePL"} or \code{"PATHd-8"} must be installed in your PATH. How to install
-\code{"PATHd-8"} in mac \code{"https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4"} and
-\code{"treePL"} can be installed using homebrew (brew install brewsci/bio/treepl). Thanks to
-Brian O'Meara and Jonathan Chang, respectively.
+Performs tree dating under \code{"treePL"} or \code{"PATHd-8"}
+based on secondary calibrations.
+Note that \code{"treePL"} or \code{"PATHd-8"} must be installed in your PATH.
+How to install \code{"PATHd-8"} in mac
+\code{"https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4"}
+and \code{"treePL"} can be installed using homebrew
+(brew install brewsci/bio/treepl). Thanks to Brian O'Meara and Jonathan
+Chang, respectively.
 }
 \examples{
 \dontrun{

@@ -17,11 +17,13 @@ sq.retrieve(
 
 \item{species}{A vector listing additional species interest (character).
 This argument can be used to define additional target species
-in the ingroup or species to be sampled in the outgroup (character).}
+in the ingroup or species to be sampled in the outgroup
+(character).}
 
 \item{genes}{A vector listing gene names of interest (character).}
 
-\item{maxseqs}{Maximum number of sequences to retrieve per search (taxa + gene) (numeric).}
+\item{maxseqs}{Maximum number of sequences to retrieve per search
+(taxa + gene) (numeric).}
 
 \item{maxlength}{Maximum lenght of the gene sequence (numeric).}
 }
@@ -29,8 +31,8 @@ in the ingroup or species to be sampled in the outgroup (character).}
 None
 }
 \description{
-Downloads sequences from genbank (nucleotide database) for particular taxa and genes
-into a folder called \code{"0.Sequences"}.
+Downloads sequences from genbank (nucleotide database) for particular taxa
+and genes into a folder called \code{"0.Sequences"}.
 }
 \examples{
 \dontrun{

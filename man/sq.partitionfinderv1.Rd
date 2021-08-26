@@ -12,12 +12,16 @@ sq.partitionfinderv1(
 )
 }
 \arguments{
-\item{folderAlignments}{Name of the folder where the sequences to align are stored (character).}
+\item{folderAlignments}{Name of the folder where the sequences to align are
+stored (character).}
 
-\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.}
+\item{FilePatterns}{A string that is common to all the target files in the
+relevant folder (character). Note that
+this argument can be set to \code{"NULL"} if no specific
+pattern wants to be analyzed.}
 
-\item{folderPartitionFinder}{Name of the new folder where the output files are stored (string).}
+\item{folderPartitionFinder}{Name of the new folder where the output files
+are stored (string).}
 
 \item{models}{Models to run in partitionfinder (string).}
 }
@@ -25,7 +29,8 @@ this argument can be set to \code{"NULL"} if no specific pattern wants to be ana
 None
 }
 \description{
-This function runs partitionfinder v1 within phruta. For now, all analyses are based on genes.
+This function runs partitionfinder v1 within phruta. For now,
+all analyses are based on genes.
 Please note that you need at least two gene regions to run partitionfinder.
 }
 \examples{

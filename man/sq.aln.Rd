@@ -7,10 +7,13 @@
 sq.aln(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T, ...)
 }
 \arguments{
-\item{folder}{Name of the folder where the sequences to align are stored (character).}
+\item{folder}{Name of the folder where the sequences to align
+are stored (character).}
 
-\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to \code{"NULL"} if no specific pattern wants to be analyzed.}
+\item{FilePatterns}{A string that is common to all the target
+files in the relevant folder (character). Note that
+this argument can be set to \code{"NULL"} if no specific
+pattern wants to be analyzed.}
 
 \item{mask}{Removes ambiguous sites (Logical, TRUE or FALSE).}
 
@@ -23,10 +26,12 @@ None
 Perform multiple sequence alignment on all the fasta files
 saved in a given folder. Alignment is conducted using
 \code{"BiocManager::install("DECIPHER")"}. Note that this function first
-optimizes the direction of the sequences, then aligns using \code{"BDECIPHER"},
-and finally masks the resulting alignment (optionally but does it per default). The
+optimizes the direction of the sequences, then aligns
+using \code{"BDECIPHER"}, and finally masks the resulting
+alignment (optionally but does it per default). The
 masking step includes removing common gaps across all the species and removing
-highly ambiguous positions. The resulting aligned sequences are stored to a new folder
+highly ambiguous positions. The resulting aligned sequences
+are stored to a new folder
 \code{"2.Alignments"}.'
 }
 \examples{

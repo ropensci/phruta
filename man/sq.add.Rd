@@ -7,23 +7,30 @@
 sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
 }
 \arguments{
-\item{folderDownloaded}{Name of the folder with dowloaded sequences (character).}
+\item{folderDownloaded}{Name of the folder with dowloaded sequences.}
 
-\item{folderNew}{Name of the folder with local sequences (character).}
+\item{folderNew}{Name of the folder with local sequences.}
 }
 \value{
 None
 }
 \description{
-This function adds sequences located in a particular folder (default is \code{"0.AdditionalSequences"}) to
-fasta files in another folder (default is \code{"0.Sequences"}). Files must be in FASTA format and names
-of the files should perfectly match the ones in the previously downloaded folder (e.g. \code{"0.Sequences"}).
-This function creates a third new folder \code{"0.0.OriginalDownloaded"} containing the originally
-downloaded sequences. The sequences in the \code{"0.Sequences"} folder get replaced with the combined ones.
-Note that new sequences can be added even for just a fraction of the originally downloaded genes.
+This function adds sequences located in a particular folder
+(default is \code{"0.AdditionalSequences"}) to
+fasta files in another folder (default is \code{"0.Sequences"}).
+Files must be in FASTA format and names
+of the files should perfectly match the ones in the previously
+downloaded folder (e.g. \code{"0.Sequences"}).
+This function creates a third new folder \code{"0.0.OriginalDownloaded"}
+containing the originally
+downloaded sequences. The sequences in the \code{"0.Sequences"} folder get
+replaced with the combined ones.
+Note that new sequences can be added even for just a fraction of the
+originally downloaded genes.
 }
 \examples{
 \dontrun{
-sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
+sq.add(folderDownloaded = "0.Sequences",
+       folderNew = "0.AdditionalSequences")
 }
 }

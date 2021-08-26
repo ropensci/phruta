@@ -12,26 +12,36 @@ sq.curate(
 )
 }
 \arguments{
-\item{filterTaxonomicCriteria}{A single string of terms (delimited using "|") listing all the
-strings that could be used to identify the species that should
+\item{filterTaxonomicCriteria}{A single string of terms (delimited using "|")
+listing all the strings that could be used to
+identify the species that should
 be in the dataset (character).}
 
-\item{database}{A name of a database with taxonomic information. Although 'gbif' is faster,
-it only has information for animals and plants. Other databases follow taxize::classification.}
+\item{database}{A name of a database with taxonomic information.
+Although 'gbif' is faster, it only has information for
+animals and plants. Other databases follow
+taxize::classification.}
 
-\item{kingdom}{Optional and only used when database='gbif'. Two possible options: "animals" or "plants."}
+\item{kingdom}{Optional and only used when database='gbif'.
+Two possible options: "animals" or "plants."}
 
-\item{folder}{The name of the folder where the original sequences are (character).}
+\item{folder}{The name of the folder where the original sequences are
+located (character).}
 }
 \value{
 None
 }
 \description{
-After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that this function provides two summary datasets. First, the accession numbers.
-Second, the taxonomic information for each species in the database. The taxonomy strictly follows
-the gbif taxonomic backbone. The resulting files are saved to \code{"1.CuratedSequences"}. The
-resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone.
+After downloading sequences from genbank, this function
+curates sequences based on taxonomic
+information. Note that this function provides two summary datasets.
+First, the accession numbers.
+Second, the taxonomic information for each species in the database.
+The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved
+to \code{"1.CuratedSequences"}. The
+resulting files also have the most recent curated taxonomy
+following the gbif (or selected database) taxonomic backbone.
 }
 \examples{
 \dontrun{

@@ -279,12 +279,11 @@ test_that("Tree constraints ingroup/outgroup", {
 
 
 test_that("Curate sequences", {
-  expect_invisible(
-    sq.curate(
-      filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
-      kingdom = "animals", folder = "0.Sequences",
-      database = 'itis'
-    )
+  expect_true(
+  class(taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
+                                      "Phoca_largha", "PREDICTED:_Phoca" ,
+                                      "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
+                      database='gbif', kingdom='animals')) == 'data.frame'
   )
 })
 
