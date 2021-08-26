@@ -47,11 +47,16 @@
 
 
 <meta property="og:title" content="Curate sequences from genbank — sq.curate" />
-<meta property="og:description" content="After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that this function provides two summary datasets. First, the accession numbers.
-Second, the taxonomic information for each species in the database. The taxonomy strictly follows
-the gbif taxonomic backbone. The resulting files are saved to &quot;1.CuratedSequences&quot;. The
-resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone." />
+<meta property="og:description" content="After downloading sequences from genbank, this function
+curates sequences based on taxonomic
+information. Note that this function provides two summary datasets.
+First, the accession numbers.
+Second, the taxonomic information for each species in the database.
+The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved
+to &quot;1.CuratedSequences&quot;. The
+resulting files also have the most recent curated taxonomy
+following the gbif (or selected database) taxonomic backbone." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -141,11 +146,16 @@ resulting files also have the most recent curated taxonomy following the gbif (o
     </div>
 
     <div class="ref-description">
-    <p>After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that this function provides two summary datasets. First, the accession numbers.
-Second, the taxonomic information for each species in the database. The taxonomy strictly follows
-the gbif taxonomic backbone. The resulting files are saved to <code>"1.CuratedSequences"</code>. The
-resulting files also have the most recent curated taxonomy following the gbif (or selected database) taxonomic backbone.</p>
+    <p>After downloading sequences from genbank, this function
+curates sequences based on taxonomic
+information. Note that this function provides two summary datasets.
+First, the accession numbers.
+Second, the taxonomic information for each species in the database.
+The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved
+to <code>"1.CuratedSequences"</code>. The
+resulting files also have the most recent curated taxonomy
+following the gbif (or selected database) taxonomic backbone.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sq.curate</span><span class='op'>(</span>
@@ -160,22 +170,27 @@ resulting files also have the most recent curated taxonomy following the gbif (o
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>filterTaxonomicCriteria</th>
-      <td><p>A single string of terms (delimited using "|") listing all the
-strings that could be used to identify the species that should
+      <td><p>A single string of terms (delimited using "|")
+listing all the strings that could be used to
+identify the species that should
 be in the dataset (character).</p></td>
     </tr>
     <tr>
       <th>database</th>
-      <td><p>A name of a database with taxonomic information. Although 'gbif' is faster,
-it only has information for animals and plants. Other databases follow taxize::classification.</p></td>
+      <td><p>A name of a database with taxonomic information.
+Although 'gbif' is faster, it only has information for
+animals and plants. Other databases follow
+taxize::classification.</p></td>
     </tr>
     <tr>
       <th>kingdom</th>
-      <td><p>Optional and only used when database='gbif'. Two possible options: "animals" or "plants."</p></td>
+      <td><p>Optional and only used when database='gbif'.
+Two possible options: "animals" or "plants."</p></td>
     </tr>
     <tr>
       <th>folder</th>
-      <td><p>The name of the folder where the original sequences are (character).</p></td>
+      <td><p>The name of the folder where the original sequences are
+located (character).</p></td>
     </tr>
     </table>
 
