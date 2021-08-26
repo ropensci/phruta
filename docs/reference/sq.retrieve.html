@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Retrieve sequences from genbank — sq.retrieve" />
-<meta property="og:description" content="Downloads sequences from genbank (nucleotide database) for particular taxa and genes
-into a folder called &quot;0.Sequences&quot;." />
+<meta property="og:description" content="Downloads sequences from genbank (nucleotide database) for particular taxa
+and genes into a folder called &quot;0.Sequences&quot;." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -113,7 +113,12 @@ into a folder called &quot;0.Sequences&quot;." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/cromanpa94/phruta/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,13 +133,13 @@ into a folder called &quot;0.Sequences&quot;." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Retrieve sequences from genbank</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/cromanpa94/phruta/blob/master/R/sq.retrieve.R'><code>R/sq.retrieve.R</code></a></small>
     <div class="hidden name"><code>sq.retrieve.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Downloads sequences from genbank (nucleotide database) for particular taxa and genes
-into a folder called <code>"0.Sequences"</code>.</p>
+    <p>Downloads sequences from genbank (nucleotide database) for particular taxa
+and genes into a folder called <code>"0.Sequences"</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sq.retrieve</span><span class='op'>(</span>
@@ -156,7 +161,8 @@ into a folder called <code>"0.Sequences"</code>.</p>
       <th>species</th>
       <td><p>A vector listing additional species interest (character).
 This argument can be used to define additional target species
-in the ingroup or species to be sampled in the outgroup (character).</p></td>
+in the ingroup or species to be sampled in the outgroup
+(character).</p></td>
     </tr>
     <tr>
       <th>genes</th>
@@ -164,7 +170,8 @@ in the ingroup or species to be sampled in the outgroup (character).</p></td>
     </tr>
     <tr>
       <th>maxseqs</th>
-      <td><p>Maximum number of sequences to retrieve per search (taxa + gene) (numeric).</p></td>
+      <td><p>Maximum number of sequences to retrieve per search
+(taxa + gene) (numeric).</p></td>
     </tr>
     <tr>
       <th>maxlength</th>

@@ -47,11 +47,14 @@
 
 
 <meta property="og:title" content="Tree dating under treePL or — tree.dating" />
-<meta property="og:description" content="Performs tree dating under &quot;treePL&quot; or &quot;PATHd-8&quot; based on secondary calibrations.
-Note that &quot;treePL&quot; or &quot;PATHd-8&quot; must be installed in your PATH. How to install
-&quot;PATHd-8&quot; in mac &quot;https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4&quot; and
-&quot;treePL&quot; can be installed using homebrew (brew install brewsci/bio/treepl). Thanks to
-Brian O'Meara and Jonathan Chang, respectively." />
+<meta property="og:description" content="Performs tree dating under &quot;treePL&quot; or &quot;PATHd-8&quot;
+based on secondary calibrations.
+Note that &quot;treePL&quot; or &quot;PATHd-8&quot; must be installed in your PATH.
+How to install &quot;PATHd-8&quot; in mac
+&quot;https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4&quot;
+and &quot;treePL&quot; can be installed using homebrew
+(brew install brewsci/bio/treepl). Thanks to Brian O'Meara and Jonathan
+Chang, respectively." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -116,7 +119,12 @@ Brian O'Meara and Jonathan Chang, respectively." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/cromanpa94/phruta/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -131,16 +139,19 @@ Brian O'Meara and Jonathan Chang, respectively." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tree dating under treePL or</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/cromanpa94/phruta/blob/master/R/tree.dating.R'><code>R/tree.dating.R</code></a></small>
     <div class="hidden name"><code>tree.dating.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Performs tree dating under <code>"treePL"</code> or <code>"PATHd-8"</code> based on secondary calibrations.
-Note that <code>"treePL"</code> or <code>"PATHd-8"</code> must be installed in your PATH. How to install
-<code>"PATHd-8"</code> in mac <code>"https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4"</code> and
-<code>"treePL"</code> can be installed using homebrew (brew install brewsci/bio/treepl). Thanks to
-Brian O'Meara and Jonathan Chang, respectively.</p>
+    <p>Performs tree dating under <code>"treePL"</code> or <code>"PATHd-8"</code>
+based on secondary calibrations.
+Note that <code>"treePL"</code> or <code>"PATHd-8"</code> must be installed in your PATH.
+How to install <code>"PATHd-8"</code> in mac
+<code>"https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4"</code>
+and <code>"treePL"</code> can be installed using homebrew
+(brew install brewsci/bio/treepl). Thanks to Brian O'Meara and Jonathan
+Chang, respectively.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tree.dating</span><span class='op'>(</span>
@@ -154,12 +165,14 @@ Brian O'Meara and Jonathan Chang, respectively.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>taxonomyFolder</th>
-      <td><p>Name of the folder where <code>"1.Taxonomy.csv"</code>, created duing the
+      <td><p>Name of the folder where <code>"1.Taxonomy.csv"</code>,
+created duing the
 <code>"sq.curate"</code> step, is stored (character).</p></td>
     </tr>
     <tr>
       <th>phylogenyFolder</th>
-      <td><p>Name of the folder where <code>"RAxML_bipartitions.phruta"</code>, created duing the
+      <td><p>Name of the folder where
+<code>"RAxML_bipartitions.phruta"</code>, created duing the
 <code>"tree.raxml"</code> step, is stored (character).</p></td>
     </tr>
     <tr>

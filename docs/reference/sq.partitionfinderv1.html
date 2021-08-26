@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Run Partitionfinder v.1 — sq.partitionfinderv1" />
-<meta property="og:description" content="This function runs partitionfinder v1 within phruta. For now, all analyses are based on genes.
+<meta property="og:description" content="This function runs partitionfinder v1 within phruta. For now,
+all analyses are based on genes.
 Please note that you need at least two gene regions to run partitionfinder." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
@@ -113,7 +114,12 @@ Please note that you need at least two gene regions to run partitionfinder." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/cromanpa94/phruta/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -128,12 +134,13 @@ Please note that you need at least two gene regions to run partitionfinder." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Run Partitionfinder v.1</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/cromanpa94/phruta/blob/master/R/sq.partitionfinderv1.R'><code>R/sq.partitionfinderv1.R</code></a></small>
     <div class="hidden name"><code>sq.partitionfinderv1.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function runs partitionfinder v1 within phruta. For now, all analyses are based on genes.
+    <p>This function runs partitionfinder v1 within phruta. For now,
+all analyses are based on genes.
 Please note that you need at least two gene regions to run partitionfinder.</p>
     </div>
 
@@ -141,7 +148,8 @@ Please note that you need at least two gene regions to run partitionfinder.</p>
   folderAlignments <span class='op'>=</span> <span class='st'>"2.Alignments"</span>,
   FilePatterns <span class='op'>=</span> <span class='st'>"Masked"</span>,
   folderPartitionFinder <span class='op'>=</span> <span class='st'>"2.1.PartitionFinderv1"</span>,
-  models <span class='op'>=</span> <span class='st'>"all"</span>
+  models <span class='op'>=</span> <span class='st'>"all"</span>,
+  run <span class='op'>=</span> <span class='cn'>T</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -149,20 +157,28 @@ Please note that you need at least two gene regions to run partitionfinder.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>folderAlignments</th>
-      <td><p>Name of the folder where the sequences to align are stored (character).</p></td>
+      <td><p>Name of the folder where the sequences to align are
+stored (character).</p></td>
     </tr>
     <tr>
       <th>FilePatterns</th>
-      <td><p>A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to <code>"NULL"</code> if no specific pattern wants to be analyzed.</p></td>
+      <td><p>A string that is common to all the target files in the
+relevant folder (character). Note that
+this argument can be set to <code>"NULL"</code> if no specific
+pattern wants to be analyzed.</p></td>
     </tr>
     <tr>
       <th>folderPartitionFinder</th>
-      <td><p>Name of the new folder where the output files are stored (string).</p></td>
+      <td><p>Name of the new folder where the output files
+are stored (string).</p></td>
     </tr>
     <tr>
       <th>models</th>
       <td><p>Models to run in partitionfinder (string).</p></td>
+    </tr>
+    <tr>
+      <th>run</th>
+      <td><p>Run  partitionfinder?</p></td>
     </tr>
     </table>
 

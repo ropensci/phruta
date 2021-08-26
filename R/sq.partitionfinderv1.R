@@ -13,6 +13,7 @@
 #' @param folderPartitionFinder Name of the new folder where the output files
 #'                              are stored (string).
 #' @param models Models to run in partitionfinder (string).
+#' @param run Run  partitionfinder?
 #'
 #' @importFrom ape read.FASTA
 #' @importFrom ips raxml.partitions
@@ -44,7 +45,7 @@
 sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
                                  FilePatterns = "Masked",
                                  folderPartitionFinder ="2.1.PartitionFinderv1",
-                                 models = "all") {
+                                 models = "all", run = T) {
   files_fullNames <- list.files(folderAlignments, FilePatterns, full.names = T)
   files <- list.files(folderAlignments, FilePatterns)
   seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
@@ -60,6 +61,7 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
   write.phy(concatenated, paste0(folderPartitionFinder, "/concatenated.phy"))
   write.csv(partitions, paste0(folderPartitionFinder, "/partitions.csv"))
 
+  if(run){
   ## Set partitions
   if ("PartitionFinder.tar.gz" %in% list.files() == FALSE) {
    download.file("https://github.com/brettc/partitionfinder/archive/v1.1.1.zip",
@@ -89,4 +91,5 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
 
   unlink("partitionfinder-1.1.1", recursive = TRUE)
   unlink("PartitionFinder.tar.gz", recursive = TRUE)
+  }
 }

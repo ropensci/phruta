@@ -47,11 +47,13 @@
 
 
 <meta property="og:title" content="Curate sequences from genbank — taxonomy.retrieve" />
-<meta property="og:description" content="After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that this function provides two summary datasets. First, the accession numbers.
-Second, the taxonomic information for each species in the database. The taxonomy strictly follows
-the gbif taxonomic backbone. The resulting files are saved to &quot;1.CuratedSequences&quot;. The
-resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone." />
+<meta property="og:description" content="After downloading sequences from genbank, this function curates sequences
+based on taxonomic information. Note that this function provides two summary
+datasets. First, the accession numbers. Second, the taxonomic information
+for each species in the database. The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved to
+&quot;1.CuratedSequences&quot;. The resulting files also have the most recent
+curated taxonomy following the gbif taxonomic backbone." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -116,7 +118,12 @@ resulting files also have the most recent curated taxonomy following the gbif ta
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/cromanpa94/phruta/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -131,16 +138,18 @@ resulting files also have the most recent curated taxonomy following the gbif ta
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Curate sequences from genbank</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/cromanpa94/phruta/blob/master/R/taxonomy.retrieve.R'><code>R/taxonomy.retrieve.R</code></a></small>
     <div class="hidden name"><code>taxonomy.retrieve.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>After downloading sequences from genbank, this function curates sequences based on taxonomic
-information. Note that this function provides two summary datasets. First, the accession numbers.
-Second, the taxonomic information for each species in the database. The taxonomy strictly follows
-the gbif taxonomic backbone. The resulting files are saved to <code>"1.CuratedSequences"</code>. The
-resulting files also have the most recent curated taxonomy following the gbif taxonomic backbone.</p>
+    <p>After downloading sequences from genbank, this function curates sequences
+based on taxonomic information. Note that this function provides two summary
+datasets. First, the accession numbers. Second, the taxonomic information
+for each species in the database. The taxonomy strictly follows
+the gbif taxonomic backbone. The resulting files are saved to
+<code>"1.CuratedSequences"</code>. The resulting files also have the most recent
+curated taxonomy following the gbif taxonomic backbone.</p>
     </div>
 
     <pre class="usage"><span class='fu'>taxonomy.retrieve</span><span class='op'>(</span>species_names <span class='op'>=</span> <span class='cn'>NULL</span>, database <span class='op'>=</span> <span class='st'>"gbif"</span>, kingdom <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
@@ -154,25 +163,32 @@ resulting files also have the most recent curated taxonomy following the gbif ta
     </tr>
     <tr>
       <th>database</th>
-      <td><p>A name of a database with taxonomic information. 'gbif' only
-works for animals and plants. Databases follows taxize::classification</p></td>
+      <td><p>A name of a database with taxonomic information.
+'gbif' only works for animals and plants. Databases
+follows taxize::classification</p></td>
     </tr>
     <tr>
       <th>kingdom</th>
-      <td><p>Optional and only used when database='gbif'. Two possible options: "animals" or "plants."</p></td>
+      <td><p>Optional and only used when database='gbif'. Two possible
+options: "animals" or "plants."</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame of taxonomic information for the target species (valid in the database)</p>
+    <p>data.frame of taxonomic information for the target species
+(valid in the database)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>taxonomy.retrieve</span><span class='op'>(</span>species_names<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Felis_catus"</span>, <span class='st'>"PREDICTED:_Vulpes"</span>,
- <span class='st'>"Phoca_largha"</span>, <span class='st'>"PREDICTED:_Phoca"</span> ,
- <span class='st'>"PREDICTED:_Manis"</span> , <span class='st'>"Felis_silvestris"</span> , <span class='st'>"Felis_nigripes"</span><span class='op'>)</span>,
- database<span class='op'>=</span><span class='st'>'gbif'</span>, kingdom<span class='op'>=</span><span class='st'>'animals'</span><span class='op'>)</span>
+<span class='fu'>taxonomy.retrieve</span><span class='op'>(</span>
+  species_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
+    <span class='st'>"Felis_catus"</span>, <span class='st'>"PREDICTED:_Vulpes"</span>,
+    <span class='st'>"Phoca_largha"</span>, <span class='st'>"PREDICTED:_Phoca"</span>,
+    <span class='st'>"PREDICTED:_Manis"</span>, <span class='st'>"Felis_silvestris"</span>, <span class='st'>"Felis_nigripes"</span>
+  <span class='op'>)</span>,
+  database <span class='op'>=</span> <span class='st'>"gbif"</span>, kingdom <span class='op'>=</span> <span class='st'>"animals"</span>
+<span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

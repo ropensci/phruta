@@ -50,10 +50,12 @@
 <meta property="og:description" content="Perform multiple sequence alignment on all the fasta files
 saved in a given folder. Alignment is conducted using
 &quot;BiocManager::install(&quot;DECIPHER&quot;)&quot;. Note that this function first
-optimizes the direction of the sequences, then aligns using &quot;BDECIPHER&quot;,
-and finally masks the resulting alignment (optionally but does it per default). The
+optimizes the direction of the sequences, then aligns
+using &quot;BDECIPHER&quot;, and finally masks the resulting
+alignment (optionally but does it per default). The
 masking step includes removing common gaps across all the species and removing
-highly ambiguous positions. The resulting aligned sequences are stored to a new folder
+highly ambiguous positions. The resulting aligned sequences
+are stored to a new folder
 &quot;2.Alignments&quot;.'" />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
@@ -119,7 +121,12 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/cromanpa94/phruta/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -134,7 +141,7 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Align sequences</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/cromanpa94/phruta/blob/master/R/sq.aln.R'><code>R/sq.aln.R</code></a></small>
     <div class="hidden name"><code>sq.aln.Rd</code></div>
     </div>
 
@@ -142,10 +149,12 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
     <p>Perform multiple sequence alignment on all the fasta files
 saved in a given folder. Alignment is conducted using
 <code>"BiocManager::install("DECIPHER")"</code>. Note that this function first
-optimizes the direction of the sequences, then aligns using <code>"BDECIPHER"</code>,
-and finally masks the resulting alignment (optionally but does it per default). The
+optimizes the direction of the sequences, then aligns
+using <code>"BDECIPHER"</code>, and finally masks the resulting
+alignment (optionally but does it per default). The
 masking step includes removing common gaps across all the species and removing
-highly ambiguous positions. The resulting aligned sequences are stored to a new folder
+highly ambiguous positions. The resulting aligned sequences
+are stored to a new folder
 <code>"2.Alignments"</code>.'</p>
     </div>
 
@@ -156,12 +165,15 @@ highly ambiguous positions. The resulting aligned sequences are stored to a new 
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>folder</th>
-      <td><p>Name of the folder where the sequences to align are stored (character).</p></td>
+      <td><p>Name of the folder where the sequences to align
+are stored (character).</p></td>
     </tr>
     <tr>
       <th>FilePatterns</th>
-      <td><p>A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to <code>"NULL"</code> if no specific pattern wants to be analyzed.</p></td>
+      <td><p>A string that is common to all the target
+files in the relevant folder (character). Note that
+this argument can be set to <code>"NULL"</code> if no specific
+pattern wants to be analyzed.</p></td>
     </tr>
     <tr>
       <th>mask</th>

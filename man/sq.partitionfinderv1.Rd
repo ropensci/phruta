@@ -8,7 +8,8 @@ sq.partitionfinderv1(
   folderAlignments = "2.Alignments",
   FilePatterns = "Masked",
   folderPartitionFinder = "2.1.PartitionFinderv1",
-  models = "all"
+  models = "all",
+  run = T
 )
 }
 \arguments{
@@ -24,6 +25,8 @@ pattern wants to be analyzed.}
 are stored (string).}
 
 \item{models}{Models to run in partitionfinder (string).}
+
+\item{run}{Run  partitionfinder?}
 }
 \value{
 None

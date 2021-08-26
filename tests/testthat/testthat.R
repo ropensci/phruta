@@ -274,7 +274,7 @@ test_that("taxonomy curate", {
   sq.partitionfinderv1(
     folderAlignments = "2.Alignments",
     FilePatterns = "Masked",
-    models = "all"
+    models = "all", run = F
   )
   expect_true(any(grepl("2.1.PartitionFinderv1", list.files())))
 })
