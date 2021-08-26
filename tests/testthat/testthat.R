@@ -196,14 +196,14 @@ test_that("Retrieve sequences", {
   ))
 })
 
-# test_that("Curate sequences", {
-#  expect_output(
+test_that("Curate sequences", {
+  expect_invisible(
 sq.curate(
   filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
   kingdom = "animals", folder = "0.Sequences"
 )
-# )
-# })
+ )
+})
 
 test_that("Align sequences new", {
   expect_invisible(
@@ -271,10 +271,20 @@ test_that("Tree constraints ingroup/outgroup", {
 
 ## PartitionFinder
 
-# Tree rogue
+#sq.partitionfinderv1(
+#  folderAlignments = "2.Alignments",
+#  FilePatterns = "Masked",
+#  models = "all"
+#)
 
-test_that("Error when running tree rogue", {
-  expect_error(
-    tree.roguetaxa(folder = "3.Phylogeny")
+
+test_that("Curate sequences", {
+  expect_invisible(
+    sq.curate(
+      filterTaxonomicCriteria = "Felis|Vulpes|Phoca|Manis",
+      kingdom = "animals", folder = "0.Sequences",
+      database = 'itis'
+    )
   )
 })
+
