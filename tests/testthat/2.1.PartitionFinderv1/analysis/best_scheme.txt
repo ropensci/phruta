@@ -1,0 +1,29 @@
+Settings used
+
+alignment         : ./concatenated.phy
+branchlengths     : linked
+models            : K81+I, GTR+I, F81+I+G, GTR+G, TrN+G, F81, K81+G, F81+G, TIM, TIM+I+G, TVM+G, JC+I+G, TVMef+G, TVMef+I, TVM+I, TrNef+I, F81+I, JC, TIMef+G, HKY, K81uf+I, TVMef, K81uf+G, K81+I+G, TIMef+I, TVM, SYM+I, K81uf, JC+I, K80, K81, K80+I+G, K80+I, SYM+G, K81uf+I+G, K80+G, TrN+I, GTR+I+G, GTR, TIM+G, HKY+I+G, TIMef, TIM+I, TVMef+I+G, TVM+I+G, HKY+G, SYM+I+G, TrN, HKY+I, SYM, TIMef+I+G, JC+G, TrNef, TrNef+G, TrNef+I+G, TrN+I+G
+model_selection   : bic
+search            : greedy
+
+
+Best partitioning scheme
+
+Scheme Name       : start_scheme
+Scheme lnL        : -5774.86822
+Scheme BIC        : 11826.8452527
+Number of params  : 38
+Number of sites   : 1469
+Number of subsets : 2
+
+Subset | Best Model | Subset Partitions              | Subset Sites                   | Alignment                               
+1      | K80        | GENE_1                         | 1-354                          | ./analysis/phylofiles/ef0bfd27b12ef1f65061c029e993d152.phy
+2      | HKY+G      | GENE_2                         | 355-1469                       | ./analysis/phylofiles/f49d63d3db2eafb351d9a7be9b4e872d.phy
+
+
+Scheme Description in PartitionFinder format
+Scheme_start_scheme = (GENE_1) (GENE_2);
+
+RaxML-style partition definitions
+DNA, p1 = 1-354
+DNA, p2 = 355-1469

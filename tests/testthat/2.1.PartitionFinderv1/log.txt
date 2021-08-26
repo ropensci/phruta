@@ -1,0 +1,33 @@
+INFO     | 2021-08-26 10:37:50,746 | config     | Loading configuration at './partition_finder.cfg'
+INFO     | 2021-08-26 10:37:50,755 | config     | Setting 'alignment' to 'concatenated.phy'
+INFO     | 2021-08-26 10:37:50,756 | config     | Setting 'branchlengths' to 'linked'
+INFO     | 2021-08-26 10:37:50,756 | parser     | Setting 'models' to 'all'
+INFO     | 2021-08-26 10:37:50,756 | parser     | The models included in this analysis are: K81+I, GTR+I, F81+I+G, GTR+G, TrN+G, F81, K81+G, F81+G, TIM, TIM+I+G, TVM+G, JC+I+G, TVMef+G, TVMef+I, TVM+I, TrNef+I, F81+I, JC, TIMef+G, HKY, K81uf+I, TVMef, K81uf+G, K81+I+G, TIMef+I, TVM, SYM+I, K81uf, JC+I, K80, K81, K80+I+G, K80+I, SYM+G, K81uf+I+G, K80+G, TrN+I, GTR+I+G, GTR, TIM+G, HKY+I+G, TIMef, TIM+I, TVMef+I+G, TVM+I+G, HKY+G, SYM+I+G, TrN, HKY+I, SYM, TIMef+I+G, JC+G, TrNef, TrNef+G, TrNef+I+G, TrN+I+G
+INFO     | 2021-08-26 10:37:50,756 | parser     | Setting datatype to 'DNA'
+INFO     | 2021-08-26 10:37:50,757 | config     | Setting 'model_selection' to 'bic'
+INFO     | 2021-08-26 10:37:50,758 | config     | Setting 'search' to 'greedy'
+INFO     | 2021-08-26 10:37:50,759 | config     | ------------------------ BEGINNING NEW RUN -------------------------------
+INFO     | 2021-08-26 10:37:50,759 | config     | Looking for alignment file './concatenated.phy'...
+INFO     | 2021-08-26 10:37:50,760 | analysis   | Beginning Analysis
+INFO     | 2021-08-26 10:37:50,760 | analysis   | Removing Schemes in './analysis/schemes' (they will be recalculated from existing subset data)
+INFO     | 2021-08-26 10:37:50,760 | config     | Checking previously run configuration data...
+INFO     | 2021-08-26 10:37:50,762 | alignment  | Reading alignment file './concatenated.phy'
+INFO     | 2021-08-26 10:37:50,770 | analysis   | No starting tree file found.
+INFO     | 2021-08-26 10:37:50,770 | phyml      | Making BioNJ tree for ./analysis/start_tree/filtered_source.phy
+INFO     | 2021-08-26 10:37:51,339 | phyml      | Estimating GTR+I+G branch lengths on tree
+INFO     | 2021-08-26 10:38:02,911 | phyml      | Branchlength estimation finished
+INFO     | 2021-08-26 10:38:02,912 | analysis   | Starting tree with branch lengths is here: ./analysis/start_tree/filtered_source.phy_phyml_tree.txt
+INFO     | 2021-08-26 10:38:02,912 | method     | Performing greedy analysis
+INFO     | 2021-08-26 10:38:02,912 | progress   | PartitionFinder will have to analyse 3 subsets to complete this analysis
+INFO     | 2021-08-26 10:38:02,913 | progress   | This will result in 2 schemes being created
+INFO     | 2021-08-26 10:38:02,913 | method     | Analysing starting scheme (scheme start_scheme)
+INFO     | 2021-08-26 10:38:02,932 | threadpool | Found 8 cpus
+INFO     | 2021-08-26 10:38:15,430 | progress   | Finished subset 1/3, 33.33 percent done
+INFO     | 2021-08-26 10:38:15,941 | progress   | Finished subset 2/3, 66.67 percent done
+INFO     | 2021-08-26 10:38:15,942 | method     | ***Greedy algorithm step 1***
+INFO     | 2021-08-26 10:38:30,643 | progress   | Finished subset 3/3, 100.00 percent done
+INFO     | 2021-08-26 10:38:30,644 | method     | Greedy algorithm finished after 1 steps
+INFO     | 2021-08-26 10:38:30,644 | method     | Highest scoring scheme is scheme start_scheme, with bic score of 11826.845
+INFO     | 2021-08-26 10:38:30,644 | reporter   | Information on best scheme is here: ./analysis/best_scheme.txt
+INFO     | 2021-08-26 10:38:30,645 | main       | Total processing time: 0:00:40 (h:m:s)
+INFO     | 2021-08-26 10:38:30,645 | main       | Processing complete.

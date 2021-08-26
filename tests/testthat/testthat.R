@@ -270,20 +270,22 @@ test_that("Tree constraints ingroup/outgroup", {
 })
 
 ## PartitionFinder
+test_that("taxonomy curate", {
+  sq.partitionfinderv1(
+    folderAlignments = "2.Alignments",
+    FilePatterns = "Masked",
+    models = "all"
+  )
+  expect_true(any(grepl("2.1.PartitionFinderv1", list.files())))
+})
 
-#sq.partitionfinderv1(
-#  folderAlignments = "2.Alignments",
-#  FilePatterns = "Masked",
-#  models = "all"
-#)
 
-
-test_that("Curate sequences", {
+test_that("taxonomy curate", {
   expect_true(
   class(taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                                       "Phoca_largha", "PREDICTED:_Phoca" ,
                                       "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
-                      database='gbif', kingdom='animals')) == 'data.frame'
+                      database='itis', kingdom='animals')) == 'data.frame'
   )
 })
 
