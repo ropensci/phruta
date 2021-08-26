@@ -279,13 +279,3 @@ test_that("taxonomy curate", {
   expect_true(any(grepl("2.1.PartitionFinderv1", list.files())))
 })
 
-
-test_that("taxonomy curate", {
-  expect_true(
-  class(taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
-                                      "Phoca_largha", "PREDICTED:_Phoca" ,
-                                      "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
-                      database='itis', kingdom='animals')) == 'data.frame'
-  )
-})
-
