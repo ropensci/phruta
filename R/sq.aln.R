@@ -6,7 +6,8 @@
 #' optimizes the direction of the sequences, then aligns
 #' using \code{"BDECIPHER"}, and finally masks the resulting
 #' alignment (optionally but does it per default). The
-#' masking step includes removing common gaps across all the species and removing
+#' masking step includes removing common gaps across
+#' all the species and removing
 #' highly ambiguous positions. The resulting aligned sequences
 #' are stored to a new folder
 #' \code{"2.Alignments"}.'
@@ -21,9 +22,9 @@
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
 #' @importFrom methods as
-#' @importFrom Biostrings writeXStringSet
-#' @importFrom Biostrings readDNAStringSet
-#' @import DECIPHER
+#' @importFrom Biostrings writeXStringSet readDNAStringSet
+#' @importFrom DECIPHER AlignSeqs MaskAlignment OrientNucleotides
+#'             RemoveGaps
 #'
 #' @return None
 #'
@@ -44,7 +45,7 @@
 
 sq.aln <- function(folder = "1.CuratedSequences",
                    FilePatterns = "renamed",
-                   mask = T, ...) {
+                   mask = TRUE, ...) {
   if (is.null(folder))
     stop("Folder where curated sequences are saved must be provided")
   if (!is.logical(mask))
@@ -52,7 +53,7 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
   files <- list.files(folder, FilePatterns)
   files <- sub("renamed_", "", files)
-  filesComplete <- list.files(folder, FilePatterns, full.names = T)
+  filesComplete <- list.files(folder, FilePatterns, full.names = TRUE)
   unlink("2.Alignments", recursive = TRUE)
   dir.create("2.Alignments")
   invisible(

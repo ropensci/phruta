@@ -8,7 +8,7 @@
 An object of class \code{"multiphylo"}.
 }
 \source{
-\href{https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334}{Publication}
+\href{http://dx.doi.org/10.1098/rspb.2016.1334}{Publication}
 }
 \usage{
 data(SW.phruta)

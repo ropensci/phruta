@@ -11,13 +11,13 @@
 #' @param genes A vector listing gene names of interest (character).
 #' @param maxseqs Maximum number of sequences to retrieve per search
 #'                (taxa + gene) (numeric).
-#' @param maxlength Maximum lenght of the gene sequence (numeric).
+#' @param maxlength Maximum length of the gene sequence (numeric).
 #'
 #' @return None
 #'
-#' @import pbapply
-#' @import rentrez
-#' @import taxize
+#' @importFrom pbapply pblapply
+#' @importFrom rentrez entrez_fetch entrez_search
+#' @importFrom taxize downstream
 #'
 #' @examples
 #' \dontrun{
@@ -63,7 +63,7 @@ sq.retrieve <-
         downstream(clades,
                    db = "itis",
                    downto = "species",
-                   verbose = F)
+                   verbose = FALSE)
       clade.species <- do.call(rbind, clade.species)
       c(clade.species$taxonname, species)
     } else {
@@ -92,7 +92,7 @@ sq.retrieve <-
             return(list(
               taxa = taxa[x],
               gene = gene,
-              data = F,
+              data = FALSE,
               sequences = NA
             ))
           } else {
@@ -103,7 +103,7 @@ sq.retrieve <-
             return(list(
               taxa = taxa[x],
               gene = gene,
-              data = F,
+              data = FALSE,
               sequences = res_seqs
             ))
           }

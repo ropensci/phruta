@@ -24,11 +24,9 @@
 #' @param folder The name of the folder where the original sequences are
 #'               located (character).
 #'
-#' @import stats
-#' @import utils
-#' @import ape
-#' @import rgbif
-#' @import taxize
+#' @importFrom stats na.omit
+#' @importFrom utils write.csv
+#' @importFrom ape write.FASTA
 #'
 #' @return None
 #'
@@ -60,20 +58,20 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   if (is.null(folder)) stop("Folder where curated
                             sequences are saved must be provided")
 
-  fastaSeqs <- lapply(list.files(folder, full.names = T), read.FASTA)
-  names(fastaSeqs) <- list.files(folder, full.names = F)
+  fastaSeqs <- lapply(list.files(folder, full.names = TRUE), read.FASTA)
+  names(fastaSeqs) <- list.files(folder, full.names = FALSE)
   seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
-                            function(x){
+                            function(x) {
     paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
     }))
 
-  seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x){
+  seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x) {
     paste0(strsplit(x, " ")[[1]][1], collapse = "_")}))
 
   AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)),
                        "AccN" = seqAccN,
                        "Species" = seqNames)
-  AccDat$file <- rep(list.files(folder, full.names = F),
+  AccDat$file <- rep(list.files(folder, full.names = FALSE),
                      unlist(lapply(fastaSeqs, length)))
 
   species_names <- unique(AccDat$Species)
@@ -112,7 +110,9 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   "%nin%" <- Negate("%in%")
 
-  toDel<-AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1]
+  toDel <- AccDat[
+    which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1
+                 ]
 
   # Remove any non-species species
   if (length(toDel) > 0) {
@@ -123,13 +123,15 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   }
 
   Full_dataset <-
-    Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
+    Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
   WrongSpecies <-
     Full_dataset[!apply(Full_dataset, 1,
-                        function(x) any(grepl(filterTaxonomicCriteria, x))),]
+                        function(x) any(grepl(filterTaxonomicCriteria, x))), ]
   RightSpecies <-
     Full_dataset[
-      apply(Full_dataset, 1,function(x) any(grepl(filterTaxonomicCriteria,x))),]
+      apply(
+        Full_dataset, 1,function(x) any(grepl(filterTaxonomicCriteria,x))
+        ), ]
 
   if (nrow(WrongSpecies) > 0) {
     seqsToDel <- AccDat[AccDat$Species %in% WrongSpecies, "OriginalNames"]

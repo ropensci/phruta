@@ -9,7 +9,7 @@ sq.partitionfinderv1(
   FilePatterns = "Masked",
   folderPartitionFinder = "2.1.PartitionFinderv1",
   models = "all",
-  run = T
+  run = TRUE
 )
 }
 \arguments{

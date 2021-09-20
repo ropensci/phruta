@@ -1,21 +1,25 @@
 #' Tree inference under RAxML
 #'
 #' Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
-#' a given folder (default is \code{"2.Alignments"}). Note that you need at least two
-#' gene regions to run a partitioned analysis.
+#' a given folder (default is \code{"2.Alignments"}). Note that you need at
+#' least two gene regions to run a partitioned analysis.
 #'
-#' @param folder Name of the folder where the sequences to align are stored (character).
-#' @param FilePatterns A string that is common to all the target files in the relevant folder (character). Note that
-#'                     this argument can be set to \code{"NULL"} if no specific pattern wants to be analized.
-#' @param raxml_exec Where to find \code{"RAxML"} or how to run it from the console? (string).
+#' @param folder Name of the folder where the sequences to align are stored
+#'               (character).
+#' @param FilePatterns A string that is common to all the target files
+#'                     in the relevant folder (character). Note that
+#'                     this argument can be set to \code{"NULL"} if no specific
+#'                     pattern wants to be analized.
+#' @param raxml_exec Where to find \code{"RAxML"} or how to run it from the
+#'                   console? (string).
 #' @param Bootstrap Number of bootstrap replicates (numeric).
-#' @param outgroup A single string of comma-separated tip labels to be used as outgroup in
-#'                 \code{"RAxML"} See \code{"RAxML"} documentation for more details (character).
+#' @param outgroup A single string of comma-separated tip labels to be
+#'                 used as outgroup in \code{"RAxML"} See \code{"RAxML"}
+#'                 documentation for more details (character).
 #' @param partitioned Whether analyses should be partitioned by gene (Logical).
 #' @param ... Arguments passed to \code{"ips::raxml"}.
 #'
-#' @importFrom ips raxml
-#' @importFrom ips raxml.partitions
+#' @importFrom ips raxml raxml.partitions
 #'
 #' @return None
 #'
@@ -45,7 +49,7 @@ tree.raxml <-
            raxml_exec = "raxmlHPC",
            Bootstrap = 100,
            outgroup,
-           partitioned = F,
+           partitioned = FALSE,
            ...) {
     if (is.null(folder))
       stop("Please provide folder names")
@@ -57,7 +61,7 @@ tree.raxml <-
       stop("Please indicate more than a single bootstrap replicate")
 
     files_fullNames <-
-      list.files(folder, FilePatterns, full.names = T)
+      list.files(folder, FilePatterns, full.names = TRUE)
     files <- list.files(folder, FilePatterns)
     seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
     names(seq) <- files
@@ -67,9 +71,10 @@ tree.raxml <-
     unlink("3.Phylogeny", recursive = TRUE)
     dir.create("3.Phylogeny")
     mainDir <- getwd()
+    on.exit(setwd(mainDir))
     setwd(paste0(mainDir, "/", "3.Phylogeny"))
 
-    if (partitioned == T) {
+    if (partitioned == TRUE) {
       partitions <- do.call(raxml.partitions, seq)
 
       tryCatch({
@@ -80,7 +85,7 @@ tree.raxml <-
           N = Bootstrap,
           p = 1234,
           x = 1234,
-          k = T,
+          k = TRUE,
           exec = raxml_exec,
           threads = 4,
           file = "phruta",
@@ -102,7 +107,7 @@ tree.raxml <-
           N = Bootstrap,
           p = 1234,
           x = 1234,
-          k = T,
+          k = TRUE,
           exec = raxml_exec,
           threads = 4,
           file = "phruta",

@@ -25,7 +25,7 @@ in the ingroup or species to be sampled in the outgroup
 \item{maxseqs}{Maximum number of sequences to retrieve per search
 (taxa + gene) (numeric).}
 
-\item{maxlength}{Maximum lenght of the gene sequence (numeric).}
+\item{maxlength}{Maximum length of the gene sequence (numeric).}
 }
 \value{
 None

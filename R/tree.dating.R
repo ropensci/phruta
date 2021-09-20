@@ -19,7 +19,8 @@
 #'
 #'
 #' @importFrom geiger congruify.phylo
-#' @import ape
+#' @importFrom ape read.tree write.tree
+#' @importFrom utils read.csv write.csv
 #'
 #' @return None
 #'

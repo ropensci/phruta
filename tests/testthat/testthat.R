@@ -1,6 +1,5 @@
 unlink(list.dirs("."), recursive = TRUE)
 
-# context("Loading sample trees")
 test_that("load sample phylogenies", {
   data("SW.phruta")
   expect_equal(length(SW.phruta), 5)
@@ -11,7 +10,6 @@ test_that("Class of sample phylogenies", {
   expect_true(class(SW.phruta) == "multiPhylo")
 })
 
-# context("sq.retrieve")
 
 test_that("Error in clades and species", {
   expect_error(sq.retrieve(
@@ -99,8 +97,6 @@ test_that("Silent sq.retrieve", {
 })
 
 
-# context("tree.dating")
-
 test_that("taxonomyFolder NULL", {
   expect_error(tree.dating(taxonomyFolder = NULL))
 })
@@ -108,8 +104,6 @@ test_that("taxonomyFolder NULL", {
 test_that("phylogenyFolder NULL", {
   expect_error(tree.dating(phylogenyFolder = NULL))
 })
-
-# context("sq.curate")
 
 test_that("expect_error default", {
   expect_error(sq.curate())
@@ -136,10 +130,10 @@ test_that("assuming the function runs x2", {
 })
 
 
-# context("sq.curate")
 
 test_that("assuming the function runs", {
-  expect_invisible(sq.aln(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T))
+  expect_invisible(sq.aln(folder = "1.CuratedSequences",
+                          FilePatterns = "renamed", mask = T))
 })
 
 
@@ -151,7 +145,6 @@ test_that("Mask is non-logic", {
   expect_error(sq.aln(mask = "H"))
 })
 
-# context("tree.raxml")
 
 test_that("Folder is null tree.raxml", {
   expect_error(tree.raxml(folder = NULL))
@@ -170,8 +163,6 @@ test_that("Bootstrap is 0 tree.raxml", {
 })
 
 
-# context("sq.add")
-
 test_that("folderDownloaded is null sq.add", {
   expect_error(sq.add(folderDownloaded = NULL))
 })
@@ -183,8 +174,6 @@ test_that("folderNew is null sq.add", {
 test_that("sq.add default", {
   expect_silent(sq.add())
 })
-
-# Test the pipeline
 
 unlink(list.dirs("."), recursive = TRUE)
 
@@ -211,8 +200,6 @@ test_that("Align sequences new", {
   )
 })
 
-## Sequence add
-
 newFas <- read.FASTA("0.Sequences/ADORA3.fasta")
 unlink("0.AdditionalSequences", recursive = TRUE)
 dir.create("0.AdditionalSequences")
@@ -220,7 +207,8 @@ write.FASTA(newFas, "0.AdditionalSequences/ADORA3.fasta")
 
 test_that("Add sequences", {
   expect_snapshot_output(
-    sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
+    sq.add(folderDownloaded = "0.Sequences",
+           folderNew = "0.AdditionalSequences")
   )
 })
 
@@ -231,8 +219,9 @@ taxonomy <- read.csv("1.CuratedSequences/1.Taxonomy.csv")
 test_that("Generate list of constraints, not by clade", {
   expect_true(
     class(getListConstraints(taxonomy,
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-      byClades = F
+      targetColumns = c("kingdom", "phylum", "class",
+                        "order", "family", "genus", "species_names"),
+      byClades = FALSE
     )) == "list"
   )
 })
@@ -241,8 +230,9 @@ test_that("Generate list of constraints, not by clade", {
 test_that("Generate list of constraints, by clade", {
   expect_true(
     class(getListConstraints(taxonomy,
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-      byClades = T
+      targetColumns = c("kingdom", "phylum", "class",
+                        "order", "family", "genus", "species_names"),
+      byClades = TRUE
     )) == "list"
   )
 })
@@ -252,7 +242,8 @@ test_that("Tree constraints non ingroup/outgroup", {
   expect_snapshot_output(
     tree.constraint(
       taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      targetColumns = c("kingdom", "phylum", "class",
+                        "order", "family", "genus", "species_names"),
       Topology = "((Felis), (Phoca));"
     )
   )
@@ -263,19 +254,18 @@ test_that("Tree constraints ingroup/outgroup", {
   expect_snapshot_output(
     tree.constraint(
       taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+      targetColumns = c("kingdom", "phylum", "class",
+                        "order", "family", "genus", "species_names"),
       outgroup = "Phoca_largha"
     )
   )
 })
 
-## PartitionFinder
 test_that("taxonomy curate", {
   sq.partitionfinderv1(
     folderAlignments = "2.Alignments",
     FilePatterns = "Masked",
-    models = "all", run = F
+    models = "all", run = FALSE
   )
   expect_true(any(grepl("2.1.PartitionFinderv1", list.files())))
 })
-

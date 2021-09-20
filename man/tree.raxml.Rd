@@ -10,22 +10,27 @@ tree.raxml(
   raxml_exec = "raxmlHPC",
   Bootstrap = 100,
   outgroup,
-  partitioned = F,
+  partitioned = FALSE,
   ...
 )
 }
 \arguments{
-\item{folder}{Name of the folder where the sequences to align are stored (character).}
+\item{folder}{Name of the folder where the sequences to align are stored
+(character).}
 
-\item{FilePatterns}{A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to \code{"NULL"} if no specific pattern wants to be analized.}
+\item{FilePatterns}{A string that is common to all the target files
+in the relevant folder (character). Note that
+this argument can be set to \code{"NULL"} if no specific
+pattern wants to be analized.}
 
-\item{raxml_exec}{Where to find \code{"RAxML"} or how to run it from the console? (string).}
+\item{raxml_exec}{Where to find \code{"RAxML"} or how to run it from the
+console? (string).}
 
 \item{Bootstrap}{Number of bootstrap replicates (numeric).}
 
-\item{outgroup}{A single string of comma-separated tip labels to be used as outgroup in
-\code{"RAxML"} See \code{"RAxML"} documentation for more details (character).}
+\item{outgroup}{A single string of comma-separated tip labels to be
+used as outgroup in \code{"RAxML"} See \code{"RAxML"}
+documentation for more details (character).}
 
 \item{partitioned}{Whether analyses should be partitioned by gene (Logical).}
 
@@ -36,8 +41,8 @@ None
 }
 \description{
 Performs tree inference under \code{"RAxML"} for aligned fasta sequences in
-a given folder (default is \code{"2.Alignments"}). Note that you need at least two
-gene regions to run a partitioned analysis.
+a given folder (default is \code{"2.Alignments"}). Note that you need at
+least two gene regions to run a partitioned analysis.
 }
 \examples{
 \dontrun{

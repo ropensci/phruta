@@ -15,8 +15,9 @@
 #' @param kingdom Optional and only used when database='gbif'. Two possible
 #'                options: "animals" or "plants."
 #'
-#' @import rgbif
-#' @import taxize
+#' @importFrom rgbif name_backbone name_usage
+#' @importFrom taxize classification
+#' @importFrom pbapply pblapply
 #'
 #' @return data.frame of taxonomic information for the target species
 #'         (valid in the database)

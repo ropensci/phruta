@@ -15,9 +15,9 @@
 #' @param models Models to run in partitionfinder (string).
 #' @param run Run  partitionfinder?
 #'
-#' @importFrom ape read.FASTA
-#' @importFrom ips raxml.partitions
-#' @importFrom ips write.phy
+#' @importFrom ape read.FASTA cbind.DNAbin
+#' @importFrom ips raxml.partitions write.phy
+#' @importFrom utils download.file untar write.csv
 #'
 #'
 #' @return None
@@ -45,8 +45,9 @@
 sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
                                  FilePatterns = "Masked",
                                  folderPartitionFinder ="2.1.PartitionFinderv1",
-                                 models = "all", run = T) {
-  files_fullNames <- list.files(folderAlignments, FilePatterns, full.names = T)
+                                 models = "all", run = TRUE) {
+  files_fullNames <- list.files(folderAlignments, FilePatterns,
+                                full.names = TRUE)
   files <- list.files(folderAlignments, FilePatterns)
   seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
   names(seq) <- files
@@ -61,7 +62,7 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
   write.phy(concatenated, paste0(folderPartitionFinder, "/concatenated.phy"))
   write.csv(partitions, paste0(folderPartitionFinder, "/partitions.csv"))
 
-  if(run){
+  if (run) {
   ## Set partitions
   if ("PartitionFinder.tar.gz" %in% list.files() == FALSE) {
    download.file("https://github.com/brettc/partitionfinder/archive/v1.1.1.zip",
@@ -73,7 +74,7 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
     readLines("partitionfinder-1.1.1/examples/nucleotide/partition_finder.cfg")
 
   block <- list()
-  for (i in 1:nrow(partitions)) {
+  for (i in seq_along(partitions[,1])) {
     block[[i]] <- paste0("GENE_", i, " ", "=", " ",
                          partitions[i, 3], " ", "-", " ", partitions[i, 4], ";")
   }
@@ -87,7 +88,7 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
 
   tofile <- paste0(folderPartitionFinder, "/partition_finder.cfg")
   system(paste0("python ./partitionfinder-1.1.1/PartitionFinder.py", " ",
-                tofile), wait = T)
+                tofile), wait = TRUE)
 
   unlink("partitionfinder-1.1.1", recursive = TRUE)
   unlink("PartitionFinder.tar.gz", recursive = TRUE)

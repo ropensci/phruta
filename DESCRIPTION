@@ -17,7 +17,8 @@ Description: The phruta R package is designed to simplify the basic
 Encoding: UTF-8
 LazyData: true
 biocViews: DECIPHER,
-           Biostrings
+           Biostrings,
+           GenomeInfoDbData
 Depends: R (>= 3.5.0)
 Imports: 
     rgbif,

@@ -7,7 +7,7 @@
 sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
 }
 \arguments{
-\item{folderDownloaded}{Name of the folder with dowloaded sequences.}
+\item{folderDownloaded}{Name of the folder with downloaded sequences.}
 
 \item{folderNew}{Name of the folder with local sequences.}
 }

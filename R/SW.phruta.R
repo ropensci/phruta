@@ -18,5 +18,5 @@
 #'            across the Tree of Life." Proceedings of the Royal
 #'            Society B: Biological Sciences 283.1838 (2016): 20161334.
 #'
-#' @source \href{https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334}{Publication}
+#' @source \href{http://dx.doi.org/10.1098/rspb.2016.1334}{Publication}
 NULL

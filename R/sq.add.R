@@ -13,8 +13,10 @@
 #' Note that new sequences can be added even for just a fraction of the
 #' originally downloaded genes.
 #'
-#' @param folderDownloaded Name of the folder with dowloaded sequences.
+#' @param folderDownloaded Name of the folder with downloaded sequences.
 #' @param folderNew Name of the folder with local sequences.
+#'
+#' @importFrom ape write.FASTA
 #'
 #' @return None
 #'
@@ -32,9 +34,9 @@ sq.add <- function(folderDownloaded = "0.Sequences",
   if (!is.character(folderDownloaded) | !is.character(folderNew))
     stop("Folder names must be of class character")
 
-  ds.namesFull <- list.files(folderDownloaded, full.names = T)
+  ds.namesFull <- list.files(folderDownloaded, full.names = TRUE)
   ds.names <- list.files(folderDownloaded)
-  ls.namesFull <- list.files(folderNew, full.names = T)
+  ls.namesFull <- list.files(folderNew, full.names = TRUE)
   ls.names <- list.files(folderNew)
 
   ds.sq <- lapply(ds.namesFull, read.FASTA)
