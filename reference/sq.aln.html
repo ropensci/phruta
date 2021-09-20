@@ -53,7 +53,8 @@ saved in a given folder. Alignment is conducted using
 optimizes the direction of the sequences, then aligns
 using &quot;BDECIPHER&quot;, and finally masks the resulting
 alignment (optionally but does it per default). The
-masking step includes removing common gaps across all the species and removing
+masking step includes removing common gaps across
+all the species and removing
 highly ambiguous positions. The resulting aligned sequences
 are stored to a new folder
 &quot;2.Alignments&quot;.'" />
@@ -152,13 +153,19 @@ saved in a given folder. Alignment is conducted using
 optimizes the direction of the sequences, then aligns
 using <code>"BDECIPHER"</code>, and finally masks the resulting
 alignment (optionally but does it per default). The
-masking step includes removing common gaps across all the species and removing
+masking step includes removing common gaps across
+all the species and removing
 highly ambiguous positions. The resulting aligned sequences
 are stored to a new folder
 <code>"2.Alignments"</code>.'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sq.aln</span><span class='op'>(</span>folder <span class='op'>=</span> <span class='st'>"1.CuratedSequences"</span>, FilePatterns <span class='op'>=</span> <span class='st'>"renamed"</span>, mask <span class='op'>=</span> <span class='cn'>T</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sq.aln</span><span class='op'>(</span>
+  folder <span class='op'>=</span> <span class='st'>"1.CuratedSequences"</span>,
+  FilePatterns <span class='op'>=</span> <span class='st'>"renamed"</span>,
+  mask <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

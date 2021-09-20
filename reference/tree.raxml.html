@@ -48,8 +48,8 @@
 
 <meta property="og:title" content="Tree inference under RAxML — tree.raxml" />
 <meta property="og:description" content="Performs tree inference under &quot;RAxML&quot; for aligned fasta sequences in
-a given folder (default is &quot;2.Alignments&quot;). Note that you need at least two
-gene regions to run a partitioned analysis." />
+a given folder (default is &quot;2.Alignments&quot;). Note that you need at
+least two gene regions to run a partitioned analysis." />
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png" />
 
 
@@ -140,8 +140,8 @@ gene regions to run a partitioned analysis." />
 
     <div class="ref-description">
     <p>Performs tree inference under <code>"RAxML"</code> for aligned fasta sequences in
-a given folder (default is <code>"2.Alignments"</code>). Note that you need at least two
-gene regions to run a partitioned analysis.</p>
+a given folder (default is <code>"2.Alignments"</code>). Note that you need at
+least two gene regions to run a partitioned analysis.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tree.raxml</span><span class='op'>(</span>
@@ -150,7 +150,7 @@ gene regions to run a partitioned analysis.</p>
   raxml_exec <span class='op'>=</span> <span class='st'>"raxmlHPC"</span>,
   Bootstrap <span class='op'>=</span> <span class='fl'>100</span>,
   <span class='va'>outgroup</span>,
-  partitioned <span class='op'>=</span> <span class='cn'>F</span>,
+  partitioned <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -159,16 +159,20 @@ gene regions to run a partitioned analysis.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>folder</th>
-      <td><p>Name of the folder where the sequences to align are stored (character).</p></td>
+      <td><p>Name of the folder where the sequences to align are stored
+(character).</p></td>
     </tr>
     <tr>
       <th>FilePatterns</th>
-      <td><p>A string that is common to all the target files in the relevant folder (character). Note that
-this argument can be set to <code>"NULL"</code> if no specific pattern wants to be analized.</p></td>
+      <td><p>A string that is common to all the target files
+in the relevant folder (character). Note that
+this argument can be set to <code>"NULL"</code> if no specific
+pattern wants to be analized.</p></td>
     </tr>
     <tr>
       <th>raxml_exec</th>
-      <td><p>Where to find <code>"RAxML"</code> or how to run it from the console? (string).</p></td>
+      <td><p>Where to find <code>"RAxML"</code> or how to run it from the
+console? (string).</p></td>
     </tr>
     <tr>
       <th>Bootstrap</th>
@@ -176,8 +180,9 @@ this argument can be set to <code>"NULL"</code> if no specific pattern wants to 
     </tr>
     <tr>
       <th>outgroup</th>
-      <td><p>A single string of comma-separated tip labels to be used as outgroup in
-<code>"RAxML"</code> See <code>"RAxML"</code> documentation for more details (character).</p></td>
+      <td><p>A single string of comma-separated tip labels to be
+used as outgroup in <code>"RAxML"</code> See <code>"RAxML"</code>
+documentation for more details (character).</p></td>
     </tr>
     <tr>
       <th>partitioned</th>
