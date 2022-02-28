@@ -23,12 +23,17 @@
 #'                Two possible options: "animals" or "plants."
 #' @param folder The name of the folder where the original sequences are
 #'               located (character).
+#' @param removeOutliers Whether odseq:odseq should be used to remove outliers
+#' @param minSeqs minimum number of sequences per locus
 #'
 #' @import stats
 #' @import utils
 #' @import ape
 #' @import rgbif
 #' @import taxize
+#' @import odseq
+#' @import msa
+#' @import Biostrings
 #'
 #' @return None
 #'
@@ -50,7 +55,9 @@
 sq.curate <- function(filterTaxonomicCriteria = NULL,
                       database = "gbif",
                       kingdom = NULL,
-                      folder = "0.Sequences") {
+                      folder = "0.Sequences",
+                      removeOutliers = TRUE,
+                      minSeqs=5) {
   if (is.null(filterTaxonomicCriteria))
     stop("Please provide filtering pattern in the
          filterTaxonomicCriteria argument")
@@ -60,7 +67,11 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   if (is.null(folder)) stop("Folder where curated
                             sequences are saved must be provided")
 
-  fastaSeqs <- lapply(list.files(folder, full.names = T), read.FASTA)
+  fastaSeqs <- lapply(list.files(folder, full.names = TRUE), function(x){
+    seqs <- read.FASTA(x)
+    seqs[!duplicated(names(seqs))]
+  })
+
   names(fastaSeqs) <- list.files(folder, full.names = F)
   seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
                             function(x){
@@ -102,7 +113,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     fastaSeqs <- lapply(fastaSeqs, function(x) {
       x[!names(x) %in% dupDel]
     })
-    AccDat <- AccDat[!duplicated(AccDat[, c(3:4)]), ]
+    AccDat <- AccDat[ !AccDat$OriginalNames %in% dupDel  , ]
   }
 
   Full_dataset <- cbind.data.frame(Taxonomy_species, species_names)
@@ -114,7 +125,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   toDel<-AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1]
 
-  # Remove any non-species species
+  # Remove any "non-species" species
   if (length(toDel) > 0) {
     fastaSeqs <- lapply(fastaSeqs, function(x) {
       x[!names(x) %in% toDel]
@@ -122,6 +133,38 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     AccDat <- AccDat[!AccDat$OriginalNames %in% toDel, ]
   }
 
+
+
+  ##Detect outliers...
+  if(isTRUE(removeOutliers)){
+  cat("\n Removing outliers...\n")
+  fastaSeqsOutDet <- lapply(fastaSeqs, function(x){
+    if(length(x)>minSeqs){
+    seqs <- as.list(as.character(x))
+    seqs <- unlist(lapply(seqs,paste0,collapse=""))
+    seqs <- Biostrings::DNAStringSet(seqs)
+    return(seqs)
+    }
+  })
+
+  fastaSeqsOutDet <- Filter(Negate(is.null), fastaSeqsOutDet)
+  fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
+  resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = 0.025)
+  names(resOut) <- NULL
+  seqsRemove <- names(which(unlist(resOut) ==TRUE))
+  AccDel <- gsub("\\..*","",seqsRemove)
+  AccDat$AccN <- gsub("\\..*","",AccDat$AccN )
+  namesDel <- AccDat[AccDat$AccN  %in%  AccDel,'OriginalNames']
+
+  if (length(toDel) > 0) {
+    fastaSeqs <- lapply(fastaSeqs, function(x) {
+      x[!names(x) %in% namesDel]
+    })
+    AccDat <- AccDat[!AccDat$OriginalNames %in% namesDel, ]
+  }
+  }
+
+  ##
   Full_dataset <-
     Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
   WrongSpecies <-
@@ -150,7 +193,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   unlink("1.CuratedSequences", recursive = TRUE)
   dir.create("1.CuratedSequences")
   invisible(lapply(seq_along(curatedSeqs), function(y) {
-    if (length(names(curatedSeqs[[y]])) > 1) {
+    if (length(names(curatedSeqs[[y]])) > minSeqs) {
       ## Original
       write.FASTA(curatedSeqs[[y]],
                   paste0("1.CuratedSequences/", names(curatedSeqs)[y]))
@@ -172,7 +215,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     }
   }))
 
-  AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > 1)), ]
+  AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > minSeqs)), ]
   Full_dataset <-
     Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
   newspp <- unlist(lapply(AccDat$Species, function(x) {
@@ -183,6 +226,14 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   AccDat$Species <- newspp
   row.names(AccDat) <- NULL
 
+  ##Create a summary of the dataset
+
+  sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
+  sumTable$species_names <- row.names(sumTable)
+  TableCombined <- merge(Full_dataset,sumTable, by='species_names', all.y =TRUE)
+
   write.csv(AccDat, "1.CuratedSequences/0.AccessionTable.csv")
   write.csv(Full_dataset, "1.CuratedSequences/1.Taxonomy.csv")
+  write.csv(TableCombined, "1.CuratedSequences/2.Taxonomy.Sampling.csv")
+
 }

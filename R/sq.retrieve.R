@@ -11,13 +11,16 @@
 #' @param genes A vector listing gene names of interest (character).
 #' @param maxseqs Maximum number of sequences to retrieve per search
 #'                (taxa + gene) (numeric).
-#' @param maxlength Maximum lenght of the gene sequence (numeric).
+#' @param maxlength Maximum length of the gene sequence (numeric).
+#' @param multicore Whether multiple searchers should be conducted simultaneously
 #'
 #' @return None
 #'
 #' @import pbapply
 #' @import rentrez
 #' @import taxize
+#' @import parallel
+#' @import pbmcapply
 #'
 #' @examples
 #' \dontrun{
@@ -34,7 +37,8 @@ sq.retrieve <-
            species = NULL,
            genes = NULL,
            maxseqs = 1,
-           maxlength = 5000) {
+           maxlength = 5000,
+           multicore= FALSE) {
     if (is.null(clades) &
         is.null(species))
       stop("Please provide at least one clade or species")
@@ -60,7 +64,7 @@ sq.retrieve <-
 
     taxa <- if (!is.null(clades)) {
       clade.species <-
-        downstream(clades,
+        taxize::downstream(clades,
                    db = "itis",
                    downto = "species",
                    verbose = F)
@@ -79,9 +83,9 @@ sq.retrieve <-
             paste0(taxa[x],
                    "[ORGN] AND ",
                    gene,
-                   "[Gene] AND 1:",
+                   "[TI] AND 1:",
                    maxlength,
-                   "[SLEN]")
+                   "[SLEN] NOT Predicted NOT UNVERIFIED NOT sp.")
 
           res_rearch <-
             entrez_search(db = "nuccore",
@@ -124,5 +128,22 @@ sq.retrieve <-
       }))
     }
 
-    invisible(pblapply(genes, singleGene))
-  }
+    invisible(
+
+      if(isTRUE(multicore) & length(grep("windows", Sys.info()["sysname"], ignore.case = TRUE)) ==0 ){
+        ncores <- parallel::detectCores()-2
+        pbmcapply::pbmclapply(genes, function(x){
+          tryCatch({
+            singleGene(x)
+          }, error=function(e){cat('Skipping...', x, 'try again later...')})
+        }, mc.cores=ncores)
+      }else{
+      pblapply(genes, function(x){
+      tryCatch({
+        singleGene(x)
+      }, error=function(e){cat('Skipping...', x, 'try again later...')})
+    })
+    }
+
+    )
+}
