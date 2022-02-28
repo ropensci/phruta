@@ -2,9 +2,19 @@ Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
 Version: 0.1.1
-Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
+Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
                   role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-1696-4886"))
+           comment = c(ORCID = "0000-0003-1696-4886")),
+    person(given = "Anna",
+          family = "Krystalli",
+          role = c("rev")),
+    person(given = "Rayna",
+          family = "Harris",
+          role = c("rev")),
+    person(given = "Frederick",
+          family = "Boehm",
+          role = c("rev"))
+           )
 URL: https://github.com/cromanpa94/phruta, https://cromanpa94.github.io/phruta/
 BugReports: https://github.com/cromanpa94/phruta/issues
 Description: The phruta R package is designed to simplify the basic 
