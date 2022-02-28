@@ -16,6 +16,17 @@ The `phruta` R package is designed to simplify the basic phylogenetic pipeline. 
 `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
 
 
+## How is `phruta` different?
+
+`phruta` has two core functions. The main applications of these functions is briefly outlined below:
+
+- `sq.retrieve`: This function downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes. 
+
+- `sq.curate()`: After sequences are downloaded from genbank, this function curates sequences within each of the examined genes by detecting sequence outliers and by using taxonomic information. 
+
+In addition to these two main functions, users will be able to align the downloaded sequences, infer phylogenetic trees, and calibrate phylogenies using additional functions in `phruta`.
+
+
 ## Why use `phruta`?
 
 `phruta` simplifies the phylogenetic pipeline, increases reproducibility, and helps organizing information used to infer molecular phylogenies.
