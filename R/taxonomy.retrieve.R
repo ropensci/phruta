@@ -37,15 +37,17 @@
 taxonomy.retrieve <-
   function(species_names = NULL,
            database = "gbif",
-           kingdom = NULL) {
-    ranks <-
-      c("kingdom",
-        "phylum",
-        "class",
-        "order",
-        "family",
-        "genus",
-        "species")
+           kingdom = NULL,
+           ranks =
+             c("kingdom",
+               "phylum",
+               "class",
+               "order",
+               'superfamily',
+               "family",
+               "genus",
+               "species")) {
+
 
     if (database != "gbif") {
       taxo <- classification(species_names, db = database, rows = 1)

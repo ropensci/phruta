@@ -4,7 +4,13 @@
 \alias{taxonomy.retrieve}
 \title{Curate sequences from genbank}
 \usage{
-taxonomy.retrieve(species_names = NULL, database = "gbif", kingdom = NULL)
+taxonomy.retrieve(
+  species_names = NULL,
+  database = "gbif",
+  kingdom = NULL,
+  ranks = c("kingdom", "phylum", "class", "order", "superfamily", "family", "genus",
+    "species")
+)
 }
 \arguments{
 \item{species_names}{A vector of species names}

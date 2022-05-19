@@ -4,7 +4,7 @@
 \alias{getListConstraints}
 \title{Get a list of constraints given a taxonomic dataset}
 \usage{
-getListConstraints(dataset, targetColumns, byClades = F)
+getListConstraints(dataset, targetColumns, byClades = FALSE)
 }
 \description{
 Internal used to generate tree constraints

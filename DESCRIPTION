@@ -40,8 +40,12 @@ Imports:
     methods,
     DECIPHER,
     Biostrings,
-    Rogue
-RoxygenNote: 7.1.1
+    Rogue,
+    reutils,
+    foreach,
+    doParallel,
+    doSNOW
+RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 3.0.0),
     covr,

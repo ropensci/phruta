@@ -8,7 +8,10 @@ sq.curate(
   filterTaxonomicCriteria = NULL,
   database = "gbif",
   kingdom = NULL,
-  folder = "0.Sequences"
+  folder = "0.Sequences",
+  removeOutliers = TRUE,
+  minSeqs = 5,
+  threshold = 0.05
 )
 }
 \arguments{
@@ -27,6 +30,10 @@ Two possible options: "animals" or "plants."}
 
 \item{folder}{The name of the folder where the original sequences are
 located (character).}
+
+\item{removeOutliers}{Whether odseq:odseq should be used to remove outliers}
+
+\item{minSeqs}{minimum number of sequences per locus}
 }
 \value{
 None

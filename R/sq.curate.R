@@ -57,7 +57,8 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
                       kingdom = NULL,
                       folder = "0.Sequences",
                       removeOutliers = TRUE,
-                      minSeqs=5) {
+                      minSeqs=5,
+                      threshold=0.05) {
   if (is.null(filterTaxonomicCriteria))
     stop("Please provide filtering pattern in the
          filterTaxonomicCriteria argument")
@@ -149,7 +150,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   fastaSeqsOutDet <- Filter(Negate(is.null), fastaSeqsOutDet)
   fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
-  resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = 0.025)
+  resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = threshold)
   names(resOut) <- NULL
   seqsRemove <- names(which(unlist(resOut) ==TRUE))
   AccDel <- gsub("\\..*","",seqsRemove)

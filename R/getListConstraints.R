@@ -3,7 +3,7 @@
 #' @keywords internal
 #' @export
 
-getListConstraints <- function(dataset, targetColumns, byClades = F) {
+getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
   classification <- lapply(1:length(targetColumns) - 1, function(x) {
     q <- unique(unlist(dataset[targetColumns[x + 1]]))
     na <- lapply(q, function(y) {

@@ -10,7 +10,7 @@ tree.raxml(
   raxml_exec = "raxmlHPC",
   Bootstrap = 100,
   outgroup,
-  partitioned = F,
+  partitioned = FALSE,
   ...
 )
 }

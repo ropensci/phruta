@@ -4,7 +4,13 @@
 \alias{sq.aln}
 \title{Align sequences}
 \usage{
-sq.aln(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = T, ...)
+sq.aln(
+  folder = "1.CuratedSequences",
+  FilePatterns = "renamed",
+  mask = TRUE,
+  maxFractionGapsSpecies = 0.5,
+  ...
+)
 }
 \arguments{
 \item{folder}{Name of the folder where the sequences to align
@@ -16,6 +22,8 @@ this argument can be set to \code{"NULL"} if no specific
 pattern wants to be analyzed.}
 
 \item{mask}{Removes ambiguous sites (Logical, TRUE or FALSE).}
+
+\item{maxFractionGapsSpecies}{Maximum fraction of gaps per species (when masked)}
 
 \item{...}{Arguments passed to \code{"DECIPHER::AlignSeqs"}.}
 }

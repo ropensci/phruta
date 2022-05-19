@@ -18,6 +18,7 @@
 #'                     this argument can be set to \code{"NULL"} if no specific
 #'                     pattern wants to be analyzed.
 #' @param mask Removes ambiguous sites (Logical, TRUE or FALSE).
+#' @param maxFractionGapsSpecies Maximum fraction of gaps per species (when masked)
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
 #'
 #' @importFrom methods as
@@ -44,7 +45,9 @@
 
 sq.aln <- function(folder = "1.CuratedSequences",
                    FilePatterns = "renamed",
-                   mask = T, ...) {
+                   mask = TRUE,
+                   maxFractionGapsSpecies = 0.5,
+                   ...) {
   if (is.null(folder))
     stop("Folder where curated sequences are saved must be provided")
   if (!is.logical(mask))
@@ -52,7 +55,7 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
   files <- list.files(folder, FilePatterns)
   files <- sub("renamed_", "", files)
-  filesComplete <- list.files(folder, FilePatterns, full.names = T)
+  filesComplete <- list.files(folder, FilePatterns, full.names = TRUE)
   unlink("2.Alignments", recursive = TRUE)
   dir.create("2.Alignments")
   invisible(
@@ -63,11 +66,35 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
       if (mask) {
         alignedNoGaps <- RemoveGaps(aligned, removeGaps = "common")
-        alignedMasked <- MaskAlignment(alignedNoGaps)
+        alignedMasked <- MaskAlignment(alignedNoGaps,
+                                       correction= if(length(alignedNoGaps)<200){
+                                         TRUE
+                                         } else {
+                                           FALSE
+                                           })
         DNAStr <- as(alignedMasked, "DNAStringSet")
+
+        ##Remove species with not enough data
+
+        NonGaps <- nchar(gsub("-", "", as.character(DNAStr)))
+        MaxNumberNonGaps <- as.vector(nchar(as.character(DNAStr))[1]*maxFractionGapsSpecies)
+
+        if(MaxNumberNonGaps > 100){
+        rem <- NonGaps < MaxNumberNonGaps
+        SumRem <- cbind.data.frame(Species=names(NonGaps),
+                                   NonGaps,
+                                   MaxNumberNonGaps,
+                                   removed=rem)
+        DNAStr <- DNAStr[!rem]
+        DNAStr <- DNAStr[!duplicated(names(DNAStr))]
+
+        #Export everything
+        write.csv(SumRem, paste0("2.Alignments/MaskedInformation_", files[x], ".csv"))
         writeXStringSet(DNAStr,
                         filepath = paste0("2.Alignments/Masked_",
                                           files[x]))
+        }
+
       }
 
       writeXStringSet(aligned, filepath = paste0("2.Alignments/", files[x]))

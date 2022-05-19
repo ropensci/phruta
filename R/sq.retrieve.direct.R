@@ -32,7 +32,7 @@
 #' }
 #' @export
 
-sq.retrieve <-
+sq.retrieve.direct <-
   function(clades = NULL,
            species = NULL,
            genes = NULL,
