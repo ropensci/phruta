@@ -40,7 +40,7 @@ sq.retrieve.indirect <- function(acc.table){
     acc.table.sub <- acc.table[acc.table$gene == x,]
     seqs <- read.GenBank(acc.table.sub$Acc, species.names = TRUE)
 
-    names(seqs) <- paste0(names(seqs), "_", acc.table.sub$Species)
+    names(seqs) <- paste0(names(seqs), " ", acc.table.sub$Species)
 
     write.dna(
       seqs,
