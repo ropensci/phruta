@@ -43,7 +43,6 @@ taxonomy.retrieve <-
                "phylum",
                "class",
                "order",
-               'superfamily',
                "family",
                "genus",
                "species")) {

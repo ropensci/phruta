@@ -58,7 +58,15 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
                       folder = "0.Sequences",
                       removeOutliers = TRUE,
                       minSeqs=5,
-                      threshold=0.05) {
+                      threshold=0.05,
+                      ranks =
+                        c("kingdom",
+                          "phylum",
+                          "class",
+                          "order",
+                          "family",
+                          "genus",
+                          "species")) {
   if (is.null(filterTaxonomicCriteria))
     stop("Please provide filtering pattern in the
          filterTaxonomicCriteria argument")
@@ -93,20 +101,12 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   Taxonomy_species <- if (database == "gbif") {
     taxonomy.retrieve(
       species_names = species_names, database = "gbif",
-      kingdom = kingdom
+      kingdom = kingdom, ranks = ranks
     )
   } else {
-    taxonomy.retrieve(species_names = species_names, database = "itis")
+    taxonomy.retrieve(species_names = species_names, database = "itis", ranks=ranks)
   }
 
-  # Remove PREDICTED species
-  if (length(grep("PREDICTED", AccDat$Species)) > 0) {
-    dupDel <- AccDat[grep("PREDICTED", AccDat$Species), "OriginalNames"]
-    fastaSeqs <- lapply(fastaSeqs, function(x) {
-      x[!names(x) %in% dupDel]
-    })
-    AccDat <- AccDat[-grep("PREDICTED", AccDat$Species), ]
-  }
 
   # Remove duplicated species
   if (any(duplicated(AccDat[, c(3:4)]))) {
