@@ -4,8 +4,10 @@
 #' Note that this function depends on \code{acc.retrieve} as it actually uses \code{expand.grid}
 #' to find all the relevant organism/gene combinations in genbank.
 #'
-#' @param clades A vector of clade names (character).
-#' @param species A vector of species names (logical).
+#' @param clades A vector of clade names (character). Note that this can either be
+#'               the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).
+#' @param species A vector of species names (logical). Note that this can either be
+#'               the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).
 #' @param gene A vector of gene names (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
 #'

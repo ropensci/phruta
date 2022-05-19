@@ -21,7 +21,7 @@
 #'             "IRBP","ND1","ND2","PLCB4",
 #'             "PNOC","RAG1a","RAG1b","RAG2",
 #'             "TTN","TYR1","VWF"),
-#'  speciesLevel=FALSE
+#'  speciesLevel=TRUE
 #' )
 #'
 #' sq.retrieve.indirect(test)
