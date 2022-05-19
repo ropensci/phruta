@@ -36,7 +36,7 @@ sq.retrieve.indirect <- function(acc.table){
   unlink("0.Sequences", recursive = TRUE)
   dir.create("0.Sequences")
 
- su <- lapply(unique(acc.table$gene), function(x){
+ su <- pblapply(unique(acc.table$gene), function(x){
     acc.table.sub <- acc.table[acc.table$gene == x,]
     seqs <- read.GenBank(acc.table.sub$Acc, species.names = TRUE)
 
