@@ -54,6 +54,7 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
       }, error=function(e){})
     }))
 
+    if(speciesLevel){
     chunks <- split(genes$code, ceiling(seq_along(genes$code)/99))
 
     spp <- do.call(rbind, lapply(chunks, function(x){
@@ -62,10 +63,10 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
 
     spp.genes <- merge(spp, genes, by.x = "Acc", by.y = "code")
 
-    if(speciesLevel){
+
     spp.genes[!duplicated(paste0(spp.genes$Species,"_", spp.genes$gene)),]
     }else{
-      spp.genes
+      genes
     }
 
   }
