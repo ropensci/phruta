@@ -18,7 +18,8 @@
 #' @examples
 #' \dontrun{
 #' test.spp <- gene.sampling.retrieve(organism = "Puma", speciesLevel=TRUE)
-#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesLevel=FALSE)#' }
+#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesLevel=FALSE)
+#' }
 #' @export
 
 gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
@@ -89,7 +90,7 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
     progress <- function(n) setTxtProgressBar(pb, n)
     opts <- list(progress = progress)
     AccDS <- foreach(x = cuts,
-                     .packages = c("reutils","doSNOW", "pruta"),
+                     .packages = c("reutils","doSNOW"),
                      .options.snow = opts
                      ,.combine = 'rbind'
     ) %dopar% get_gene_list(x, search = base.search, nObs=count, speciesLevel=speciesLevel)
