@@ -8,8 +8,7 @@ taxonomy.retrieve(
   species_names = NULL,
   database = "gbif",
   kingdom = NULL,
-  ranks = c("kingdom", "phylum", "class", "order", "superfamily", "family", "genus",
-    "species")
+  ranks = c("kingdom", "phylum", "class", "order", "family", "genus", "species")
 )
 }
 \arguments{

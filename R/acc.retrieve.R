@@ -21,9 +21,9 @@
 #' }
 #' @export
 
-acc.retrieve <- function(organism, gene=NULL, speciesLevel=FALSE, npar=2){
+acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALSE, npar=2){
 
-  if( is.null(gene) & !isTRUE(speciesLevel) ){stop("\nPlease provide the name of a gene region or disable the species-level filtering")}
+  if( is.null(gene) & speciesLevel ){stop("\nPlease provide the name of a gene region or disable the species-level filtering")}
 
   get_gene = function(x, search, nObs){
     tryCatch({
@@ -46,17 +46,24 @@ acc.retrieve <- function(organism, gene=NULL, speciesLevel=FALSE, npar=2){
     }, error=function(e){})
   }
 
+
+  if(!acc.num){
   base.search <- esearch(term = paste0(organism,"[orgn] ", if(!is.null(gene)){paste0("and " ,gene, "[TITL] ")},
                                        "NOT sp NOT unverified NOT genome NOT aff NOT cf"),
                          db = 'nuccore', usehistory = TRUE)
+  }else{
+    base.search <- esearch(term = paste(organism, collapse = " "),
+                           db = 'nuccore', usehistory = TRUE)
+  }
+
+
   xml <- content(base.search, "xml")
   count <- as.numeric(XML::xmlToList(xml)$Count)
 
-
-
   if(count>0){
+    if(!acc.num){
     message("\nSequences found for gene ", gene, " and organism ", organism)
-
+      }
     myCluster <- makeCluster(npar, type="SOCK")
     registerDoSNOW(myCluster)
     by = 499
@@ -83,9 +90,9 @@ acc.retrieve <- function(organism, gene=NULL, speciesLevel=FALSE, npar=2){
     }
 
   }else{
+    if(!acc.num){
     message("\nNo sequences found for gene ", gene, " and organism ", organism)
+    }
   }
 }
 
-
-base.search$params$term

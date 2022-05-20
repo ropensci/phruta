@@ -4,7 +4,13 @@
 \alias{acc.retrieve}
 \title{Retrieve accession numbers and titles for a given search in genbank}
 \usage{
-acc.retrieve(organism, gene = NULL, speciesLevel = FALSE, npar = 2)
+acc.retrieve(
+  organism,
+  acc.num = FALSE,
+  gene = NULL,
+  speciesLevel = FALSE,
+  npar = 2
+)
 }
 \arguments{
 \item{organism}{The name of a single taxon (character).}

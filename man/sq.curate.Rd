@@ -11,7 +11,8 @@ sq.curate(
   folder = "0.Sequences",
   removeOutliers = TRUE,
   minSeqs = 5,
-  threshold = 0.05
+  threshold = 0.05,
+  ranks = c("kingdom", "phylum", "class", "order", "family", "genus", "species")
 )
 }
 \arguments{
