@@ -17,14 +17,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' test.spp <- gene.sampling.retrieve(organism = "Puma", speciesLevel=TRUE)
-#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesLevel=FALSE)
+#' test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling=TRUE)
+#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesSampling=FALSE)
 #' }
 #' @export
 
-gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
+gene.sampling.retrieve <- function(organism, npar=2, speciesSampling=TRUE){
 
-  get_gene_list <- function(x, search, nObs, speciesLevel=speciesLevel){
+  get_gene_list <- function(x, search, nObs, speciesSampling=speciesSampling){
 
     recs_summ <- if(nObs==1){
       reutils::efetch(search,
@@ -54,11 +54,12 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
       }, error=function(e){})
     }))
 
-    if(speciesLevel){
+
+    if(speciesSampling){
     chunks <- split(genes$code, ceiling(seq_along(genes$code)/99))
 
-    spp <- do.call(rbind, lapply(chunks, function(x){
-      acc.retrieve(organism = x , acc.num = TRUE, speciesLevel = FALSE)
+    spp <- do.call(rbind, lapply(chunks, function(z){
+      acc.retrieve(organism = z , acc.num = TRUE, speciesLevel = FALSE)
     }))
 
     spp.genes <- merge(spp, genes, by.x = "Acc", by.y = "code")
@@ -94,7 +95,7 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesLevel=TRUE){
                      .packages = c("reutils","doSNOW"),
                      .options.snow = opts
                      ,.combine = 'rbind'
-    ) %dopar% get_gene_list(x, search = base.search, nObs=count, speciesLevel=speciesLevel)
+    ) %dopar% get_gene_list(x, search = base.search, nObs=count, speciesSampling=speciesSampling)
 
 
     resTable <- as.data.frame(sort(table(AccDS$gene), decreasing = T))
