@@ -33,7 +33,7 @@
 #' @import taxize
 #' @import odseq
 #' @import msa
-#' @import Biostrings
+#' @importFrom Biostrings DNAStringSet
 #'
 #' @return None
 #'

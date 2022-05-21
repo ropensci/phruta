@@ -4,7 +4,7 @@
 \alias{gene.sampling.retrieve}
 \title{Retrieve the distribution of genes for given organism in genbank}
 \usage{
-gene.sampling.retrieve(organism, npar = 2, speciesLevel = TRUE)
+gene.sampling.retrieve(organism, npar = 2, speciesSampling = TRUE)
 }
 \arguments{
 \item{organism}{The name of a single taxon (character).}
@@ -23,6 +23,7 @@ in genbank.
 }
 \examples{
 \dontrun{
-test.spp <- gene.sampling.retrieve(organism = "Puma", speciesLevel=TRUE)
-test.pop <- gene.sampling.retrieve(organism = "Puma", speciesLevel=FALSE)#' }
+test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling=TRUE)
+test.pop <- gene.sampling.retrieve(organism = "Puma", speciesSampling=FALSE)
+}
 }

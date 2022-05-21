@@ -39,7 +39,6 @@ Imports:
     geiger,
     methods,
     DECIPHER,
-    Biostrings,
     Rogue,
     reutils,
     foreach,
@@ -53,7 +52,8 @@ Suggests:
     markdown,
     rmarkdown,
     spelling,
-    utf8
+    utf8,
+    Biostrings
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3
