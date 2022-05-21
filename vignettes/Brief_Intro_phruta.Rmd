@@ -25,29 +25,33 @@ output:
 
 ## What is `phruta` <a name="intro"></a>
 
-The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` retrieves gene sequences, combines newly downloaded and local gene sequences, and performs sequence alignments.
+The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given organism of taxa, retrieves gene sequences, optionally combines newly downloaded and local gene sequences, performs sequence alignments, phylogenetic inference, and tree dating.
 
-`phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
+`phruta` is able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
 
 ## Functions in `phruta`
 
-The current release of `phruta` includes a set of six major functions. All six functions form a pipeline within `phruta` to output a time-calibrated phylogeny. However, users interested in using their own files at any stage can run each function independently.
+The current release of `phruta` includes a set of eight major functions. All eight functions form a pipeline within `phruta` to output a time-calibrated phylogeny. However, users interested in using their own files at any stage can run each function independently.
 
 Note that all the functions for which their primary output are sequences (aligned or unaligned) are listed under `sq.*`. All the files that output phylogenies (time-calibrated or not) are listed under `tree.*`.
 
--   First, `sq.retrieve` retrieves gene sequences for taxa of interest. This function saves all the resulting `fasta` files in a new directory, `0.Sequences`.
+-   First, the distribution of gene sampled for a given organism or set of taxa can be explored using the `acc.gene.sampling` function. This function will return a table that summarizes either the distribution of genes sampled for the search term in general or specifically across species.
 
--   Second, `sq.add` allows users to include local sequences to those retrieved from genbank in the previous step. This function saves all the resulting `fasta` files in two directories, combined sequences in `0.Sequences` and local sequences in `0.AdditionalSequences` (originally downloaded sequences are moved to `0.0.OriginalDownloaded` at this step). Note that `sq.add` is optional.
+-   Second, given a list of target organisms, users can retrieve a list of accession numbers that are relevant to their search using `acc.table.retrieve`. Instead of directly downloading sequences from genbank (see `sq.retrieve.direct` below), retrieving accession numbers allow users to have more control over the sequences that are being used in the analyses. Note that users can also curate the content of the dataset obtained using `sq.retrieve.direct`.
 
--   Third, the `sq.curate` function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the Global Biodiversity Information Facility (GBIF) database's taxonomic backbone (see alternatives in the advanced vignette to `pruta`). If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and renames sequences.
+-   Third, users should download gene sequences. Sequences can be download using the `sq.retrieve.indirect` from the accession numbers retrieved before using the `acc.table.retrieve` function. This is the preferred option within `pruta`. Additionally, users can directly download gene sequences using the `sq.retrieve.direct` function. Both `sq.retrieve.indirect` and `sq.retrieve.direct` functions save gene sequences in `fasta` files that will be located in a new directory named `0.Sequences`.
 
--   Fourth, `sq.aln` performs multiple sequence alignment on `fasta` files. Currently, `phruta` uses the [`DECIPHER` R package](http://www2.decipher.codes/), here. This package allows for adjusting sequence orientation and masking (removing ambiguous sites).
+-   Fourth, `sq.add` allows users to include local sequences to those retrieved from genbank in the previous step. This function saves all the resulting `fasta` files in two directories, combined sequences in `0.Sequences` and local sequences in `0.AdditionalSequences` (originally downloaded sequences are moved to `0.0.OriginalDownloaded` at this step). Note that `sq.add` is optional.
+
+-   Fifth, the `sq.curate` function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the Global Biodiversity Information Facility (GBIF) database's taxonomic backbone (see alternatives in the advanced vignette to `pruta`). If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and renames sequences.
+
+-   Sixth, `sq.aln` performs multiple sequence alignment on `fasta` files. Currently, `phruta` uses the [`DECIPHER` R package](http://www2.decipher.codes/), here. This package allows for adjusting sequence orientation and masking (removing ambiguous sites).
 
 The final two functions in `phruta` focus on tree inference and dating. These two functions depend on external software that needs to be installed (**and tested**) before running. Please make sure both `RAxML` and `PATHd-8` or `treePL` are installed and can be called within `R` using the `system()` function. Note that you can choose between `PATHd-8` and `treePL`. More details on how to install `RAxML` are provided [below](#paragraph2). Similarly, we provide details on how to install `PATHd-8` and `treePL` [below](#paragraph3).
 
--Fifth, the `tree.raxml` function allows users to perform tree inference under `RAxML` for sequences in a given folder. This is a wraper to `ips::raxml` and each of the arguments can be customized. The current release of `phruta` can manage both partitioned and unpartitioned analyses. Starting and constrained trees are allowed.
+-Seventh, the `tree.raxml` function allows users to perform tree inference under `RAxML` for sequences in a given folder. This is a wraper to `ips::raxml` and each of the arguments can be customized. The current release of `phruta` can manage both partitioned and unpartitioned analyses. Starting and constrained trees are allowed.
 
--Sixth, `tree.dating` enables users to perform time-calibrations of a given phylogeny using `geiger::congruify.phylo`. `phruta` includes a basic set of comprehensively sampled, time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using `data(SW.phruta)`. Please make sure you have at least **two** groups in common with each of the phylogenies. Similarly, users can choose to run either `PATHd-8` or `treePL`.
+-Eith, `tree.dating` enables users to perform time-calibrations of a given phylogeny using `geiger::congruify.phylo`. `phruta` includes a basic set of comprehensively sampled, time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using `data(SW.phruta)`. Please make sure you have at least **two** groups in common with each of the phylogenies. Similarly, users can choose to run either `PATHd-8` or `treePL`.
 
 ## Tutorial: Clade names to time-calibrated phylogenies <a name="paragraph1"></a>
 
@@ -60,6 +64,9 @@ Before we move on, please make sure that you you have [set a working directory f
 Now, since we're going to retrieve sequences from genbank, we will use the `sq.retrieve` function in `phruta`. This function will create `fasta` files (saved to your working directory) for the genes where at least one sequence was found in genbank for the target taxa.
 
 ```{r eval=FALSE}
+
+test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling=TRUE)
+
 sq.retrieve(
             clades  = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,
