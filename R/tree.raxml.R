@@ -41,7 +41,7 @@
 
 tree.raxml <-
   function(folder = "2.Alignments",
-           FilePatterns = "Masked",
+           FilePatterns = "Masked_",
            raxml_exec = "raxmlHPC",
            Bootstrap = 100,
            outgroup,

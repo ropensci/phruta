@@ -14,6 +14,7 @@
 #' @import foreach
 #' @import doParallel
 #' @import doSNOW
+#' @import ape
 #'
 #' @examples
 #' \dontrun{
@@ -22,9 +23,11 @@
 #' }
 #' @export
 
-gene.sampling.retrieve <- function(organism, npar=2, speciesSampling=TRUE){
+gene.sampling.retrieve <- function(organism, speciesSampling=TRUE, npar=2){
 
   get_gene_list <- function(x, search, nObs, speciesSampling=speciesSampling){
+    tryCatch({
+
 
     recs_summ <- if(nObs==1){
       reutils::efetch(search,
@@ -47,33 +50,36 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesSampling=TRUE){
     #genes
     genes <- do.call(rbind, lapply(newTxt, function(x){
       tryCatch({
-      feat <- sub("|", "", x[[1]], fixed = T)
+       xt<- if(length(x)>1){x[[1]]}else{x}
+      feat <- sub("|", "", xt , fixed = T)
       feat <- sub("|", "", feat, fixed = T)
       feat <- gsub("\\..*","",feat)
       cbind.data.frame(code = feat, gene = x[which(x == "product")+1])
       }, error=function(e){})
     }))
 
-
     if(speciesSampling){
-    chunks <- split(genes$code, ceiling(seq_along(genes$code)/99))
 
-    spp <- do.call(rbind, lapply(chunks, function(z){
-      acc.retrieve(organism = z , acc.num = TRUE, speciesLevel = FALSE)
-    }))
+    seqs <- ape::read.GenBank(genes$code, species.names=TRUE, chunk.size=200)
+    spp <- attr(seqs, "species")
 
-    spp.genes <- merge(spp, genes, by.x = "Acc", by.y = "code")
-
-
+    spp.genes <- cbind.data.frame(Species=unlist(spp), genes)
     spp.genes[!duplicated(paste0(spp.genes$Species,"_", spp.genes$gene)),]
     }else{
       genes
     }
 
+    }, error=function(e){})
   }
 
-  base.search <- esearch(term = paste0(organism,"[orgn] ",
-                                         "NOT sp NOT unverified NOT genome NOT aff NOT cf"),
+  if(length(organism)>1){
+    organism.2 <- paste(paste(organism, "[orgn]"), collapse = " OR ")
+  }else{
+    organism.2 <- paste0(organism,"[orgn] ")
+  }
+
+  base.search <- esearch(term = paste0(organism.2,
+                                         " NOT sp NOT unverified NOT genome NOT aff NOT cf NOT predicted NOT TSA NOT EST"),
                            db = 'nuccore', usehistory = TRUE, sort = 'relevance')
 
   xml <- content(base.search, "xml")
@@ -81,7 +87,7 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesSampling=TRUE){
 
   if(count>0){
 
-    message("\n Genes identified for ", organism)
+    message("\n Genes identified...")
 
     myCluster <- makeCluster(npar, type="SOCK")
     registerDoSNOW(myCluster)
@@ -92,19 +98,31 @@ gene.sampling.retrieve <- function(organism, npar=2, speciesSampling=TRUE){
     progress <- function(n) setTxtProgressBar(pb, n)
     opts <- list(progress = progress)
     AccDS <- foreach(x = cuts,
-                     .packages = c("reutils","doSNOW"),
+                     .packages = c("ape","reutils"),
                      .options.snow = opts
                      ,.combine = 'rbind'
     ) %dopar% get_gene_list(x, search = base.search, nObs=count, speciesSampling=speciesSampling)
 
+    if(speciesSampling){
 
+    tab01 <- ifelse(table(AccDS$gene,AccDS$Species) >1,1,table(AccDS$gene,AccDS$Species))
+
+    resTable <- as.data.frame(sort(rowSums(tab01), decreasing = T))
+    resTable$PercentOfSampledSpecies <- 100* resTable[,1] / length(unique(AccDS$Species))
+    colnames(resTable)[1] <- "Sampled in N species"
+    resTable <- cbind.data.frame(Gene=row.names(resTable),resTable )
+    row.names(resTable) <- NULL
+    resTable
+
+    }else{
     resTable <- as.data.frame(sort(table(AccDS$gene), decreasing = T))
     resTable$Percent <- 100* resTable[,2] / sum(resTable[,2])
     colnames(resTable)[1] <- "Gene"
     resTable
+    }
 
   }else{
-    message("\nNo sequences found for gene ", gene, " and organism ", organism)
+    message("\nNo genes identified...")
   }
 
 }

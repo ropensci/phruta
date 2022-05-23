@@ -49,7 +49,7 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
 
   if(!acc.num){
   base.search <- esearch(term = paste0(organism,"[orgn] ", if(!is.null(gene)){paste0("and " ,gene, "[TITL] ")},
-                                       "NOT sp NOT unverified NOT genome NOT aff NOT cf"),
+                                       "NOT sp NOT unverified NOT genome NOT aff NOT cf NOT predicted NOT TSA NOT EST"),
                          db = 'nuccore', usehistory = TRUE)
   }else{
     base.search <- esearch(term = paste(organism, collapse = " "),

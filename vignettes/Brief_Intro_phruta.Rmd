@@ -19,15 +19,13 @@ output:
 
 1.  [What is `phruta`](#intro)
 2.  [Functions in `phruta`](#paragraph0)
-3.  [From clade names to time-calibrated phylogenies](#paragraph1)
+3.  [From taxonomic names to time-calibrated phylogenies](#paragraph1)
 4.  [Installing RAxML](#paragraph2)
 5.  [Installing PATHd-8 and treePL](#paragraph3)
 
 ## What is `phruta` <a name="intro"></a>
 
-The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given organism of taxa, retrieves gene sequences, optionally combines newly downloaded and local gene sequences, performs sequence alignments, phylogenetic inference, and tree dating.
-
-`phruta` is able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
+The `phruta` R package is designed to simplify the basic phylogenetic pipeline and allow scientists from different backgrounds to assemble their own phylogenies. All code in `phruta` is run within the same program (`R`) and data from intermediate steps are saved locally in independent folders. Furthermore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given set of taxa, retrieves gene sequences, could combine newly downloaded and local gene sequences, performs sequence alignments, phylogenetic inference, and tree dating. `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative `R` packages and software.
 
 ## Functions in `phruta`
 
@@ -63,25 +61,36 @@ Before we move on, please make sure that you you have [set a working directory f
 
 Now, since we're going to retrieve sequences from genbank, we will use the `sq.retrieve` function in `phruta`. This function will create `fasta` files (saved to your working directory) for the genes where at least one sequence was found in genbank for the target taxa.
 
+```{r}
+gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling=TRUE)
+```
+
+
 ```{r eval=FALSE}
+targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies>30,]
 
-test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling=TRUE)
-
-sq.retrieve(
+acc.table <- acc.table.retrieve(
             clades  = c('Felis', 'Vulpes', 'Phoca'),
             species = 'Manis_pentadactyla' ,
-            genes   = c("A2AB","ADORA3","ADRB2","APOB",
-                      "APP","ATP7","BCHE","BDNF",
-                      "BMI1","BRCA1","BRCA2","CNR1",
-                      "COI","CREM","CYTB","DMP1",
-                      "EDG1","ENAM","FBN1","GHR",
-                      "IRBP","ND1","ND2","PLCB4",
-                      "PNOC","RAG1a","RAG1b","RAG2",
-                      "TTN","TYR1","VWF")
+            genes   = targetGenes$Gene,
+            speciesLevel = TRUE
           )
 ```
 
-This function will write all the resulting fasta files into the newly created folder `0.Sequences` located in our working directory.
+Some work left...
+
+```{r}
+acc.table$Species <- sub("P.", "Phoca ", acc.table$Species, fixed = T)
+acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = T)
+acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = T)
+acc.table$Species <- sub("mitochondrial", "", acc.table$Species)
+```
+
+Now, we still need to retrieve the sequences from the accessions table. The `sq.retrieve.indirect` function will write all the resulting fasta files into the newly created folder `0.Sequences` located in our working directory.
+
+```{r}
+sq.retrieve.indirect(acc.table)
+```
 
 Next, we're going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name is also included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Hopefully, I will be able to expand this to other kingdoms soon.
 
@@ -105,7 +114,7 @@ Phylogenetic inference is conducted using the `tree.raxml` function. We need to 
 
 ```{r eval=FALSE}
 tree.raxml(folder='2.Alignments', 
-           FilePatterns= 'Masked', 
+           FilePatterns= 'Masked_', 
            raxml_exec='raxmlHPC', 
            Bootstrap=100, 
            outgroup ="Manis_pentadactyla")
