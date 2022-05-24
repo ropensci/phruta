@@ -80,15 +80,18 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   ##Merge gene files
   if(!is.null(mergeGeneFiles)){
 
-
     mergedSeqs <- lapply(mergeGeneFiles, function(x){
-      refF <- list.files(folder)
+      refF <- list.files(folder, pattern = '.fasta')
       targetF <- paste0(unlist(x), '.fasta')
       if(all(targetF %in% refF)){
 
       seqs <- lapply(x, function(z) read.FASTA(paste0(folder,"/", z, '.fasta')))
-      unlink(paste0(folder,"/", x, '.fasta')) #remove original files
-      do.call(c,seqs)
+
+      #unlink(paste0(folder,"/", x, '.fasta')) #remove original files
+      file.rename(paste0(folder,"/", x, '.fasta'), paste0(folder,"/", x, '.original.non.merged'))
+
+      comS <- do.call(c,seqs)
+      comS[!duplicated(sub(".*? ", "", names(comS)))]
       }else{
         message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found in ", folder,"\n")
       }
@@ -107,12 +110,14 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   ##
 
-  fastaSeqs <- lapply(list.files(folder, full.names = TRUE), function(x){
+  fastaSeqs <- lapply(list.files(folder, pattern = '.fasta', full.names = TRUE), function(x){
     seqs <- read.FASTA(x)
-    seqs[!duplicated(names(seqs))]
+    seqs <- seqs[!duplicated(names(seqs))]
+    seqs[!duplicated(sub(".*? ", "", names(seqs)))]
   })
 
-  names(fastaSeqs) <- list.files(folder, full.names = F)
+  names(fastaSeqs) <- list.files(folder, pattern = '.fasta', full.names = F)
+
   seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
                             function(x){
     paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
@@ -124,7 +129,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)),
                        "AccN" = seqAccN,
                        "Species" = seqNames)
-  AccDat$file <- rep(list.files(folder, full.names = F),
+  AccDat$file <- rep(list.files(folder,pattern = '.fasta', full.names = F),
                      unlist(lapply(fastaSeqs, length)))
 
   species_names <- unique(AccDat$Species)
@@ -137,7 +142,6 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   } else {
     taxonomy.retrieve(species_names = species_names, database = "itis", ranks=ranks)
   }
-
 
   # Remove duplicated species
   if (any(duplicated(AccDat[, c(3:4)]))) {
@@ -221,31 +225,41 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   toRename <-
     Full_dataset[Full_dataset$originalSpeciesName!= Full_dataset$species_names,]
 
+
   ## Export
   unlink("1.CuratedSequences", recursive = TRUE)
   dir.create("1.CuratedSequences")
   invisible(lapply(seq_along(curatedSeqs), function(y) {
     if (length(names(curatedSeqs[[y]])) > minSeqs) {
       ## Original
-      write.FASTA(curatedSeqs[[y]],
+      ta.cu <- curatedSeqs[[y]]
+      ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
+
+      write.FASTA(ta.cu,
                   paste0("1.CuratedSequences/", names(curatedSeqs)[y]))
       ## Renamed
       newNames <-
-        unlist(lapply(names(curatedSeqs[[y]]),
+        unlist(lapply(names(ta.cu),
                       function(x) {
                         paste(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
                         }
                       ))
-      renamed <- curatedSeqs[[y]]
+
+      renamed <- ta.cu
       if (nrow(toRename) > 0) {
         newNames <- ifelse(newNames %in% toRename$originalSpeciesName,
                            toRename$species_names, newNames)
       }
       names(renamed) <- newNames
+      renamed <- renamed[!duplicated(names(renamed))]
+
       write.FASTA(renamed, paste0("1.CuratedSequences/renamed_",
                                   names(curatedSeqs)[y]))
     }
   }))
+
+  perDS <- lapply(curatedSeqs, function(x) sub(" ", "_", sub(".*? ", "", names(x))))
+  names(perDS) <- names(curatedSeqs)
 
   AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > minSeqs)), ]
   Full_dataset <-
@@ -263,6 +277,13 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
   sumTable$species_names <- row.names(sumTable)
   TableCombined <- merge(Full_dataset,sumTable, by='species_names', all.y =TRUE)
+
+  dat <- split(AccDat, f=(AccDat$file))
+  dat = dat[which(names(dat) %in% names(perDS))]
+  dat <- lapply(seq_along(dat), function(x){
+    dat[[x]][dat[[x]]$Species %in% perDS[[x]],]
+  })
+  AccDat <- do.call(rbind, dat)
 
   write.csv(AccDat, "1.CuratedSequences/0.AccessionTable.csv")
   write.csv(Full_dataset, "1.CuratedSequences/1.Taxonomy.csv")

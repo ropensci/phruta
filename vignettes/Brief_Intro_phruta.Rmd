@@ -15,6 +15,11 @@ output:
     fig_caption: yes
 ---
 
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = FALSE, warning = FALSE, message = FALSE)
+```
+
+
 # Table of Contents
 
 1.  [What is `phruta`](#intro)
@@ -59,20 +64,18 @@ So far, we have decided the taxonomic make of our analyses. However, we also nee
 
 Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
 
-```{r eval=FALSE}
+```{r }
+start_time <- Sys.time()
+library(phruta)
 gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling=TRUE)
 head(gs.seqs)
 ```
 
-```{r for testing}
-gs.seqs <- data.frame('a')
-```
-
-For the search terms, `phruta` was able to retrieve `r nrow(gs.seqs)` gene regions . The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
+For the search terms, `phruta` was able to retrieve the names for multiple gene regions . The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
 
 From here, we will generate a preliminary table summarizing accession numbers for the combination of taxa and gene regions that we're interested in sampling. In fact, not all these accession numbers are expected to be in the final (curated) molecular dataset. Using the `acc.table.retrieve` function, we will assemble a species-level summary of accession numbers (hence the `speciesLevel = TRUE` argument). For simplicity, this tutorial will focus on sampling gene regions that are sampled in >30% of the species (`targetGenes` data.frame).
 
-```{r eval=FALSE}
+```{r }
 targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies>30,]
 
 acc.table <- acc.table.retrieve(
@@ -86,7 +89,7 @@ head(acc.table)
 
 The `acc.table` object is a `data.frame` that is later on going to be used for downloading locally the relevant gene sequences. Feel free to review this dataset, make changes, add new species, samples, etc. The integrity of this dataset is critical for the next steps so please take your time and review it carefully. Let's just make some minor changes to our dataset:
 
-```{r eval=FALSE}
+```{r }
 acc.table$Species <- sub("P.", "Phoca ", acc.table$Species, fixed = T)
 acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = T)
 acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = T)
@@ -97,26 +100,27 @@ Now, since we're going to retrieve sequences from genbank, we will use the `sq.r
 
 Now, we still need to retrieve the sequences from the accessions table `acc.table`. The `sq.retrieve.indirect` function will write all the resulting fasta files into the newly created folder `0.Sequences` located in our working directory.
 
-```{r eval=FALSE}
+```{r }
 sq.retrieve.indirect(acc.table)
 ```
 
 Next, we're going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name should also be included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Finally, you might have already noticed that we have "cytochrome oxidase subunit 1" and "cytochrome c oxidase subunit I" as different gene regions. We can combine the sequences in these two files into a single file names `COI` that will be used in the next steps. Specifically, to merge gene files, you will have to provide a named list to the `mergeGeneFiles` argument of the `sq.curate` function. This named list (`tb.merged` in our tutorial) will have a length that equals the number of final files that
 
-```{r eval=FALSE}
+```{r }
 tb.merged <- list('COI'=c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
 sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
           mergeGeneFiles=tb.merged,
           kingdom='animals', 
-          folder='0.Sequences')
+          folder='0.Sequences',
+          removeOutliers = FALSE)
 ```
 
 Running this line will create the new folder `1.CuratedSequences` that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (`renamed_*` prefix), (3) an accession table (`0.AccessionTable.csv`), and (4) a summary of taxonomic information for all the species sampled in the files (`1.Taxonomy.csv`). We'll use the `renamed_*` and `1.Taxonomy.csv` files in the next steps.
 
 Next, we'll align the sequences that we just curated. For this, we just use `sq.aln` with default parameters.
 
-```{r eval=FALSE}
-sq.aln(folder='1.CuratedSequences')
+```{r }
+sq.aln(folder='1.CuratedSequences', FilePatterns = "renamed")
 ```
 
 The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). 
@@ -124,5 +128,14 @@ The resulting multiple sequence alignments will be saved to the `2.Alignments` f
 We can use the resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package".
 
 
-
+```{r}
+library(ape)
+files <- list.files("2.Alignments", pattern="Masked_",full.names = T)
+sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
+par(mfrow=c(round(length(sampleALNs)/2),2))
+for(i in seq_along(sampleALNs)){
+image(sampleALNs[[i]], main=files[i])
+}
+end_time <- Sys.time()
+```
 

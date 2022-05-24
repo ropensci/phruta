@@ -1,0 +1,25 @@
+"","species_names","kingdom","phylum","class","order","family","genus","species","originalSpeciesName","12S ribosomal RNA.fasta","16S ribosomal RNA.fasta","COI.fasta","cytochrome b.fasta","growth hormone receptor.fasta"
+"1","Felis_bieti","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis bieti","Felis_bieti",1,0,0,1,0
+"2","Felis_catus","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis catus","Felis_catus",1,1,1,1,1
+"3","Felis_chaus","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis chaus","Felis_chaus",1,1,1,1,0
+"4","Felis_margarita","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis margarita","Felis_margarita",0,1,1,1,0
+"5","Felis_nigripes","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis nigripes","Felis_nigripes",0,1,1,0,0
+"6","Felis_silvestris","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis silvestris","Felis_silvestris",1,2,1,1,0
+"7","Felis_silvestris","Animalia","Chordata","Mammalia","Carnivora","Felidae","Felis","Felis silvestris","Felis_libyca",1,2,1,1,0
+"8","Histriophoca_fasciata","Animalia","Chordata","Mammalia","Carnivora","Phocidae","Histriophoca","Histriophoca fasciata","Phoca_fasciata",1,0,0,1,0
+"9","Manis_pentadactyla","Animalia","Chordata","Mammalia","Pholidota","Manidae","Manis","Manis pentadactyla","Manis_pentadactyla",1,1,1,1,1
+"10","Pagophilus_groenlandicus","Animalia","Chordata","Mammalia","Carnivora","Phocidae","Pagophilus","Pagophilus groenlandicus","Phoca_groenlandica",0,0,1,1,1
+"11","Phoca_largha","Animalia","Chordata","Mammalia","Carnivora","Phocidae","Phoca","Phoca largha","Phoca_largha",1,0,1,1,1
+"12","Phoca_vitulina","Animalia","Chordata","Mammalia","Carnivora","Phocidae","Phoca","Phoca vitulina","Phoca_vitulina",0,0,1,1,1
+"13","Vulpes_cana","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes cana","Vulpes_cana",0,0,0,1,0
+"14","Vulpes_chama","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes chama","Vulpes_chama",0,0,1,0,0
+"15","Vulpes_corsac","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes corsac","Vulpes_corsac",0,0,1,1,1
+"16","Vulpes_ferrilata","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes ferrilata","Vulpes_ferrilata",0,1,0,1,0
+"17","Vulpes_lagopus","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes lagopus","Alopex_lagopus",1,1,2,1,2
+"18","Vulpes_lagopus","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes lagopus","Vulpes_lagopus",1,1,2,1,2
+"19","Vulpes_macrotis","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes macrotis","Vulpes_macrotis",0,0,1,1,1
+"20","Vulpes_pallida","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes pallida","Vulpes_pallida",0,0,0,1,0
+"21","Vulpes_rueppellii","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes rueppellii","Vulpes_rueppellii",0,0,0,1,0
+"22","Vulpes_velox","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes velox","Vulpes_velox",0,0,1,0,1
+"23","Vulpes_vulpes","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes vulpes","Vulpes_vulpes",1,1,1,1,1
+"24","Vulpes_zerda","Animalia","Chordata","Mammalia","Carnivora","Canidae","Vulpes","Vulpes zerda","Vulpes_zerda",0,0,1,1,1
