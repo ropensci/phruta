@@ -81,7 +81,6 @@ Finally, let's perform tree dating in our phylogeny using secondary calibrations
 
 ## Tree dating in `phruta` <a name="paragraph4"></a>
 
-
 Tree dating is performed using the `tree.dating` function in `phruta`. We have to provide the name of the folder containing the `1.Taxonomy.csv` file created in `sq.curate`. We also have to indicate the name of the folder containing the `RAxML_bipartitions.phruta` file. We will scale our phylogeny using `treePL`.
 
 ```{r eval=FALSE}

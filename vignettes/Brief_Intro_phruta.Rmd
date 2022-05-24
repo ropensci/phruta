@@ -53,13 +53,11 @@ The final two functions in `phruta` focus on tree inference and dating. These tw
 
 ## Intro tutorial: Clade names to sequence alignments <a name="paragraph1"></a>
 
-Let's create a phylogeny for a few mammal clades. Assume that we need to build a tree for the following three genera: *Felis, Vulpes*, and *Phoca*. Note that all three genera are within Carnivora. Both *Felis* and *Vulpes* are classified in different superfamilies within Fissipedia and *Phoca* is part of another suborder, Pinnipedia. We're going to root our tree with another mammal species, a Chinese Pangolin ( *Manis pentadactyla*). Users can select additional target species, however, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.
+Let's create a phylogeny for a few mammal clades. Assume that we need to build a tree for the following three genera: *Felis, Vulpes*, and *Phoca*. All three genera are within Carnivora. Both *Felis* and *Vulpes* are classified in different superfamilies within Fissipedia and *Phoca* is part of another suborder, Pinnipedia. We're going to root our tree with another mammal species, a Chinese Pangolin ( *Manis pentadactyla*). Users can select additional target species, however, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.
 
-So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analized is already available. For instance, we could use same gene regions as in [Upham et al (2009)](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030). Nevertheless, for this tutorial, we will simply try to find the gene regions are well sampled for the target taxa. I believe that figuring out best sampled gene regions instead of providing names is potentially more valuable when working with poorly studied groups.
+So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analized is already available. For instance, we could use same gene regions as in [Upham et al (2009)](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030). Nevertheless, for this tutorial, we will simply try to find the gene regions are well sampled for the target taxa. I believe that figuring out the best sampled gene regions in genbank, instead of providing names, is potentially more valuable when working with poorly studied groups. Before we move on, please make sure that you you have [set a working directory for this project](http://rfunction.com/archives/1001) as all the files will be saved to the current working directory.
 
-Now, before we move on, please make sure that you you have [set a working directory for this project](http://rfunction.com/archives/1001) as all the files will be saved to the current working directory.
-
-Let's first look for the gene regions that are sampled for our target taxa. For this, we will first use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame` named `gs.seqs` will contain the list of full names for genes sampled in genbank for the target taxa.
+Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
 
 ```{r eval=FALSE}
 gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling=TRUE)
@@ -70,9 +68,9 @@ head(gs.seqs)
 gs.seqs <- data.frame('a')
 ```
 
-For the search terms, `phruta` was able to retrieve `r nrow(gs.seqs)` gene regions for the taxa that we're searching for. The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank.
+For the search terms, `phruta` was able to retrieve `r nrow(gs.seqs)` gene regions . The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
 
-From here, the next step would be to generate a preliminary table summarizing accession numbers for the combination of taxa and gene regions that we're interested in sampling. In fact, not all these accession numbers are expected to be in the final (curated) molecular dataset. Using the `acc.table.retrieve` function, note that we're interested in generating a species-level summary of accession numbers (hence the `speciesLevel = TRUE` argument). Furthermore, we're going to focus on gene regions that are sampled in >30% of the species (`targetGenes` data.frame).
+From here, we will generate a preliminary table summarizing accession numbers for the combination of taxa and gene regions that we're interested in sampling. In fact, not all these accession numbers are expected to be in the final (curated) molecular dataset. Using the `acc.table.retrieve` function, we will assemble a species-level summary of accession numbers (hence the `speciesLevel = TRUE` argument). For simplicity, this tutorial will focus on sampling gene regions that are sampled in >30% of the species (`targetGenes` data.frame).
 
 ```{r eval=FALSE}
 targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies>30,]
@@ -94,7 +92,6 @@ acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = T)
 acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = T)
 acc.table$Species <- sub("mitochondrial", "", acc.table$Species)
 ```
-
 
 Now, since we're going to retrieve sequences from genbank, we will use the `sq.retrieve.indirect` function in `phruta`. I'm going to stop here to mention that there are two versions of `sq.retrieve.*` in the `R` package. The one that we're using in this tutorial, `sq.retrieve.indirect`, retrieves sequences "indirectly" because it necessarily follows the intermediate step of generating a table summarizing accession numbers (see the `acc.table.retrieve` function above). I present the information in this vignette using `sq.retrieve.indirect` instead of `sq.retrieve.direct` because the first function is way more flexible and allows for correcting issues *prior* to download any sequence. For instance, you can add new sequences, species, populations to the resulting data.frame from `acc.table.retrieve`. Additionally, you could even manually assemble your own dataset of accession numbers to be retrieved using `sq.retrieve.indirect`. Instead, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. In short, you should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`.
 
@@ -122,5 +119,10 @@ Next, we'll align the sequences that we just curated. For this, we just use `sq.
 sq.aln(folder='1.CuratedSequences')
 ```
 
-The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). We will use the latter set of files in the next steps.
+The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). 
+
+We can use the resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package".
+
+
+
 
