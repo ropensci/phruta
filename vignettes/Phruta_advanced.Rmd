@@ -16,7 +16,7 @@ output:
 ---
 
 # Table of Contents
-1. [Working with non-animal nor plant groups in `phruta`](#paragraph0)
+1. [Working with non-animal/plant groups in `phruta`](#paragraph0)
 2. [Creating taxonomic constraints in `phruta`](#paragraph1)
 3. [Running PartitionFinder in `phruta`](#paragraph2)
 4. [Partitioned analyses in RAxML](#paragraph3)

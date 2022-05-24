@@ -41,12 +41,20 @@ library(devtools)
 install_github("cromanpa94/phruta")
 ```
 
+## Running `phruta` from `Rstudio` while using `MacOS`?
+
+Only if you're interested in running phylogenetic analyses, please make sure you open `RStudio` using the following code from the terminal:
+
+```{bash eval=FALSE}
+open /Applications/RStudio.app
+```
+
 ## Dedication
-My package is dedicated to my mom and every single Black woman. I still have lots of things to learn from you. You will always have all my admiration and respect.
+My package is dedicated to my mom and every single Black woman. I still have lots of things to learn from you. You will always have all my admiration.
 
 The [logo](https://www.flickr.com/photos/gufomusike/3462117620/in/photolist-6NFiPi-xoLbca-FtC6yJ-4nk6wS-x2AZV-b3MUv8-e2B7qj-4uCwwa-e3PJxi-2ePGmUM-b2wBVi-obHf1x-5iP26P-4juoE6-z881E-z88t3-9GmTbQ-dGvrFe-22APdBs-p2t5Zv-8DWQw8-6fAJ2G-7jQhu2-7LEkkL-7vBdyF-jTdXSR-kcntD1-aWGfnx-bk59CK-5JfhKt-6gWfX7-reVehy-bjk7Ki-2xnGjv-dLJbq9-e3VjY3-ugz6U-FGVagm-iqVRuD-YE5pLe-2kPkt84-2kHhswd) features a Palenquera in Cartagena (Colombia). For many folks, Palenqueras are just the Black woman ones who sell fruits in particular Colombian turistic areas. However, palenqueras and Palenque are central to Black identity in Colombia, Latin America, and America. ["Palenque was the first free African town in the Americas"](https://en.wikipedia.org/wiki/San_Basilio_de_Palenque).
 
-_Fruta_ is the Spanish word for _Fruit_. English _ph_ sounds the same as _F_ in Spanish. In `phruta`, _ph_ is relative to phylogenetics. I pronounce `phruta` as _fruta_ in Spanish.
+_Fruta_ is the Spanish word for _Fruit_. English _ph_ sounds the same as _F_ in Spanish. In `phruta`, _ph_ is relative to phylogenetics. I pronounce `phruta` just as _fruta_ in Spanish.
 
 ## Additional resources
 
