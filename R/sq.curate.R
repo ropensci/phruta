@@ -53,6 +53,7 @@
 #' @export
 
 sq.curate <- function(filterTaxonomicCriteria = NULL,
+                      mergeGeneFiles = NULL,
                       database = "gbif",
                       kingdom = NULL,
                       folder = "0.Sequences",
@@ -75,6 +76,36 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
          \n SOLUTION: Split multiple criteria using |")
   if (is.null(folder)) stop("Folder where curated
                             sequences are saved must be provided")
+
+  ##Merge gene files
+  if(!is.null(mergeGeneFiles)){
+
+
+    mergedSeqs <- lapply(mergeGeneFiles, function(x){
+      refF <- list.files(folder)
+      targetF <- paste0(unlist(x), '.fasta')
+      if(all(targetF %in% refF)){
+
+      seqs <- lapply(x, function(z) read.FASTA(paste0(folder,"/", z, '.fasta')))
+      unlink(paste0(folder,"/", x, '.fasta')) #remove original files
+      do.call(c,seqs)
+      }else{
+        message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found in ", folder,"\n")
+      }
+    })
+
+    names(mergedSeqs) <- names(mergeGeneFiles)
+    invisible(
+    lapply(seq_along(mergedSeqs), function(y){
+      if(!is.null(mergedSeqs[[y]])){
+    write.FASTA(mergedSeqs[[y]],
+                paste0(folder,"/", names(mergedSeqs)[y], ".fasta"))
+      }
+    })
+    )
+  }
+
+  ##
 
   fastaSeqs <- lapply(list.files(folder, full.names = TRUE), function(x){
     seqs <- read.FASTA(x)

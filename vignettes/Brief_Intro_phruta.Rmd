@@ -95,7 +95,9 @@ sq.retrieve.indirect(acc.table)
 Next, we're going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name is also included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Hopefully, I will be able to expand this to other kingdoms soon.
 
 ```{r eval=FALSE}
+tb.merged <- list('COI'=c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
 sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
+          mergeGeneFiles=tb.merged,
           kingdom='animals', 
           folder='0.Sequences')
 ```
