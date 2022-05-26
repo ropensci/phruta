@@ -8,7 +8,7 @@ sq.aln(
   folder = "1.CuratedSequences",
   FilePatterns = "renamed",
   mask = TRUE,
-  maxFractionGapsSpecies = 0.5,
+  maxFractionGapsSpecies = 0.01,
   ...
 )
 }

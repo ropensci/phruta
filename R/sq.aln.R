@@ -25,6 +25,7 @@
 #' @importFrom Biostrings writeXStringSet
 #' @importFrom Biostrings readDNAStringSet
 #' @import DECIPHER
+#' @import msa
 #'
 #' @return None
 #'
@@ -67,15 +68,18 @@ sq.aln <- function(folder = "1.CuratedSequences",
       if (mask) {
         alignedNoGaps <- DECIPHER::RemoveGaps(aligned, removeGaps = "common")
         alignedMasked <- DECIPHER::MaskAlignment(alignedNoGaps,
-                                       correction= if(length(alignedNoGaps)<200){
+                                       correction = if (length(alignedNoGaps) < 200) {
                                          TRUE
                                          } else {
                                            FALSE
                                            })
+
+        alignedMasked <- if (max(nchar(as.character(DNAStr))) != 0) {
+
         DNAStr <- as(alignedMasked, "DNAStringSet")
 
         ##Species removed while masking the aln
-        RemMasking <- ! names(aligned) %in% names(DNAStr)
+        RemMasking <- !names(aligned) %in% names(DNAStr)
 
         ##Remove species with not enough data
         NonGaps <- nchar(gsub("-", "", as.character(DNAStr)))
@@ -83,11 +87,11 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
         #if(MaxNumberNonGaps > 100){
         rem <- NonGaps < MaxNumberNonGaps
-        SumRem <- cbind.data.frame(Species=names(NonGaps),
+        SumRem <- cbind.data.frame(Species = names(NonGaps),
                                    NonGaps,
                                    #MaxNumberNonGaps,
-                                   removedPerGaps=rem,
-                                   removedMasking=RemMasking)
+                                   removedPerGaps = rem,
+                                   removedMasking = RemMasking)
         DNAStr <- DNAStr[!rem]
         DNAStr <- DNAStr[!duplicated(names(DNAStr))]
 
@@ -97,8 +101,8 @@ sq.aln <- function(folder = "1.CuratedSequences",
                         filepath = paste0("2.Alignments/Masked_",
                                           files[x]))
         #}
-
       }
+        }
 
       writeXStringSet(aligned, filepath = paste0("2.Alignments/", files[x]))
     })

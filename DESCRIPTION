@@ -26,8 +26,7 @@ Description: The phruta R package is designed to simplify the basic
             gene sequences, and performs sequence alignments. 
 Encoding: UTF-8
 LazyData: true
-biocViews: DECIPHER,
-           Biostrings
+biocViews:
 Depends: R (>= 3.5.0)
 Imports: 
     rgbif,
@@ -43,7 +42,10 @@ Imports:
     reutils,
     foreach,
     doParallel,
-    doSNOW
+    doSNOW,
+    Biostrings,
+    msa,
+    odseq
 RoxygenNote: 7.2.0
 Suggests: 
     testthat (>= 3.0.0),
@@ -52,8 +54,7 @@ Suggests:
     markdown,
     rmarkdown,
     spelling,
-    utf8,
-    Biostrings
+    utf8
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3

@@ -4,7 +4,7 @@
 \alias{gene.sampling.retrieve}
 \title{Retrieve the distribution of genes for given organism in genbank}
 \usage{
-gene.sampling.retrieve(organism, npar = 2, speciesSampling = TRUE)
+gene.sampling.retrieve(organism, speciesSampling = TRUE, npar = 2)
 }
 \arguments{
 \item{organism}{The name of a single taxon (character).}

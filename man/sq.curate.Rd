@@ -6,6 +6,7 @@
 \usage{
 sq.curate(
   filterTaxonomicCriteria = NULL,
+  mergeGeneFiles = NULL,
   database = "gbif",
   kingdom = NULL,
   folder = "0.Sequences",

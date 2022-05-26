@@ -16,7 +16,11 @@ output:
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(eval = FALSE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = FALSE)
+knitr::opts_chunk$set(tidy = "styler")
+unlink(c("0.Sequences", "1.CuratedSequences", "2.Alignments"), recursive = TRUE)
+start_time <- Sys.time()
+library(knitr)
 ```
 
 
@@ -50,7 +54,7 @@ Note that all the functions for which their primary output are sequences (aligne
 
 -   Sixth, `sq.aln` performs multiple sequence alignment on `fasta` files. Currently, `phruta` uses the [`DECIPHER` R package](http://www2.decipher.codes/), here. This package allows for adjusting sequence orientation and masking (removing ambiguous sites).
 
-The final two functions in `phruta` focus on tree inference and dating. These two functions depend on external software that needs to be installed (**and tested**) before running. Please make sure both `RAxML` and `PATHd-8` or `treePL` are installed and can be called within `R` using the `system()` function. Note that you can choose between `PATHd-8` and `treePL`. More details on how to install `RAxML` are provided [below](#paragraph2). Similarly, we provide details on how to install `PATHd-8` and `treePL` [below](#paragraph3).
+The final two functions in `phruta` focus on tree inference and dating. These two functions depend on external software that needs to be installed (**and tested**) before running. Please make sure both `RAxML` and `PATHd-8` or `treePL` are installed and can be called within `R` using the `system()` function. Note that you can choose between `PATHd-8` and `treePL`. More details on how to install `RAxML` are provided in the phylogenetic vignette of `phruta`. Similarly, we provide details on how to install `PATHd-8` and `treePL` in the same vignette.
 
 -Seventh, the `tree.raxml` function allows users to perform tree inference under `RAxML` for sequences in a given folder. This is a wraper to `ips::raxml` and each of the arguments can be customized. The current release of `phruta` can manage both partitioned and unpartitioned analyses. Starting and constrained trees are allowed.
 
@@ -62,21 +66,31 @@ Let's create a phylogeny for a few mammal clades. Assume that we need to build a
 
 So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analized is already available. For instance, we could use same gene regions as in [Upham et al (2009)](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030). Nevertheless, for this tutorial, we will simply try to find the gene regions are well sampled for the target taxa. I believe that figuring out the best sampled gene regions in genbank, instead of providing names, is potentially more valuable when working with poorly studied groups. Before we move on, please make sure that you you have [set a working directory for this project](http://rfunction.com/archives/1001) as all the files will be saved to the current working directory.
 
-Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
+Let's start by loading `phruta`!
 
-```{r }
-start_time <- Sys.time()
+```{r eval = TRUE, warning = TRUE, message = TRUE, progress = TRUE}
 library(phruta)
-gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling=TRUE)
-head(gs.seqs)
 ```
 
-For the search terms, `phruta` was able to retrieve the names for multiple gene regions . The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
+Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
+
+```{r results = 'hide'}
+gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), 
+                                  speciesSampling = TRUE)
+```
+
+For the search terms, `phruta` was able to retrieve the names for `r nrow(gs.seqs)` gene regions.
+
+```{r echo=FALSE}
+kable(gs.seqs, caption = "Table 1. Gene sampling for the search including the genera Felis, Vulpes, Phoca as the ingroup taxa. Manis pentadactyla was used as outgroup.")
+```
+
+The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
 
 From here, we will generate a preliminary table summarizing accession numbers for the combination of taxa and gene regions that we're interested in sampling. In fact, not all these accession numbers are expected to be in the final (curated) molecular dataset. Using the `acc.table.retrieve` function, we will assemble a species-level summary of accession numbers (hence the `speciesLevel = TRUE` argument). For simplicity, this tutorial will focus on sampling gene regions that are sampled in >30% of the species (`targetGenes` data.frame).
 
-```{r }
-targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies>30,]
+```{r  results = 'hide'}
+targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]
 
 acc.table <- acc.table.retrieve(
             clades  = c('Felis', 'Vulpes', 'Phoca'),
@@ -84,58 +98,84 @@ acc.table <- acc.table.retrieve(
             genes   = targetGenes$Gene,
             speciesLevel = TRUE
           )
-head(acc.table)
 ```
 
-The `acc.table` object is a `data.frame` that is later on going to be used for downloading locally the relevant gene sequences. Feel free to review this dataset, make changes, add new species, samples, etc. The integrity of this dataset is critical for the next steps so please take your time and review it carefully. Let's just make some minor changes to our dataset:
+The `acc.table` object is a `data.frame` that is later on going to be used for downloading locally the relevant gene sequences. In this case, the dataset includes the following information:
 
-```{r }
-acc.table$Species <- sub("P.", "Phoca ", acc.table$Species, fixed = T)
-acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = T)
-acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = T)
+```{r echo=FALSE}
+kable(acc.table, caption = 'Table 2. Accession numbers for the relevant species and gene regions examined in this tutorial.')
+```
+
+Feel free to review this dataset, make changes, add new species, samples, etc. The integrity of this dataset is critical for the next steps so please take your time and review it carefully. Let's just make some minor changes to our dataset:
+
+```{r}
+acc.table$Species <- sub("P.", "Phoca ", acc.table$Species, fixed = TRUE)
+acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = TRUE)
+acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = TRUE)
 acc.table$Species <- sub("mitochondrial", "", acc.table$Species)
 ```
 
-Now, since we're going to retrieve sequences from genbank, we will use the `sq.retrieve.indirect` function in `phruta`. I'm going to stop here to mention that there are two versions of `sq.retrieve.*` in the `R` package. The one that we're using in this tutorial, `sq.retrieve.indirect`, retrieves sequences "indirectly" because it necessarily follows the intermediate step of generating a table summarizing accession numbers (see the `acc.table.retrieve` function above). I present the information in this vignette using `sq.retrieve.indirect` instead of `sq.retrieve.direct` because the first function is way more flexible and allows for correcting issues *prior* to download any sequence. For instance, you can add new sequences, species, populations to the resulting data.frame from `acc.table.retrieve`. Additionally, you could even manually assemble your own dataset of accession numbers to be retrieved using `sq.retrieve.indirect`. Instead, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. In short, you should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`.
+Let's check how the new table looks now...
 
-Now, we still need to retrieve the sequences from the accessions table `acc.table`. The `sq.retrieve.indirect` function will write all the resulting fasta files into the newly created folder `0.Sequences` located in our working directory.
+```{r echo = FALSE}
+kable(acc.table, caption = 'Table 3. Updated table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by `pruta`).')
+```
 
-```{r }
+Now, since we're going to retrieve sequences from genbank using an existing preliminary accession numbers table, we will use the `sq.retrieve.indirect` function in `phruta`. I'm going to stop here to mention that there are two versions of `sq.retrieve.*` in the `R` package. The one that we're using in this tutorial, `sq.retrieve.indirect`, retrieves sequences "indirectly" because it necessarily follows the intermediate step of generating a table summarizing accession numbers (see the `acc.table.retrieve` function above). I present the information in this vignette using `sq.retrieve.indirect` instead of `sq.retrieve.direct` because the first function is way more flexible and allows for correcting issues *prior* to download any sequence. For instance, you can add new sequences, species, populations to the resulting data.frame from `acc.table.retrieve`. Additionally, you could even manually assemble your own dataset of accession numbers to be retrieved using `sq.retrieve.indirect`. Instead, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. In short, you should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`.
+
+Now, we still need to retrieve all the sequences from the accessions table generated using `acc.table`. The `sq.retrieve.indirect` function will write all the resulting `fasta` files into a newly created folder `0.Sequences` located in our working directory. 
+
+```{r results = 'hide'}
 sq.retrieve.indirect(acc.table)
 ```
 
-Next, we're going to make sure that we include only sequences that are reliable and from species that we are interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name should also be included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Finally, you might have already noticed that we have "cytochrome oxidase subunit 1" and "cytochrome c oxidase subunit I" as different gene regions. We can combine the sequences in these two files into a single file names `COI` that will be used in the next steps. Specifically, to merge gene files, you will have to provide a named list to the `mergeGeneFiles` argument of the `sq.curate` function. This named list (`tb.merged` in our tutorial) will have a length that equals the number of final files that
+Next, we're going to make sure that we include only sequences that are reliable and from species that we are actually interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name should also be included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Finally, you might have already noticed that we have "cytochrome oxidase subunit 1" and "cytochrome c oxidase subunit I" as different gene regions. We can combine the sequences in these two files into a single file names `COI` that will be used in the next steps. Specifically, to merge gene files, you will have to provide a named list to the `mergeGeneFiles` argument of the `sq.curate` function. This named list (`tb.merged` in our tutorial) will have a length that equals the number of final files that
 
-```{r }
-tb.merged <- list('COI'=c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
-sq.curate(filterTaxonomicCriteria='Felis|Vulpes|Phoca|Manis',
-          mergeGeneFiles=tb.merged,
-          kingdom='animals', 
-          folder='0.Sequences',
+```{r results = 'hide'}
+tb.merged <- list('COI' = c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
+sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
+          mergeGeneFiles = tb.merged,
+          kingdom = 'animals', 
+          folder = '0.Sequences',
           removeOutliers = FALSE)
 ```
 
-Running this line will create the new folder `1.CuratedSequences` that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (`renamed_*` prefix), (3) an accession table (`0.AccessionTable.csv`), and (4) a summary of taxonomic information for all the species sampled in the files (`1.Taxonomy.csv`). We'll use the `renamed_*` and `1.Taxonomy.csv` files in the next steps.
+Running this line will create the new folder `1.CuratedSequences` that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (`renamed_*` prefix), (3) an accession table (`0.AccessionTable.csv`), and (4) a summary of taxonomic information for all the species sampled in the files (`1.Taxonomy.csv`). We'll use the `renamed_*` and `1.Taxonomy.csv` files in the next steps. Let's take a look at the sampling per gene region in the `0.AccessionTable.csv` table.
 
-Next, we'll align the sequences that we just curated. For this, we just use `sq.aln` with default parameters.
-
-```{r }
-sq.aln(folder='1.CuratedSequences', FilePatterns = "renamed")
+```{r echo = FALSE}
+accTable <- read.csv("1.CuratedSequences/0.AccessionTable.csv")
+kable(accTable, caption = "4. Preliminary accession number table")
 ```
 
-The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). 
+Now, we'll align the sequences that we just curated. For this, we just use `sq.aln` with default parameters.
 
-We can use the resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package".
+```{r  results = 'hide'}
+sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
+```
 
+The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). Masked alignments are only created if the `mask` argument in `sq.aln` is set to `TRUE`. In that case, one additional `.csv` file is created for each of the alignments (`0.Masked.Information_*`). Each of these datasets list the number of sites in the masked alignment that (1) are not gaps (`NonGaps` column), (2) if the sequence was removed due to the elevated number of gaps (`removedPerGaps`; controlled using the `threshold` argument in `sq.aln`), or (3) if it was removed directly in the masking step (`removedMasking`). 
+
+Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot our cool alignments.
 
 ```{r}
 library(ape)
-files <- list.files("2.Alignments", pattern="Masked_",full.names = T)
+files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
-par(mfrow=c(round(length(sampleALNs)/2),2))
-for(i in seq_along(sampleALNs)){
-image(sampleALNs[[i]], main=files[i])
+par(mfrow = c(ceiling(length(sampleALNs)/2),2))
+for (i in seq_along(sampleALNs)) {
+  image(sampleALNs[[i]], main = files[i])
 }
+```
+
+```{r include = FALSE}
 end_time <- Sys.time()
 ```
+
+In total, this script took `r round(end_time-start_time)` minutes to run in my local machine. You can now try to run `phruta` in your favorite group organisms! Don't forget to check the other tutorials...Buena suerte! 
+
+```{r include = FALSE}
+#Deleting the extra elements...
+unlink(c("0.Sequences", "1.CuratedSequences", "2.Alignments"), recursive = TRUE)
+```
+
 

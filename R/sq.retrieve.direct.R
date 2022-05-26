@@ -12,7 +12,6 @@
 #' @param maxseqs Maximum number of sequences to retrieve per search
 #'                (taxa + gene) (numeric).
 #' @param maxlength Maximum length of the gene sequence (numeric).
-#' @param multicore Whether multiple searchers should be conducted simultaneously
 #'
 #' @return None
 #'
@@ -20,7 +19,6 @@
 #' @import rentrez
 #' @import taxize
 #' @import parallel
-#' @import pbmcapply
 #'
 #' @examples
 #' \dontrun{
@@ -37,8 +35,7 @@ sq.retrieve.direct <-
            species = NULL,
            genes = NULL,
            maxseqs = 1,
-           maxlength = 5000,
-           multicore= FALSE) {
+           maxlength = 5000) {
     if (is.null(clades) &
         is.null(species))
       stop("Please provide at least one clade or species")
@@ -129,21 +126,10 @@ sq.retrieve.direct <-
     }
 
     invisible(
-
-      if(isTRUE(multicore) & length(grep("windows", Sys.info()["sysname"], ignore.case = TRUE)) ==0 ){
-        ncores <- parallel::detectCores()-2
-        pbmcapply::pbmclapply(genes, function(x){
-          tryCatch({
-            singleGene(x)
-          }, error=function(e){cat('Skipping...', x, 'try again later...')})
-        }, mc.cores=ncores)
-      }else{
       pblapply(genes, function(x){
       tryCatch({
         singleGene(x)
-      }, error=function(e){cat('Skipping...', x, 'try again later...')})
+      }, error = function(e){cat('Skipping...', x, 'try again later...')})
     })
-    }
-
     )
 }

@@ -9,8 +9,7 @@ sq.retrieve.direct(
   species = NULL,
   genes = NULL,
   maxseqs = 1,
-  maxlength = 5000,
-  multicore = FALSE
+  maxlength = 5000
 )
 }
 \arguments{
@@ -27,8 +26,6 @@ in the ingroup or species to be sampled in the outgroup
 (taxa + gene) (numeric).}
 
 \item{maxlength}{Maximum length of the gene sequence (numeric).}
-
-\item{multicore}{Whether multiple searchers should be conducted simultaneously}
 }
 \value{
 None

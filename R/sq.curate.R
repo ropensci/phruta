@@ -58,8 +58,8 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
                       kingdom = NULL,
                       folder = "0.Sequences",
                       removeOutliers = TRUE,
-                      minSeqs=5,
-                      threshold=0.05,
+                      minSeqs = 5,
+                      threshold = 0.05,
                       ranks =
                         c("kingdom",
                           "phylum",
@@ -77,13 +77,12 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   if (is.null(folder)) stop("Folder where curated
                             sequences are saved must be provided")
 
-  ##Merge gene files
-  if(!is.null(mergeGeneFiles)){
+  if (!is.null(mergeGeneFiles)) {
 
     mergedSeqs <- lapply(mergeGeneFiles, function(x){
       refF <- list.files(folder, pattern = '.fasta')
       targetF <- paste0(unlist(x), '.fasta')
-      if(all(targetF %in% refF)){
+      if (all(targetF %in% refF)) {
 
       seqs <- lapply(x, function(z) read.FASTA(paste0(folder,"/", z, '.fasta')))
 
@@ -107,8 +106,6 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     })
     )
   }
-
-  ##
 
   fastaSeqs <- lapply(list.files(folder, pattern = '.fasta', full.names = TRUE), function(x){
     seqs <- read.FASTA(x)
@@ -140,7 +137,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
       kingdom = kingdom, ranks = ranks
     )
   } else {
-    taxonomy.retrieve(species_names = species_names, database = "itis", ranks=ranks)
+    taxonomy.retrieve(species_names = species_names, database = "itis", ranks = ranks)
   }
 
   # Remove duplicated species
@@ -187,7 +184,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
   resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = threshold)
   names(resOut) <- NULL
-  seqsRemove <- names(which(unlist(resOut) ==TRUE))
+  seqsRemove <- names(which(unlist(resOut) == TRUE))
   AccDel <- gsub("\\..*","",seqsRemove)
   AccDat$AccN <- gsub("\\..*","",AccDat$AccN )
   namesDel <- AccDat[AccDat$AccN  %in%  AccDel,'OriginalNames']
@@ -223,7 +220,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   ## Rename incorrect synonyms
   toRename <-
-    Full_dataset[Full_dataset$originalSpeciesName!= Full_dataset$species_names,]
+    Full_dataset[Full_dataset$originalSpeciesName != Full_dataset$species_names,]
 
 
   ## Export
@@ -258,12 +255,22 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     }
   }))
 
-  perDS <- lapply(curatedSeqs, function(x) sub(" ", "_", sub(".*? ", "", names(x))))
-  names(perDS) <- names(curatedSeqs)
+  perDS <- unlist(lapply(curatedSeqs, function(x){
+   spps <- sub(" ", "_", sub(".*? ", "", names(x)))
+   spps <- sub(" ", "", spps)
+   spps <- unlist(lapply(spps, function(y){
+   Full_dataset[Full_dataset$originalSpeciesName == y, "species_names"]
+   }))
+   codes <- sub(" .*", "", names(x))
+   codes[!duplicated(spps)]
+  } ))
+
+  AccDat <- AccDat[AccDat$AccN %in% perDS,]
 
   AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > minSeqs)), ]
   Full_dataset <-
     Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
+
   newspp <- unlist(lapply(AccDat$Species, function(x) {
     Full_dataset[Full_dataset$originalSpeciesName == x, "species_names"]
   }))
@@ -273,17 +280,9 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   row.names(AccDat) <- NULL
 
   ##Create a summary of the dataset
-
   sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
   sumTable$species_names <- row.names(sumTable)
-  TableCombined <- merge(Full_dataset,sumTable, by='species_names', all.y =TRUE)
-
-  dat <- split(AccDat, f=(AccDat$file))
-  dat = dat[which(names(dat) %in% names(perDS))]
-  dat <- lapply(seq_along(dat), function(x){
-    dat[[x]][dat[[x]]$Species %in% perDS[[x]],]
-  })
-  AccDat <- do.call(rbind, dat)
+  TableCombined <- merge(Full_dataset,sumTable, by = 'species_names', all.y = TRUE)
 
   write.csv(AccDat, "1.CuratedSequences/0.AccessionTable.csv")
   write.csv(Full_dataset, "1.CuratedSequences/1.Taxonomy.csv")
