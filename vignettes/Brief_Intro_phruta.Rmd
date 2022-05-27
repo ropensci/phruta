@@ -28,15 +28,13 @@ library(knitr)
 
 1.  [What is `phruta`](#intro)
 2.  [Functions in `phruta`](#paragraph0)
-3.  [From taxonomic names to time-calibrated phylogenies](#paragraph1)
-4.  [Installing RAxML](#paragraph2)
-5.  [Installing PATHd-8 and treePL](#paragraph3)
+3.  [From taxonomic names to sequence alignments](#paragraph1)
 
 ## What is `phruta` <a name="intro"></a>
 
 The `phruta` R package is designed to simplify the basic phylogenetic pipeline and allow scientists from different backgrounds to assemble their own phylogenies. All code in `phruta` is run within the same program (`R`) and data from intermediate steps are saved locally in independent folders. Furthermore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given set of taxa, retrieves gene sequences, could combine newly downloaded and local gene sequences, performs sequence alignments, phylogenetic inference, and tree dating. `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative `R` packages and software.
 
-## Functions in `phruta`
+## Functions in `phruta` <a name="paragraph0"></a>
 
 The current release of `phruta` includes a set of eight major functions. All eight functions form a pipeline within `phruta` to output a time-calibrated phylogeny. However, users interested in using their own files at any stage can run each function independently.
 
@@ -82,7 +80,7 @@ gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Mani
 For the search terms, `phruta` was able to retrieve the names for `r nrow(gs.seqs)` gene regions.
 
 ```{r echo=FALSE}
-kable(gs.seqs, caption = "Table 1. Gene sampling for the search including the genera Felis, Vulpes, Phoca as the ingroup taxa. Manis pentadactyla was used as outgroup.")
+kable(head(gs.seqs), caption = "Gene sampling for the search including the genera Felis, Vulpes, Phoca as the ingroup taxa. Manis pentadactyla was used as outgroup.")
 ```
 
 The `gene.sampling.retrieve` provides an estimate of the number of species in genbank (matching the taxonomic criteria of the search term) that have sequences for a given gene region. However, this estimate is only as good as the annotations for genes deposited in genbank. 
@@ -103,7 +101,8 @@ acc.table <- acc.table.retrieve(
 The `acc.table` object is a `data.frame` that is later on going to be used for downloading locally the relevant gene sequences. In this case, the dataset includes the following information:
 
 ```{r echo=FALSE}
-kable(acc.table, caption = 'Table 2. Accession numbers for the relevant species and gene regions examined in this tutorial.')
+row.names(acc.table) <- NULL
+kable(acc.table, caption = 'Accession numbers for the relevant species and gene regions examined in this tutorial.')
 ```
 
 Feel free to review this dataset, make changes, add new species, samples, etc. The integrity of this dataset is critical for the next steps so please take your time and review it carefully. Let's just make some minor changes to our dataset:
@@ -113,12 +112,13 @@ acc.table$Species <- sub("P.", "Phoca ", acc.table$Species, fixed = TRUE)
 acc.table$Species <- sub("F.", "Felis ", acc.table$Species, fixed = TRUE)
 acc.table$Species <- sub("V.", "Vulpes ", acc.table$Species, fixed = TRUE)
 acc.table$Species <- sub("mitochondrial", "", acc.table$Species)
+row.names(acc.table) <- NULL
 ```
 
 Let's check how the new table looks now...
 
 ```{r echo = FALSE}
-kable(acc.table, caption = 'Table 3. Updated table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by `pruta`).')
+kable(acc.table, caption = 'Updated Table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by `pruta`).')
 ```
 
 Now, since we're going to retrieve sequences from genbank using an existing preliminary accession numbers table, we will use the `sq.retrieve.indirect` function in `phruta`. I'm going to stop here to mention that there are two versions of `sq.retrieve.*` in the `R` package. The one that we're using in this tutorial, `sq.retrieve.indirect`, retrieves sequences "indirectly" because it necessarily follows the intermediate step of generating a table summarizing accession numbers (see the `acc.table.retrieve` function above). I present the information in this vignette using `sq.retrieve.indirect` instead of `sq.retrieve.direct` because the first function is way more flexible and allows for correcting issues *prior* to download any sequence. For instance, you can add new sequences, species, populations to the resulting data.frame from `acc.table.retrieve`. Additionally, you could even manually assemble your own dataset of accession numbers to be retrieved using `sq.retrieve.indirect`. Instead, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. In short, you should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`.
@@ -128,6 +128,7 @@ Now, we still need to retrieve all the sequences from the accessions table gener
 ```{r results = 'hide'}
 sq.retrieve.indirect(acc.table)
 ```
+
 
 Next, we're going to make sure that we include only sequences that are reliable and from species that we are actually interested in analyzing. We're going to use the `sq.curate` function for this. We will provide a list of taxonomic criteria to filter out incorrect sequences (`filterTaxonomicCriteria` argument), which in this case can be just the genera that we're interested in analyzing. Note that the outgroup's name should also be included in the list. If the taxonomic information for a sequence retrieved from genbank does not match with any of these strings, this species will be dropped. You will have to specify whether sampling is for animals or plants (`kingdom` argument). Finally, you might have already noticed that we have "cytochrome oxidase subunit 1" and "cytochrome c oxidase subunit I" as different gene regions. We can combine the sequences in these two files into a single file names `COI` that will be used in the next steps. Specifically, to merge gene files, you will have to provide a named list to the `mergeGeneFiles` argument of the `sq.curate` function. This named list (`tb.merged` in our tutorial) will have a length that equals the number of final files that
 
@@ -143,7 +144,7 @@ sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
 Running this line will create the new folder `1.CuratedSequences` that contains (1) the curated sequences with original names, (2) curated sequences with species-level names (`renamed_*` prefix), (3) an accession table (`0.AccessionTable.csv`), and (4) a summary of taxonomic information for all the species sampled in the files (`1.Taxonomy.csv`). We'll use the `renamed_*` and `1.Taxonomy.csv` files in the next steps. Let's take a look at the sampling per gene region in the `0.AccessionTable.csv` table.
 
 ```{r echo = FALSE}
-accTable <- read.csv("1.CuratedSequences/0.AccessionTable.csv")
+accTable <- read.csv("1.CuratedSequences/0.AccessionTable.csv")[,-1]
 kable(accTable, caption = "4. Preliminary accession number table")
 ```
 
