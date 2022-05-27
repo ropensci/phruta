@@ -156,19 +156,17 @@ sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
 
 The resulting multiple sequence alignments will be saved to the `2.Alignments` folder. In this folder, we will have two types of files: (1) raw alignments (same file names as in `1.CuratedSequences`) and (2) alignments with ambiguous sites removed (`Masked_*` prefix). Masked alignments are only created if the `mask` argument in `sq.aln` is set to `TRUE`. In that case, one additional `.csv` file is created for each of the alignments (`0.Masked.Information_*`). Each of these datasets list the number of sites in the masked alignment that (1) are not gaps (`NonGaps` column), (2) if the sequence was removed due to the elevated number of gaps (`removedPerGaps`; controlled using the `threshold` argument in `sq.aln`), or (3) if it was removed directly in the masking step (`removedMasking`). 
 
-Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot our cool alignments.
+Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our cool alignments.
 
-```{r}
+```{r echo = FALSE}
 library(ape)
 files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
-par(mfrow = c(ceiling(length(sampleALNs)/2),2))
-for (i in seq_along(sampleALNs)) {
+i = 1
+#par(mfrow = c(ceiling(length(sampleALNs)/2),2))
+#for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files[i])
-}
-```
-
-```{r include = FALSE}
+#}
 end_time <- Sys.time()
 ```
 
