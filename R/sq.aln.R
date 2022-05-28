@@ -67,6 +67,7 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
       if (mask) {
         alignedNoGaps <- DECIPHER::RemoveGaps(aligned, removeGaps = "common")
+
         alignedMasked <- DECIPHER::MaskAlignment(alignedNoGaps,
                                        correction = if (length(alignedNoGaps) < 200) {
                                          TRUE
@@ -74,9 +75,10 @@ sq.aln <- function(folder = "1.CuratedSequences",
                                            FALSE
                                            })
 
-        alignedMasked <- if (max(nchar(as.character(DNAStr))) != 0) {
-
         DNAStr <- as(alignedMasked, "DNAStringSet")
+
+        if (max(nchar(as.character(DNAStr))) != 0) {
+
 
         ##Species removed while masking the aln
         RemMasking <- !names(aligned) %in% names(DNAStr)
@@ -100,11 +102,13 @@ sq.aln <- function(folder = "1.CuratedSequences",
         writeXStringSet(DNAStr,
                         filepath = paste0("2.Alignments/Masked_",
                                           files[x]))
-        #}
-      }
+        }else{
+          write.csv("Masking failed", paste0("2.Alignments/0.Masked.Information_", files[x], ".csv"))
         }
 
-      writeXStringSet(aligned, filepath = paste0("2.Alignments/", files[x]))
+        }
+
+      writeXStringSet(aligned, filepath = paste0("2.Alignments/Raw_", files[x]))
     })
   )
 }

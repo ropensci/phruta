@@ -172,7 +172,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   if(isTRUE(removeOutliers)){
   cat("\n Removing outliers...\n")
   fastaSeqsOutDet <- lapply(fastaSeqs, function(x){
-    if(length(x)>minSeqs){
+    if(length(x) >= minSeqs){
     seqs <- as.list(as.character(x))
     seqs <- unlist(lapply(seqs,paste0,collapse=""))
     seqs <- Biostrings::DNAStringSet(seqs)
@@ -227,7 +227,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   unlink("1.CuratedSequences", recursive = TRUE)
   dir.create("1.CuratedSequences")
   invisible(lapply(seq_along(curatedSeqs), function(y) {
-    if (length(names(curatedSeqs[[y]])) > minSeqs) {
+    if (length(names(curatedSeqs[[y]])) >= minSeqs) {
       ## Original
       ta.cu <- curatedSeqs[[y]]
       ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
@@ -269,7 +269,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   AccDat <- AccDat[AccDat$AccN %in% perDS,]
 
-  AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) > minSeqs)), ]
+  AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) >= minSeqs)), ]
   Full_dataset <-
     Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
 
