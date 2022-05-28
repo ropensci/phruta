@@ -161,12 +161,12 @@ Note that we could use these resulting alignments to infer phylogenies. We cover
 ```{r echo = FALSE}
 library(ape)
 files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
+files.main <- list.files("2.Alignments", pattern = "Masked_",full.names = FALSE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
-i = 1
-#par(mfrow = c(ceiling(length(sampleALNs)/2),2))
-#for (i in seq_along(sampleALNs)) {
-  image(sampleALNs[[i]], main = files[i])
-#}
+par(mfrow = c(ceiling(length(sampleALNs)/2),2))
+for (i in seq_along(sampleALNs)) {
+  image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE)
+}
 end_time <- Sys.time()
 ```
 

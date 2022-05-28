@@ -248,26 +248,26 @@ test_that("Generate list of constraints, by clade", {
 })
 
 
-test_that("Tree constraints non ingroup/outgroup", {
-  expect_snapshot_output(
-    tree.constraint(
-      taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-      Topology = "((Felis), (Phoca));"
-    )
-  )
-})
+# test_that("Tree constraints non ingroup/outgroup", {
+#   expect_snapshot_output(
+#     tree.constraint(
+#       taxonomy_folder = "1.CuratedSequences",
+#       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+#       Topology = "((Felis), (Phoca));"
+#     )
+#   )
+# })
 
 
-test_that("Tree constraints ingroup/outgroup", {
-  expect_snapshot_output(
-    tree.constraint(
-      taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-      outgroup = "Phoca_largha"
-    )
-  )
-})
+# test_that("Tree constraints ingroup/outgroup", {
+#   expect_snapshot_output(
+#     tree.constraint(
+#       taxonomy_folder = "1.CuratedSequences",
+#       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+#       outgroup = "Phoca_largha"
+#     )
+#   )
+# })
 
 
 test_that("Curate sequences", {
@@ -282,28 +282,32 @@ test_that("Curate sequences", {
 
 ###Latest version of the pipeline
 
+gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling = TRUE)
+
 test_that("Generate a gene sampling dataset", {
   expect_true(
-    class(gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"),
-                                  speciesSampling = TRUE)
-                     ) == 'data.frame'
+    class(gs.seqs) == 'data.frame'
   )
 }
 )
 
 test_that("Generate a gene sampling dataset", {
+  targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]
   expect_true(
-class(gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]) == 'data.frame'
+class(targetGenes) == 'data.frame'
 )})
 
+
 test_that("Generate an accession number dataset", {
+   acc.table <- acc.table.retrieve(
+    clades  = c('Felis', 'Vulpes', 'Phoca'),
+    species = 'Manis_pentadactyla' ,
+    genes   = targetGenes$Gene,
+    speciesLevel = TRUE
+  )
+
   expect_true(
-class(acc.table.retrieve(
-  clades  = c('Felis', 'Vulpes', 'Phoca'),
-  species = 'Manis_pentadactyla' ,
-  genes   = targetGenes$Gene,
-  speciesLevel = TRUE
-)) == 'data.frame'
+class(acc.table) == 'data.frame'
 )
 })
 

@@ -257,11 +257,13 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   perDS <- unlist(lapply(curatedSeqs, function(x){
    spps <- sub(" ", "_", sub(".*? ", "", names(x)))
+   spps <- lapply(spps, function(y) strsplit(y, " ")[[1]][1])
    spps <- sub(" ", "", spps)
    spps <- unlist(lapply(spps, function(y){
    Full_dataset[Full_dataset$originalSpeciesName == y, "species_names"]
    }))
    codes <- sub(" .*", "", names(x))
+   codes <- gsub("\\..*","",codes)
    codes[!duplicated(spps)]
   } ))
 
