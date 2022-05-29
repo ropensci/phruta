@@ -31,6 +31,7 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
 
   if (is.null(gene) & speciesLevel ) {stop("\nPlease provide the name of a gene region or disable the species-level filtering")}
 
+  x <- NULL
   get_gene = function(x, search, nObs){
     tryCatch({
       recs_summ <- if (nObs == 1) {

@@ -34,6 +34,7 @@
 
 gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
 
+  x <- NULL
   get_gene_list <- function(x, search, nObs, speciesSampling = speciesSampling){
     tryCatch({
 
