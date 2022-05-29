@@ -282,6 +282,7 @@ test_that("Curate sequences", {
 
 ###Latest version of the pipeline
 
+
 gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling = TRUE)
 
 test_that("Generate a gene sampling dataset", {
@@ -311,29 +312,30 @@ class(acc.table) == 'data.frame'
 )
 })
 
-test_that("Retrieve sequences with sq.retrieve.indirect", {
-  expect_output(sq.retrieve.indirect(acc.table))
-  })
+# test_that("Retrieve sequences with sq.retrieve.indirect", {
+#   expect_output(sq.retrieve.indirect(acc.table))
+#   })
+#
+# tb.merged <- list('COI' = c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
+#
+# test_that("Curate sequences", {
+#   expect_output(
+# sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
+#           mergeGeneFiles = tb.merged,
+#           kingdom = 'animals',
+#           folder = '0.Sequences',
+#           removeOutliers = FALSE)
+# )})
+#
+#
+# test_that("Align sequences", {
+#   expect_output(
+# sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
+# )})
 
-tb.merged <- list('COI' = c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
-
-test_that("Curate sequences", {
-  expect_output(
-sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
-          mergeGeneFiles = tb.merged,
-          kingdom = 'animals',
-          folder = '0.Sequences',
-          removeOutliers = FALSE)
-)})
 
 
-test_that("Align sequences", {
-  expect_output(
-sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
-)})
-
-
-
+unlink(list.dirs("."), recursive = TRUE)
 
 
 
