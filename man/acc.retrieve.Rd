@@ -2,7 +2,7 @@
 % Please edit documentation in R/acc.retrieve.R
 \name{acc.retrieve}
 \alias{acc.retrieve}
-\title{Retrieve accession numbers and titles for a given search in genbank}
+\title{Retrieve accession numbers and titles for a genbank search}
 \usage{
 acc.retrieve(
   organism,
@@ -14,6 +14,9 @@ acc.retrieve(
 }
 \arguments{
 \item{organism}{The name of a single taxon (character).}
+
+\item{acc.num}{Logical indicating whether the \code{organism}
+is actually a vector or accession numbers.}
 
 \item{gene}{The name of a single gene region (character; optional).}
 

@@ -7,6 +7,15 @@
     <loc>https://cromanpa94.github.io/phruta//reference/SW.phruta.html</loc>
   </url>
   <url>
+    <loc>https://cromanpa94.github.io/phruta//reference/acc.retrieve.html</loc>
+  </url>
+  <url>
+    <loc>https://cromanpa94.github.io/phruta//reference/acc.table.retrieve.html</loc>
+  </url>
+  <url>
+    <loc>https://cromanpa94.github.io/phruta//reference/gene.sampling.retrieve.html</loc>
+  </url>
+  <url>
     <loc>https://cromanpa94.github.io/phruta//reference/getListConstraints.html</loc>
   </url>
   <url>
@@ -22,7 +31,10 @@
     <loc>https://cromanpa94.github.io/phruta//reference/sq.partitionfinderv1.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta//reference/sq.retrieve.html</loc>
+    <loc>https://cromanpa94.github.io/phruta//reference/sq.retrieve.direct.html</loc>
+  </url>
+  <url>
+    <loc>https://cromanpa94.github.io/phruta//reference/sq.retrieve.indirect.html</loc>
   </url>
   <url>
     <loc>https://cromanpa94.github.io/phruta//reference/taxonomy.retrieve.html</loc>
@@ -43,6 +55,12 @@
     <loc>https://cromanpa94.github.io/phruta//articles/Brief_Intro_phruta.html</loc>
   </url>
   <url>
+    <loc>https://cromanpa94.github.io/phruta//articles/Future_phruta.html</loc>
+  </url>
+  <url>
     <loc>https://cromanpa94.github.io/phruta//articles/Phruta_advanced.html</loc>
+  </url>
+  <url>
+    <loc>https://cromanpa94.github.io/phruta//articles/Phylogenetics_phruta.html</loc>
   </url>
 </urlset>

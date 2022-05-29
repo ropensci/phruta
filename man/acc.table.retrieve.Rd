@@ -13,9 +13,9 @@ the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).}
 \item{species}{A vector of species names (logical). Note that this can either be
 the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).}
 
-\item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
+\item{genes}{A vector of gene names (character; optional).}
 
-\item{gene}{A vector of gene names (character; optional).}
+\item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
 }
 \value{
 data.frame

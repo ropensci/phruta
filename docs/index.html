@@ -32,8 +32,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,17 +44,23 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -79,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/cromanpa94/phruta/" class="external-link">
+  <a href="https://github.com/cromanpa94/phruta/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -97,25 +101,24 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><!-- badges: start --> <a href="https://codecov.io/gh/cromanpa94/phruta?branch=main" class="external-link"><img src="https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/cromanpa94/phruta/actions" class="external-link"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a><br><a href="https://github.com/cromanpa94/phruta" class="external-link"><img src="https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg"></a> <a href="https://www.codefactor.io/repository/github/cromanpa94/phruta" class="external-link"><img src="https://www.codefactor.io/repository/github/cromanpa94/phruta/badge" alt="CodeFactor"></a> <!-- badges: end --></p>
-<div class="section level1">
-<div class="page-header"><h1 id="phruta-">
-<code>phruta</code> <a href="https://cromanpa94.github.io/phruta"><img src="reference/figures/logo.png" align="right" height="300"></a>
-<a class="anchor" aria-label="anchor" href="#phruta-"></a>
+<p><!-- badges: start --> <a href="https://codecov.io/gh/cromanpa94/phruta?branch=main"><img src="https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/cromanpa94/phruta/actions"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a><br><a href="https://github.com/cromanpa94/phruta"><img src="https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg"></a> <a href="https://www.codefactor.io/repository/github/cromanpa94/phruta"><img src="https://www.codefactor.io/repository/github/cromanpa94/phruta/badge" alt="CodeFactor"></a> <!-- badges: end --></p>
+<div id="phruta" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#phruta" class="anchor"></a><code>phruta</code> <a href="https://cromanpa94.github.io/phruta"><img src="reference/figures/logo.png" align="right" height="300"></a>
 </h1></div>
-<div class="section level3">
-<h3 id="assembling-phylogenetic-trees-from-taxonomic-names">Assembling phylogenetic trees from taxonomic names.<a class="anchor" aria-label="anchor" href="#assembling-phylogenetic-trees-from-taxonomic-names"></a>
-</h3>
+<div id="assembling-phylogenetic-trees-from-taxonomic-names-" class="section level3">
+<h3 class="hasAnchor">
+<a href="#assembling-phylogenetic-trees-from-taxonomic-names-" class="anchor"></a>Assembling phylogenetic trees from taxonomic names.</h3>
 </div>
-<div class="section level2">
-<h2 id="what-is-phruta">What is <code>phruta</code>?<a class="anchor" aria-label="anchor" href="#what-is-phruta"></a>
-</h2>
+<div id="what-is-phruta" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-is-phruta" class="anchor"></a>What is <code>phruta</code>?</h2>
 <p>The <code>phruta</code> R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. <code>phruta</code> retrieves gene sequences, combines newly downloaded and local gene sequences, and performs sequence alignments.</p>
 <p><code>phruta</code> is also able to perform basic phylogenetic inference under <code>RAxML</code> on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. <code>phruta</code> is essentially a wrapper for alternative R packages and software.</p>
 </div>
-<div class="section level2">
-<h2 id="how-is-phruta-different">How is <code>phruta</code> different?<a class="anchor" aria-label="anchor" href="#how-is-phruta-different"></a>
-</h2>
+<div id="how-is-phruta-different" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-is-phruta-different" class="anchor"></a>How is <code>phruta</code> different?</h2>
 <p><code>phruta</code> has two core functions. The main applications of these functions is briefly outlined below:</p>
 <ul>
 <li><p><code>sq.retrieve</code>: This function downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes.</p></li>
@@ -123,45 +126,45 @@
 </ul>
 <p>In addition to these two main functions, users will be able to align the downloaded sequences, infer phylogenetic trees, and calibrate phylogenies using additional functions in <code>phruta</code>.</p>
 </div>
-<div class="section level2">
-<h2 id="why-use-phruta">Why use <code>phruta</code>?<a class="anchor" aria-label="anchor" href="#why-use-phruta"></a>
-</h2>
+<div id="why-use-phruta" class="section level2">
+<h2 class="hasAnchor">
+<a href="#why-use-phruta" class="anchor"></a>Why use <code>phruta</code>?</h2>
 <p><code>phruta</code> simplifies the phylogenetic pipeline, increases reproducibility, and helps organizing information used to infer molecular phylogenies.</p>
 </div>
-<div class="section level2">
-<h2 id="installing-phruta">Installing <code>phruta</code>
-<a class="anchor" aria-label="anchor" href="#installing-phruta"></a>
+<div id="installing-phruta" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installing-phruta" class="anchor"></a>Installing <code>phruta</code>
 </h2>
 <p><code>phruta</code> is currently only available through <code>GitHub</code>. It can be easily installed using the following code.</p>
-<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span> 
-<span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cromanpa94/phruta"</span><span class="op">)</span></code></pre>
+<pre><code><a href="https://devtools.r-lib.org/">library(devtools) 
+install_github("cromanpa94/phruta")</a></code></pre>
 </div>
-<div class="section level2">
-<h2 id="running-phruta-from-rstudio-while-using-macos">Running <code>phruta</code> from <code>Rstudio</code> while using <code>MacOS</code>?<a class="anchor" aria-label="anchor" href="#running-phruta-from-rstudio-while-using-macos"></a>
-</h2>
+<div id="running-phruta-from-rstudio-while-using-macos" class="section level2">
+<h2 class="hasAnchor">
+<a href="#running-phruta-from-rstudio-while-using-macos" class="anchor"></a>Running <code>phruta</code> from <code>Rstudio</code> while using <code>MacOS</code>?</h2>
 <p>Only if you’re interested in running phylogenetic analyses, please make sure you open <code>RStudio</code> using the following code from the terminal:</p>
 <p><code>{bash eval=FALSE} open /Applications/RStudio.app</code></p>
 </div>
-<div class="section level2">
-<h2 id="dedication">Dedication<a class="anchor" aria-label="anchor" href="#dedication"></a>
-</h2>
+<div id="dedication" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dedication" class="anchor"></a>Dedication</h2>
 <p>My package is dedicated to my mom and every single Black woman. I still have lots of things to learn from you. You will always have all my admiration.</p>
-<p>The <a href="https://www.flickr.com/photos/gufomusike/3462117620/in/photolist-6NFiPi-xoLbca-FtC6yJ-4nk6wS-x2AZV-b3MUv8-e2B7qj-4uCwwa-e3PJxi-2ePGmUM-b2wBVi-obHf1x-5iP26P-4juoE6-z881E-z88t3-9GmTbQ-dGvrFe-22APdBs-p2t5Zv-8DWQw8-6fAJ2G-7jQhu2-7LEkkL-7vBdyF-jTdXSR-kcntD1-aWGfnx-bk59CK-5JfhKt-6gWfX7-reVehy-bjk7Ki-2xnGjv-dLJbq9-e3VjY3-ugz6U-FGVagm-iqVRuD-YE5pLe-2kPkt84-2kHhswd" class="external-link">logo</a> features a Palenquera in Cartagena (Colombia). For many folks, Palenqueras are just the Black woman ones who sell fruits in particular Colombian turistic areas. However, palenqueras and Palenque are central to Black identity in Colombia, Latin America, and America. <a href="https://en.wikipedia.org/wiki/San_Basilio_de_Palenque" class="external-link">“Palenque was the first free African town in the Americas”</a>.</p>
+<p>The <a href="https://www.flickr.com/photos/gufomusike/3462117620/in/photolist-6NFiPi-xoLbca-FtC6yJ-4nk6wS-x2AZV-b3MUv8-e2B7qj-4uCwwa-e3PJxi-2ePGmUM-b2wBVi-obHf1x-5iP26P-4juoE6-z881E-z88t3-9GmTbQ-dGvrFe-22APdBs-p2t5Zv-8DWQw8-6fAJ2G-7jQhu2-7LEkkL-7vBdyF-jTdXSR-kcntD1-aWGfnx-bk59CK-5JfhKt-6gWfX7-reVehy-bjk7Ki-2xnGjv-dLJbq9-e3VjY3-ugz6U-FGVagm-iqVRuD-YE5pLe-2kPkt84-2kHhswd">logo</a> features a Palenquera in Cartagena (Colombia). For many folks, Palenqueras are just the Black woman ones who sell fruits in particular Colombian turistic areas. However, palenqueras and Palenque are central to Black identity in Colombia, Latin America, and America. <a href="https://en.wikipedia.org/wiki/San_Basilio_de_Palenque">“Palenque was the first free African town in the Americas”</a>.</p>
 <p><em>Fruta</em> is the Spanish word for <em>Fruit</em>. English <em>ph</em> sounds the same as <em>F</em> in Spanish. In <code>phruta</code>, <em>ph</em> is relative to phylogenetics. I pronounce <code>phruta</code> just as <em>fruta</em> in Spanish.</p>
 </div>
-<div class="section level2">
-<h2 id="additional-resources">Additional resources<a class="anchor" aria-label="anchor" href="#additional-resources"></a>
-</h2>
+<div id="additional-resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#additional-resources" class="anchor"></a>Additional resources</h2>
 <p>More details about the functions implemented in <code>phruta</code> can be found in the different vignettes associated with the package or in our <a href="https://cromanpa94.github.io/phruta/">website</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
-</h2>
+<div id="contributing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>Please see our <a href="CONTRIBUTING">contributing guide</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
-</h2>
+<div id="contact" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contact" class="anchor"></a>Contact</h2>
 <p>Please see the package <a href="DESCRIPTION">DESCRIPTION</a> for package authors.</p>
 </div>
 </div>
@@ -170,53 +173,47 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/cromanpa94/phruta/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/cromanpa94/phruta/issues" class="external-link">Report a bug</a></li>
-</ul>
-</div>
-
-<div class="license">
-<h2 data-toc-skip>License</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<li>Browse source code at <br><a href="https://github.com/cromanpa94/phruta/">https://​github.com/​cromanpa94/​phruta/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/cromanpa94/phruta/issues">https://​github.com/​cromanpa94/​phruta/​issues</a>
 </li>
 </ul>
 </div>
-
-
-<div class="citation">
-<h2 data-toc-skip>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing phruta</a></li>
-</ul>
-</div>
-
-<div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<div class="license">
+<h2>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://cromanpa94.github.io/cromanpa/" class="external-link">Cristian Roman Palacios</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-1696-4886" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
+<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
-
-
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing phruta</a></li>
+</ul>
+</div>
+<div class="developers">
+<h2>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="http://cromanpa94.github.io/cromanpa/">Cristian Roman Palacios</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-1696-4886" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
+</ul>
+</div>
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="http://cromanpa94.github.io/cromanpa/" class="external-link">Cristian Roman Palacios</a>.</p>
+  <p>Developed by <a href="http://cromanpa94.github.io/cromanpa/">Cristian Roman Palacios</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -224,8 +221,6 @@
 
   
 
-
-  
 
   </body>
 </html>
