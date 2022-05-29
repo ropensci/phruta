@@ -5,15 +5,21 @@
 #' in genbank.
 #'
 #' @param organism The name of a single taxon (character).
+#' @param acc.num Logical indicating whether the \code{organism}
+#'                is actually a vector or accession numbers.
 #' @param gene The name of a single gene region (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
 #'
 #' @return data.frame
 #'
+#' @name acc.retrieve
+#'
+#'
 #' @import reutils
 #' @import foreach
 #' @import doParallel
 #' @import doSNOW
+#' @import XML
 #'
 #' @examples
 #' \dontrun{

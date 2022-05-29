@@ -27,14 +27,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling=TRUE)
-#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesSampling=FALSE)
+#' test.spp <- gene.sampling.retrieve(organism = "Puma", speciesSampling = TRUE)
+#' test.pop <- gene.sampling.retrieve(organism = "Puma", speciesSampling = FALSE)
 #' }
 #' @export
 
-gene.sampling.retrieve <- function(organism, speciesSampling=TRUE, npar=2){
+gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
 
-  get_gene_list <- function(x, search, nObs, speciesSampling=speciesSampling){
+  get_gene_list <- function(x, search, nObs, speciesSampling = speciesSampling){
     tryCatch({
 
     recs_summ <- if (nObs == 1) {

@@ -8,10 +8,13 @@
 #'               the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).
 #' @param species A vector of species names (logical). Note that this can either be
 #'               the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).
-#' @param gene A vector of gene names (character; optional).
+#' @param genes A vector of gene names (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
 #'
 #' @return data.frame
+#'
+#' @name acc.table.retrieve
+#'
 #'
 #' @import reutils
 #' @import foreach
