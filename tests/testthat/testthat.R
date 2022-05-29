@@ -230,7 +230,7 @@ test_that("Add sequences", {
 taxonomy <- read.csv("1.CuratedSequences/1.Taxonomy.csv")
 test_that("Generate list of constraints, not by clade", {
   expect_true(
-    class(getListConstraints(taxonomy,
+    class(getListConstraints(dataset = taxonomy,
       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
       byClades = FALSE
     )) == "list"
@@ -248,26 +248,26 @@ test_that("Generate list of constraints, by clade", {
 })
 
 
-# test_that("Tree constraints non ingroup/outgroup", {
-#   expect_snapshot_output(
-#     tree.constraint(
-#       taxonomy_folder = "1.CuratedSequences",
-#       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-#       Topology = "((Felis), (Phoca));"
-#     )
-#   )
-# })
+ test_that("Tree constraints non ingroup/outgroup", {
+   expect_snapshot_output(
+     tree.constraint(
+       taxonomy_folder = "1.CuratedSequences",
+       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+       Topology = "((Felis), (Phoca));"
+     )
+   )
+ })
 
 
-# test_that("Tree constraints ingroup/outgroup", {
-#   expect_snapshot_output(
-#     tree.constraint(
-#       taxonomy_folder = "1.CuratedSequences",
-#       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
-#       outgroup = "Phoca_largha"
-#     )
-#   )
-# })
+ test_that("Tree constraints ingroup/outgroup", {
+   expect_snapshot_output(
+     tree.constraint(
+       taxonomy_folder = "1.CuratedSequences",
+       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+       outgroup = "Phoca_largha"
+     )
+   )
+ })
 
 
 test_that("Curate sequences", {
@@ -291,29 +291,29 @@ test_that("Generate a gene sampling dataset", {
 }
 )
 
+targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]
+
 test_that("Generate a gene sampling dataset", {
-  targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]
   expect_true(
 class(targetGenes) == 'data.frame'
 )})
 
+acc.table <- acc.table.retrieve(
+  clades  = c('Felis', 'Vulpes', 'Phoca'),
+  species = 'Manis_pentadactyla' ,
+  genes   = targetGenes$Gene,
+  speciesLevel = TRUE
+)
 
 test_that("Generate an accession number dataset", {
-   acc.table <- acc.table.retrieve(
-    clades  = c('Felis', 'Vulpes', 'Phoca'),
-    species = 'Manis_pentadactyla' ,
-    genes   = targetGenes$Gene,
-    speciesLevel = TRUE
-  )
-
   expect_true(
 class(acc.table) == 'data.frame'
 )
 })
 
 test_that("Retrieve sequences with sq.retrieve.indirect", {
-  expect_output(sq.retrieve.indirect(acc.table)
-)})
+  expect_output(sq.retrieve.indirect(acc.table))
+  })
 
 tb.merged <- list('COI' = c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
 
