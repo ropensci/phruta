@@ -15,16 +15,9 @@ The `phruta` R package is designed to simplify the basic phylogenetic pipeline. 
 
 `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
 
+## Who should consider using `phruta`
 
-## How is `phruta` different?
-
-`phruta` has two core functions. The main applications of these functions is briefly outlined below:
-
-- `sq.retrieve`: This function downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes. 
-
-- `sq.curate()`: After sequences are downloaded from genbank, this function curates sequences within each of the examined genes by detecting sequence outliers and by using taxonomic information. 
-
-In addition to these two main functions, users will be able to align the downloaded sequences, infer phylogenetic trees, and calibrate phylogenies using additional functions in `phruta`.
+The main functions in the `phruta` R package allow for a quick mining and curation of GenBank sequences. This package is designed for students and researchers interested in generating species-level genetic datasets for particular sets of taxa. Specifically, if you have a clade or group of species in mind, `phruta` will help you to assemble a molecular dataset with information available in GenBank.
 
 
 ## Why use `phruta`?
@@ -40,6 +33,17 @@ In addition to these two main functions, users will be able to align the downloa
 library(devtools) 
 install_github("cromanpa94/phruta")
 ```
+
+## How is `phruta` different?
+
+`phruta` has two core functions. The main applications of these functions is briefly outlined below:
+
+- `sq.retrieve`: This function downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes. 
+
+- `sq.curate()`: After sequences are downloaded from genbank, this function curates sequences within each of the examined genes by detecting sequence outliers and by using taxonomic information. 
+
+In addition to these two main functions, users will be able to align the downloaded sequences, infer phylogenetic trees, and calibrate phylogenies using additional functions in `phruta`.
+
 
 ## Running `phruta` from `Rstudio` while using `MacOS`?
 
