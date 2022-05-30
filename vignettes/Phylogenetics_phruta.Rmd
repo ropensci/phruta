@@ -40,7 +40,7 @@ Open `R` and make sure that the following line doesn't throw an error.
 system("raxmlHPC")
 ```
 
-You may also want to check if `RAxML` is called using `raxmlHPC` or something else. This can be set when running `tree.raxml` using the `raxml_exec` argument.
+You may also want to check if `RAxML` is called from the console using `raxmlHPC` or `raxml`. In fact, this string is passed to the `exec` argument in `ips::raxml` when running `tree.raxml` (`raxml_exec` therein).
 
 Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`.
 
