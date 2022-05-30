@@ -1,9 +1,10 @@
 #' Get a list of constraints given a taxonomic dataset
 #' @description Internal used to generate tree constraints
-#' @noRd
+#' @keywords internal
+#' @export
 
 getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
-  classification <- lapply(seq_along(targetColumns) - 1, function(x) {
+  classification <- lapply(1:length(targetColumns) - 1, function(x) {
     q <- unique(unlist(dataset[targetColumns[x + 1]]))
     na <- lapply(q, function(y) {
       dataset[which(dataset[, targetColumns[x + 1]] == y)[1], targetColumns[x]]
@@ -34,7 +35,7 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
   additionalLevels <- rev(names(classification))[-1]
 
   if (byClades == FALSE) {
-    for (x in seq_along(additionalLevels)) {
+    for (x in 1:length(additionalLevels)) {
       nextLev <- if (x == 1) {
         firstLev
       } else {
@@ -44,7 +45,7 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
         classification[names(classification) == additionalLevels[x]][[1]]
       if (x == 1) {
         nextLevNested <- list()
-        for (i in seq_along(targetGroups)) {
+        for (i in 1:length(targetGroups)) {
           nextLevP <- nextLev[names(nextLev) == targetGroups[i]]
           nextLevNested[[i]] <- paste(nextLevP, collapse = ",")
         }
@@ -53,8 +54,8 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
         nextLev
       } else {
         nextLevNested <- list()
-        for (i in seq_along(targetGroups)) {
-          nextLevP <- nextLev[names(nextLev) == targetGroups[[i]]]
+        for (i in 1:length(targetGroups)) {
+          nextLevP <- nextLev[names(nextLev) %in% targetGroups[[i]]]
           nextLevNested[[i]] <- paste(nextLevP, collapse = ",")
         }
         names(nextLevNested) <- names(targetGroups)
@@ -65,17 +66,17 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
     }
   } else {
     nextLevgroups <- list()
-    for (x in seq_along(additionalLevels)) {
+    for (x in 1:length(additionalLevels)) {
       nextLev <- if (x == 1) {
         firstLev
       } else {
         nextLev
       }
       targetGroups <-
-        classification[names(classification) == additionalLevels[x]][[1]]
+        classification[names(classification) %in% additionalLevels[x]][[1]]
       if (x == 1) {
         nextLevNested <- list()
-        for (i in seq_along(targetGroups)) {
+        for (i in 1:length(targetGroups)) {
           nextLevP <- nextLev[names(nextLev) == targetGroups[i]]
           nextLevNested[[i]] <- paste(nextLevP, collapse = ",")
         }
@@ -84,8 +85,8 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
         nextLev
       } else {
         nextLevNested <- list()
-        for (i in seq_along(targetGroups)) {
-          nextLevP <- nextLev[names(nextLev) == targetGroups[[i]]]
+        for (i in 1:length(targetGroups)) {
+          nextLevP <- nextLev[names(nextLev) %in% targetGroups[[i]]]
           nextLevNested[[i]] <- paste(nextLevP, collapse = ",")
         }
         names(nextLevNested) <- names(targetGroups)
@@ -101,5 +102,6 @@ getListConstraints <- function(dataset, targetColumns, byClades = FALSE) {
     names(groups) <- gsub("^.*\\.", "", names(groups))
     nextLev <- as.list(groups)
   }
+  names(nextLev)[length(nextLev)] <- "CompleteTree"
   return(nextLev)
 }

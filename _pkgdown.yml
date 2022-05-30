@@ -5,3 +5,11 @@ authors:
 template:
   params:
     bootswatch: cerulean
+articles:
+- title: Vignettes
+  navbar: ~
+  contents:
+  - Brief_Intro_phruta
+  - Phylogenetics_phruta
+  - Phruta_advanced
+  - Future_phruta

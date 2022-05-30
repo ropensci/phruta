@@ -6,5 +6,6 @@ utils::globalVariables(c(
   "OrientNucleotides",
   "AlignSeqs",
   "RemoveGaps",
-  "MaskAlignment"
+  "MaskAlignment",
+  "x"
 ))

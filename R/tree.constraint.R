@@ -76,7 +76,7 @@ tree.constraint <- function(taxonomy_folder = "1.CuratedSequences",
     clades <- strsplit(Topology, ",")[[1]]
     for (i in seq_along(clades)) {
       TopologyOriginal <- gsub(clades[i],
-                               cstByClade[names(cstByClade) == clades[i]],
+                               cstByClade[names(cstByClade) %in% clades[i]],
                                TopologyOriginal)
     }
     Topology <- TopologyOriginal

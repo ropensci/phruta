@@ -1,5 +1,6 @@
 unlink(list.dirs("."), recursive = TRUE)
 
+# context("Loading sample trees")
 test_that("load sample phylogenies", {
   data("SW.phruta")
   expect_equal(length(SW.phruta), 5)
@@ -10,9 +11,10 @@ test_that("Class of sample phylogenies", {
   expect_true(class(SW.phruta) == "multiPhylo")
 })
 
+# context("sq.retrieve.direct")
 
 test_that("Error in clades and species", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = NULL,
     species = NULL,
     genes = NULL,
@@ -22,7 +24,7 @@ test_that("Error in clades and species", {
 })
 
 test_that("Error in default numeric clades", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = 1,
     species = NULL,
     genes = NULL,
@@ -34,7 +36,7 @@ test_that("Error in default numeric clades", {
 
 
 test_that("Error in default numeric species", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = NULL,
     species = 1,
     genes = NULL,
@@ -44,7 +46,7 @@ test_that("Error in default numeric species", {
 })
 
 test_that("No genes", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
     genes = NULL,
@@ -55,7 +57,7 @@ test_that("No genes", {
 
 
 test_that("Max sequence as character", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
     genes = "COI",
@@ -66,7 +68,7 @@ test_that("Max sequence as character", {
 
 
 test_that("Max length as character", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
     genes = "COI",
@@ -76,7 +78,7 @@ test_that("Max length as character", {
 })
 
 test_that("length of maxseqs and maxlength", {
-  expect_error(sq.retrieve(
+  expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
     genes = "COI",
@@ -86,8 +88,8 @@ test_that("length of maxseqs and maxlength", {
 })
 
 
-test_that("Silent sq.retrieve", {
-  expect_output(sq.retrieve(
+test_that("Silent sq.retrieve.direct", {
+  expect_output(sq.retrieve.direct(
     clades = "Psocus",
     species = NULL,
     genes = "HDFJ",
@@ -97,6 +99,8 @@ test_that("Silent sq.retrieve", {
 })
 
 
+# context("tree.dating")
+
 test_that("taxonomyFolder NULL", {
   expect_error(tree.dating(taxonomyFolder = NULL))
 })
@@ -104,6 +108,8 @@ test_that("taxonomyFolder NULL", {
 test_that("phylogenyFolder NULL", {
   expect_error(tree.dating(phylogenyFolder = NULL))
 })
+
+# context("sq.curate")
 
 test_that("expect_error default", {
   expect_error(sq.curate())
@@ -130,10 +136,10 @@ test_that("assuming the function runs x2", {
 })
 
 
+# context("sq.curate")
 
 test_that("assuming the function runs", {
-  expect_invisible(sq.aln(folder = "1.CuratedSequences",
-                          FilePatterns = "renamed", mask = T))
+  expect_invisible(sq.aln(folder = "1.CuratedSequences", FilePatterns = "renamed", mask = TRUE))
 })
 
 
@@ -145,6 +151,7 @@ test_that("Mask is non-logic", {
   expect_error(sq.aln(mask = "H"))
 })
 
+# context("tree.raxml")
 
 test_that("Folder is null tree.raxml", {
   expect_error(tree.raxml(folder = NULL))
@@ -163,6 +170,8 @@ test_that("Bootstrap is 0 tree.raxml", {
 })
 
 
+# context("sq.add")
+
 test_that("folderDownloaded is null sq.add", {
   expect_error(sq.add(folderDownloaded = NULL))
 })
@@ -175,10 +184,12 @@ test_that("sq.add default", {
   expect_silent(sq.add())
 })
 
+# Test the pipeline
+
 unlink(list.dirs("."), recursive = TRUE)
 
 test_that("Retrieve sequences", {
-  expect_output(sq.retrieve(
+  expect_output(sq.retrieve.direct(
     clades = c("Felis", "Vulpes", "Phoca"),
     species = "Manis_pentadactyla",
     genes = c("ADORA3", "CYTB")
@@ -200,6 +211,8 @@ test_that("Align sequences new", {
   )
 })
 
+## Sequence add
+
 newFas <- read.FASTA("0.Sequences/ADORA3.fasta")
 unlink("0.AdditionalSequences", recursive = TRUE)
 dir.create("0.AdditionalSequences")
@@ -207,8 +220,7 @@ write.FASTA(newFas, "0.AdditionalSequences/ADORA3.fasta")
 
 test_that("Add sequences", {
   expect_snapshot_output(
-    sq.add(folderDownloaded = "0.Sequences",
-           folderNew = "0.AdditionalSequences")
+    sq.add(folderDownloaded = "0.Sequences", folderNew = "0.AdditionalSequences")
   )
 })
 
@@ -218,9 +230,8 @@ test_that("Add sequences", {
 taxonomy <- read.csv("1.CuratedSequences/1.Taxonomy.csv")
 test_that("Generate list of constraints, not by clade", {
   expect_true(
-    class(getListConstraints(taxonomy,
-      targetColumns = c("kingdom", "phylum", "class",
-                        "order", "family", "genus", "species_names"),
+    class(getListConstraints(dataset = taxonomy,
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
       byClades = FALSE
     )) == "list"
   )
@@ -230,42 +241,101 @@ test_that("Generate list of constraints, not by clade", {
 test_that("Generate list of constraints, by clade", {
   expect_true(
     class(getListConstraints(taxonomy,
-      targetColumns = c("kingdom", "phylum", "class",
-                        "order", "family", "genus", "species_names"),
+      targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
       byClades = TRUE
     )) == "list"
   )
 })
 
 
-test_that("Tree constraints non ingroup/outgroup", {
-  expect_snapshot_output(
-    tree.constraint(
-      taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class",
-                        "order", "family", "genus", "species_names"),
-      Topology = "((Felis), (Phoca));"
-    )
+ test_that("Tree constraints non ingroup/outgroup", {
+   expect_snapshot_output(
+     tree.constraint(
+       taxonomy_folder = "1.CuratedSequences",
+       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+       Topology = "((Felis), (Phoca));"
+     )
+   )
+ })
+
+
+ test_that("Tree constraints ingroup/outgroup", {
+   expect_snapshot_output(
+     tree.constraint(
+       taxonomy_folder = "1.CuratedSequences",
+       targetColumns = c("kingdom", "phylum", "class", "order", "family", "genus", "species_names"),
+       outgroup = "Phoca_largha"
+     )
+   )
+ })
+
+
+test_that("Curate sequences", {
+  expect_true(
+  class(taxonomy.retrieve(species_names = c("Felis_catus", "PREDICTED:_Vulpes",
+                                      "Phoca_largha", "PREDICTED:_Phoca" ,
+                                      "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
+                      database = 'gbif', kingdom = 'animals')) == 'data.frame'
   )
 })
 
 
-test_that("Tree constraints ingroup/outgroup", {
-  expect_snapshot_output(
-    tree.constraint(
-      taxonomy_folder = "1.CuratedSequences",
-      targetColumns = c("kingdom", "phylum", "class",
-                        "order", "family", "genus", "species_names"),
-      outgroup = "Phoca_largha"
-    )
+###Latest version of the pipeline
+
+
+gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), speciesSampling = TRUE)
+
+test_that("Generate a gene sampling dataset", {
+  expect_true(
+    class(gs.seqs) == 'data.frame'
   )
+}
+)
+
+targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > 30,]
+
+test_that("Generate a gene sampling dataset", {
+  expect_true(
+class(targetGenes) == 'data.frame'
+)})
+
+acc.table <- acc.table.retrieve(
+  clades  = c('Felis', 'Vulpes', 'Phoca'),
+  species = 'Manis_pentadactyla' ,
+  genes   = targetGenes$Gene,
+  speciesLevel = TRUE
+)
+
+test_that("Generate an accession number dataset", {
+  expect_true(
+class(acc.table) == 'data.frame'
+)
 })
 
-test_that("taxonomy curate", {
-  sq.partitionfinderv1(
-    folderAlignments = "2.Alignments",
-    FilePatterns = "Masked",
-    models = "all", run = FALSE
-  )
-  expect_true(any(grepl("2.1.PartitionFinderv1", list.files())))
-})
+# test_that("Retrieve sequences with sq.retrieve.indirect", {
+#   expect_output(sq.retrieve.indirect(acc.table))
+#   })
+#
+# tb.merged <- list('COI' = c("cytochrome oxidase subunit 1", "cytochrome c oxidase subunit I"))
+#
+# test_that("Curate sequences", {
+#   expect_output(
+# sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
+#           mergeGeneFiles = tb.merged,
+#           kingdom = 'animals',
+#           folder = '0.Sequences',
+#           removeOutliers = FALSE)
+# )})
+#
+#
+# test_that("Align sequences", {
+#   expect_output(
+# sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
+# )})
+
+
+
+unlink(list.dirs("."), recursive = TRUE)
+
+
+

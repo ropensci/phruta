@@ -1,0 +1,31 @@
+---
+title: "Future directions of the `phruta` R package"
+author: Cristian Román-Palacios
+date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+vignette: >
+  %\VignetteIndexEntry{Future directions of the `phruta` R package}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+output:
+#  pdf_document:
+#    highlight: null
+#    number_sections: yes
+  knitr:::html_vignette:
+    toc: true
+    fig_caption: yes
+---
+
+# Table of Contents
+1.  [Future improvements](#paragraph1)
+
+## Future directions in `phruta`  <a name="paragraph1"></a>
+
+I acknowledge some of the functions in `phruta` are very limited to only a few basic aspects of phylogenetic analyses. I'm actively working on improving phruta. Recent developments include:
+
+-   Expand taxonomic cleaning for non-animal/plant groups
+-   Taxonomic tree constraints
+-   Partitioned analyses in RAxML
+-   PartitionFinder (V1)
+-   Rogue taxa identification
+
+Please stay tuned for more updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable!

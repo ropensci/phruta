@@ -45,7 +45,7 @@
 
 tree.raxml <-
   function(folder = "2.Alignments",
-           FilePatterns = "Masked",
+           FilePatterns = "Masked_",
            raxml_exec = "raxmlHPC",
            Bootstrap = 100,
            outgroup,
@@ -63,7 +63,8 @@ tree.raxml <-
     files_fullNames <-
       list.files(folder, FilePatterns, full.names = TRUE)
     files <- list.files(folder, FilePatterns)
-    seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
+    seq <- lapply(lapply(files_fullNames, read.FASTA), function(x) x[!duplicated(names(x))] )
+    seq <- lapply(seq, as.matrix)
     names(seq) <- files
 
     concatenated <- do.call(cbind.DNAbin, c(seq,

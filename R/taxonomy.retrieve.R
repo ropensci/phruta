@@ -12,8 +12,9 @@
 #' @param database A name of a database with taxonomic information.
 #'                 'gbif' only works for animals and plants. Databases
 #'                 follows taxize::classification
-#' @param kingdom Optional and only used when database='gbif'. Two possible
+#' @param kingdom Optional and only used when database = 'gbif'. Two possible
 #'                options: "animals" or "plants."
+#' @param ranks Taxonomic ranks to retrieve from the target species.
 #'
 #' @importFrom rgbif name_backbone name_usage
 #' @importFrom taxize classification
@@ -38,15 +39,16 @@
 taxonomy.retrieve <-
   function(species_names = NULL,
            database = "gbif",
-           kingdom = NULL) {
-    ranks <-
-      c("kingdom",
-        "phylum",
-        "class",
-        "order",
-        "family",
-        "genus",
-        "species")
+           kingdom = NULL,
+           ranks =
+             c("kingdom",
+               "phylum",
+               "class",
+               "order",
+               "family",
+               "genus",
+               "species")) {
+
 
     if (database != "gbif") {
       taxo <- classification(species_names, db = database, rows = 1)

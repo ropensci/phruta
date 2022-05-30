@@ -4,7 +4,12 @@
 \alias{taxonomy.retrieve}
 \title{Curate sequences from genbank}
 \usage{
-taxonomy.retrieve(species_names = NULL, database = "gbif", kingdom = NULL)
+taxonomy.retrieve(
+  species_names = NULL,
+  database = "gbif",
+  kingdom = NULL,
+  ranks = c("kingdom", "phylum", "class", "order", "family", "genus", "species")
+)
 }
 \arguments{
 \item{species_names}{A vector of species names}
@@ -13,8 +18,10 @@ taxonomy.retrieve(species_names = NULL, database = "gbif", kingdom = NULL)
 'gbif' only works for animals and plants. Databases
 follows taxize::classification}
 
-\item{kingdom}{Optional and only used when database='gbif'. Two possible
+\item{kingdom}{Optional and only used when database = 'gbif'. Two possible
 options: "animals" or "plants."}
+
+\item{ranks}{Taxonomic ranks to retrieve from the target species.}
 }
 \value{
 data.frame of taxonomic information for the target species

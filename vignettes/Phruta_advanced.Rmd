@@ -16,7 +16,7 @@ output:
 ---
 
 # Table of Contents
-1. [Working with non-animal nor plant groups in `phruta`](#paragraph0)
+1. [Working with non-animal/plant groups in `phruta`](#paragraph0)
 2. [Creating taxonomic constraints in `phruta`](#paragraph1)
 3. [Running PartitionFinder in `phruta`](#paragraph2)
 4. [Partitioned analyses in RAxML](#paragraph3)
@@ -25,7 +25,7 @@ output:
 
 ## Working with non-animal nor plant groups in `phruta` <a name="paragraph0"></a>
 
-As explained in the brief intro to `pruta`, the `sq.curate` function is primarily designed to curate taxonomic datasets using `gbif`. Alto `gbif` is extremely fast and efficient, it is largely designed to deal with animals and plants. If you're interested in using the `gbif` backbone for curating sequence regardless of the kingdom use the following approach:
+As explained in the brief intro to `phruta`, the `sq.curate` function is primarily designed to curate taxonomic datasets using `gbif`. Alto `gbif` is extremely fast and efficient, it is largely designed to deal with animals and plants. If you're interested in using the `gbif` backbone for curating sequence regardless of the kingdom use the following approach:
 
 ```{r eval=FALSE}
 taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",

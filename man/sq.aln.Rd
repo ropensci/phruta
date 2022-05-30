@@ -8,6 +8,7 @@ sq.aln(
   folder = "1.CuratedSequences",
   FilePatterns = "renamed",
   mask = TRUE,
+  maxFractionGapsSpecies = 0.01,
   ...
 )
 }
@@ -22,6 +23,8 @@ pattern wants to be analyzed.}
 
 \item{mask}{Removes ambiguous sites (Logical, TRUE or FALSE).}
 
+\item{maxFractionGapsSpecies}{Maximum fraction of gaps per species (when masked)}
+
 \item{...}{Arguments passed to \code{"DECIPHER::AlignSeqs"}.}
 }
 \value{
@@ -34,8 +37,7 @@ saved in a given folder. Alignment is conducted using
 optimizes the direction of the sequences, then aligns
 using \code{"BDECIPHER"}, and finally masks the resulting
 alignment (optionally but does it per default). The
-masking step includes removing common gaps across
-all the species and removing
+masking step includes removing common gaps across all the species and removing
 highly ambiguous positions. The resulting aligned sequences
 are stored to a new folder
 \code{"2.Alignments"}.'

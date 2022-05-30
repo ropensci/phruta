@@ -6,9 +6,14 @@
 \usage{
 sq.curate(
   filterTaxonomicCriteria = NULL,
+  mergeGeneFiles = NULL,
   database = "gbif",
   kingdom = NULL,
-  folder = "0.Sequences"
+  folder = "0.Sequences",
+  removeOutliers = TRUE,
+  minSeqs = 5,
+  threshold = 0.05,
+  ranks = c("kingdom", "phylum", "class", "order", "family", "genus", "species")
 )
 }
 \arguments{
@@ -16,6 +21,11 @@ sq.curate(
 listing all the strings that could be used to
 identify the species that should
 be in the dataset (character).}
+
+\item{mergeGeneFiles}{A named list, with each element being a character vector
+indicating the names of the files in \code{"0.Sequences"}
+that need to be combined into a single fasta file. For instance,
+you can use this argument to combine CO1 and COI.}
 
 \item{database}{A name of a database with taxonomic information.
 Although 'gbif' is faster, it only has information for
@@ -27,6 +37,16 @@ Two possible options: "animals" or "plants."}
 
 \item{folder}{The name of the folder where the original sequences are
 located (character).}
+
+\item{removeOutliers}{Whether  \code{odseq:odseq} should be used to remove outliers}
+
+\item{minSeqs}{minimum number of sequences per locus}
+
+\item{threshold}{Relative to \code{odseq::odseq}. Only important if
+\code{removeOutliers = TRUE}}
+
+\item{ranks}{The taxonomic ranks used to examine the taxonomy of the species
+in the \code{0.Sequences} folder.}
 }
 \value{
 None

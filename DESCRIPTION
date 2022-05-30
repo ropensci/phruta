@@ -2,38 +2,53 @@ Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
 Version: 0.1.1
-Authors@R: person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
+Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
                   role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-1696-4886"))
+           comment = c(ORCID = "0000-0003-1696-4886")),
+    person(given = "Anna",
+          family = "Krystalli",
+          role = c("rev")),
+    person(given = "Rayna",
+          family = "Harris",
+          role = c("rev")),
+    person(given = "Frederick",
+          family = "Boehm",
+          role = c("rev"))
+           )
 URL: https://github.com/cromanpa94/phruta, https://cromanpa94.github.io/phruta/
 BugReports: https://github.com/cromanpa94/phruta/issues
-Description: The phruta R package is designed to simplify the basic 
-            phylogenetic pipeline. Specifically, all code is run within 
-            the same program and data from intermediate steps are saved in 
-            independent folders. Furthrmore, all code is run within the 
-            same environment which increases the reproducibility of your analysis. 
-            phruta retrieves gene sequences, combines newly downloaded and local 
-            gene sequences, and performs sequence alignments. 
+Description: The phruta R package is designed to simplify the basic
+            phylogenetic pipeline. Specifically, all code is run within
+            the same program and data from intermediate steps are saved in
+            independent folders. Furthrmore, all code is run within the
+            same environment which increases the reproducibility of your analysis.
+            phruta retrieves gene sequences, combines newly downloaded and local
+            gene sequences, and performs sequence alignments.
 Encoding: UTF-8
 LazyData: true
-biocViews: DECIPHER,
-           Biostrings,
-           GenomeInfoDbData
+biocViews:
 Depends: R (>= 3.5.0)
-Imports: 
+Imports:
     rgbif,
     pbapply,
     rentrez,
     taxize,
-    ape,
     ips,
+    ape,
     geiger,
     methods,
     DECIPHER,
+    Rogue,
+    reutils,
+    foreach,
+    doParallel,
+    doSNOW,
     Biostrings,
-    Rogue
-RoxygenNote: 7.1.1
-Suggests: 
+    msa,
+    odseq,
+    XML
+RoxygenNote: 7.2.0
+Suggests:
     testthat (>= 3.0.0),
     covr,
     knitr,
