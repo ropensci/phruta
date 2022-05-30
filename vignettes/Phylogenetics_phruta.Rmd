@@ -18,8 +18,8 @@ output:
 # Table of Contents
 1.  [Installing RAxML](#paragraph1)
 2.  [Installing PATHd-8 and treePL](#paragraph2)
-3.  [Phylogenetic inference with `pruta` and `RAxML`](#paragraph3)
-3.  [Tree dating in `pruta`](#paragraph4)
+3.  [Phylogenetic inference with `phruta` and `RAxML`](#paragraph3)
+3.  [Tree dating in `phruta`](#paragraph4)
 
 
 ## Installing RAxML <a name="paragraph1"></a>

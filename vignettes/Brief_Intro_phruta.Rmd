@@ -44,11 +44,11 @@ Note that all the functions for which their primary output are sequences (aligne
 
 -   Second, given a list of target organisms, users can retrieve a list of accession numbers that are relevant to their search using `acc.table.retrieve`. Instead of directly downloading sequences from genbank (see `sq.retrieve.direct` below), retrieving accession numbers allow users to have more control over the sequences that are being used in the analyses. Note that users can also curate the content of the dataset obtained using `sq.retrieve.direct`.
 
--   Third, users should download gene sequences. Sequences can be download using the `sq.retrieve.indirect` from the accession numbers retrieved before using the `acc.table.retrieve` function. This is the preferred option within `pruta`. Additionally, users can directly download gene sequences using the `sq.retrieve.direct` function. Both `sq.retrieve.indirect` and `sq.retrieve.direct` functions save gene sequences in `fasta` files that will be located in a new directory named `0.Sequences`.
+-   Third, users should download gene sequences. Sequences can be download using the `sq.retrieve.indirect` from the accession numbers retrieved before using the `acc.table.retrieve` function. This is the preferred option within `phruta`. Additionally, users can directly download gene sequences using the `sq.retrieve.direct` function. Both `sq.retrieve.indirect` and `sq.retrieve.direct` functions save gene sequences in `fasta` files that will be located in a new directory named `0.Sequences`.
 
 -   Fourth, `sq.add` allows users to include local sequences to those retrieved from genbank in the previous step. This function saves all the resulting `fasta` files in two directories, combined sequences in `0.Sequences` and local sequences in `0.AdditionalSequences` (originally downloaded sequences are moved to `0.0.OriginalDownloaded` at this step). Note that `sq.add` is optional.
 
--   Fifth, the `sq.curate` function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the Global Biodiversity Information Facility (GBIF) database's taxonomic backbone (see alternatives in the advanced vignette to `pruta`). If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and renames sequences.
+-   Fifth, the `sq.curate` function filters out unreliable sequences based on information listed in genbank (e.g. PREDICTED) and on taxonomic information provided by the user. Specifically, this function retrieves taxonomic information from the Global Biodiversity Information Facility (GBIF) database's taxonomic backbone (see alternatives in the advanced vignette to `phruta`). If a given species belongs to a non-target group, this species is dropped from the analyses. This function automatically corrects taxonomy and renames sequences.
 
 -   Sixth, `sq.aln` performs multiple sequence alignment on `fasta` files. Currently, `phruta` uses the [`DECIPHER` R package](http://www2.decipher.codes/), here. This package allows for adjusting sequence orientation and masking (removing ambiguous sites).
 
@@ -70,7 +70,7 @@ Let's start by loading `phruta`!
 library(phruta)
 ```
 
-Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `pruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
+Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `phruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
 
 ```{r results = 'hide'}
 gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), 
@@ -118,7 +118,7 @@ row.names(acc.table) <- NULL
 Let's check how the new table looks now...
 
 ```{r echo = FALSE}
-kable(acc.table, caption = 'Updated Table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by `pruta`).')
+kable(acc.table, caption = 'Updated Table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by `phruta`).')
 ```
 
 Now, since we're going to retrieve sequences from genbank using an existing preliminary accession numbers table, we will use the `sq.retrieve.indirect` function in `phruta`. I'm going to stop here to mention that there are two versions of `sq.retrieve.*` in the `R` package. The one that we're using in this tutorial, `sq.retrieve.indirect`, retrieves sequences "indirectly" because it necessarily follows the intermediate step of generating a table summarizing accession numbers (see the `acc.table.retrieve` function above). I present the information in this vignette using `sq.retrieve.indirect` instead of `sq.retrieve.direct` because the first function is way more flexible and allows for correcting issues *prior* to download any sequence. For instance, you can add new sequences, species, populations to the resulting data.frame from `acc.table.retrieve`. Additionally, you could even manually assemble your own dataset of accession numbers to be retrieved using `sq.retrieve.indirect`. Instead, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. In short, you should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`.
