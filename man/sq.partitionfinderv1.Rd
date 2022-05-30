@@ -38,7 +38,7 @@ Please note that you need at least two gene regions to run partitionfinder.
 }
 \examples{
 \dontrun{
-sq.retrieve(
+sq.retrieve.direct(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
   genes = c("ADORA3", "CYTB")

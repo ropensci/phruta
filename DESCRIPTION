@@ -38,7 +38,6 @@ Imports:
     geiger,
     methods,
     DECIPHER,
-    Rogue,
     reutils,
     foreach,
     doParallel,
@@ -46,7 +45,8 @@ Imports:
     Biostrings,
     msa,
     odseq,
-    XML
+    XML,
+    Rogue
 RoxygenNote: 7.2.0
 Suggests:
     testthat (>= 3.0.0),
@@ -55,7 +55,8 @@ Suggests:
     markdown,
     rmarkdown,
     spelling,
-    utf8
+    utf8,
+    Rogue
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3

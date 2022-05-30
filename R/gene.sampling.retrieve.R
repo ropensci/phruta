@@ -99,8 +99,8 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
 
     message("\n Genes identified...")
 
-    myCluster <- makeCluster(npar, type = "SOCK")
-    registerDoSNOW(myCluster)
+    cl <- makeCluster(npar, type = "SOCK")
+    registerDoSNOW(cl)
     by = 499
     cuts <- seq(1, count, by)
     iterations <- length(cuts)
@@ -115,7 +115,7 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
                             search = base.search,
                             nObs = count,
                             speciesSampling = speciesSampling)
-
+    stopCluster(cl)
     if (speciesSampling) {
 
     tab01 <- ifelse(table(AccDS$gene, AccDS$Species) > 1,1,table(AccDS$gene, AccDS$Species))

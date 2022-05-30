@@ -34,7 +34,7 @@
 #'             "IRBP","ND1","ND2","PLCB4",
 #'             "PNOC","RAG1a","RAG1b","RAG2",
 #'             "TTN","TYR1","VWF"),
-#'  speciesLevel=FALSE
+#'  speciesLevel = FALSE
 #' )
 #' }
 #' @export
@@ -42,6 +42,12 @@
 
 acc.table.retrieve <- function(clades, species, genes, speciesLevel){
   fullTerms <- expand.grid(c(clades,species), genes, stringsAsFactors = FALSE)
-  fullSearch <- mapply(acc.retrieve, organism=fullTerms[,1], gene=fullTerms[,2], speciesLevel=speciesLevel)
-  fullSearch.df <- do.call(rbind, fullSearch)
+  fullSearch <-
+    Map(acc.retrieve,
+        organism=fullTerms[,1],
+        gene=fullTerms[,2],
+        speciesLevel=speciesLevel)
+  fullSearch.df <- do.call(rbind.data.frame, fullSearch)
+  row.names(fullSearch.df) <- NULL
+  fullSearch.df
 }

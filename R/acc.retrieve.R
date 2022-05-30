@@ -71,9 +71,9 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
   if (count > 0) {
     if (!acc.num) {
     message("\nSequences found for gene ", gene, " and organism ", organism)
-      }
-    myCluster <- makeCluster(npar, type = "SOCK")
-    registerDoSNOW(myCluster)
+     }
+    cl <- makeCluster(npar, type = "SOCK")
+    registerDoSNOW(cl)
     by = 499
     cuts <- seq(1, count, by)
     iterations <- length(cuts)
@@ -85,6 +85,7 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
                      .options.snow = opts
                      ,.combine = 'rbind'
     ) %dopar% get_gene(x, search = base.search, nObs = count)
+    stopCluster(cl)
 
     Species <- sapply(AccDS[,1], function(z) paste(strsplit(z, " ")[[1]][c(1:2)], collapse = " " ))
     AccDS <- cbind.data.frame(Species, AccDS)

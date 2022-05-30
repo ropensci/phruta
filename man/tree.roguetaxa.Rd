@@ -21,7 +21,7 @@ within phruta
 }
 \examples{
 \dontrun{
-sq.retrieve(
+sq.retrieve.direct(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
   genes = c("ADORA3", "CYTB")

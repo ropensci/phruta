@@ -34,7 +34,7 @@ a given folder (default is \code{"2.Alignments"}).
 }
 \examples{
 \dontrun{
-sq.retrieve(
+sq.retrieve.direct(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
   genes = c("ADORA3", "CYTB")

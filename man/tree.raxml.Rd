@@ -46,7 +46,7 @@ least two gene regions to run a partitioned analysis.
 }
 \examples{
 \dontrun{
-sq.retrieve(
+sq.retrieve.direct(
   clades = c("Felis", "Vulpes", "Phoca"),
   species = "Manis_pentadactyla",
   genes = c("ADORA3", "CYTB")
