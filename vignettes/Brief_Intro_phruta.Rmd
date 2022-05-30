@@ -17,7 +17,6 @@ output:
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = FALSE)
-knitr::opts_chunk$set(tidy = "styler")
 unlink(c("0.Sequences", "1.CuratedSequences", "2.Alignments"), recursive = TRUE)
 start_time <- Sys.time()
 library(knitr)
