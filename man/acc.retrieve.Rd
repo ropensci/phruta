@@ -21,6 +21,8 @@ is actually a vector or accession numbers.}
 \item{gene}{The name of a single gene region (character; optional).}
 
 \item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
+
+\item{npar}{Number of parallel searches (the default is probably the best option).}
 }
 \value{
 data.frame

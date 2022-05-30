@@ -12,8 +12,9 @@
 #' @param database A name of a database with taxonomic information.
 #'                 'gbif' only works for animals and plants. Databases
 #'                 follows taxize::classification
-#' @param kingdom Optional and only used when database='gbif'. Two possible
+#' @param kingdom Optional and only used when database = 'gbif'. Two possible
 #'                options: "animals" or "plants."
+#' @param ranks Taxonomic ranks to retrieve from the target species.
 #'
 #' @import rgbif
 #' @import taxize

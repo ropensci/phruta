@@ -9,6 +9,7 @@
 #'                is actually a vector or accession numbers.
 #' @param gene The name of a single gene region (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
+#' @param npar Number of parallel searches (the default is probably the best option).
 #'
 #' @return data.frame
 #'
@@ -27,7 +28,7 @@
 #' }
 #' @export
 
-acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALSE, npar=2){
+acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALSE, npar = 2){
 
   if (is.null(gene) & speciesLevel ) {stop("\nPlease provide the name of a gene region or disable the species-level filtering")}
 
