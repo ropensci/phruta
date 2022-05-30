@@ -24,6 +24,7 @@
 #' @import doParallel
 #' @import doSNOW
 #' @import ape
+#' @import doMC
 #'
 #' @examples
 #' \dontrun{
@@ -99,6 +100,9 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
 
     message("\n Genes identified...")
 
+    sys <- Sys.info()["sysname"]
+
+    if(sys == "Darwin"){
     cl <- makeCluster(npar, type = "SOCK")
     registerDoSNOW(cl)
     by = 499
@@ -116,6 +120,40 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
                             nObs = count,
                             speciesSampling = speciesSampling)
     stopCluster(cl)
+    }
+
+    if(sys == "Linux"){
+      registerDoMC(npar)
+      by = 499
+      cuts <- seq(1, count, by)
+      iterations <- length(cuts)
+      invisible(pb <- txtProgressBar(max = iterations, style = 3))
+      progress <- function(n) setTxtProgressBar(pb, n)
+      opts <- list(progress = progress)
+      AccDS <- foreach(x = cuts,
+                       .packages = c("ape","reutils"),
+                       .options.snow = opts
+                       ,.combine = 'rbind'
+      ) %dopar% get_gene_list(x,
+                              search = base.search,
+                              nObs = count,
+                              speciesSampling = speciesSampling)
+    }
+
+    if(sys == "Windows"){
+
+      AccDS <- pblapply(cuts, function(x){
+        get_gene_list(x,
+                      search = base.search,
+                      nObs = count,
+                      speciesSampling = speciesSampling)
+      })
+
+      AccDS <- do.call(rbind, AccDS)
+
+    }
+
+
     if (speciesSampling) {
 
     tab01 <- ifelse(table(AccDS$gene, AccDS$Species) > 1,1,table(AccDS$gene, AccDS$Species))

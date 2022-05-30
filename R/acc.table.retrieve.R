@@ -20,6 +20,7 @@
 #' @import foreach
 #' @import doParallel
 #' @import doSNOW
+#' @import doMC
 #'
 #' @examples
 #' \dontrun{

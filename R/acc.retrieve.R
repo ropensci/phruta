@@ -21,6 +21,7 @@
 #' @import doParallel
 #' @import doSNOW
 #' @import XML
+#' @import doMC
 #'
 #' @examples
 #' \dontrun{
@@ -71,7 +72,12 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
   if (count > 0) {
     if (!acc.num) {
     message("\nSequences found for gene ", gene, " and organism ", organism)
-     }
+    }
+
+    sys <- Sys.info()["sysname"]
+
+    if(sys == "Darwin"){
+
     cl <- makeCluster(npar, type = "SOCK")
     registerDoSNOW(cl)
     by = 499
@@ -86,6 +92,33 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
                      ,.combine = 'rbind'
     ) %dopar% get_gene(x, search = base.search, nObs = count)
     stopCluster(cl)
+    }
+
+    if(sys == "Linux"){
+
+      registerDoMC(npar)
+      by = 499
+      cuts <- seq(1, count, by)
+      iterations <- length(cuts)
+      invisible(pb <- txtProgressBar(max = iterations, style = 3))
+      progress <- function(n) setTxtProgressBar(pb, n)
+      opts <- list(progress = progress)
+      AccDS <- foreach(x = cuts,
+                       .packages = "reutils",
+                       .options.snow = opts
+                       ,.combine = 'rbind'
+      ) %dopar% get_gene(x, search = base.search, nObs = count)
+    }
+
+    if(sys == "Windows"){
+      by = 499
+      cuts <- seq(1, count, by)
+      iterations <- length(cuts)
+      AccDS <- pblapply(cuts, function(x){
+        get_gene(x, search = base.search, nObs = count
+                 )})
+      AccDS <- do.call(rbind, AccDS)
+    }
 
     Species <- sapply(AccDS[,1], function(z) paste(strsplit(z, " ")[[1]][c(1:2)], collapse = " " ))
     AccDS <- cbind.data.frame(Species, AccDS)
