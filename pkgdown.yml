@@ -1,11 +1,13 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   Brief_Intro_phruta: Brief_Intro_phruta.html
+  Future_phruta: Future_phruta.html
   Phruta_advanced: Phruta_advanced.html
-last_built: 2021-10-21T01:02Z
+  Phylogenetics_phruta: Phylogenetics_phruta.html
+last_built: 2022-05-30T04:37Z
 urls:
-  reference: https://cromanpa94.github.io/phruta//reference
-  article: https://cromanpa94.github.io/phruta//articles
+  reference: https://cromanpa94.github.io/phruta/reference
+  article: https://cromanpa94.github.io/phruta/articles
 
