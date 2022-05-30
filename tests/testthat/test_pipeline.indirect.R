@@ -2,11 +2,11 @@ unlink(list.dirs("."), recursive = TRUE)
 
 
 test_that("Generate a gene sampling dataset", {
-  gs.seqs <- gene.sampling.retrieve(organism = c("Phoca"), speciesSampling = TRUE)
+  gs.seqs <- gene.sampling.retrieve(organism = "Phoca", speciesSampling = TRUE)
   targetGenes <- gs.seqs[1,]
 
   acc.table <- acc.table.retrieve(
-    clades  = c('Phoca'),
+    clades  = 'Phoca',
     species = 'Manis_pentadactyla' ,
     genes   = targetGenes$Gene,
     speciesLevel = TRUE
