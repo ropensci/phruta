@@ -21,7 +21,6 @@
 #' @import doParallel
 #' @import doSNOW
 #' @import XML
-#' @import doMC
 #'
 #' @examples
 #' \dontrun{
@@ -76,12 +75,13 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
 
     sys <- Sys.info()["sysname"]
 
+    by = 499
+    cuts <- seq(1, count, by)
+
     if(sys == "Darwin"){
 
     cl <- makeCluster(npar, type = "SOCK")
     registerDoSNOW(cl)
-    by = 499
-    cuts <- seq(1, count, by)
     iterations <- length(cuts)
     invisible(pb <- txtProgressBar(max = iterations, style = 3))
     progress <- function(n) setTxtProgressBar(pb, n)
@@ -96,24 +96,14 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
 
     if(sys == "Linux"){
 
-      registerDoMC(npar)
-      by = 499
-      cuts <- seq(1, count, by)
-      iterations <- length(cuts)
-      invisible(pb <- txtProgressBar(max = iterations, style = 3))
-      progress <- function(n) setTxtProgressBar(pb, n)
-      opts <- list(progress = progress)
-      AccDS <- foreach(x = cuts,
-                       .packages = "reutils",
-                       .options.snow = opts
-                       ,.combine = 'rbind'
-      ) %dopar% get_gene(x, search = base.search, nObs = count)
+      AccDS <- pblapply(cuts, function(x){
+        get_gene(x, search = base.search, nObs = count
+        )})
+      AccDS <- do.call(rbind, AccDS)
     }
 
     if(sys == "Windows"){
-      by = 499
-      cuts <- seq(1, count, by)
-      iterations <- length(cuts)
+
       AccDS <- pblapply(cuts, function(x){
         get_gene(x, search = base.search, nObs = count
                  )})

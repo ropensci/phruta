@@ -55,8 +55,7 @@ Suggests:
     markdown,
     rmarkdown,
     spelling,
-    utf8,
-    doMC
+    utf8
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Config/testthat/edition: 3
