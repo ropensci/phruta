@@ -100,13 +100,12 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
     message("\n Genes identified...")
 
     sys <- Sys.info()["sysname"]
-
+    by = 499
     cuts <- seq(1, count, by)
 
     if(sys == "Darwin"){
     cl <- makeCluster(npar, type = "SOCK")
     registerDoSNOW(cl)
-    by = 499
     iterations <- length(cuts)
     invisible(pb <- txtProgressBar(max = iterations, style = 3))
     progress <- function(n) setTxtProgressBar(pb, n)
