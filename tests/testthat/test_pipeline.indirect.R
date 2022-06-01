@@ -1,7 +1,7 @@
 unlink(list.dirs("."), recursive = TRUE)
 
 
-test_that("Generate a gene sampling dataset", {
+test_that("Test if the full indirect pipeline works", {
   gs.seqs <- gene.sampling.retrieve(organism = "Phoca", speciesSampling = TRUE)
   targetGenes <- gs.seqs[1,]
 

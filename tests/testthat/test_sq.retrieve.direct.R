@@ -1,6 +1,6 @@
 unlink(list.dirs("."), recursive = TRUE)
 
-test_that("Error in clades and species", {
+test_that("Generate an error when no genes, species or clades are specified", {
   expect_error(sq.retrieve.direct(
     clades = NULL,
     species = NULL,
@@ -10,7 +10,7 @@ test_that("Error in clades and species", {
   ))
 })
 
-test_that("Error in default numeric clades", {
+test_that("Generate an error when clades are actually numeric and not strings", {
   expect_error(sq.retrieve.direct(
     clades = 1,
     species = NULL,
@@ -22,7 +22,7 @@ test_that("Error in default numeric clades", {
 
 
 
-test_that("Error in default numeric species", {
+test_that("Generate an error when species are actually numeric and not strings", {
   expect_error(sq.retrieve.direct(
     clades = NULL,
     species = 1,
@@ -32,7 +32,7 @@ test_that("Error in default numeric species", {
   ))
 })
 
-test_that("No genes", {
+test_that("Generate an error when no genes are specified", {
   expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
@@ -43,7 +43,7 @@ test_that("No genes", {
 })
 
 
-test_that("Max sequence as character", {
+test_that("Generate an error when the maximum number of sequences is a string instead of numeric", {
   expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
@@ -54,7 +54,7 @@ test_that("Max sequence as character", {
 })
 
 
-test_that("Max length as character", {
+test_that("Generate an error when the maximum lenght for the sequences retrieved is a string instead of numeric", {
   expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",
@@ -64,7 +64,7 @@ test_that("Max length as character", {
   ))
 })
 
-test_that("length of maxseqs and maxlength", {
+test_that("Generate an error when a vector with more than 1 element is provided for the max* arguments", {
   expect_error(sq.retrieve.direct(
     clades = "Homo",
     species = "Brassica",

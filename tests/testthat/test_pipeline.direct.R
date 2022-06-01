@@ -1,7 +1,7 @@
 unlink(list.dirs("."), recursive = TRUE)
 
 
-test_that("Direct pipeline works", {
+test_that("Test if the direct pipeline works", {
 
   expect_output(sq.retrieve.direct(
     clades = c("Felis", "Vulpes", "Phoca"),
