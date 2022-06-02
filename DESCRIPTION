@@ -1,7 +1,7 @@
 Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
                   role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1696-4886")),

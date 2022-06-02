@@ -4,11 +4,13 @@
 \alias{sq.retrieve.indirect}
 \title{Retrieve sequences from genbank based on a dataset of accession numbers}
 \usage{
-sq.retrieve.indirect(acc.table)
+sq.retrieve.indirect(acc.table, download.sqs = FALSE)
 }
 \arguments{
 \item{acc.table}{An accession table, ideally generated using \code{acc.table.retrieve}.
 The data.frame must have the Species, Acc, and gene column names.}
+
+\item{download.sqs}{Logical indicating whether sequences should be downloaded locally or returned as a list.}
 }
 \value{
 None

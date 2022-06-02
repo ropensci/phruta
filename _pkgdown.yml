@@ -9,7 +9,9 @@ articles:
 - title: Vignettes
   navbar: ~
   contents:
-  - Brief_Intro_phruta
+  - what_is_phruta
+  - Using_phruta
+  - Exporting_data_phruta
   - Phylogenetics_phruta
   - Phruta_advanced
   - Future_phruta

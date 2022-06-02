@@ -17,6 +17,8 @@
 #'                     files in the relevant folder (character). Note that
 #'                     this argument can be set to \code{"NULL"} if no specific
 #'                     pattern wants to be analyzed.
+#' @param sqs.object A list of sequences generated from sq.curate. Only use if you're
+#'                   not interested in download sequences locally.
 #' @param mask Removes ambiguous sites (Logical, TRUE or FALSE).
 #' @param maxFractionGapsSpecies Maximum fraction of gaps per species (when masked)
 #' @param ... Arguments passed to \code{"DECIPHER::AlignSeqs"}.
@@ -46,6 +48,7 @@
 
 sq.aln <- function(folder = "1.CuratedSequences",
                    FilePatterns = "renamed",
+                   sqs.object = NULL,
                    mask = TRUE,
                    maxFractionGapsSpecies = 0.01,
                    ...) {
@@ -53,6 +56,8 @@ sq.aln <- function(folder = "1.CuratedSequences",
     stop("Folder where curated sequences are saved must be provided")
   if (!is.logical(mask))
     stop("The mask argument must be TRUE or FALSE")
+
+  if(is.null(sqs.object)){
 
   files <- list.files(folder, FilePatterns)
   files <- sub("renamed_", "", files)
@@ -111,4 +116,61 @@ sq.aln <- function(folder = "1.CuratedSequences",
       writeXStringSet(aligned, filepath = paste0("2.Alignments/Raw_", files[x]))
     })
   )
+
+  } else{
+     alns <- lapply(sqs.object$Sequences, function(x) {
+
+        if(!is.null(x)){
+        seqs <- Biostrings::DNAStringSet(unlist(lapply(as.character(x$Renamed),paste0, collapse="")))
+        seqs <- DECIPHER::OrientNucleotides(seqs)
+        aligned <- DECIPHER::AlignSeqs(seqs)
+
+        #if (mask) {
+          alignedNoGaps <- DECIPHER::RemoveGaps(aligned, removeGaps = "common")
+
+          alignedMasked <- DECIPHER::MaskAlignment(alignedNoGaps,
+                                                   correction = if (length(alignedNoGaps) < 200) {
+                                                     TRUE
+                                                   } else {
+                                                     FALSE
+                                                   })
+
+          DNAStr <- as(alignedMasked, "DNAStringSet")
+
+          no.masking <- max(nchar(as.character(DNAStr)))
+          if (no.masking != 0) {
+
+
+            ##Species removed while masking the aln
+            RemMasking <- !names(aligned) %in% names(DNAStr)
+
+            ##Remove species with not enough data
+            NonGaps <- nchar(gsub("-", "", as.character(DNAStr)))
+            MaxNumberNonGaps <- as.vector(max(nchar(as.character(DNAStr)))*maxFractionGapsSpecies)
+
+            #if(MaxNumberNonGaps > 100){
+            rem <- NonGaps < MaxNumberNonGaps
+            SumRem <- cbind.data.frame(Species = names(NonGaps),
+                                       NonGaps,
+                                       #MaxNumberNonGaps,
+                                       removedPerGaps = rem,
+                                       removedMasking = RemMasking)
+            DNAStr <- DNAStr[!rem]
+            DNAStr <- DNAStr[!duplicated(names(DNAStr))]
+
+          }
+
+        #}
+
+          toRet <- if(no.masking != 0) {
+            list("Aln.Original" = as.DNAbin(aligned), "Info.Masked" = SumRem, "Aln.Masked" = as.DNAbin(DNAStr))
+          }else{
+            list("Aln.Original" = as.DNAbin(aligned))
+          }
+          return(toRet)
+          }
+      })
+     names(alns) <- names(sqs.object$Sequences)
+     return(alns)
+  }
 }

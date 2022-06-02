@@ -7,6 +7,7 @@
 sq.aln(
   folder = "1.CuratedSequences",
   FilePatterns = "renamed",
+  sqs.object = NULL,
   mask = TRUE,
   maxFractionGapsSpecies = 0.01,
   ...
@@ -20,6 +21,9 @@ are stored (character).}
 files in the relevant folder (character). Note that
 this argument can be set to \code{"NULL"} if no specific
 pattern wants to be analyzed.}
+
+\item{sqs.object}{A list of sequences generated from sq.curate. Only use if you're
+not interested in download sequences locally.}
 
 \item{mask}{Removes ambiguous sites (Logical, TRUE or FALSE).}
 

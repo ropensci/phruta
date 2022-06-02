@@ -5,6 +5,7 @@
 #'
 #' @param acc.table An accession table, ideally generated using \code{acc.table.retrieve}.
 #'                  The data.frame must have the Species, Acc, and gene column names.
+#' @param download.sqs Logical indicating whether sequences should be downloaded locally or returned as a list.
 #'
 #' @return None
 #'
@@ -31,7 +32,7 @@
 
 
 
-sq.retrieve.indirect <- function(acc.table){
+sq.retrieve.indirect <- function(acc.table, download.sqs = FALSE){
 
   unlink("0.Sequences", recursive = TRUE)
   dir.create("0.Sequences")
@@ -41,13 +42,21 @@ sq.retrieve.indirect <- function(acc.table){
     seqs <- read.GenBank(acc.table.sub$Acc, species.names = TRUE)
 
     names(seqs) <- paste0(names(seqs), " ", acc.table.sub$Species)
-
+    if(download.sqs){
     write.dna(
       seqs,
       file=paste0("0.Sequences/", x, ".fasta"),
       format = "fasta"
     )
+    }else{
+      seqs
+    }
   })
+
+ if( !download.sqs ){
+   names(su) <- unique(acc.table$gene)
+   su
+ }
 
 }
 

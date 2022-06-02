@@ -19,7 +19,7 @@ Please note that you need at least two gene regions to run partitionfinder."><me
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -34,7 +34,13 @@ Please note that you need at least two gene regions to run partitionfinder."><me
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Brief_Intro_phruta.html">Introduction to the `phruta` R package</a>
+      <a href="../articles/what_is_phruta.html">What is `phruta`?</a>
+    </li>
+    <li>
+      <a href="../articles/Using_phruta.html">Using the `phruta` R package</a>
+    </li>
+    <li>
+      <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
       <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
@@ -77,7 +83,8 @@ Please note that you need at least two gene regions to run partitionfinder.</p>
   folderAlignments <span class="op">=</span> <span class="st">"2.Alignments"</span>,
   FilePatterns <span class="op">=</span> <span class="st">"Masked"</span>,
   folderPartitionFinder <span class="op">=</span> <span class="st">"2.1.PartitionFinderv1"</span>,
-  models <span class="op">=</span> <span class="st">"all"</span>
+  models <span class="op">=</span> <span class="st">"all"</span>,
+  run <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -96,6 +103,8 @@ pattern wants to be analyzed.</p></dd>
 are stored (string).</p></dd>
 <dt>models</dt>
 <dd><p>Models to run in partitionfinder (string).</p></dd>
+<dt>run</dt>
+<dd><p>Run  partitionfinder?</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -105,7 +114,7 @@ are stored (string).</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">sq.retrieve</span><span class="op">(</span></span>
+<span class="r-in"><span class="fu"><a href="sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span></span>
 <span class="r-in">  clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,</span>
 <span class="r-in">  species <span class="op">=</span> <span class="st">"Manis_pentadactyla"</span>,</span>
 <span class="r-in">  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADORA3"</span>, <span class="st">"CYTB"</span><span class="op">)</span></span>

@@ -10,6 +10,7 @@ sq.curate(
   database = "gbif",
   kingdom = NULL,
   folder = "0.Sequences",
+  sqs.object = NULL,
   removeOutliers = TRUE,
   minSeqs = 5,
   threshold = 0.05,
@@ -37,6 +38,9 @@ Two possible options: "animals" or "plants."}
 
 \item{folder}{The name of the folder where the original sequences are
 located (character).}
+
+\item{sqs.object}{A list of sequences generated from \code{sq.retrieve.indirect}. Only use if you're
+not interested in download sequences locally.}
 
 \item{removeOutliers}{Whether  \code{odseq:odseq} should be used to remove outliers}
 
