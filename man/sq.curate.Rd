@@ -53,7 +53,7 @@ not interested in download sequences locally.}
 in the \code{0.Sequences} folder.}
 }
 \value{
-None
+list
 }
 \description{
 After downloading sequences from genbank, this function

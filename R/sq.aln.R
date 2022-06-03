@@ -29,7 +29,7 @@
 #' @import DECIPHER
 #' @import msa
 #'
-#' @return None
+#' @return list
 #'
 #' @examples
 #' \dontrun{

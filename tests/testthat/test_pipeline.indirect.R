@@ -24,7 +24,7 @@ test_that("Test if the full indirect pipeline works", {
     class(acc.table) == 'data.frame'
   )
 
-  sq.retrieve.indirect(acc.table)
+  sq.retrieve.indirect(acc.table, download.sqs = TRUE)
 
   expect_true(any(grepl('0.Sequences',list.dirs())))
 

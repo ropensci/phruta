@@ -47,7 +47,7 @@
 #'
 #' @name sq.curate
 #'
-#' @return None
+#' @return list
 #'
 #' @examples
 #' \dontrun{

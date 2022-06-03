@@ -32,7 +32,7 @@ not interested in download sequences locally.}
 \item{...}{Arguments passed to \code{"DECIPHER::AlignSeqs"}.}
 }
 \value{
-None
+list
 }
 \description{
 Perform multiple sequence alignment on all the fasta files
