@@ -26,7 +26,7 @@ following the gbif (or selected database) taxonomic backbone.'><meta property="o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -41,7 +41,13 @@ following the gbif (or selected database) taxonomic backbone.'><meta property="o
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Brief_Intro_phruta.html">Introduction to the `phruta` R package</a>
+      <a href="../articles/what_is_phruta.html">What is `phruta`?</a>
+    </li>
+    <li>
+      <a href="../articles/Using_phruta.html">Using the `phruta` R package</a>
+    </li>
+    <li>
+      <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
       <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
@@ -87,17 +93,18 @@ following the gbif (or selected database) taxonomic backbone.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sq.curate</span><span class="op">(</span>
-  filterTaxonomicCriteria <span class="op">=</span> <span class="cn">NULL</span>,
-  mergeGeneFiles <span class="op">=</span> <span class="cn">NULL</span>,
-  database <span class="op">=</span> <span class="st">"gbif"</span>,
-  kingdom <span class="op">=</span> <span class="cn">NULL</span>,
-  folder <span class="op">=</span> <span class="st">"0.Sequences"</span>,
-  removeOutliers <span class="op">=</span> <span class="cn">TRUE</span>,
-  minSeqs <span class="op">=</span> <span class="fl">5</span>,
-  threshold <span class="op">=</span> <span class="fl">0.05</span>,
-  ranks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kingdom"</span>, <span class="st">"phylum"</span>, <span class="st">"class"</span>, <span class="st">"order"</span>, <span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sq.curate</span><span class="op">(</span></span>
+<span>  filterTaxonomicCriteria <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mergeGeneFiles <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  database <span class="op">=</span> <span class="st">"gbif"</span>,</span>
+<span>  kingdom <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  folder <span class="op">=</span> <span class="st">"0.Sequences"</span>,</span>
+<span>  sqs.object <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  removeOutliers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  minSeqs <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  threshold <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  ranks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kingdom"</span>, <span class="st">"phylum"</span>, <span class="st">"class"</span>, <span class="st">"order"</span>, <span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,52 +114,76 @@ following the gbif (or selected database) taxonomic backbone.</p>
 listing all the strings that could be used to
 identify the species that should
 be in the dataset (character).</p></dd>
+
+
 <dt>mergeGeneFiles</dt>
 <dd><p>A named list, with each element being a character vector
 indicating the names of the files in <code>"0.Sequences"</code>
 that need to be combined into a single fasta file. For instance,
 you can use this argument to combine CO1 and COI.</p></dd>
+
+
 <dt>database</dt>
 <dd><p>A name of a database with taxonomic information.
 Although 'gbif' is faster, it only has information for
 animals and plants. Other databases follow
 taxize::classification.</p></dd>
+
+
 <dt>kingdom</dt>
 <dd><p>Optional and only used when database='gbif'.
 Two possible options: "animals" or "plants."</p></dd>
+
+
 <dt>folder</dt>
 <dd><p>The name of the folder where the original sequences are
 located (character).</p></dd>
+
+
+<dt>sqs.object</dt>
+<dd><p>A list of sequences generated from <code>sq.retrieve.indirect</code>. Only use if you're
+not interested in download sequences locally.</p></dd>
+
+
 <dt>removeOutliers</dt>
 <dd><p>Whether  <code>odseq:odseq</code> should be used to remove outliers</p></dd>
+
+
 <dt>minSeqs</dt>
 <dd><p>minimum number of sequences per locus</p></dd>
+
+
 <dt>threshold</dt>
 <dd><p>Relative to <code><a href="https://rdrr.io/pkg/odseq/man/odseq.html" class="external-link">odseq::odseq</a></code>. Only important if
 <code>removeOutliers = TRUE</code></p></dd>
+
+
 <dt>ranks</dt>
 <dd><p>The taxonomic ranks used to examine the taxonomy of the species
 in the <code>0.Sequences</code> folder.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>None</p>
+    
+
+<p>list</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span></span>
-<span class="r-in">  clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,</span>
-<span class="r-in">  species <span class="op">=</span> <span class="st">"Manis_pentadactyla"</span>,</span>
-<span class="r-in">  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADORA3"</span>, <span class="st">"CYTB"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">sq.curate</span><span class="op">(</span></span>
-<span class="r-in">  filterTaxonomicCriteria <span class="op">=</span> <span class="st">"Felis|Vulpes|Phoca|Manis"</span>,</span>
-<span class="r-in">  database <span class="op">=</span> <span class="st">"gbif"</span>, kingdom <span class="op">=</span> <span class="st">"animals"</span>,</span>
-<span class="r-in">  folder <span class="op">=</span> <span class="st">"0.Sequences"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  species <span class="op">=</span> <span class="st">"Manis_pentadactyla"</span>,</span></span>
+<span class="r-in"><span>  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADORA3"</span>, <span class="st">"CYTB"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">sq.curate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  filterTaxonomicCriteria <span class="op">=</span> <span class="st">"Felis|Vulpes|Phoca|Manis"</span>,</span></span>
+<span class="r-in"><span>  database <span class="op">=</span> <span class="st">"gbif"</span>, kingdom <span class="op">=</span> <span class="st">"animals"</span>,</span></span>
+<span class="r-in"><span>  folder <span class="op">=</span> <span class="st">"0.Sequences"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -167,7 +198,7 @@ in the <code>0.Sequences</code> folder.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

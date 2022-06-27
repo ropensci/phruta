@@ -19,7 +19,7 @@ in genbank."><meta property="og:image" content="https://cromanpa94.github.io/phr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -34,7 +34,13 @@ in genbank."><meta property="og:image" content="https://cromanpa94.github.io/phr
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Brief_Intro_phruta.html">Introduction to the `phruta` R package</a>
+      <a href="../articles/what_is_phruta.html">What is `phruta`?</a>
+    </li>
+    <li>
+      <a href="../articles/Using_phruta.html">Using the `phruta` R package</a>
+    </li>
+    <li>
+      <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
       <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
@@ -73,39 +79,50 @@ in genbank.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">acc.retrieve</span><span class="op">(</span>
-  <span class="va">organism</span>,
-  acc.num <span class="op">=</span> <span class="cn">FALSE</span>,
-  gene <span class="op">=</span> <span class="cn">NULL</span>,
-  speciesLevel <span class="op">=</span> <span class="cn">FALSE</span>,
-  npar <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">acc.retrieve</span><span class="op">(</span></span>
+<span>  <span class="va">organism</span>,</span>
+<span>  acc.num <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  gene <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  speciesLevel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  npar <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>organism</dt>
 <dd><p>The name of a single taxon (character).</p></dd>
+
+
 <dt>acc.num</dt>
 <dd><p>Logical indicating whether the <code>organism</code>
 is actually a vector or accession numbers.</p></dd>
+
+
 <dt>gene</dt>
 <dd><p>The name of a single gene region (character; optional).</p></dd>
+
+
 <dt>speciesLevel</dt>
 <dd><p>Whether the result should be a species-level dataset (logical).</p></dd>
+
+
 <dt>npar</dt>
 <dd><p>Number of parallel searches (the default is probably the best option).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>data.frame</p>
+    
+
+<p>data.frame</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">acc.retrieve</span><span class="op">(</span>organism<span class="op">=</span><span class="st">"Vulpes"</span>, gene <span class="op">=</span> <span class="st">'cytb'</span>, species<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">acc.retrieve</span><span class="op">(</span>organism<span class="op">=</span><span class="st">"Vulpes"</span>, gene <span class="op">=</span> <span class="st">'cytb'</span>, species<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +137,7 @@ is actually a vector or accession numbers.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
