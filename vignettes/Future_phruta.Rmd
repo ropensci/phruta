@@ -17,13 +17,13 @@ output:
 
 ## Future directions in `phruta`  <a name="paragraph1"></a>
 
-I acknowledge some of the functions in `phruta` are for now very limited to only a few basic aspects of phylogenetic analyses. I'm actively working on improving `phruta.` Recent developments have include:
+I acknowledge that some of the functions in `phruta` are for now very limited and cover a few basic aspects of the modern phylogenetic pipeline. However, I'm actively working on improving `phruta.` Recent developments have included:
 
--   Expand taxonomic cleaning for non-animal/plant groups
--   Taxonomic tree constraints
+-   Expand taxonomic cleaning for non-animal/plant groups (implemented in `v0.1.2`)
+-   Taxonomic tree constraints (implemented in `v0.1.2`)
 -   Partitioned analyses in RAxML
--   PartitionFinder (V1)
--   Rogue taxa identification
--   New functions to mine genbank
+-   PartitionFinder (V2; V1 is implemented in `v0.1.2`)
+-   Rogue taxa identification (implemented in `v0.1.2`)
+-   Faster functions to mine genbank  (implemented in `v0.1.2`)
 
-Please stay tuned for more updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions, etc. Your input is very valuable! Feel free to get in touch as well if you want to request any new functionality.
+Please stay tuned for more updates. Get in touch if you have questions. Open issues if you find anything relevant in my code, have suggestions. Your input is very valuable! Feel free to get in touch as well if you want to request any new functionality.

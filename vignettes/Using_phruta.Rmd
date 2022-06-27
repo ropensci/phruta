@@ -30,9 +30,9 @@ library(knitr)
 
 ## Intro tutorial: Clade names to sequence alignments <a name="paragraph1"></a>
 
-Let's create a phylogeny for a few mammal clades. Assume that we need to build a tree for the following three genera: *Felis, Vulpes*, and *Phoca*. All three genera are within Carnivora. Both *Felis* and *Vulpes* are classified in different superfamilies within Fissipedia and *Phoca* is part of another suborder, Pinnipedia. We're going to root our tree with another mammal species, a Chinese Pangolin ( *Manis pentadactyla*). Users can select additional target species, however, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.
+Let's create a phylogeny for a few mammal clades. Assume that we need to build a tree for the following three genera: *Felis, Vulpes*, and *Phoca*. All three genera are classified within Carnivora. Both *Felis* and *Vulpes* are classified in different superfamilies within the order Fissipedia. *Phoca* is part of another suborder, Pinnipedia. We're going to root our tree with another mammal species, the Chinese Pangolin ( *Manis pentadactyla*). Users can select additional target species, however, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.
 
-So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analized is already available. For instance, we could use same gene regions as in [Upham et al (2009)](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030). Nevertheless, for this tutorial, we will simply try to find the gene regions are well sampled for the target taxa. I believe that figuring out the best sampled gene regions in genbank, instead of providing names, is potentially more valuable when working with poorly studied groups. Before we move on, please make sure that you you have [set a working directory for this project](http://rfunction.com/archives/1001) as all the files will be saved to the current working directory.
+So far, we have decided the taxonomic make of our analyses. However, we also need to determine the characteristics of the molecular dataset that we would like to assemble. Fortunately, mammals are extensively studied and a comprehensive list of potential gene regions to be analyzed is already available. For instance, we could use same gene regions as in [Upham et al (2009)](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000494#sec030). Nevertheless, for this tutorial, we will simply try to find the gene regions are well sampled for the target taxa. I believe that figuring out the best sampled gene regions in genbank, instead of providing names, is potentially more valuable when working with poorly studied groups. Before we move on, please make sure that you you have [set a working directory for this project](http://rfunction.com/archives/1001) as all the files will be saved to the current working directory.
 
 Let's start by loading `phruta`!
 
@@ -128,7 +128,7 @@ The resulting multiple sequence alignments will be saved to `sqs.aln` object, a 
 
 Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in another vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our cool alignments. Let's first check the raw alignments.
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = FALSE}
 library(ape)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
@@ -141,7 +141,7 @@ for (i in seq_along(sqs.aln)) {
 
 Now, the masked alignments...
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = FALSE}
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Masked)){
@@ -149,6 +149,10 @@ for (i in seq_along(sqs.aln)) {
         ylab = "Species", legend = FALSE)
   }
 }
+```
+
+
+```{r echo = FALSE}
 end_time <- Sys.time()
 ```
 
