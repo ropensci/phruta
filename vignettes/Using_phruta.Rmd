@@ -139,6 +139,8 @@ for (i in seq_along(sqs.aln)) {
 }
 ```
 
+![Raw sequence alignments](Fig1.png "Figure 1") 
+
 Now, the masked alignments...
 
 ```{r echo = FALSE, eval = FALSE}
@@ -151,6 +153,8 @@ for (i in seq_along(sqs.aln)) {
 }
 ```
 
+
+![Curated sequence alignments](Fig2.png "Figure 2") 
 
 ```{r echo = FALSE}
 end_time <- Sys.time()
