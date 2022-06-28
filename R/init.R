@@ -8,3 +8,10 @@
   )
   packageStartupMessage(paste(message, collapse = ""))
 }
+
+pkg.env <- NULL
+.onLoad <- function(libname, pkgname) {
+  pkg.env <<- new.env()
+  assign(".testMode", FALSE, envir = pkg.env)
+}
+

@@ -1,0 +1,126 @@
+---
+title: "Using `phruta` with defined target genes"
+author: Cristian Román-Palacios
+date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+vignette: >
+  %\VignetteIndexEntry{Using `phruta` with defined target genes}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+output:
+#  pdf_document:
+#    highlight: null
+#    number_sections: yes
+  knitr:::html_vignette:
+    toc: true
+    fig_caption: yes
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = FALSE)
+unlink(c("0.Sequences", "1.CuratedSequences", "2.Alignments"), recursive = TRUE)
+start_time <- Sys.time()
+library(knitr)
+```
+
+
+In this vignette, we will be retrieving sequences directly from genbank using a list of taxa and particular gene regions. Given that we already have some target genes in mind, we can skip `gene.sampling.retrieve`. We won't generate an accession table using `acc.table.retrieve` at the beginning, mostly because the sampling that we're using in `phruta` this time, based on `sq.retrieve.direct`, is less flexible than the one outlined before for `sq.retrieve.indirect`. As noted before, `sq.retrieve.direct` does its best to directly (i.e. without potential input from the user) retrieve sequences for a target set of taxa and set of gene regions. You should be able to catch errors using `sq.retrieve.indirect` but mistakes will be harder to spot and fix if you're using `sq.retrieve.direct`. 
+
+Let's start by loading `phruta`!
+
+```{r eval = TRUE, warning = TRUE, message = TRUE, progress = TRUE}
+library(phruta)
+```
+
+
+```{r setup, echo=FALSE, include = FALSE}
+assign(".testMode", TRUE, envir = phruta:::pkg.env)
+```
+
+
+Now, let's download gene sequences for taxa in _Felis_, _Vulpes_, and _Phoca_. We will be sampling only two gene regions using `sq.retrieve.direct`. Note that we're going to be using the list of species for the target genera from the gbif taxonomic backbone (hence `db = "gbif"`).
+
+
+```{r results = 'hide'}
+sq.retrieve.direct(
+  clades = c("Felis", "Vulpes", "Phoca"),
+  species = "Manis_pentadactyla",
+  genes = c("ADORA3", "CYTB"),
+  db = "gbif"
+)
+```
+
+This line of code will create a folder `0.Sequences` in your working directory. Note that `sq.retrieve.direct` does not return objects to the environment. The rest of this tutorial follow the same structure as the `Using the `phruta` R package` vignette. 
+
+For instance, we can use the `sq.curate` function to remove highly divergent sequences. Similarly, this function will remove observations from species that are not within our target taxonomic groups.
+
+```{r results = 'hide'}
+sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
+                         kingdom = 'animals', 
+                         folder = "0.Sequences",
+                         removeOutliers = FALSE,
+                         minSeqs = 2)
+```
+
+Let's now review the current sampling...
+
+```{r echo = FALSE}
+accTable <- read.csv("1.CuratedSequences/0.AccessionTable.csv")[,-1]
+kable(accTable, caption = "4. Preliminary accession number table")
+```
+
+Now, we'll align the sequences that we just curated. For this, we just use `sq.aln` with default parameters. We're again passing the output from `sq.curate`, `sqs.curated`, using the `sqs.object` argument in `sq.aln`.
+
+```{r  results = 'hide'}
+sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
+```
+
+The resulting multiple sequence alignments will be saved to `sqs.aln` object, a list. For each of the gene regions, we will have access to the original alignment (`Aln.Original`), the masked one (`Aln.Masked`), and information on the masking process.Let's first check the raw alignments...
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+```{r echo = FALSE}
+library(ape)
+files <- list.files("2.Alignments", pattern = "Raw_",full.names = TRUE)
+files.main <- list.files("2.Alignments", pattern = "Raw_",full.names = FALSE)
+sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
+par(mfrow = c(ceiling(length(sampleALNs)/2),2))
+for (i in seq_along(sampleALNs)) {
+  image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
+        ylab = "Species", legend = FALSE)
+}
+```
+
+Now, the masked alignments...
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+
+```{r echo = FALSE}
+files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
+files.main <- list.files("2.Alignments", pattern = "Masked_",full.names = FALSE)
+sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
+par(mfrow = c(ceiling(length(sampleALNs)/2),2))
+for (i in seq_along(sampleALNs)) {
+  image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
+        ylab = "Species", legend = FALSE)
+}
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+```{r echo = FALSE}
+end_time <- Sys.time()
+```
+
+
+In total, this script took `r round(end_time-start_time)` minutes to run in my local machine. 
+
+
+
+

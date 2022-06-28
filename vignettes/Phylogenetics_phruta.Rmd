@@ -24,7 +24,8 @@ output:
 
 ## Installing RAxML <a name="paragraph1"></a>
 
-`RAxML` can be easily installed to the `PATH` using one of the two lines below in `conda`:
+
+In `MacOS`, `RAxML` can be easily installed to the `PATH` using one of the two lines below in `conda`:
 
 ```{bash eval=FALSE}
 conda install -c bioconda/label/cf201901 raxml 
@@ -34,34 +35,38 @@ conda install -c bioconda/label/cf201901 raxml
 conda install -c bioconda raxml
 ```
 
-Open `R` and make sure that the following line doesn't throw an error.
+For other `OS` (Windows, Linux), please follow the instructions listed in the official `RAxML` [website](https://cme.h-its.org/exelixis/web/software/raxml/)
+
+Once `RAxML` has been installed to your computer, open `R` and make sure that the following line doesn't throw an error.
 
 ```{r eval=FALSE}
 system("raxmlHPC")
 ```
 
-You may also want to check if `RAxML` is called from the console using `raxmlHPC` or `raxml`. In fact, this string is passed to the `exec` argument in `ips::raxml` when running `tree.raxml` (`raxml_exec` therein).
+Depending on how `RAxML` was installed, you may want to check if `RAxML` is called from the terminal using `raxmlHPC` or `raxmlHPC`. This string needs to be passed to `tree.raxml` using the argument `raxml_exec`. Please note that this argument corresponds to the `exec` argument in `ips::raxml`.
 
-Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`.
-
-With issues, if you're running macOS, try running RStudio from the command line. Close RStudio, open the terminal, and type:
+Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`. If you're using `macOS`, try starting `RStudio` from the command line by running the following line:
 
 ```{bash eval=FALSE}
 open /Applications/RStudio.app
 ```
 
+In other OS, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
+
+
 ## Installing PATHd-8 and treePL <a name="paragraph2"></a>
 
 There are excellent guides for installing `PATHd-8` and `treePL`. Here, I summarize two potentially relevant options.
 
-First, you can use [Brian O'Meara's](https://github.com/bomeara/phydocker/blob/master/Dockerfile) approach for installing `PATHd-8`. I summarized the code [here](https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4).
+First, you can use [Brian O'Meara's](https://github.com/bomeara/phydocker/blob/master/Dockerfile) approach for installing `PATHd-8` in MacOs and linux. I summarize the code in the following [link](https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4). For Windows users, please use the compiled version of the software provided in the following [link](https://www2.math.su.se/PATHd8/).
 
-Second, you can use homebrew to install `treePL`, thanks to Jonathan Chang.
+Second, you can use homebrew to install `treePL` (Windows, MacOS, and Linux), thanks to Jonathan Chang.
 
 ```{bash eval = F}
 brew install brewsci/bio/treepl
 ```
 
+Please check the following [link](https://docs.brew.sh/Homebrew-on-Linux)) if you're interested in running `brew` from Windows and Linux.
 
 ## Phylogenetic inference with `phruta` and `RAxML` <a name="paragraph3"></a>
 

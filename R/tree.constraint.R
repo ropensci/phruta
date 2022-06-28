@@ -51,6 +51,16 @@ tree.constraint <- function(taxonomy_folder = "1.CuratedSequences",
                                               "species_names"),
                             Topology = "((ingroup), outgroup);",
                             outgroup = NULL) {
+
+
+  ##Over-writing?
+  if( !isTRUE(pkg.env$.testMode) ) {
+    UI <- readline(paste0("This function might overwrite ",
+                          "3.2.Phylogeny.constraint", ". Are you sure you want to continue? (y/n)  "))
+    if(UI != 'y') stop('Exiting since you did not press y')
+  }
+
+
   taxonomy <- read.csv(paste0(taxonomy_folder, "/1.Taxonomy.csv"))
 
   if (Topology == "((ingroup), outgroup);") {

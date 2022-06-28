@@ -59,6 +59,13 @@ sq.aln <- function(folder = "1.CuratedSequences",
 
   if(is.null(sqs.object)){
 
+    ##Over-writing?
+    if( !isTRUE(pkg.env$.testMode) ) {
+      UI <- readline(paste0("This function might overwrite ",
+                            "2.Alignments", ". Are you sure you want to continue? (y/n)  "))
+      if(UI != 'y') stop('Exiting since you did not press y')
+    }
+
   files <- list.files(folder, FilePatterns)
   files <- sub("renamed_", "", files)
   filesComplete <- list.files(folder, FilePatterns, full.names = TRUE)

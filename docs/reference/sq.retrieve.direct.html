@@ -42,6 +42,9 @@ and genes into a folder called "0.Sequences".'><meta property="og:image" content
       <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
+      <a href="../articles/phruta_targetgenes.html">Using `phruta` with defined target genes</a>
+    </li>
+    <li>
       <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
     </li>
     <li>
@@ -81,6 +84,7 @@ and genes into a folder called <code>"0.Sequences"</code>.</p>
   clades <span class="op">=</span> <span class="cn">NULL</span>,
   species <span class="op">=</span> <span class="cn">NULL</span>,
   genes <span class="op">=</span> <span class="cn">NULL</span>,
+  db <span class="op">=</span> <span class="st">"itis"</span>,
   maxseqs <span class="op">=</span> <span class="fl">1</span>,
   maxlength <span class="op">=</span> <span class="fl">5000</span>
 <span class="op">)</span></code></pre></div>
@@ -97,6 +101,9 @@ in the ingroup or species to be sampled in the outgroup
 (character).</p></dd>
 <dt>genes</dt>
 <dd><p>A vector listing gene names of interest (character).</p></dd>
+<dt>db</dt>
+<dd><p>Follows <code>db</code> in <code>taxize::downsteam</code>. Choose from
+<code>itis</code>, <code>gbif</code>, <code>ncbi</code>, <code>worms</code>, or <code>bold</code>.</p></dd>
 <dt>maxseqs</dt>
 <dd><p>Maximum number of sequences to retrieve per search
 (taxa + gene) (numeric).</p></dd>

@@ -35,6 +35,15 @@
 #' @export
 
 tree.roguetaxa <- function(folder = "3.Phylogeny", ...) {
+
+  ##Over-writing?
+  if( !isTRUE(pkg.env$.testMode) ) {
+    UI <- readline(paste0("This function might overwrite ",
+                          "3.1.RogueTaxa", ". Are you sure you want to continue? (y/n)  "))
+    if(UI != 'y') stop('Exiting since you did not press y')
+  }
+
+
   trees <- read.tree(paste0(folder, "/RAxML_bootstrap.phruta"))
   BestTree <- read.tree(paste0(folder, "/RAxML_bipartitions.phruta"))
   RT <- RogueTaxa(trees, bestTree = BestTree, ...)

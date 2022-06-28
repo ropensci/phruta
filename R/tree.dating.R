@@ -58,6 +58,14 @@ tree.dating <-
         is.null(phylogenyFolder))
       stop("Please provide folder names")
 
+    ##Over-writing?
+    if( !isTRUE(pkg.env$.testMode) ) {
+      UI <- readline(paste0("This function might overwrite ",
+                            "4.Timetree", ". Are you sure you want to continue? (y/n)  "))
+      if(UI != 'y') stop('Exiting since you did not press y')
+    }
+
+
     taxonomy <- read.csv(paste0(taxonomyFolder, "/1.Taxonomy.csv"))
     row.names(taxonomy) <- taxonomy$species_names
     TargetTree <-

@@ -93,6 +93,13 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   if(is.null(sqs.object)){
 
+    ##Over-writing?
+    if( !isTRUE(pkg.env$.testMode) ) {
+      UI <- readline(paste0("This function might overwrite ",
+                            "1.CuratedSequences", ". Are you sure you want to continue? (y/n)  "))
+      if(UI != 'y') stop('Exiting since you did not press y')
+    }
+
 
     if (!is.null(mergeGeneFiles)) {
 
@@ -285,6 +292,8 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
    codes <- gsub("\\..*","",codes)
    codes[!duplicated(spps)]
   } ))
+
+  AccDat$AccN <- gsub("\\..*","",AccDat$AccN)
 
   AccDat <- AccDat[AccDat$AccN %in% perDS,]
 
@@ -497,6 +506,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
       codes[!duplicated(spps)]
     } ))
 
+    AccDat$AccN <- gsub("\\..*","",AccDat$AccN)
     AccDat <- AccDat[AccDat$AccN %in% perDS,]
 
     AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) >= minSeqs)), ]

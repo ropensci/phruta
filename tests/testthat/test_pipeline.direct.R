@@ -6,7 +6,8 @@ test_that("Test if the direct pipeline works", {
   expect_output(sq.retrieve.direct(
     clades = c("Felis", "Vulpes", "Phoca"),
     species = "Manis_pentadactyla",
-    genes = c("ADORA3", "CYTB")
+    genes = c("ADORA3", "CYTB"),
+    db = "gbif"
   ))
 
   expect_invisible(

@@ -72,6 +72,9 @@
       <a href="articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
+      <a href="articles/phruta_targetgenes.html">Using `phruta` with defined target genes</a>
+    </li>
+    <li>
       <a href="articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
     </li>
     <li>
@@ -105,9 +108,8 @@
 
 <p><!-- badges: start --> <a href="https://codecov.io/gh/cromanpa94/phruta?branch=main" class="external-link"><img src="https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg" alt="Codecov test coverage"></a> <a href="https://github.com/cromanpa94/phruta/actions" class="external-link"><img src="https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></a><br><a href="https://github.com/cromanpa94/phruta" class="external-link"><img src="https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg"></a> <a href="https://www.codefactor.io/repository/github/cromanpa94/phruta" class="external-link"><img src="https://www.codefactor.io/repository/github/cromanpa94/phruta/badge" alt="CodeFactor"></a> <!-- badges: end --></p>
 <div class="section level1">
-<div class="page-header"><h1 id="phruta-">
-<code>phruta</code> <a href="https://cromanpa94.github.io/phruta"><img src="reference/figures/logo.png" align="right" height="300"></a>
-<a class="anchor" aria-label="anchor" href="#phruta-"></a>
+<div class="page-header"><h1 id="the-phruta-r-package-">The <code>phruta</code> <code>R</code> package <a href="https://cromanpa94.github.io/phruta"><img src="reference/figures/logo.png" align="right" height="300"></a>
+<a class="anchor" aria-label="anchor" href="#the-phruta-r-package-"></a>
 </h1></div>
 <div class="section level3">
 <h3 id="assembling-phylogenetic-trees-from-taxonomic-names">Assembling phylogenetic trees from taxonomic names.<a class="anchor" aria-label="anchor" href="#assembling-phylogenetic-trees-from-taxonomic-names"></a>
@@ -153,24 +155,26 @@
 <h2 id="installing-raxml-">Installing RAxML <a name="paragraph1"></a>
 <a class="anchor" aria-label="anchor" href="#installing-raxml-"></a>
 </h2>
-<p><code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below in <code>conda</code>:</p>
+<p>In <code>MacOS</code>, <code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below in <code>conda</code>:</p>
 <p><code>{bash eval=FALSE} conda install -c bioconda/label/cf201901 raxml</code></p>
 <p><code>{bash eval=FALSE} conda install -c bioconda raxml</code></p>
-<p>Open <code>R</code> and make sure that the following line doesn’t throw an error.</p>
+<p>For other <code>OS</code> (Windows, Linux), please follow the instructions listed in the official <code>RAxML</code> <a href="https://cme.h-its.org/exelixis/web/software/raxml/" class="external-link">website</a></p>
+<p>Once <code>RAxML</code> has been installed to your computer, open <code>R</code> and make sure that the following line doesn’t throw an error.</p>
 <p><code>{r eval=FALSE} system("raxmlHPC")</code></p>
-<p>You may also want to check if <code>RAxML</code> is called using <code>raxmlHPC</code> or something else. This can be set when running <code>tree.raxml</code> using the <code>raxml_exec</code> argument.</p>
-<p>Finally, note that <code>RStudio</code> sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>.</p>
-<p>With issues, if you’re running macOS, try running RStudio from the command line. Close RStudio, open the terminal, and type:</p>
+<p>Depending on how <code>RAxML</code> was installed, you may want to check if <code>RAxML</code> is called from the terminal using <code>raxmlHPC</code> or <code>raxmlHPC</code>. This string needs to be passed to <code>tree.raxml</code> using the argument <code>raxml_exec</code>. Please note that this argument corresponds to the <code>exec</code> argument in <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code>.</p>
+<p>Finally, note that <code>RStudio</code> sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>. If you’re using <code>macOS</code>, try starting <code>RStudio</code> from the command line by running the following line:</p>
 <p><code>{bash eval=FALSE} open /Applications/RStudio.app</code></p>
+<p>In other OS, it might be better to simply avoid using <code>RStudio</code> if you’re interested in running the phylogenetic functions in <code>phruta</code>.</p>
 </div>
 <div class="section level2">
-<h2 id="installing-pathd-8-and-treepl-">Installing PATHd-8 and treePL <a name="paragraph2"></a>
+<h2 id="installing-pathd-8-and-treepl-">Installing <code>PATHd-8</code> and <code>treePL</code> <a name="paragraph2"></a>
 <a class="anchor" aria-label="anchor" href="#installing-pathd-8-and-treepl-"></a>
 </h2>
 <p>There are excellent guides for installing <code>PATHd-8</code> and <code>treePL</code>. Here, I summarize two potentially relevant options.</p>
-<p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile" class="external-link">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code>. I summarized the code <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">here</a>.</p>
-<p>Second, you can use homebrew to install <code>treePL</code>, thanks to Jonathan Chang.</p>
+<p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile" class="external-link">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code> in MacOs and linux. I summarize the code in the following <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">link</a>. For Windows users, please use the compiled version of the software provided in the following <a href="https://www2.math.su.se/PATHd8/" class="external-link">link</a>.</p>
+<p>Second, you can use homebrew to install <code>treePL</code> (Windows, MacOS, and Linux), thanks to Jonathan Chang.</p>
 <p><code>{bash eval = F} brew install brewsci/bio/treepl</code></p>
+<p>Please check the following <a href="https://docs.brew.sh/Homebrew-on-Linux" class="external-link">link</a>) if you’re interested in running <code>brew</code> from Windows and Linux.</p>
 </div>
 <div class="section level2">
 <h2 id="running-phruta-from-rstudio-while-using-macos">Running <code>phruta</code> from <code>Rstudio</code> while using <code>MacOS</code>?<a class="anchor" aria-label="anchor" href="#running-phruta-from-rstudio-while-using-macos"></a>
@@ -189,6 +193,12 @@
 <h2 id="additional-resources">Additional resources<a class="anchor" aria-label="anchor" href="#additional-resources"></a>
 </h2>
 <p>More details about the functions implemented in <code>phruta</code> can be found in the different vignettes associated with the package or in our <a href="https://cromanpa94.github.io/phruta/">website</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="alternatives-to-phruta">Alternatives to <code>phruta</code>
+<a class="anchor" aria-label="anchor" href="#alternatives-to-phruta"></a>
+</h2>
+<p>Similar functionalities for assembling curated molecular datasets for phylogenetic analyses can be found in <a href="https://github.com/ropensci/phylotaR" class="external-link"><code>phylotaR</code></a> and <a href="https://github.com/dportik/SuperCRUNCH" class="external-link">SuperCRUNCH</a>. However, note that <code>phylotaR</code> is limited to downloading and curating sequences (e.g. doesn’t align sequences). Similarly, <code>SuperCRUNCH</code> only curates local sequences. <code>phruta</code> is closer to the <a href="https://academic.oup.com/sysbio/article/66/2/152/2418028" class="external-link"><code>SUPERSMART</code></a> and its “new” associated <code>R</code> workflow <a href="https://github.com/AntonelliLab/supersmartR" class="external-link"><code>SUPERSMARTR</code></a>. However, most of the applications in the different packages that are part of <code>SUPERSMARTR</code> are simplified in <code>phruta</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>

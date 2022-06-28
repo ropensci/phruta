@@ -22,7 +22,6 @@ start_time <- Sys.time()
 library(knitr)
 ```
 
-
 # Table of Contents
 
 1.  [To export or not export from `phruta`](#intro)
@@ -43,6 +42,10 @@ Let's start by loading `phruta`!
 
 ```{r eval = TRUE, warning = TRUE, message = TRUE, progress = TRUE}
 library(phruta)
+```
+
+```{r setup, echo=FALSE, include = FALSE}
+assign(".testMode", TRUE, envir = phruta:::pkg.env)
 ```
 
 Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `phruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
@@ -133,6 +136,11 @@ The resulting multiple sequence alignments will be saved to the `2.Alignments` f
 
 Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in the next vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our cool alignments. Let's first check the raw alignments.
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+
 ```{r echo = FALSE}
 library(ape)
 files <- list.files("2.Alignments", pattern = "Raw_",full.names = TRUE)
@@ -147,6 +155,11 @@ for (i in seq_along(sampleALNs)) {
 
 Now, the masked alignments...
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+
 ```{r echo = FALSE}
 files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
 files.main <- list.files("2.Alignments", pattern = "Masked_",full.names = FALSE)
@@ -156,9 +169,16 @@ for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
         ylab = "Species", legend = FALSE)
 }
-end_time <- Sys.time()
 ```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+
+```{r echo = FALSE}
+end_time <- Sys.time()
+```
 
 In total, this script took `r round(end_time-start_time)` minutes to run in my local machine. You can now try to run `phruta` in your favorite group organisms! Don't forget to check the other tutorials...Buena suerte! 
 

@@ -8,6 +8,7 @@ sq.retrieve.direct(
   clades = NULL,
   species = NULL,
   genes = NULL,
+  db = "itis",
   maxseqs = 1,
   maxlength = 5000
 )
@@ -21,6 +22,9 @@ in the ingroup or species to be sampled in the outgroup
 (character).}
 
 \item{genes}{A vector listing gene names of interest (character).}
+
+\item{db}{Follows \code{db} in \code{taxize::downsteam}. Choose from
+\code{itis}, \code{gbif}, \code{ncbi}, \code{worms}, or \code{bold}.}
 
 \item{maxseqs}{Maximum number of sequences to retrieve per search
 (taxa + gene) (numeric).}

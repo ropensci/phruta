@@ -9,6 +9,8 @@
 #'                in the ingroup or species to be sampled in the outgroup
 #'                (character).
 #' @param genes A vector listing gene names of interest (character).
+#' @param db Follows \code{db} in \code{taxize::downsteam}. Choose from
+#'           \code{itis}, \code{gbif}, \code{ncbi}, \code{worms}, or \code{bold}.
 #' @param maxseqs Maximum number of sequences to retrieve per search
 #'                (taxa + gene) (numeric).
 #' @param maxlength Maximum length of the gene sequence (numeric).
@@ -34,6 +36,7 @@ sq.retrieve.direct <-
   function(clades = NULL,
            species = NULL,
            genes = NULL,
+           db = 'itis',
            maxseqs = 1,
            maxlength = 5000) {
     if (is.null(clades) &
@@ -59,17 +62,49 @@ sq.retrieve.direct <-
       stop("Please provide a single number for maxseqs or maxlength")
 
 
-    taxa <- if (!is.null(clades)) {
+    ##Over-writing?
+    if( !isTRUE(pkg.env$.testMode) ) {
+      UI <- readline(paste0("This function might overwrite ",
+                            "0.Sequences", ". Are you sure you want to continue? (y/n)  "))
+      if(UI != 'y') stop('Exiting since you did not press y')
+    }
+
+
+    if (!is.null(clades)) {
       clade.species <-
         taxize::downstream(clades,
-                   db = "itis",
+                   db = db,
                    downto = "species",
-                   verbose = F)
+                   verbose = F,
+                   rows = 1)
+
+
       clade.species <- do.call(rbind, clade.species)
-      c(clade.species$taxonname, species)
+
+      if(db == 'gbif'){
+        taxa <- c(clade.species$name, species)
+      }
+
+      if(db == 'itis'){
+        taxa <- c(clade.species$taxonname, species)
+      }
+
+      if(db == 'ncbi'){
+        taxa <-  c(clade.species$childtaxa_name, species)
+      }
+
+      if(db == 'bold'){
+        taxa <-  c(clade.species$name, species)
+      }
+
+      if(db == 'worms'){
+        stop("db = worms is not supported yet")
+      }
+
     } else {
-      species
+      taxa <- species
     }
+
     unlink("0.Sequences", recursive = TRUE)
     dir.create("0.Sequences")
 

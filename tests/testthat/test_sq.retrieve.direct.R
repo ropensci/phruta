@@ -6,7 +6,8 @@ test_that("Generate an error when no genes, species or clades are specified", {
     species = NULL,
     genes = NULL,
     maxseqs = 1,
-    maxlength = 5000
+    maxlength = 5000,
+    db = "gbif"
   ))
 })
 
@@ -16,7 +17,8 @@ test_that("Generate an error when clades are actually numeric and not strings", 
     species = NULL,
     genes = NULL,
     maxseqs = 1,
-    maxlength = 5000
+    maxlength = 5000,
+    db = "gbif"
   ))
 })
 
@@ -28,7 +30,8 @@ test_that("Generate an error when species are actually numeric and not strings",
     species = 1,
     genes = NULL,
     maxseqs = 1,
-    maxlength = 5000
+    maxlength = 5000,
+    db = "gbif"
   ))
 })
 
@@ -38,7 +41,8 @@ test_that("Generate an error when no genes are specified", {
     species = "Brassica",
     genes = NULL,
     maxseqs = 1,
-    maxlength = 5000
+    maxlength = 5000,
+    db = "gbif"
   ))
 })
 
@@ -49,7 +53,8 @@ test_that("Generate an error when the maximum number of sequences is a string in
     species = "Brassica",
     genes = "COI",
     maxseqs = "20",
-    maxlength = 5000
+    maxlength = 5000,
+    db = "gbif"
   ))
 })
 
@@ -60,7 +65,8 @@ test_that("Generate an error when the maximum lenght for the sequences retrieved
     species = "Brassica",
     genes = "COI",
     maxseqs = 20,
-    maxlength = "5000"
+    maxlength = "5000",
+    db = "gbif"
   ))
 })
 
@@ -70,7 +76,8 @@ test_that("Generate an error when a vector with more than 1 element is provided 
     species = "Brassica",
     genes = "COI",
     maxseqs = c(20, 20),
-    maxlength = c(5000, 100)
+    maxlength = c(5000, 100),
+    db = "gbif"
   ))
 })
 
@@ -81,7 +88,8 @@ test_that("Silent sq.retrieve.direct", {
     species = NULL,
     genes = "HDFJ",
     maxseqs = 1,
-    maxlength = 1
+    maxlength = 1,
+    db = "gbif"
   ))
 })
 

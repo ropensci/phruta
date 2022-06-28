@@ -60,6 +60,14 @@ tree.raxml <-
     if (Bootstrap == 0)
       stop("Please indicate more than a single bootstrap replicate")
 
+    ##Over-writing?
+    if( !isTRUE(pkg.env$.testMode) ) {
+      UI <- readline(paste0("This function might overwrite ",
+                            "3.Phylogeny", ". Are you sure you want to continue? (y/n)  "))
+      if(UI != 'y') stop('Exiting since you did not press y')
+    }
+
+
     files_fullNames <-
       list.files(folder, FilePatterns, full.names = TRUE)
     files <- list.files(folder, FilePatterns)

@@ -34,6 +34,7 @@
 
 sq.retrieve.indirect <- function(acc.table, download.sqs = FALSE){
 
+
   unlink("0.Sequences", recursive = TRUE)
   dir.create("0.Sequences")
 
@@ -43,6 +44,14 @@ sq.retrieve.indirect <- function(acc.table, download.sqs = FALSE){
 
     names(seqs) <- paste0(names(seqs), " ", acc.table.sub$Species)
     if(download.sqs){
+
+      ##Over-writing?
+      if( !isTRUE(pkg.env$.testMode) ) {
+        UI <- readline(paste0("This function might overwrite ",
+                              "0.Sequences", ". Are you sure you want to continue? (y/n)  "))
+        if(UI != 'y') stop('Exiting since you did not press y')
+      }
+
     write.dna(
       seqs,
       file=paste0("0.Sequences/", x, ".fasta"),

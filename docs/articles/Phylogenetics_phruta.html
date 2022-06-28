@@ -66,6 +66,9 @@
       <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
     </li>
     <li>
+      <a href="../articles/phruta_targetgenes.html">Using `phruta` with defined target genes</a>
+    </li>
+    <li>
       <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
     </li>
     <li>
@@ -125,24 +128,32 @@ Updated on 2022-06-27</h4>
 <div class="section level3">
 <h3 id="installing-raxml">Installing RAxML <a name="paragraph1"></a><a class="anchor" aria-label="anchor" href="#installing-raxml"></a>
 </h3>
-<p><code>RAxML</code> can be easily installed to the <code>PATH</code>
-using one of the two lines below in <code>conda</code>:</p>
+<p>In <code>MacOS</code>, <code>RAxML</code> can be easily installed to
+the <code>PATH</code> using one of the two lines below in
+<code>conda</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda/label/cf201901 raxml </span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda raxml</span></code></pre></div>
-<p>Open <code>R</code> and make sure that the following line doesn’t
-throw an error.</p>
+<p>For other <code>OS</code> (Windows, Linux), please follow the
+instructions listed in the official <code>RAxML</code> <a href="https://cme.h-its.org/exelixis/web/software/raxml/" class="external-link">website</a></p>
+<p>Once <code>RAxML</code> has been installed to your computer, open
+<code>R</code> and make sure that the following line doesn’t throw an
+error.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"raxmlHPC"</span><span class="op">)</span></code></pre></div>
-<p>You may also want to check if <code>RAxML</code> is called from the
-console using <code>raxmlHPC</code> or <code>raxml</code>. In fact, this
-string is passed to the <code>exec</code> argument in
-<code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code> when running <code>tree.raxml</code>
-(<code>raxml_exec</code> therein).</p>
+<p>Depending on how <code>RAxML</code> was installed, you may want to
+check if <code>RAxML</code> is called from the terminal using
+<code>raxmlHPC</code> or <code>raxmlHPC</code>. This string needs to be
+passed to <code>tree.raxml</code> using the argument
+<code>raxml_exec</code>. Please note that this argument corresponds to
+the <code>exec</code> argument in <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code>.</p>
 <p>Finally, note that <code>RStudio</code> sometimes has issues finding
-<em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>.</p>
-<p>With issues, if you’re running macOS, try running RStudio from the
-command line. Close RStudio, open the terminal, and type:</p>
+<em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>. If you’re
+using <code>macOS</code>, try starting <code>RStudio</code> from the
+command line by running the following line:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
+<p>In other OS, it might be better to simply avoid using
+<code>RStudio</code> if you’re interested in running the phylogenetic
+functions in <code>phruta</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="installing-pathd-8-and-treepl">Installing PATHd-8 and treePL <a name="paragraph2"></a><a class="anchor" aria-label="anchor" href="#installing-pathd-8-and-treepl"></a>
@@ -151,11 +162,15 @@ command line. Close RStudio, open the terminal, and type:</p>
 <code>treePL</code>. Here, I summarize two potentially relevant
 options.</p>
 <p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile" class="external-link">Brian
-O’Meara’s</a> approach for installing <code>PATHd-8</code>. I summarized
-the code <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">here</a>.</p>
-<p>Second, you can use homebrew to install <code>treePL</code>, thanks
-to Jonathan Chang.</p>
+O’Meara’s</a> approach for installing <code>PATHd-8</code> in MacOs and
+linux. I summarize the code in the following <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">link</a>.
+For Windows users, please use the compiled version of the software
+provided in the following <a href="https://www2.math.su.se/PATHd8/" class="external-link">link</a>.</p>
+<p>Second, you can use homebrew to install <code>treePL</code> (Windows,
+MacOS, and Linux), thanks to Jonathan Chang.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
+<p>Please check the following <a href="https://docs.brew.sh/Homebrew-on-Linux" class="external-link">link</a>) if you’re
+interested in running <code>brew</code> from Windows and Linux.</p>
 </div>
 <div class="section level3">
 <h3 id="phylogenetic-inference-with-phruta-and-raxml">Phylogenetic inference with <code>phruta</code> and

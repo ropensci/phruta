@@ -40,6 +40,12 @@ Let's start by loading `phruta`!
 library(phruta)
 ```
 
+
+```{r setup, echo=FALSE, include = FALSE}
+assign(".testMode", TRUE, envir = phruta:::pkg.env)
+```
+
+
 Now, let's look for the gene regions that are sampled for our target taxa. For this, we will use the `gene.sampling.retrieve` function in `phruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
 
 ```{r results = 'hide'}
@@ -128,7 +134,12 @@ The resulting multiple sequence alignments will be saved to `sqs.aln` object, a 
 
 Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in another vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our cool alignments. Let's first check the raw alignments.
 
-```{r echo = FALSE, eval = FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
+
+```{r echo = FALSE}
 library(ape)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
@@ -139,11 +150,14 @@ for (i in seq_along(sqs.aln)) {
 }
 ```
 
-![Raw sequence alignments](Fig1.png "Figure 1") 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+invisible(dev.off())
+```
+
 
 Now, the masked alignments...
 
-```{r echo = FALSE, eval = FALSE}
+```{r echo = FALSE}
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Masked)){
@@ -153,8 +167,9 @@ for (i in seq_along(sqs.aln)) {
 }
 ```
 
-
-![Curated sequence alignments](Fig2.png "Figure 2") 
+```{r echo=FALSE, message=FALSE, warning=FALSE,}
+invisible(dev.off())
+```
 
 ```{r echo = FALSE}
 end_time <- Sys.time()

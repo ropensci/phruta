@@ -15,6 +15,13 @@ output:
     fig_caption: yes
 ---
 
+
+```{r include = FALSE}
+library(phruta)
+assign(".testMode", TRUE, envir = phruta:::pkg.env)
+```
+
+
 # Table of Contents
 1. [Working with non-animal/plant groups in `phruta`](#paragraph0)
 2. [Creating taxonomic constraints in `phruta`](#paragraph1)

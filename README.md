@@ -5,7 +5,7 @@
   [![](https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg)](https://github.com/cromanpa94/phruta)
   [![CodeFactor](https://www.codefactor.io/repository/github/cromanpa94/phruta/badge)](https://www.codefactor.io/repository/github/cromanpa94/phruta)  <!-- badges: end -->
 
-# `phruta` <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
+# The `phruta` `R` package <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
 
 ### Assembling phylogenetic trees from taxonomic names.
 
@@ -49,7 +49,8 @@ Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq
 
 ## Installing RAxML <a name="paragraph1"></a>
 
-`RAxML` can be easily installed to the `PATH` using one of the two lines below in `conda`:
+
+In `MacOS`, `RAxML` can be easily installed to the `PATH` using one of the two lines below in `conda`:
 
 ```{bash eval=FALSE}
 conda install -c bioconda/label/cf201901 raxml 
@@ -59,33 +60,37 @@ conda install -c bioconda/label/cf201901 raxml
 conda install -c bioconda raxml
 ```
 
-Open `R` and make sure that the following line doesn't throw an error.
+For other `OS` (Windows, Linux), please follow the instructions listed in the official `RAxML` [website](https://cme.h-its.org/exelixis/web/software/raxml/)
+
+Once `RAxML` has been installed to your computer, open `R` and make sure that the following line doesn't throw an error.
 
 ```{r eval=FALSE}
 system("raxmlHPC")
 ```
 
-You may also want to check if `RAxML` is called using `raxmlHPC` or something else. This can be set when running `tree.raxml` using the `raxml_exec` argument.
+Depending on how `RAxML` was installed, you may want to check if `RAxML` is called from the terminal using `raxmlHPC` or `raxmlHPC`. This string needs to be passed to `tree.raxml` using the argument `raxml_exec`. Please note that this argument corresponds to the `exec` argument in `ips::raxml`. 
 
-Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`.
-
-With issues, if you're running macOS, try running RStudio from the command line. Close RStudio, open the terminal, and type:
+Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`. If you're using `macOS`, try starting `RStudio` from the command line by running the following line:
 
 ```{bash eval=FALSE}
 open /Applications/RStudio.app
 ```
 
-## Installing PATHd-8 and treePL <a name="paragraph2"></a>
+In other OS, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
+
+## Installing `PATHd-8` and `treePL` <a name="paragraph2"></a>
 
 There are excellent guides for installing `PATHd-8` and `treePL`. Here, I summarize two potentially relevant options.
 
-First, you can use [Brian O'Meara's](https://github.com/bomeara/phydocker/blob/master/Dockerfile) approach for installing `PATHd-8`. I summarized the code [here](https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4).
+First, you can use [Brian O'Meara's](https://github.com/bomeara/phydocker/blob/master/Dockerfile) approach for installing `PATHd-8` in MacOs and linux. I summarize the code in the following [link](https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4). For Windows users, please use the compiled version of the software provided in the following [link](https://www2.math.su.se/PATHd8/).
 
-Second, you can use homebrew to install `treePL`, thanks to Jonathan Chang.
+Second, you can use homebrew to install `treePL` (Windows, MacOS, and Linux), thanks to Jonathan Chang.
 
 ```{bash eval = F}
 brew install brewsci/bio/treepl
 ```
+
+Please check the following [link](https://docs.brew.sh/Homebrew-on-Linux)) if you're interested in running `brew` from Windows and Linux.
 
 
 ## Running `phruta` from `Rstudio` while using `MacOS`?
@@ -106,6 +111,11 @@ _Fruta_ is the Spanish word for _Fruit_. English _ph_ sounds the same as _F_ in 
 ## Additional resources
 
 More details about the functions implemented in `phruta` can be found in the different vignettes associated with the package or in our [website](https://cromanpa94.github.io/phruta/).
+
+## Alternatives to `phruta`
+
+Similar functionalities for assembling curated molecular datasets for phylogenetic analyses can be found in [`phylotaR`](https://github.com/ropensci/phylotaR) and [SuperCRUNCH](https://github.com/dportik/SuperCRUNCH). However, note that `phylotaR` is limited to downloading and curating sequences (e.g. doesn't align sequences). Similarly, `SuperCRUNCH` only curates local sequences. `phruta` is closer to the [`SUPERSMART`](https://academic.oup.com/sysbio/article/66/2/152/2418028) and its "new" associated `R` workflow [`SUPERSMARTR`](https://github.com/AntonelliLab/supersmartR). However, most of the applications in the different packages that are part of `SUPERSMARTR` are simplified in `phruta`. 
+
 
 ## Contributing
 

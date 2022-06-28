@@ -34,6 +34,14 @@ sq.add <- function(folderDownloaded = "0.Sequences",
   if (!is.character(folderDownloaded) | !is.character(folderNew))
     stop("Folder names must be of class character")
 
+  ##Over-writing?
+  if( !isTRUE(pkg.env$.testMode) ) {
+  UI <- readline(paste0("This function might overwrite ",
+                 folderDownloaded, ". Are you sure you want to continue? (y/n)  "))
+  if(UI != 'y') stop('Exiting since you did not press y')
+  }
+
+
   ds.namesFull <- list.files(folderDownloaded, full.names = TRUE)
   ds.names <- list.files(folderDownloaded)
   ls.namesFull <- list.files(folderNew, full.names = TRUE)
