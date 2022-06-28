@@ -19,7 +19,6 @@ output:
 knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = FALSE)
 ```
 
-
 # Table of Contents
 
 1.  [What is `phruta`](#intro)
@@ -27,7 +26,7 @@ knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = 
 
 ## What is `phruta` <a name="intro"></a>
 
-The `phruta` `R` package is designed to simplify the basic phylogenetic pipeline and allow scientists from different backgrounds to assemble their own phylogenies. All code in `phruta` is run within the same program (`R`) and data from intermediate steps are saved locally in independent folders. All code in `phruta` is run within the same environment, an aspect that increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given set of taxa, retrieves gene sequences, could combine newly downloaded and local gene sequences, performs sequence alignments, phylogenetic inference, and tree dating. `phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative `R` packages and software.
+The `phruta` package is designed to simplify the basic phylogenetic pipeline in `R`. `phruta` is designed to allow scientists from different backgrounds to assemble their own reproducible phylogenies with as minimal code as possible. All code in `phruta` is run within the same program (`R`) and data from intermediate steps are either stored to the environment or exported locally in independent folders. All code in `phruta` is run within the same environment, an aspect that increases the reproducibility of your analysis. `phruta` looks for potentially (phylogenetically) relevant gene regions for a given set of taxa, retrieves gene sequences, could combine newly downloaded and local gene sequences, performs sequence alignment, phylogenetic inference, and tree dating. `phruta` is largely a wrapper for alternative `R` packages and software.
 
 ## Functions in `phruta` <a name="paragraph0"></a>
 
@@ -49,9 +48,6 @@ Note that all the functions for which their primary output are sequences (aligne
 
 The final two functions in `phruta` focus on tree inference and dating. These two functions depend on external software that needs to be installed (**and tested**) before running. Please make sure both `RAxML` and `PATHd-8` or `treePL` are installed and can be called within `R` using the `system()` function. Note that you can choose between `PATHd-8` and `treePL`. More details on how to install `RAxML` are provided in the phylogenetic vignette of `phruta`. Similarly, we provide details on how to install `PATHd-8` and `treePL` in the same vignette.
 
--Seventh, the `tree.raxml` function allows users to perform tree inference under `RAxML` for sequences in a given folder. This is a wrapper to `ips::raxml` and each of the arguments can be customized. The current release of `phruta` can manage both partitioned and unpartitioned analyses. Starting and constrained trees are allowed.
+-   Seventh, the `tree.raxml` function allows users to perform tree inference under `RAxML` for sequences in a given folder. This is a wrapper to `ips::raxml` and each of the arguments can be customized. The current release of `phruta` can manage both partitioned and unpartitioned analyses. Starting and constrained trees are allowed.
 
--Eight, `tree.dating` enables users to perform time-calibrations of a given phylogeny using `geiger::congruify.phylo`. `phruta` includes a basic set of comprehensively sampled, time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using `data(SW.phruta)`. Please make sure you have at least **two** groups in common with each of the phylogenies. Similarly, users can choose to run either `PATHd-8` or `treePL`.
-
-
-
+-   Eight, `tree.dating` enables users to perform time-calibrations of a given phylogeny using `geiger::congruify.phylo`. `phruta` includes a basic set of comprehensively sampled, time-calibrated phylogenies that are used to extract secondary calibrations for the target phylogeny. Note that sampling in those phylogenies can be examined using `data(SW.phruta)`. Please make sure you have at least **two** groups in common with each of the phylogenies. Similarly, users can choose to run either `PATHd-8` or `treePL`.
