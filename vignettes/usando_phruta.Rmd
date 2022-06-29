@@ -1,9 +1,9 @@
 ---
-title: "Using the `phruta` R package"
+title: "Usando el paquete phruta"
 author: Cristian Román-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
-  %\VignetteIndexEntry{Using the `phruta` R package}
+  %\VignetteIndexEntry{Usando phruta}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:

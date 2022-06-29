@@ -1,18 +1,68 @@
 url: https://cromanpa94.github.io/phruta/
+
 authors:
   Cristian Roman Palacios:
     href: http://cromanpa94.github.io/cromanpa/
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, tutorials, news]
+    right: [twitter, github]
+  components:
+    twitter:
+      icon: fa-twitter
+      href: http://twitter.com/cromanpa
+      aria-label: Twitter
+
 template:
+  includes:
+    after_body: >
+      <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   params:
-    bootswatch: cerulean
-articles:
-- title: Vignettes
-  navbar: ~
+    bootswatch: Yeti
+
+reference:
+- title: "Mining genbank"
+  desc: >
+    Functions to mine genbank
   contents:
-  - what_is_phruta
+  - gene.sampling.retrieve
+  - acc.table.retrieve
+  - sq.retrieve.direct
+  - sq.retrieve.indirect
+- title: "Pre-processing sequences"
+  desc: "Functions for pre-processing sequences."
+  contents:
+  - sq.add
+  - sq.curate
+  - sq.aln
+- title: "Inferring and exploring phylogenies"
+  desc: "Functions for inferring and exploring phylogenetic trees"
+  contents:
+  - starts_with("tree")
+  - sq.partitionfinderv1
+
+articles:
+- title: Tutorials
+  desc: "This section includes basic tutorials on how to use phruta!"
+  contents:
   - Using_phruta
   - Exporting_data_phruta
   - phruta_targetgenes
   - Phylogenetics_phruta
   - Phruta_advanced
+- title: Tutoriales
+  desc: "Esta seccion incluye tutoriales basicos sobre como usar phruta!"
+  contents:
+  - usando_phruta
+- title: More...
+  contents:
   - Future_phruta
+
+repo:
+  url:
+    home: https://github.com/cromanpa94/phruta
+    source: https://github.com/cromanpa94/phruta
+    issue: https://github.com/cromanpa94/phruta/issues
+    user: https://github.com/cromanpa94
+

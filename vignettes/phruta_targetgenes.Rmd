@@ -75,7 +75,8 @@ sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
 The resulting multiple sequence alignments will be saved to `sqs.aln` object, a list. For each of the gene regions, we will have access to the original alignment (`Aln.Original`), the masked one (`Aln.Masked`), and information on the masking process. Let's first check the raw alignments...
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
+sv <- graphics.off()
 ```
 
 ```{r echo = FALSE}
@@ -93,7 +94,8 @@ for (i in seq_along(sampleALNs)) {
 Now, the masked alignments...
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
+sv <- graphics.off()
 ```
 
 ```{r echo = FALSE}
@@ -108,7 +110,8 @@ for (i in seq_along(sampleALNs)) {
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
+sv <- graphics.off()
 ```
 
 ```{r echo = FALSE}

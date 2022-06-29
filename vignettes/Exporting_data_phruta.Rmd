@@ -138,7 +138,7 @@ The resulting multiple sequence alignments will be saved to the `2.Alignments` f
 Note that we could use these resulting alignments directly to infer our phylogenies. We cover these steps within `phruta` in another vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our (cool) alignments. Let's first check the raw alignments!
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
 ```
 
 ```{r echo = FALSE}
@@ -156,7 +156,7 @@ for (i in seq_along(sampleALNs)) {
 Now, the masked alignments...!!
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
 ```
 
 ```{r echo = FALSE}
@@ -171,7 +171,7 @@ for (i in seq_along(sampleALNs)) {
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-invisible(dev.off())
+sv <- dev.off()
 ```
 
 ```{r echo = FALSE}

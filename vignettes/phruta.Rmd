@@ -1,9 +1,9 @@
 ---
-title: "What is `phruta`?"
+title: "phruta"
 author: Cristian Román-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
-  %\VignetteIndexEntry{What is `phruta`?}
+  %\VignetteIndexEntry{phruta}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:

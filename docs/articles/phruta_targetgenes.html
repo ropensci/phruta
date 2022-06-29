@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/Yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -47,42 +47,24 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="../articles/phruta.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/what_is_phruta.html">What is `phruta`?</a>
-    </li>
-    <li>
-      <a href="../articles/Using_phruta.html">Using the `phruta` R package</a>
-    </li>
-    <li>
-      <a href="../articles/Exporting_data_phruta.html">To export or not export `phruta` outputs</a>
-    </li>
-    <li>
-      <a href="../articles/phruta_targetgenes.html">Using `phruta` with defined target genes</a>
-    </li>
-    <li>
-      <a href="../articles/Phylogenetics_phruta.html">Phylogenetics with the `phruta` R package</a>
-    </li>
-    <li>
-      <a href="../articles/Phruta_advanced.html">Advanced methods in the `phruta` R package</a>
-    </li>
-    <li>
-      <a href="../articles/Future_phruta.html">Future directions of the `phruta` R package</a>
-    </li>
-  </ul>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/cromanpa94/phruta/" class="external-link">
+  <a href="http://twitter.com/cromanpa" class="external-link">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/cromanpa94/phruta" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,29 +88,33 @@ genes</h1>
 Román-Palacios</h4>
             
             <h4 data-toc-skip class="date">First created on 2021-07-30.
-Updated on 2022-06-27</h4>
+Updated on 2022-06-28</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phruta/blob/HEAD/vignettes/phruta_targetgenes.Rmd" class="external-link"><code>vignettes/phruta_targetgenes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phrutavignettes/phruta_targetgenes.Rmd" class="external-link"><code>vignettes/phruta_targetgenes.Rmd</code></a></small>
       <div class="hidden name"><code>phruta_targetgenes.Rmd</code></div>
 
     </div>
 
     
     
-<p>In this vignette, we will be retrieving sequences directly from
-genbank using a list of taxa and particular gene regions. Given that we
-already have some target genes in mind, we can skip
-<code>gene.sampling.retrieve</code>. We won’t generate an accession
-table using <code>acc.table.retrieve</code> at the beginning, mostly
-because the sampling that we’re using in <code>phruta</code> this time,
-based on <code>sq.retrieve.direct</code>, is less flexible than the one
-outlined before for <code>sq.retrieve.indirect</code>. As noted before,
+<p>In this vignette, we will be retrieving sequences from genbank using
+<code>phruta</code>. We will need a list of taxa and the names of
+particular gene regions that need to be sampled. If you have no idea on
+what genes you should sample - <code>phruta</code>’ve got your back.
+Just check the “Introduction to the `phruta` R package” and “To export
+or not export `phruta` outputs” vignettes.</p>
+<p>Now, given that we already have some target genes in mind, we can
+avoid using <code>gene.sampling.retrieve</code>. We won’t generate an
+accession table using <code>acc.table.retrieve</code> at the beginning,
+mostly because the sampling that we’re using in <code>phruta</code> this
+time. Therefore, <code>sq.retrieve.direct</code> is less flexible than
+<code>sq.retrieve.indirect</code>. As noted before,
 <code>sq.retrieve.direct</code> does its best to directly (i.e. without
-potential input from the user) retrieve sequences for a target set of
-taxa and set of gene regions. You should be able to catch errors using
-<code>sq.retrieve.indirect</code> but mistakes will be harder to spot
-and fix if you’re using <code>sq.retrieve.direct</code>.</p>
-<p>Let’s start by loading <code>phruta</code>!</p>
+input from the user) retrieve sequences for a target set of taxa and set
+of gene regions. You are more likely to catch errors using
+<code>sq.retrieve.indirect</code>. However, mistakes will be harder to
+spot and fix when using <code>sq.retrieve.direct</code>.</p>
+<p>Let’s first start by loading <code>phruta</code>!</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cromanpa94/phruta" class="external-link">phruta</a></span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Registered S3 methods overwritten by 'TreeDist':</span>
@@ -140,11 +126,14 @@ and fix if you’re using <code>sq.retrieve.direct</code>.</p>
 <span class="co">## </span>
 <span class="co">##                         🙂Happy coding!!🙂</span>
 <span class="co">##                        🍊🍍🍐🥝🥥🌶🥑🍒🥭</span></code></pre>
-<p>Now, let’s download gene sequences for taxa in <em>Felis</em>,
-<em>Vulpes</em>, and <em>Phoca</em>. We will be sampling only two gene
-regions using <code>sq.retrieve.direct</code>. Note that we’re going to
-be using the list of species for the target genera from the gbif
-taxonomic backbone (hence <code>db = "gbif"</code>).</p>
+<p>Let’s download gene sequences for the taxa in <em>Felis</em>,
+<em>Vulpes</em>, and <em>Phoca</em>. Tjhis species-level sampling
+corresponds with the one in other vignettes. We will be sampling only
+two gene regions using <code>sq.retrieve.direct</code>. Note that we’re
+going to be using the list of species for the target genera from the
+gbif taxonomic backbone (hence <code>db = "gbif"</code>). There are more
+databases available for this (please check
+<code><a href="https://docs.ropensci.org/taxize/reference/downstream.html" class="external-link">taxize::downstream</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span>
   clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,
@@ -152,13 +141,13 @@ taxonomic backbone (hence <code>db = "gbif"</code>).</p>
   genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADORA3"</span>, <span class="st">"CYTB"</span><span class="op">)</span>,
   db <span class="op">=</span> <span class="st">"gbif"</span>
 <span class="op">)</span></code></pre></div>
-<p>This line of code will create a folder <code>0.Sequences</code> in
-your working directory. Note that <code>sq.retrieve.direct</code> does
-not return objects to the environment. The rest of this tutorial follow
-the same structure as the
-<code>Using the</code>phruta<code>R package</code> vignette.</p>
+<p>The code above will create a folder <code>0.Sequences</code> in your
+working directory. Note that <code>sq.retrieve.direct</code> does not
+return objects to the environment. The rest of this tutorial follow the
+same structure as the “To export or not export `phruta` outputs”
+vignette.</p>
 <p>For instance, we can use the <code>sq.curate</code> function to
-remove highly divergent sequences. Similarly, this function will remove
+remove highly divergent sequences. This function will also remove
 observations from species that are not within our target taxonomic
 groups.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -167,7 +156,7 @@ groups.</p>
                          folder <span class="op">=</span> <span class="st">"0.Sequences"</span>,
                          removeOutliers <span class="op">=</span> <span class="cn">FALSE</span>,
                          minSeqs <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p>Let’s now review the current sampling…</p>
+<p>Let’s review the current sampling…</p>
 <table class="table">
 <caption>4. Preliminary accession number table</caption>
 <colgroup>
@@ -366,28 +355,22 @@ gene for cytochrome b, complete cds, isolate: Pvs15</td>
 </tr>
 </tbody>
 </table>
-<p>Now, we’ll align the sequences that we just curated. For this, we
-just use <code>sq.aln</code> with default parameters. We’re again
-passing the output from <code>sq.curate</code>,
-<code>sqs.curated</code>, using the <code>sqs.object</code> argument in
-<code>sq.aln</code>.</p>
+<p>Now, we’ll align the sequences that we just curated. For this, we use
+<code>sq.aln</code> with under default parameters.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.aln.html">sq.aln</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">'1.CuratedSequences'</span>, FilePatterns <span class="op">=</span> <span class="st">"renamed"</span><span class="op">)</span></code></pre></div>
 <p>The resulting multiple sequence alignments will be saved to
 <code>sqs.aln</code> object, a list. For each of the gene regions, we
 will have access to the original alignment (<code>Aln.Original</code>),
 the masked one (<code>Aln.Masked</code>), and information on the masking
-process.Let’s first check the raw alignments…</p>
-<pre><code><span class="co">## null device </span>
-<span class="co">##           1</span></code></pre>
+process. Let’s first check the raw alignments…</p>
 <p><img src="phruta_targetgenes_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Now, the masked alignments…</p>
-<pre><code><span class="co">## null device </span>
-<span class="co">##           1</span></code></pre>
 <p><img src="phruta_targetgenes_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-<pre><code><span class="co">## null device </span>
-<span class="co">##           1</span></code></pre>
-<p>In total, this script took 4 minutes to run in my local machine.</p>
+<p>And we’re done for now!! You can compare the sampling between the
+main three tutorials using <code>sq.retrieve.direct</code> and
+<code>sq.retrieve.indirect</code>. In total, this vignette took 5
+minutes to render in my local machine.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -414,7 +397,6 @@ process.Let’s first check the raw alignments…</p>
   
 
 
-  
-
-  </body>
+  <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
 </html>
