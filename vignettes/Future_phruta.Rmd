@@ -1,9 +1,9 @@
 ---
-title: "Future directions of the `phruta` R package"
+title: "Future directions for phruta"
 author: Cristian Román-Palacios
 date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
 vignette: >
-  %\VignetteIndexEntry{Future directions of the `phruta` R package}
+  %\VignetteIndexEntry{Future directions for phruta}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:
@@ -15,7 +15,7 @@ output:
     fig_caption: yes
 ---
 
-## Future directions in `phruta`  <a name="paragraph1"></a>
+## Future directions for `phruta`  <a name="paragraph1"></a>
 
 I acknowledge that some of the functions in `phruta` are for now very limited and cover a few basic aspects of the modern phylogenetic pipeline. However, I'm actively working on improving `phruta.` Recent developments have included:
 

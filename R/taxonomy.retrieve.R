@@ -23,6 +23,8 @@
 #' @return data.frame of taxonomic information for the target species
 #'         (valid in the database)
 #'
+#' @keywords internal
+#'
 #' @examples
 #' \dontrun{
 #' taxonomy.retrieve(
@@ -34,7 +36,6 @@
 #'   database = "gbif", kingdom = "animals"
 #' )
 #' }
-#' @export
 
 taxonomy.retrieve <-
   function(species_names = NULL,

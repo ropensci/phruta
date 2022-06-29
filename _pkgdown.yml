@@ -40,12 +40,6 @@ reference:
   contents:
   - starts_with("tree")
   - sq.partitionfinderv1
-- title: "Other functions"
-  contents:
-  - SW.phruta
-  - acc.retrieve
-  - taxonomy.retrieve
-
 
 articles:
 - title: Tutorials (English)

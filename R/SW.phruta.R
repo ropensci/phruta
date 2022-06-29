@@ -11,7 +11,7 @@
 #'
 #' @format An object of class \code{"multiphylo"}.
 #'
-#' @keywords datasets
+#' @keywords internal
 #'
 #' @references Scholl, Joshua P., and John J. Wiens.
 #'            "Diversification rates and species richness

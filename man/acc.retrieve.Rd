@@ -37,3 +37,4 @@ in genbank.
 acc.retrieve(organism="Vulpes", gene = 'cytb', species=TRUE)
 }
 }
+\keyword{internal}

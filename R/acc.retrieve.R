@@ -13,6 +13,8 @@
 #'
 #' @return data.frame
 #'
+#' @keywords internal
+#'
 #' @name acc.retrieve
 #'
 #'
@@ -26,7 +28,6 @@
 #' \dontrun{
 #' acc.retrieve(organism="Vulpes", gene = 'cytb', species=TRUE)
 #' }
-#' @export
 
 acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALSE, npar = 2){
 
