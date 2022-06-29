@@ -1,9 +1,7 @@
 ---
-title: "Advanced methods in the `phruta` R package" 
-author: Cristian Román-Palacios
-date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+title: "Advanced methods" 
 vignette: >
-  %\VignetteIndexEntry{Advanced methods in the `phruta` R package}
+  %\VignetteIndexEntry{Advanced methods}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:
@@ -32,7 +30,7 @@ assign(".testMode", TRUE, envir = phruta:::pkg.env)
 
 ## Working with non-animal nor plant groups in `phruta` <a name="paragraph0"></a>
 
-As explained in the brief intro to `phruta`, the `sq.curate` function is primarily designed to curate taxonomic datasets using `gbif`. Alto `gbif` is extremely fast and efficient, it is largely designed to deal with animals and plants. If you're interested in using the `gbif` backbone for curating sequence regardless of the kingdom use the following approach:
+As explained in the brief intro to `phruta`, the `sq.curate()` function is primarily designed to curate taxonomic datasets using `gbif`. Alto `gbif` is extremely fast and efficient, it is largely designed to deal with animals and plants. If you're interested in using the `gbif` backbone for curating sequence regardless of the kingdom use the following approach:
 
 ```{r eval=FALSE}
 taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
@@ -50,7 +48,7 @@ taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                   database='gbif', kingdom='animals')
 ```
 
-We could also do the same for plants by using `plants` instead of `animals` in the `kingdom` argument. Now, what if we were interested in following other databases to retrieve taxonomic information for the species in our database? The latest version of `phruta` allow users to select the desired database. The databases follow the `taxize::classification` function. Options are: `ncbi`, `itis`, `eol`, `tropicos`,  `nbn`, `worms`, `natserv`, `bold`, `wiki`, and `pow`. Please select only one. Note that the `gbif` option in `taxize::classification` is replaced by the internal `gbif` in `phruta`.
+We could also do the same for plants by using `plants` instead of `animals` in the `kingdom` argument. Now, what if we were interested in following other databases to retrieve taxonomic information for the species in our database? The latest version of `phruta` allow users to select the desired database. The databases follow the `taxize::classification()` function. Options are: `ncbi`, `itis`, `eol`, `tropicos`,  `nbn`, `worms`, `natserv`, `bold`, `wiki`, and `pow`. Please select only one. Note that the `gbif` option in `taxize::classification()` is replaced by the internal `gbif` in `phruta`.
 
 Now, let's assume that we were interested in curating our database using `itis`:
 
@@ -104,7 +102,7 @@ Note that the key aspect in here is the `Topology` argument. It is a newick tree
 
 ## Running PartitionFinder in `phruta` <a name="paragraph2"></a>
 
-With the current version of `phruta`, users are able to run PartitionFinder v1 within R. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names ( `masked` in our case), and which models will be run in PartitionFinder. This function will download PartitionFinder, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.
+With the current version of `phruta`, users are able to run `PartitionFinder` v1 within `R`. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names (`masked` in our case), and which models will be run in `PartitionFinder`. This function will download `PartitionFinder`, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.
 
 ```{r eval=FALSE}
 sq.partitionfinderv1(folderAlignments = "2.Alignments",
@@ -132,7 +130,7 @@ tree.raxml(folder = "2.Alignments", FilePatterns = "Masked",
 
 ## Identifying rogue taxa <a name="paragraph4"></a>
 
-`phruta` can help users run `RogueNaRok` implemented in the `Rogue` R package. Users can then examine whether rogue taxa should be excluded from the analyses. `tree.roguetaxa` uses the bootstrap trees generated using the `tree.raxml` function along with the associated best tree to identify rogue taxa.  
+`phruta` can help users run `RogueNaRok` implemented in the `Rogue` R package. Users can then examine whether rogue taxa should be excluded from the analyses. `tree.roguetaxa()` uses the bootstrap trees generated using the `tree.raxml()` function along with the associated best tree to identify rogue taxa.  
 
 
 ```{r eval=FALSE}

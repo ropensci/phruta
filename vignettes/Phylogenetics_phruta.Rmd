@@ -1,9 +1,7 @@
 ---
-title: "Phylogenetics with the `phruta` R package"
-author: Cristian Román-Palacios
-date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+title: "Phylogenetics with phruta"
 vignette: >
-  %\VignetteIndexEntry{Phylogenetics with the `phruta` R package}
+  %\VignetteIndexEntry{Phylogenetics with phruta}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:
@@ -43,7 +41,7 @@ Once `RAxML` has been installed to your computer, open `R` and make sure that th
 system("raxmlHPC")
 ```
 
-Depending on how `RAxML` was installed, you may want to check if `RAxML` is called from the terminal using `raxmlHPC` or `raxmlHPC`. This string needs to be passed to `tree.raxml` using the argument `raxml_exec`. Please note that this argument corresponds to the `exec` argument in `ips::raxml`.
+Depending on how `RAxML` was installed, you may want to check if `RAxML` is called from the terminal using `raxmlHPC` or `raxmlHPC`. This string needs to be passed to `tree.raxml()` using the argument `raxml_exec`. Please note that this argument corresponds to the `exec` argument in `ips::raxml()`.
 
 Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`. If you're using `macOS`, try starting `RStudio` from the command line by running the following line:
 
@@ -51,7 +49,7 @@ Finally, note that `RStudio` sometimes has issues finding *stuff* in the path wh
 open /Applications/RStudio.app
 ```
 
-In other OS, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
+In other `OS`, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
 
 
 ## Installing PATHd-8 and treePL <a name="paragraph2"></a>
@@ -70,7 +68,7 @@ Please check the following [link](https://docs.brew.sh/Homebrew-on-Linux)) if yo
 
 ## Phylogenetic inference with `phruta` and `RAxML` <a name="paragraph3"></a>
 
-Phylogenetic inference is conducted using the `tree.raxml` function. We need to indicate where the aligned sequences are located (`folder` argument), the patterns of the files in the same folder (`FilePatterns` argument; "`Masked_`" in our case). We'll run a total of 100 boostrap replicates and set the outgroup to "Manis_pentadactyla".
+Phylogenetic inference is conducted using the `tree.raxml()` function. We need to indicate where the aligned sequences are located (`folder` argument), the patterns of the files in the same folder (`FilePatterns` argument; "`Masked_`" in our case). We'll run a total of 100 boostrap replicates and set the outgroup to "Manis_pentadactyla".
 
 ```{r eval=FALSE}
 tree.raxml(folder='2.Alignments', 
@@ -86,7 +84,7 @@ Finally, let's perform tree dating in our phylogeny using secondary calibrations
 
 ## Tree dating in `phruta` <a name="paragraph4"></a>
 
-Tree dating is performed using the `tree.dating` function in `phruta`. We have to provide the name of the folder containing the `1.Taxonomy.csv` file created in `sq.curate`. We also have to indicate the name of the folder containing the `RAxML_bipartitions.phruta` file. We will scale our phylogeny using `treePL`.
+Tree dating is performed using the `tree.dating()` function in `phruta`. We have to provide the name of the folder containing the `1.Taxonomy.csv` file created in `sq.curate()`. We also have to indicate the name of the folder containing the `RAxML_bipartitions.phruta` file. We will scale our phylogeny using `treePL`.
 
 ```{r eval=FALSE}
 tree.dating(taxonomyFolder="1.CuratedSequences", 

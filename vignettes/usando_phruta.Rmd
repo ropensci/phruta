@@ -1,9 +1,7 @@
 ---
-title: "Usando el paquete phruta"
-author: Cristian Román-Palacios
-date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+title: "Usando el paquete de R phruta"
 vignette: >
-  %\VignetteIndexEntry{Usando phruta}
+  %\VignetteIndexEntry{Usando el paquete de R phruta}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:
@@ -24,10 +22,10 @@ library(knitr)
 
 # Table of Contents
 
-1.  [Clade names to sequence alignments](#paragraph1)
-2.  [Saving intermediate files](#paragraph2)
+1.  [Desde nombres taxonomicos a alineamientos](#paragraph1)
+2.  [Guardando objetos intermedios](#paragraph2)
 
-## Intro tutorial: Clade names to sequence alignments <a name="paragraph1"></a>
+## Desde nombres taxonomicos a alineamientos <a name="paragraph1"></a>
 
 Let's learn how `phruta` works by assembling a molecular dataset at the species level for a few mammal clades. For this tutorial, assume that we need to build a tree for the following three genera: *Felis, Vulpes*, and *Phoca*. All three genera are classified within the order Carnivora. Both *Felis* and *Vulpes* are classified in different superfamilies within the suborder Fissipedia. *Phoca* is part of another suborder, Pinnipedia. We're going to root our tree with another mammal species, the Chinese Pangolin (*Manis pentadactyla*). Please note that you can select as many target clades and species as you need. However, for simplicity, we will run the analyses using three genera in the ingroup and a single outgroup species.
 
@@ -43,7 +41,7 @@ library(phruta)
 assign(".testMode", TRUE, envir = phruta:::pkg.env)
 ```
 
-Let's now look for the gene regions that are extensively sampled in our target taxa. For this, we will use the `gene.sampling.retrieve` function in `phruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
+Let's now look for the gene regions that are extensively sampled in our target taxa. For this, we will use the `gene.sampling.retrieve()` function in `phruta`. The resulting `data.frame`, named `gs.seqs` in this example, will contain the list of full names for genes sampled in genbank for the target taxa.
 
 ```{r results = 'hide'}
 gs.seqs <- gene.sampling.retrieve(organism = c("Felis", "Vulpes", "Phoca", "Manis_pentadactyla"), 
@@ -130,13 +128,9 @@ The resulting multiple sequence alignments will be saved to `sqs.aln` object, a 
 
 Note that we could use these resulting alignments to infer phylogenies. We cover these steps within `phruta` in another vignette: "Phylogenetics with the `phruta` R package". For now, let's wrap up and plot one of our cool alignments. Let's first check the raw alignments.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-sv <- dev.off()
-sv <- graphics.off()
-```
-
 ```{r echo = FALSE}
 library(ape)
+jpeg("UFE.Raw.jpeg", width = 8, height = 5, units = "in", res = 300)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Original)){
@@ -144,16 +138,15 @@ for (i in seq_along(sqs.aln)) {
         ylab = "Species", legend = FALSE)
   }
 }
+sv <- dev.off()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-sv <- dev.off()
-sv <- graphics.off()
-```
+ ![A figure showing raw alignments](UFE.Raw.jpeg "Raw alignments")
 
 Now, the masked alignments...
 
 ```{r echo = FALSE}
+jpeg("UFE.Cur.jpeg", width = 8, height = 5, units = "in", res = 300)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Masked)){
@@ -161,12 +154,10 @@ for (i in seq_along(sqs.aln)) {
         ylab = "Species", legend = FALSE)
   }
 }
+sv <- dev.off()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE,}
-sv <- dev.off()
-sv <- graphics.off()
-```
+ ![A figure showing curated alignments](UFE.Cur.jpeg "Curated alignments")
 
 ```{r echo = FALSE}
 end_time <- Sys.time()
@@ -174,6 +165,6 @@ end_time <- Sys.time()
 
 Note that you could share the resulting workspace with your coworkers or add it to the supplement to your article!! In total, this script took `r round(end_time-start_time)` minutes to run in my local machine. You can now try to run `phruta` in your favorite group organisms! Don't forget to check the other tutorials...Buena suerte!
 
-## Saving intermediate files <a name="paragraph2"></a>
+## Guardando objetos intermedios <a name="paragraph2"></a>
 
 Note that this current vignette is structured such that the functions used in this tutorial won't not write anything to your working directory. An advantage of this approach is that you could simply save the workspace and make your pipeline fully reproducible to others. However, sometimes the molecular dataset is simply to large to be analyzed in `R`. For those cases, `phruta` is able to export the relevant files into folder that are created within the working directory. If you're interested in saving partial outputs, please follow the `Exporting sequences using the phruta R package` vignette associated to this package.

@@ -15,11 +15,10 @@ navbar:
       aria-label: Twitter
 
 template:
-  includes:
-    after_body: >
-      <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  params:
-    bootswatch: Yeti
+  bootstrap: 5
+  bootswatch: cerulean
+
+
 
 reference:
 - title: "Mining genbank"
@@ -43,7 +42,7 @@ reference:
   - sq.partitionfinderv1
 
 articles:
-- title: Tutorials
+- title: Tutorials (English)
   desc: "This section includes basic tutorials on how to use phruta!"
   contents:
   - Using_phruta
@@ -51,18 +50,11 @@ articles:
   - phruta_targetgenes
   - Phylogenetics_phruta
   - Phruta_advanced
-- title: Tutoriales
+- title: Tutoriales (Español)
   desc: "Esta seccion incluye tutoriales basicos sobre como usar phruta!"
   contents:
   - usando_phruta
 - title: More...
   contents:
   - Future_phruta
-
-repo:
-  url:
-    home: https://github.com/cromanpa94/phruta
-    source: https://github.com/cromanpa94/phruta
-    issue: https://github.com/cromanpa94/phruta/issues
-    user: https://github.com/cromanpa94
 

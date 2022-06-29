@@ -1,9 +1,7 @@
 ---
-title: "Using `phruta` with defined target genes"
-author: Cristian Román-Palacios
-date: '`r paste("First created on 2021-07-30. Updated on", Sys.Date())`'
+title: "Using phruta with a defined set of target genes"
 vignette: >
-  %\VignetteIndexEntry{Using `phruta` with defined target genes}
+  %\VignetteIndexEntry{Using phruta with a defined set of target genes}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 output:
@@ -24,7 +22,7 @@ library(knitr)
 
 In this vignette, we will be retrieving sequences from genbank using `phruta`. We will need a list of taxa and the names of particular gene regions that need to be sampled. If you have no idea on what genes you should sample - `phruta`'ve got your back. Just check the "Introduction to the \`phruta\` R package" and "To export or not export \`phruta\` outputs" vignettes.
 
-Now, given that we already have some target genes in mind, we can avoid using `gene.sampling.retrieve`. We won't generate an accession table using `acc.table.retrieve` at the beginning, mostly because the sampling that we're using in `phruta` this time. Therefore, `sq.retrieve.direct` is less flexible than `sq.retrieve.indirect`. As noted before, `sq.retrieve.direct` does its best to directly (i.e. without input from the user) retrieve sequences for a target set of taxa and set of gene regions. You are more likely to catch errors using `sq.retrieve.indirect`. However, mistakes will be harder to spot and fix when using `sq.retrieve.direct`.
+Now, given that we already have some target genes in mind, we can avoid using `gene.sampling.retrieve()`. We won't generate an accession table using `acc.table.retrieve()` at the beginning, mostly because the sampling that we're using in `phruta` this time. Therefore, `sq.retrieve.direct()` is less flexible than `sq.retrieve.indirect()`. As noted before, `sq.retrieve.direct()` does its best to directly (i.e. without input from the user) retrieve sequences for a target set of taxa and set of gene regions. You are more likely to catch errors using `sq.retrieve.indirect()`. However, mistakes will be harder to spot and fix when using `sq.retrieve.direct()`.
 
 Let's first start by loading `phruta`!
 
@@ -36,7 +34,7 @@ library(phruta)
 assign(".testMode", TRUE, envir = phruta:::pkg.env)
 ```
 
-Let's download gene sequences for the taxa in *Felis*, *Vulpes*, and *Phoca*. Tjhis species-level sampling corresponds with the one in other vignettes. We will be sampling only two gene regions using `sq.retrieve.direct`. Note that we're going to be using the list of species for the target genera from the gbif taxonomic backbone (hence `db = "gbif"`). There are more databases available for this (please check `taxize::downstream`).
+Let's download gene sequences for the taxa in *Felis*, *Vulpes*, and *Phoca*. Tjhis species-level sampling corresponds with the one in other vignettes. We will be sampling only two gene regions using `sq.retrieve.direct()`. Note that we're going to be using the list of species for the target genera from the gbif taxonomic backbone (hence `db = "gbif"`). There are more databases available for this (please check `taxize::downstream()`).
 
 ```{r results = 'hide'}
 sq.retrieve.direct(
@@ -47,9 +45,9 @@ sq.retrieve.direct(
 )
 ```
 
-The code above will create a folder `0.Sequences` in your working directory. Note that `sq.retrieve.direct` does not return objects to the environment. The rest of this tutorial follow the same structure as the "To export or not export \`phruta\` outputs" vignette.
+The code above will create a folder `0.Sequences` in your working directory. Note that `sq.retrieve.direct()` does not return objects to the environment. The rest of this tutorial follow the same structure as the "To export or not export \`phruta\` outputs" vignette.
 
-For instance, we can use the `sq.curate` function to remove highly divergent sequences. This function will also remove observations from species that are not within our target taxonomic groups.
+For instance, we can use the `sq.curate()` function to remove highly divergent sequences. This function will also remove observations from species that are not within our target taxonomic groups.
 
 ```{r results = 'hide'}
 sq.curate(filterTaxonomicCriteria = 'Felis|Vulpes|Phoca|Manis',
@@ -66,56 +64,48 @@ accTable <- read.csv("1.CuratedSequences/0.AccessionTable.csv")[,-1]
 kable(accTable, caption = "4. Preliminary accession number table")
 ```
 
-Now, we'll align the sequences that we just curated. For this, we use `sq.aln` with under default parameters.
+Now, we'll align the sequences that we just curated. For this, we use `sq.aln()` with under default parameters.
 
 ```{r  results = 'hide'}
 sq.aln(folder = '1.CuratedSequences', FilePatterns = "renamed")
 ```
 
-The resulting multiple sequence alignments will be saved to `sqs.aln` object, a list. For each of the gene regions, we will have access to the original alignment (`Aln.Original`), the masked one (`Aln.Masked`), and information on the masking process. Let's first check the raw alignments...
+The resulting multiple sequence alignments will be saved to `sqs.aln()` object, a list. For each of the gene regions, we will have access to the original alignment (`Aln.Original`), the masked one (`Aln.Masked`), and information on the masking process. Let's first check the raw alignments...
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-sv <- dev.off()
-sv <- graphics.off()
-```
-
-```{r echo = FALSE}
+```{r echo = FALSE, message=FALSE, warning=FALSE}
 library(ape)
 files <- list.files("2.Alignments", pattern = "Raw_",full.names = TRUE)
 files.main <- list.files("2.Alignments", pattern = "Raw_",full.names = FALSE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
+jpeg("PTG.Raw.jpeg", width = 8, height = 5, units = "in", res = 300)
 par(mfrow = c(ceiling(length(sampleALNs)/2),2))
 for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
         ylab = "Species", legend = FALSE)
 }
+sv <- dev.off()
 ```
 
+ ![A figure showing raw alignments](PTG.Raw.jpeg "Raw alignments")
 Now, the masked alignments...
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-sv <- dev.off()
-sv <- graphics.off()
-```
-
-```{r echo = FALSE}
+```{r echo = FALSE, message=FALSE, warning=FALSE}
 files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
 files.main <- list.files("2.Alignments", pattern = "Masked_",full.names = FALSE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
+jpeg("PTG.Cur.jpeg", width = 8, height = 5, units = "in", res = 300)
 par(mfrow = c(ceiling(length(sampleALNs)/2),2))
 for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
         ylab = "Species", legend = FALSE)
 }
+sv <- dev.off()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-sv <- dev.off()
-sv <- graphics.off()
-```
+ ![A figure showing curated alignments](PTG.Cur.jpeg "Curated alignments")
 
 ```{r echo = FALSE}
 end_time <- Sys.time()
 ```
 
-And we're done for now!! You can compare the sampling between the main three tutorials using `sq.retrieve.direct` and `sq.retrieve.indirect`. In total, this vignette took `r round(end_time-start_time)` minutes to render in my local machine.
+And we're done for now!! You can compare the sampling between the main three tutorials using `sq.retrieve.direct()` and `sq.retrieve.indirect()`. In total, this vignette took `r round(end_time-start_time)` minutes to render in my local machine.

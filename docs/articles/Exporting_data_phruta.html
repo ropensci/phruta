@@ -4,20 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>To export or not export `phruta` outputs • phruta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="phruta">
+<title>To export or not export phruta outputs • phruta</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/Yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="To export or not export `phruta` outputs">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="To export or not export phruta outputs">
 <meta property="og:description" content="phruta">
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,74 +25,67 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">phruta</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/phruta.html">Get started</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/phruta.html">Get started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="http://twitter.com/cromanpa" class="external-link">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="http://twitter.com/cromanpa" aria-label="Twitter">
     <span class="fa fa-twitter"></span>
      
   </a>
 </li>
-<li>
-  <a href="https://github.com/cromanpa94/phruta" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/cromanpa94/phruta/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>To export or not export <code>phruta</code>
-outputs</h1>
-                        <h4 data-toc-skip class="author">Cristian
-Román-Palacios</h4>
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>To export or not export phruta outputs</h1>
             
-            <h4 data-toc-skip class="date">First created on 2021-07-30.
-Updated on 2022-06-28</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phrutavignettes/Exporting_data_phruta.Rmd" class="external-link"><code>vignettes/Exporting_data_phruta.Rmd</code></a></small>
-      <div class="hidden name"><code>Exporting_data_phruta.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phruta/blob/HEAD/vignettes/Exporting_data_phruta.Rmd" class="external-link"><code>vignettes/Exporting_data_phruta.Rmd</code></a></small>
+      <div class="d-none name"><code>Exporting_data_phruta.Rmd</code></div>
     </div>
 
     
@@ -131,8 +124,9 @@ for inferring the phylogeny among three mammal genera. Let’s recreate
 the same tutorial, but in this case, exporting the intermediate files
 that are created after using several of the functions. Note that the
 structure of this tutorial closely follows that of “Using the
-<code>phruta</code> R package”. You should be able to follow this
-tutorial even without having reviewed the introductory vignette.</p>
+<code>phruta</code> <code>R</code> package”. You should be able to
+follow this tutorial even without having reviewed the introductory
+vignette.</p>
 <p>Please assume that we are interested in building a phylogenetic tree
 for the following three genera: <em>Felis, Vulpes</em>, and
 <em>Phoca</em>. All these three genera are classified within the
@@ -178,15 +172,16 @@ taxonomically. For instance, genes A and B can be extensively sampled in
 genus 1. However, genus 2 in the same family has mainly been studied
 using genes Y and Z. The idea here is that <code>phruta</code> will try
 to find those gene regions that are extensively sampled across species
-in the target taxa. We will use the <code>gene.sampling.retrieve</code>
-function in <code>phruta</code>. The resulting <code>data.frame</code>,
-named <code>gs.seqs</code> in this example, will contain the list of
-full names for genes sampled in genbank for the target taxa.</p>
+in the target taxa. We will use the
+<code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code> function in <code>phruta</code>.
+The resulting <code>data.frame</code>, named <code>gs.seqs</code> in
+this example, will contain the list of full names for genes sampled in
+genbank for the target taxa.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gs.seqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span>, <span class="st">"Manis_pentadactyla"</span><span class="op">)</span>, 
                                   speciesSampling <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>For the search terms used above, <code>phruta</code> was able to
-retrieve the names for 2101 gene regions. In the table below I summarize
+retrieve the names for 2161 gene regions. In the table below I summarize
 a few of those genes, with sampling frequency calculated at the level of
 species (see <code>speciesSampling = TRUE</code> argument above).</p>
 <table class="table">
@@ -206,8 +201,8 @@ outgroup.</caption>
 <tbody>
 <tr class="odd">
 <td align="left">cytochrome b</td>
-<td align="right">22</td>
-<td align="right">68.750</td>
+<td align="right">24</td>
+<td align="right">75.000</td>
 </tr>
 <tr class="even">
 <td align="left">NADH dehydrogenase subunit 5</td>
@@ -215,17 +210,17 @@ outgroup.</caption>
 <td align="right">40.625</td>
 </tr>
 <tr class="odd">
+<td align="left">cytochrome c oxidase subunit I</td>
+<td align="right">12</td>
+<td align="right">37.500</td>
+</tr>
+<tr class="even">
 <td align="left">12S ribosomal RNA</td>
 <td align="right">11</td>
 <td align="right">34.375</td>
 </tr>
-<tr class="even">
-<td align="left">16S ribosomal RNA</td>
-<td align="right">11</td>
-<td align="right">34.375</td>
-</tr>
 <tr class="odd">
-<td align="left">cytochrome c oxidase subunit I</td>
+<td align="left">16S ribosomal RNA</td>
 <td align="right">11</td>
 <td align="right">34.375</td>
 </tr>
@@ -236,10 +231,10 @@ outgroup.</caption>
 </tr>
 </tbody>
 </table>
-<p>Thus, the <code>gene.sampling.retrieve</code> function provides an
+<p>Thus, the <code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code> function provides an
 estimate of the number of species in genbank that matches the taxonomic
 criteria and have sequences for a given gene region. Note that the
-estimates recovered by <code>gene.sampling.retrieve</code> are only as
+estimates recovered by <code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code> are only as
 good as the annotations that other researchers have provided for
 sequences deposited in genbank.</p>
 <p>From here, we will generate a preliminary table summarizing accession
@@ -248,7 +243,7 @@ interested in sampling. However, note that not all these accession
 numbers are expected to be in the final (curated) molecular dataset. For
 instance, several sequences might be dropped later after taxonomic
 information is curated. Now, we will assemble a species-level summary of
-accession numbers using the <code>acc.table.retrieve</code> function.
+accession numbers using the <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> function.
 For simplicity, this tutorial will focus on sampling gene regions that
 are sampled in &gt;30% of the species (<code>targetGenes</code>
 <code>data.frame</code>).</p>
@@ -536,139 +531,6 @@ complete cds; mitochondrial</td>
 <td align="left">NADH dehydrogenase subunit 5</td>
 </tr>
 <tr class="even">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus voucher N22b 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">KX786344</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis chaus</td>
-<td align="left">Felis chaus isolate G 12S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">KU963205</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis silvestris</td>
-<td align="left">Felis silvestris 12S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">KX002032</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis bieti</td>
-<td align="left">Felis bieti 12S ribosomal RNA gene, partial sequence;
-mitochondrial</td>
-<td align="left">AY773084</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes Vv1 mitochondrial gene for 12S ribosomal
-RNA, partial sequence</td>
-<td align="left">LC424764</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus isolate FRT12 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">KM224240</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca fasciata</td>
-<td align="left">Phoca fasciata isolate 5888 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">GU174595</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha isolate 06spotted03 12S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">GU174591</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla 12S ribosomal RNA gene, partial
-sequence; and tRNA-Val gene, complete sequence; mitochondrial</td>
-<td align="left">AY012154</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus 16S ribosomal RNA gene, partial sequence;
-mitochondrial</td>
-<td align="left">AY011183</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis silvestris</td>
-<td align="left">Felis silvestris isolate A1 16S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">MF444948</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis libyca</td>
-<td align="left">Felis libyca 16S ribosomal RNA gene, mitochondrial gene
-for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006395</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis nigripes</td>
-<td align="left">Felis nigripes 16S ribosomal RNA gene, mitochondrial
-gene for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006399</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis margarita</td>
-<td align="left">Felis margarita 16S ribosomal RNA gene, mitochondrial
-gene for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006397</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis chaus</td>
-<td align="left">Felis chaus 16S ribosomal RNA gene, mitochondrial gene
-for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006393</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes voucher UAM:Mamm:24948 16S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">DQ334815</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus voucher UAM:Mamm:22740 16S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">DQ334814</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes ferrilata</td>
-<td align="left">Vulpes ferrilata voucher QTPNM 12112003 16S ribosomal
-RNA gene, partial sequence; mitochondrial</td>
-<td align="left">KC538826</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla 16S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">AY011188</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
 <td align="left">Felis silvestris</td>
 <td align="left">Felis silvestris voucher 77_Fe_sil cytochrome c oxidase
 subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial
@@ -676,7 +538,7 @@ gene</td>
 <td align="left">KF297804</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Felis catus</td>
 <td align="left">Felis catus voucher 191_Fe_cat cytochrome c oxidase
 subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial
@@ -684,42 +546,42 @@ gene</td>
 <td align="left">KF297802</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Felis chaus</td>
 <td align="left">Felis chaus cytochrome c oxidase subunit I (COI) gene,
 partial cds; mitochondrial</td>
 <td align="left">KJ634464</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes corsac</td>
 <td align="left">Vulpes corsac isolate MGL-309 cytochrome c oxidase
 subunit I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">ON377297</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Vulpes vulpes</td>
 <td align="left">Vulpes vulpes isolate EXT423_2020 cytochrome c oxidase
 subunit I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">OM980695</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes lagopus</td>
 <td align="left">Vulpes lagopus isolate VL1 cytochrome c oxidase subunit
 I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">MT731651</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Alopex lagopus</td>
 <td align="left">Alopex lagopus cytochrome c oxidase subunit I (COI)
 gene, partial cds; mitochondrial</td>
 <td align="left">AY894421</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes macrotis</td>
 <td align="left">Vulpes macrotis cytochrome c oxidase subunit I (COI)
 gene, mitochondrial gene encoding mitochondrial protein, partial
@@ -727,14 +589,14 @@ cds</td>
 <td align="left">AF028205</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Vulpes zerda</td>
 <td align="left">Vulpes zerda cytochrome c oxidase subunit I (COI) gene,
 mitochondrial gene encoding mitochondrial protein, partial cds</td>
 <td align="left">AF028194</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Phoca vitulina</td>
 <td align="left">Phoca vitulina vitulina isolate Atlantic harbor seal D
 cytochrome c oxidase subunit I (COX1) gene, partial cds; tRNA-Ser and
@@ -743,13 +605,146 @@ tRNA-Asp genes, complete sequence; and cytochrome c oxidase subunit II
 <td align="left">GU733705</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Manis pentadactyla</td>
 <td align="left">Manis pentadactyla pentadactyla isolate ASIZFZ002032
 cytochrome c oxidase subunit I (COX1) gene, partial cds;
 mitochondrial</td>
 <td align="left">OM220069</td>
 <td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis catus</td>
+<td align="left">Felis catus voucher N22b 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">KX786344</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus isolate G 12S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">KU963205</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris 12S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">KX002032</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis bieti</td>
+<td align="left">Felis bieti 12S ribosomal RNA gene, partial sequence;
+mitochondrial</td>
+<td align="left">AY773084</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes Vv1 mitochondrial gene for 12S ribosomal
+RNA, partial sequence</td>
+<td align="left">LC424764</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus isolate FRT12 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">KM224240</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Phoca fasciata</td>
+<td align="left">Phoca fasciata isolate 5888 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">GU174595</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Phoca largha</td>
+<td align="left">Phoca largha isolate 06spotted03 12S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">GU174591</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Manis pentadactyla</td>
+<td align="left">Manis pentadactyla 12S ribosomal RNA gene, partial
+sequence; and tRNA-Val gene, complete sequence; mitochondrial</td>
+<td align="left">AY012154</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis catus</td>
+<td align="left">Felis catus 16S ribosomal RNA gene, partial sequence;
+mitochondrial</td>
+<td align="left">AY011183</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris isolate A1 16S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">MF444948</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis libyca</td>
+<td align="left">Felis libyca 16S ribosomal RNA gene, mitochondrial gene
+for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006395</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis nigripes</td>
+<td align="left">Felis nigripes 16S ribosomal RNA gene, mitochondrial
+gene for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006399</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis margarita</td>
+<td align="left">Felis margarita 16S ribosomal RNA gene, mitochondrial
+gene for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006397</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus 16S ribosomal RNA gene, mitochondrial gene
+for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006393</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes voucher UAM:Mamm:24948 16S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">DQ334815</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus voucher UAM:Mamm:22740 16S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">DQ334814</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes ferrilata</td>
+<td align="left">Vulpes ferrilata voucher QTPNM 12112003 16S ribosomal
+RNA gene, partial sequence; mitochondrial</td>
+<td align="left">KC538826</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Manis pentadactyla</td>
+<td align="left">Manis pentadactyla 16S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">AY011188</td>
+<td align="left">16S ribosomal RNA</td>
 </tr>
 <tr class="even">
 <td align="left">Felis catus</td>
@@ -1221,139 +1216,6 @@ complete cds; mitochondrial</td>
 <td align="left">NADH dehydrogenase subunit 5</td>
 </tr>
 <tr class="even">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus voucher N22b 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">KX786344</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis chaus</td>
-<td align="left">Felis chaus isolate G 12S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">KU963205</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis silvestris</td>
-<td align="left">Felis silvestris 12S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">KX002032</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis bieti</td>
-<td align="left">Felis bieti 12S ribosomal RNA gene, partial sequence;
-mitochondrial</td>
-<td align="left">AY773084</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes Vv1 mitochondrial gene for 12S ribosomal
-RNA, partial sequence</td>
-<td align="left">LC424764</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus isolate FRT12 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">KM224240</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca fasciata</td>
-<td align="left">Phoca fasciata isolate 5888 12S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">GU174595</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha isolate 06spotted03 12S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">GU174591</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla 12S ribosomal RNA gene, partial
-sequence; and tRNA-Val gene, complete sequence; mitochondrial</td>
-<td align="left">AY012154</td>
-<td align="left">12S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus 16S ribosomal RNA gene, partial sequence;
-mitochondrial</td>
-<td align="left">AY011183</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis silvestris</td>
-<td align="left">Felis silvestris isolate A1 16S ribosomal RNA gene,
-partial sequence; mitochondrial</td>
-<td align="left">MF444948</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis libyca</td>
-<td align="left">Felis libyca 16S ribosomal RNA gene, mitochondrial gene
-for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006395</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis nigripes</td>
-<td align="left">Felis nigripes 16S ribosomal RNA gene, mitochondrial
-gene for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006399</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis margarita</td>
-<td align="left">Felis margarita 16S ribosomal RNA gene, mitochondrial
-gene for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006397</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Felis chaus</td>
-<td align="left">Felis chaus 16S ribosomal RNA gene, mitochondrial gene
-for mitochondrial RNA, partial sequence</td>
-<td align="left">AF006393</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes voucher UAM:Mamm:24948 16S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">DQ334815</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus voucher UAM:Mamm:22740 16S ribosomal RNA
-gene, partial sequence; mitochondrial</td>
-<td align="left">DQ334814</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes ferrilata</td>
-<td align="left">Vulpes ferrilata voucher QTPNM 12112003 16S ribosomal
-RNA gene, partial sequence; mitochondrial</td>
-<td align="left">KC538826</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla 16S ribosomal RNA gene, partial
-sequence; mitochondrial</td>
-<td align="left">AY011188</td>
-<td align="left">16S ribosomal RNA</td>
-</tr>
-<tr class="odd">
 <td align="left">Felis silvestris</td>
 <td align="left">Felis silvestris voucher 77_Fe_sil cytochrome c oxidase
 subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial
@@ -1361,7 +1223,7 @@ gene</td>
 <td align="left">KF297804</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Felis catus</td>
 <td align="left">Felis catus voucher 191_Fe_cat cytochrome c oxidase
 subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial
@@ -1369,42 +1231,42 @@ gene</td>
 <td align="left">KF297802</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Felis chaus</td>
 <td align="left">Felis chaus cytochrome c oxidase subunit I (COI) gene,
 partial cds; mitochondrial</td>
 <td align="left">KJ634464</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes corsac</td>
 <td align="left">Vulpes corsac isolate MGL-309 cytochrome c oxidase
 subunit I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">ON377297</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Vulpes vulpes</td>
 <td align="left">Vulpes vulpes isolate EXT423_2020 cytochrome c oxidase
 subunit I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">OM980695</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes lagopus</td>
 <td align="left">Vulpes lagopus isolate VL1 cytochrome c oxidase subunit
 I (COX1) gene, partial cds; mitochondrial</td>
 <td align="left">MT731651</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Alopex lagopus</td>
 <td align="left">Alopex lagopus cytochrome c oxidase subunit I (COI)
 gene, partial cds; mitochondrial</td>
 <td align="left">AY894421</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Vulpes macrotis</td>
 <td align="left">Vulpes macrotis cytochrome c oxidase subunit I (COI)
 gene, mitochondrial gene encoding mitochondrial protein, partial
@@ -1412,14 +1274,14 @@ cds</td>
 <td align="left">AF028205</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Vulpes zerda</td>
 <td align="left">Vulpes zerda cytochrome c oxidase subunit I (COI) gene,
 mitochondrial gene encoding mitochondrial protein, partial cds</td>
 <td align="left">AF028194</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Phoca vitulina</td>
 <td align="left">Phoca vitulina vitulina isolate Atlantic harbor seal D
 cytochrome c oxidase subunit I (COX1) gene, partial cds; tRNA-Ser and
@@ -1428,13 +1290,146 @@ tRNA-Asp genes, complete sequence; and cytochrome c oxidase subunit II
 <td align="left">GU733705</td>
 <td align="left">cytochrome c oxidase subunit I</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Manis pentadactyla</td>
 <td align="left">Manis pentadactyla pentadactyla isolate ASIZFZ002032
 cytochrome c oxidase subunit I (COX1) gene, partial cds;
 mitochondrial</td>
 <td align="left">OM220069</td>
 <td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis catus</td>
+<td align="left">Felis catus voucher N22b 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">KX786344</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus isolate G 12S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">KU963205</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris 12S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">KX002032</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis bieti</td>
+<td align="left">Felis bieti 12S ribosomal RNA gene, partial sequence;
+mitochondrial</td>
+<td align="left">AY773084</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes Vv1 mitochondrial gene for 12S ribosomal
+RNA, partial sequence</td>
+<td align="left">LC424764</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus isolate FRT12 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">KM224240</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Phoca fasciata</td>
+<td align="left">Phoca fasciata isolate 5888 12S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">GU174595</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Phoca largha</td>
+<td align="left">Phoca largha isolate 06spotted03 12S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">GU174591</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Manis pentadactyla</td>
+<td align="left">Manis pentadactyla 12S ribosomal RNA gene, partial
+sequence; and tRNA-Val gene, complete sequence; mitochondrial</td>
+<td align="left">AY012154</td>
+<td align="left">12S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis catus</td>
+<td align="left">Felis catus 16S ribosomal RNA gene, partial sequence;
+mitochondrial</td>
+<td align="left">AY011183</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris isolate A1 16S ribosomal RNA gene,
+partial sequence; mitochondrial</td>
+<td align="left">MF444948</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis libyca</td>
+<td align="left">Felis libyca 16S ribosomal RNA gene, mitochondrial gene
+for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006395</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis nigripes</td>
+<td align="left">Felis nigripes 16S ribosomal RNA gene, mitochondrial
+gene for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006399</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Felis margarita</td>
+<td align="left">Felis margarita 16S ribosomal RNA gene, mitochondrial
+gene for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006397</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus 16S ribosomal RNA gene, mitochondrial gene
+for mitochondrial RNA, partial sequence</td>
+<td align="left">AF006393</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes voucher UAM:Mamm:24948 16S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">DQ334815</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus voucher UAM:Mamm:22740 16S ribosomal RNA
+gene, partial sequence; mitochondrial</td>
+<td align="left">DQ334814</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes ferrilata</td>
+<td align="left">Vulpes ferrilata voucher QTPNM 12112003 16S ribosomal
+RNA gene, partial sequence; mitochondrial</td>
+<td align="left">KC538826</td>
+<td align="left">16S ribosomal RNA</td>
+</tr>
+<tr class="odd">
+<td align="left">Manis pentadactyla</td>
+<td align="left">Manis pentadactyla 16S ribosomal RNA gene, partial
+sequence; mitochondrial</td>
+<td align="left">AY011188</td>
+<td align="left">16S ribosomal RNA</td>
 </tr>
 <tr class="even">
 <td align="left">Felis catus</td>
@@ -1623,41 +1618,41 @@ protein (IRBP) gene, exon 1 and partial cds</td>
 </table>
 <p>Now, since we’re going to retrieve sequences from genbank using an
 existing preliminary accession numbers table, we will use the
-<code>sq.retrieve.indirect</code> function in <code>phruta</code>. I’m
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> function in <code>phruta</code>. I’m
 going to spend some time in here to explain the differences between the
 two versions of <code>sq.retrieve.*</code> in <code>phruta</code>. The
 one that we’re using in this tutorial,
-<code>sq.retrieve.indirect</code>, retrieves sequences “indirectly”
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>, retrieves sequences “indirectly”
 because it follows the initial step of generating a table summarizing
-accession numbers (see the <code>acc.table.retrieve</code> function
+accession numbers (see the <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> function
 above). I present the information in this vignette using
-<code>sq.retrieve.indirect</code> instead of
-<code>sq.retrieve.direct</code> because the first function is way more
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> instead of
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> because the first function is way more
 flexible and allows for correcting issues <em>prior</em> to download any
 sequence. For instance, you can add new sequences, species, populations
-to the resulting data.frame from <code>acc.table.retrieve</code>.
+to the resulting data.frame from <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code>.
 Additionally, you could even manually assemble your own dataset of
 accession numbers to be retrieved using
-<code>sq.retrieve.indirect</code>. Instead,
-<code>sq.retrieve.direct</code> does its best to directly (i.e. without
-potential input from the user) retrieve sequences for a target set of
-taxa and set of gene regions. In short, you should be able to catch
-errors using <code>sq.retrieve.indirect</code> but mistakes will be
-harder to spot and fix if you’re using <code>sq.retrieve.direct</code>.
-Note that the functionality of <code>sq.retrieve.direct</code> is
-outlined in the “Using <code>phruta</code> with defined target genes”
-vignette.</p>
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. Instead,
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does its best to directly
+(i.e. without potential input from the user) retrieve sequences for a
+target set of taxa and set of gene regions. In short, you should be able
+to catch errors using <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> but mistakes
+will be harder to spot and fix if you’re using
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>. Note that the functionality of
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> is outlined in the “Using
+<code>phruta</code> with defined target genes” vignette.</p>
 <p>We still need to retrieve all the sequences from the accessions table
 that was generated avobe using <code>acc.table</code>. The
-<code>sq.retrieve.indirect</code> function will write all the resulting
-<code>fasta</code> files into a newly created folder
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> function will write all the
+resulting <code>fasta</code> files into a newly created folder
 <code>0.Sequences</code> located in our working directory (please check
 the <code>download.sqs = TRUE</code> argument).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect</a></span><span class="op">(</span><span class="va">acc.table</span>, download.sqs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>Next, we’re going to make sure that we include only sequences that
 are reliable and from species that we are actually interested in
-analyzing. For this, we will be using the <code>sq.curate</code>
+analyzing. For this, we will be using the <code><a href="../reference/sq.curate.html">sq.curate()</a></code>
 function. We need to provide a list of taxonomic names to filter out
 incorrect sequences (<code>filterTaxonomicCriteria</code> argument). For
 simplicity, our criteria can be the genera that we’re interested in
@@ -2216,7 +2211,7 @@ table.</p>
 </tbody>
 </table>
 <p>We’ll now align the sequences that we just curated. For this, we just
-use <code>sq.aln</code> with default parameters. We need to indicate
+use <code><a href="../reference/sq.aln.html">sq.aln()</a></code> with default parameters. We need to indicate
 that we’re interested in aligning only the <code>"renamed"</code>
 <code>fasta</code> files in our <code>1.CuratedSequences</code>
 folder.</p>
@@ -2244,44 +2239,42 @@ our phylogenies. We cover these steps within <code>phruta</code> in
 another vignette: “Phylogenetics with the <code>phruta</code> R
 package”. For now, let’s wrap up and plot one of our (cool) alignments.
 Let’s first check the raw alignments!</p>
-<p><img src="Exporting_data_phruta_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<div class="figure">
+<img src="EDF.Raw.jpeg" title="Raw alignments" alt=""><p class="caption">A figure showing raw alignments</p>
+</div>
 <p>Now, the masked alignments…!!</p>
-<p><img src="Exporting_data_phruta_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<div class="figure">
+<img src="EDF.Cur.jpeg" title="Curated alignments" alt=""><p class="caption">A figure showing curated alignments</p>
+</div>
 <p>And we’re done for now!! Thanks for following this tutorial…:)</p>
-<p>In total, this vignette took 14 minutes to render in my local
+<p>In total, this vignette took 13 minutes to render in my local
 machine. You can now try to run <code>phruta</code> using your favorite
 groups organisms! Don’t forget to check the other tutorials and get in
 touch if you find any issues…Buena suerte!</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by <a href="http://cromanpa94.github.io/cromanpa/" class="external-link">Cristian Roman Palacios</a>.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
-  <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
+  </body>
 </html>

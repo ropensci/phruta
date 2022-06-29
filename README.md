@@ -28,7 +28,7 @@ The main functions in the `phruta` R package allow for a quick mining and curati
 
 `phruta` has two core functions. The main applications of these functions is briefly outlined below:
 
-- `sq.retrieve*`: This function downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes. 
+- `sq.retrieve.direct()` and `sq.retrieve.indirect()`: These functions downloads sequences from genbank (nucleotide database) for particular taxa (taxonomic groups or particular species) and a list of genes. 
 
 - `sq.curate()`: After sequences are downloaded from genbank, this function curates sequences within each of the examined genes by detecting sequence outliers and by using taxonomic information. 
 

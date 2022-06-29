@@ -4,20 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Using `phruta` with defined target genes • phruta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="phruta">
+<title>Using phruta with a defined set of target genes • phruta</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/Yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Using `phruta` with defined target genes">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using phruta with a defined set of target genes">
 <meta property="og:description" content="phruta">
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,74 +25,67 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">phruta</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/phruta.html">Get started</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/phruta.html">Get started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="http://twitter.com/cromanpa" class="external-link">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="http://twitter.com/cromanpa" aria-label="Twitter">
     <span class="fa fa-twitter"></span>
      
   </a>
 </li>
-<li>
-  <a href="https://github.com/cromanpa94/phruta" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/cromanpa94/phruta/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Using <code>phruta</code> with defined target
-genes</h1>
-                        <h4 data-toc-skip class="author">Cristian
-Román-Palacios</h4>
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Using phruta with a defined set of target genes</h1>
             
-            <h4 data-toc-skip class="date">First created on 2021-07-30.
-Updated on 2022-06-28</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phrutavignettes/phruta_targetgenes.Rmd" class="external-link"><code>vignettes/phruta_targetgenes.Rmd</code></a></small>
-      <div class="hidden name"><code>phruta_targetgenes.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phruta/blob/HEAD/vignettes/phruta_targetgenes.Rmd" class="external-link"><code>vignettes/phruta_targetgenes.Rmd</code></a></small>
+      <div class="d-none name"><code>phruta_targetgenes.Rmd</code></div>
     </div>
 
     
@@ -104,16 +97,17 @@ what genes you should sample - <code>phruta</code>’ve got your back.
 Just check the “Introduction to the `phruta` R package” and “To export
 or not export `phruta` outputs” vignettes.</p>
 <p>Now, given that we already have some target genes in mind, we can
-avoid using <code>gene.sampling.retrieve</code>. We won’t generate an
-accession table using <code>acc.table.retrieve</code> at the beginning,
-mostly because the sampling that we’re using in <code>phruta</code> this
-time. Therefore, <code>sq.retrieve.direct</code> is less flexible than
-<code>sq.retrieve.indirect</code>. As noted before,
-<code>sq.retrieve.direct</code> does its best to directly (i.e. without
-input from the user) retrieve sequences for a target set of taxa and set
-of gene regions. You are more likely to catch errors using
-<code>sq.retrieve.indirect</code>. However, mistakes will be harder to
-spot and fix when using <code>sq.retrieve.direct</code>.</p>
+avoid using <code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code>. We won’t generate an
+accession table using <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> at the
+beginning, mostly because the sampling that we’re using in
+<code>phruta</code> this time. Therefore,
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> is less flexible than
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. As noted before,
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does its best to directly
+(i.e. without input from the user) retrieve sequences for a target set
+of taxa and set of gene regions. You are more likely to catch errors
+using <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. However, mistakes will be
+harder to spot and fix when using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>.</p>
 <p>Let’s first start by loading <code>phruta</code>!</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cromanpa94/phruta" class="external-link">phruta</a></span><span class="op">)</span></code></pre></div>
@@ -129,11 +123,11 @@ spot and fix when using <code>sq.retrieve.direct</code>.</p>
 <p>Let’s download gene sequences for the taxa in <em>Felis</em>,
 <em>Vulpes</em>, and <em>Phoca</em>. Tjhis species-level sampling
 corresponds with the one in other vignettes. We will be sampling only
-two gene regions using <code>sq.retrieve.direct</code>. Note that we’re
-going to be using the list of species for the target genera from the
-gbif taxonomic backbone (hence <code>db = "gbif"</code>). There are more
-databases available for this (please check
-<code><a href="https://docs.ropensci.org/taxize/reference/downstream.html" class="external-link">taxize::downstream</a></code>).</p>
+two gene regions using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>. Note that
+we’re going to be using the list of species for the target genera from
+the gbif taxonomic backbone (hence <code>db = "gbif"</code>). There are
+more databases available for this (please check
+<code><a href="https://docs.ropensci.org/taxize/reference/downstream.html" class="external-link">taxize::downstream()</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span>
   clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,
@@ -142,11 +136,11 @@ databases available for this (please check
   db <span class="op">=</span> <span class="st">"gbif"</span>
 <span class="op">)</span></code></pre></div>
 <p>The code above will create a folder <code>0.Sequences</code> in your
-working directory. Note that <code>sq.retrieve.direct</code> does not
+working directory. Note that <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does not
 return objects to the environment. The rest of this tutorial follow the
 same structure as the “To export or not export `phruta` outputs”
 vignette.</p>
-<p>For instance, we can use the <code>sq.curate</code> function to
+<p>For instance, we can use the <code><a href="../reference/sq.curate.html">sq.curate()</a></code> function to
 remove highly divergent sequences. This function will also remove
 observations from species that are not within our target taxonomic
 groups.</p>
@@ -356,47 +350,43 @@ gene for cytochrome b, complete cds, isolate: Pvs15</td>
 </tbody>
 </table>
 <p>Now, we’ll align the sequences that we just curated. For this, we use
-<code>sq.aln</code> with under default parameters.</p>
+<code><a href="../reference/sq.aln.html">sq.aln()</a></code> with under default parameters.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.aln.html">sq.aln</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">'1.CuratedSequences'</span>, FilePatterns <span class="op">=</span> <span class="st">"renamed"</span><span class="op">)</span></code></pre></div>
 <p>The resulting multiple sequence alignments will be saved to
-<code>sqs.aln</code> object, a list. For each of the gene regions, we
+<code>sqs.aln()</code> object, a list. For each of the gene regions, we
 will have access to the original alignment (<code>Aln.Original</code>),
 the masked one (<code>Aln.Masked</code>), and information on the masking
 process. Let’s first check the raw alignments…</p>
-<p><img src="phruta_targetgenes_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<p>Now, the masked alignments…</p>
-<p><img src="phruta_targetgenes_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="PTG.Raw.jpeg" title="Raw alignments" alt="A figure showing raw alignments"> Now, the masked alignments…</p>
+<div class="figure">
+<img src="PTG.Cur.jpeg" title="Curated alignments" alt=""><p class="caption">A figure showing curated alignments</p>
+</div>
 <p>And we’re done for now!! You can compare the sampling between the
-main three tutorials using <code>sq.retrieve.direct</code> and
-<code>sq.retrieve.indirect</code>. In total, this vignette took 5
+main three tutorials using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> and
+<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. In total, this vignette took 4
 minutes to render in my local machine.</p>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-      </div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by <a href="http://cromanpa94.github.io/cromanpa/" class="external-link">Cristian Roman Palacios</a>.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
-  <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
+  </body>
 </html>

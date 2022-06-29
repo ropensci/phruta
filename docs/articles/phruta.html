@@ -4,20 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>phruta • phruta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="phruta">
+<title>Getting started with phruta • phruta</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/Yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="phruta">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting started with phruta">
 <meta property="og:description" content="phruta">
 <meta property="og:image" content="https://cromanpa94.github.io/phruta/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,73 +25,67 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">phruta</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">phruta</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/phruta.html">Get started</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/phruta.html">Get started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/index.html">Articles</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="http://twitter.com/cromanpa" class="external-link">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="http://twitter.com/cromanpa" aria-label="Twitter">
     <span class="fa fa-twitter"></span>
      
   </a>
 </li>
-<li>
-  <a href="https://github.com/cromanpa94/phruta" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/cromanpa94/phruta/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>phruta</h1>
-                        <h4 data-toc-skip class="author">Cristian
-Román-Palacios</h4>
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Getting started with phruta</h1>
             
-            <h4 data-toc-skip class="date">First created on 2021-07-30.
-Updated on 2022-06-28</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phrutavignettes/phruta.Rmd" class="external-link"><code>vignettes/phruta.Rmd</code></a></small>
-      <div class="hidden name"><code>phruta.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/cromanpa94/phruta/blob/HEAD/vignettes/phruta.Rmd" class="external-link"><code>vignettes/phruta.Rmd</code></a></small>
+      <div class="d-none name"><code>phruta.Rmd</code></div>
     </div>
 
     
@@ -100,11 +94,20 @@ Updated on 2022-06-28</h4>
 <h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><a href="#intro">What is <code>phruta</code></a></li>
+<li>
+<a href="#esp"><code>phruta</code> en Español</a>?</li>
+<li>
+<a href="#intro">What is <code>phruta</code></a>?</li>
 <li><a href="#paragraph0">Functions in <code>phruta</code></a></li>
 </ol>
 <div class="section level3">
-<h3 id="what-is-phruta">What is <code>phruta</code> <a name="intro"></a><a class="anchor" aria-label="anchor" href="#what-is-phruta"></a>
+<h3 id="phruta-en-español">
+<code>phruta</code> en Español <a name="intro"></a><a class="anchor" aria-label="anchor" href="#phruta-en-espa%C3%B1ol"></a>
+</h3>
+<p>[Placeholder]</p>
+</div>
+<div class="section level3">
+<h3 id="what-is-phruta">What is <code>phruta</code>? <a name="intro"></a><a class="anchor" aria-label="anchor" href="#what-is-phruta"></a>
 </h3>
 <p>The <code>phruta</code> package is designed to simplify the basic
 phylogenetic pipeline in <code>R</code>. <code>phruta</code> is designed
@@ -141,37 +144,39 @@ distribution of genes sampled for the search term in general or
 specifically across species.</p></li>
 <li><p>Second, given a list of target organisms, users can retrieve a
 list of accession numbers that are relevant to their search using
-<code>acc.table.retrieve</code>. Instead of directly downloading
-sequences from genbank (see <code>sq.retrieve.direct</code> below),
+<code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code>. Instead of directly downloading
+sequences from genbank (see <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> below),
 retrieving accession numbers allow users to have more control over the
 sequences that are being used in the analyses. Note that users can also
 curate the content of the dataset obtained using
-<code>sq.retrieve.direct</code>.</p></li>
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>.</p></li>
 <li><p>Third, users should download gene sequences. Sequences can be
-download using the <code>sq.retrieve.indirect</code> from the accession
-numbers retrieved before using the <code>acc.table.retrieve</code>
-function. This is the preferred option within <code>phruta</code>.
-Additionally, users can directly download gene sequences using the
-<code>sq.retrieve.direct</code> function. Both
-<code>sq.retrieve.indirect</code> and <code>sq.retrieve.direct</code>
-functions save gene sequences in <code>fasta</code> files that will be
-located in a new directory named <code>0.Sequences</code>.</p></li>
-<li><p>Fourth, <code>sq.add</code> allows users to include local
+download using the <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> from the
+accession numbers retrieved before using the
+<code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> function. This is the preferred option
+within <code>phruta</code>. Additionally, users can directly download
+gene sequences using the <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> function.
+Both <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code> and
+<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> functions save gene sequences in
+<code>fasta</code> files that will be located in a new directory named
+<code>0.Sequences</code>.</p></li>
+<li><p>Fourth, <code><a href="../reference/sq.add.html">sq.add()</a></code> allows users to include local
 sequences to those retrieved from genbank in the previous step. This
 function saves all the resulting <code>fasta</code> files in two
 directories, combined sequences in <code>0.Sequences</code> and local
 sequences in <code>0.AdditionalSequences</code> (originally downloaded
 sequences are moved to <code>0.0.OriginalDownloaded</code> at this
-step). Note that <code>sq.add</code> is optional.</p></li>
-<li><p>Fifth, the <code>sq.curate</code> function filters out unreliable
-sequences based on information listed in genbank (e.g. PREDICTED) and on
-taxonomic information provided by the user. Specifically, this function
-retrieves taxonomic information from the Global Biodiversity Information
-Facility (GBIF) database’s taxonomic backbone (see alternatives in the
-advanced vignette to <code>phruta</code>). If a given species belongs to
-a non-target group, this species is dropped from the analyses. This
-function automatically corrects taxonomy and renames sequences.</p></li>
-<li><p>Sixth, <code>sq.aln</code> performs multiple sequence alignment
+step). Note that <code><a href="../reference/sq.add.html">sq.add()</a></code> is optional.</p></li>
+<li><p>Fifth, the <code><a href="../reference/sq.curate.html">sq.curate()</a></code> function filters out
+unreliable sequences based on information listed in genbank
+(e.g. PREDICTED) and on taxonomic information provided by the user.
+Specifically, this function retrieves taxonomic information from the
+Global Biodiversity Information Facility (GBIF) database’s taxonomic
+backbone (see alternatives in the advanced vignette to
+<code>phruta</code>). If a given species belongs to a non-target group,
+this species is dropped from the analyses. This function automatically
+corrects taxonomy and renames sequences.</p></li>
+<li><p>Sixth, <code><a href="../reference/sq.aln.html">sq.aln()</a></code> performs multiple sequence alignment
 on <code>fasta</code> files. Currently, <code>phruta</code> uses the <a href="http://www2.decipher.codes/" class="external-link"><code>DECIPHER</code> R package</a>,
 here. This package allows for adjusting sequence orientation and masking
 (removing ambiguous sites).</p></li>
@@ -188,15 +193,15 @@ phylogenetic vignette of <code>phruta</code>. Similarly, we provide
 details on how to install <code>PATHd-8</code> and <code>treePL</code>
 in the same vignette.</p>
 <ul>
-<li><p>Seventh, the <code>tree.raxml</code> function allows users to
+<li><p>Seventh, the <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> function allows users to
 perform tree inference under <code>RAxML</code> for sequences in a given
-folder. This is a wrapper to <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code> and each of the
+folder. This is a wrapper to <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml()</a></code> and each of the
 arguments can be customized. The current release of <code>phruta</code>
 can manage both partitioned and unpartitioned analyses. Starting and
 constrained trees are allowed.</p></li>
-<li><p>Eight, <code>tree.dating</code> enables users to perform
+<li><p>Eight, <code><a href="../reference/tree.dating.html">tree.dating()</a></code> enables users to perform
 time-calibrations of a given phylogeny using
-<code><a href="https://rdrr.io/pkg/geiger/man/congruify.phylo.html" class="external-link">geiger::congruify.phylo</a></code>. <code>phruta</code> includes a
+<code><a href="https://rdrr.io/pkg/geiger/man/congruify.phylo.html" class="external-link">geiger::congruify.phylo()</a></code>. <code>phruta</code> includes a
 basic set of comprehensively sampled, time-calibrated phylogenies that
 are used to extract secondary calibrations for the target phylogeny.
 Note that sampling in those phylogenies can be examined using
@@ -207,34 +212,28 @@ Similarly, users can choose to run either <code>PATHd-8</code> or
 </ul>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by <a href="http://cromanpa94.github.io/cromanpa/" class="external-link">Cristian Roman Palacios</a>.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
-  <script data-goatcounter="https://phruta.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
+  </body>
 </html>
