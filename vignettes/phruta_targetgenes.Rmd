@@ -77,7 +77,7 @@ library(ape)
 files <- list.files("2.Alignments", pattern = "Raw_",full.names = TRUE)
 files.main <- list.files("2.Alignments", pattern = "Raw_",full.names = FALSE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
-jpeg("PTG.Raw.jpeg", width = 8, height = 5, units = "in", res = 300)
+jpeg("PTG.Raw.jpeg", width = 8, height = 5, units = "in", res = 72)
 par(mfrow = c(ceiling(length(sampleALNs)/2),2))
 for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
@@ -93,7 +93,7 @@ Now, the masked alignments...
 files <- list.files("2.Alignments", pattern = "Masked_",full.names = TRUE)
 files.main <- list.files("2.Alignments", pattern = "Masked_",full.names = FALSE)
 sampleALNs <- lapply(files, read.FASTA); names(sampleALNs) <- files
-jpeg("PTG.Cur.jpeg", width = 8, height = 5, units = "in", res = 300)
+jpeg("PTG.Cur.jpeg", width = 8, height = 5, units = "in", res = 72)
 par(mfrow = c(ceiling(length(sampleALNs)/2),2))
 for (i in seq_along(sampleALNs)) {
   image(sampleALNs[[i]], main = files.main[i], show.labels = FALSE, xlab = "Position",
@@ -109,3 +109,11 @@ end_time <- Sys.time()
 ```
 
 And we're done for now!! You can compare the sampling between the main three tutorials using `sq.retrieve.direct()` and `sq.retrieve.indirect()`. In total, this vignette took `r round(end_time-start_time)` minutes to render in my local machine.
+
+
+
+```{r include = FALSE}
+#Deleting the extra elements...
+unlink(c("0.Sequences", "1.CuratedSequences", "2.Alignments"), recursive = TRUE)
+#unlink(c("PTG.Cur.jpeg", "PTG.Raw.jpeg"), recursive = TRUE)
+```

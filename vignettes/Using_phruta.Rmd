@@ -130,7 +130,7 @@ Note that we could use these resulting alignments to infer phylogenies. We cover
 
 ```{r echo = FALSE}
 library(ape)
-jpeg("UF.Raw.jpeg", width = 8, height = 5, units = "in", res = 300)
+jpeg("UF.Raw.jpeg", width = 8, height = 5, units = "in", res = 72)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Original)){
@@ -146,7 +146,7 @@ sv <- dev.off()
 Now, the masked alignments...
 
 ```{r echo = FALSE}
-jpeg("UF.Cur.jpeg", width = 8, height = 5, units = "in", res = 300)
+jpeg("UF.Cur.jpeg", width = 8, height = 5, units = "in", res = 72)
 par(mfrow = c(ceiling(length(sqs.aln)/2),2))
 for (i in seq_along(sqs.aln)) {
   if(!is.null(sqs.aln[[i]]$Aln.Masked)){
@@ -163,6 +163,12 @@ sv <- dev.off()
 ```{r echo = FALSE}
 end_time <- Sys.time()
 ```
+
+```{r include = FALSE}
+#Deleting the extra elements...
+#unlink(c("UF.Cur.jpeg", "UF.Raw.jpeg"), recursive = TRUE)
+```
+
 
 Note that you could share the resulting workspace with your coworkers or add it to the supplement to your article!! In total, this script took `r round(end_time-start_time)` minutes to run in my local machine. You can now try to run `phruta` in your favorite group organisms! Don't forget to check the other tutorials...Buena suerte!
 
