@@ -56,7 +56,7 @@ taxonomy.retrieve <-
       invisible(Taxonomy_species <-
                   as.data.frame(do.call(
                     rbind, lapply(seq_along(taxo), function(x) {
-                      if (!is.na(taxo[[x]])) {
+                      if (!all(is.na(taxo[[x]]))) {
                         t(data.frame(taxo[[x]][taxo[[x]][, 2] %in% ranks, 1]))
                       } else {
                         sma <- matrix(nrow = 1, ncol = length(ranks) - 1)

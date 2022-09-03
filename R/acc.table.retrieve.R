@@ -40,7 +40,10 @@
 #' @export
 
 
-acc.table.retrieve <- function(clades, species, genes, speciesLevel){
+acc.table.retrieve <- function(clades = NULL,
+                               species = NULL,
+                               genes = NULL,
+                               speciesLevel = NULL){
   fullTerms <- expand.grid(c(clades,species), genes, stringsAsFactors = FALSE)
   fullSearch <-
     Map(acc.retrieve,

@@ -309,6 +309,9 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   AccDat$Species <- newspp
   row.names(AccDat) <- NULL
 
+  Full_dataset <- Full_dataset[!duplicated(Full_dataset$species_names),]
+
+
   ##Create a summary of the dataset
   sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
   sumTable$species_names <- row.names(sumTable)
@@ -516,6 +519,8 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     newspp <- unlist(lapply(AccDat$Species, function(x) {
       Full_dataset[Full_dataset$originalSpeciesName == x, "species_names"]
     }))
+
+    Full_dataset <- Full_dataset[!duplicated(Full_dataset$species_names),]
 
     AccDat$OldSpecies <- AccDat$Species
     AccDat$Species <- newspp

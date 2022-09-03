@@ -52,7 +52,7 @@ tree.constraint <- function(taxonomy_folder = "1.CuratedSequences",
                             Topology = "((ingroup), outgroup);",
                             outgroup = NULL) {
 
-
+  .Deprecated()
   ##Over-writing?
   if( !isTRUE(pkg.env$.testMode) ) {
     UI <- readline(paste0("This function might overwrite ",
