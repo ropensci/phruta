@@ -118,7 +118,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gs.seqs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span>, <span class="st">"Manis_pentadactyla"</span><span class="op">)</span>, </span>
 <span>                                  speciesSampling <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>For the search terms used above, <code>phruta</code> was able to retrieve the names for 1314 gene regions. In the table below I summarize a few of those genes, with sampling frequency calculated at the level of species (see <code>speciesSampling = TRUE</code> argument above).</p>
+<p>For the search terms used above, <code>phruta</code> was able to retrieve the names for 1761 gene regions. In the table below I summarize a few of those genes, with sampling frequency calculated at the level of species (see <code>speciesSampling = TRUE</code> argument above).</p>
 <table class="table">
 <caption>Gene sampling for the search including the genera Felis, Vulpes, Phoca as the ingroup taxa. Manis pentadactyla was used as outgroup.</caption>
 <thead><tr class="header">
@@ -129,33 +129,33 @@
 <tbody>
 <tr class="odd">
 <td align="left">cytochrome b</td>
-<td align="right">23</td>
-<td align="right">74.19355</td>
+<td align="right">26</td>
+<td align="right">76.47059</td>
 </tr>
 <tr class="even">
 <td align="left">NADH dehydrogenase subunit 5</td>
-<td align="right">13</td>
-<td align="right">41.93548</td>
+<td align="right">14</td>
+<td align="right">41.17647</td>
 </tr>
 <tr class="odd">
-<td align="left">growth hormone receptor</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 <td align="right">11</td>
-<td align="right">35.48387</td>
+<td align="right">32.35294</td>
 </tr>
 <tr class="even">
 <td align="left">cytochrome oxidase subunit 1</td>
-<td align="right">10</td>
-<td align="right">32.25806</td>
+<td align="right">9</td>
+<td align="right">26.47059</td>
 </tr>
 <tr class="odd">
-<td align="left">interphotoreceptor retinoid-binding protein</td>
-<td align="right">10</td>
-<td align="right">32.25806</td>
+<td align="left">NADH dehydrogenase subunit 2</td>
+<td align="right">9</td>
+<td align="right">26.47059</td>
 </tr>
 <tr class="even">
-<td align="left">apolipoprotein B</td>
+<td align="left">tRNA-Pro</td>
 <td align="right">9</td>
-<td align="right">29.03226</td>
+<td align="right">26.47059</td>
 </tr>
 </tbody>
 </table>
@@ -175,9 +175,9 @@
 <caption>Accession numbers for the relevant species and gene regions examined in this tutorial.</caption>
 <colgroup>
 <col width="5%">
-<col width="85%">
+<col width="87%">
 <col width="1%">
-<col width="7%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Species</th>
@@ -403,161 +403,70 @@
 <td align="left">NADH dehydrogenase subunit 5</td>
 </tr>
 <tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205829</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris voucher 77_Fe_sil cytochrome c oxidase subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial gene</td>
+<td align="left">KF297804</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885401</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis catus</td>
+<td align="left">Felis catus voucher 191_Fe_cat cytochrome c oxidase subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial gene</td>
+<td align="left">KF297802</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
-<td align="left">Vulpes macrotis</td>
-<td align="left">Vulpes macrotis growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885400</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus cytochrome c oxidase subunit I (COI) gene, partial cds; mitochondrial</td>
+<td align="left">KJ634464</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
 <td align="left">Vulpes corsac</td>
-<td align="left">Vulpes corsac growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885399</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Vulpes corsac isolate MGL-316 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">ON377298</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes isolate EXT423_2020 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">OM980695</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus isolate VL1 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">MT731651</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Alopex lagopus</td>
+<td align="left">Alopex lagopus cytochrome c oxidase subunit I (COI) gene, partial cds; mitochondrial</td>
+<td align="left">AY894421</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes macrotis</td>
+<td align="left">Vulpes macrotis cytochrome c oxidase subunit I (COI) gene, mitochondrial gene encoding mitochondrial protein, partial cds</td>
+<td align="left">AF028205</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
 <td align="left">Vulpes zerda</td>
-<td align="left">Vulpes zerda growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885393</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Alopex lagopus</td>
-<td align="left">Alopex lagopus growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885379</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205838</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205837</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca vitulina</td>
-<td align="left">Phoca vitulina growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">GU931127</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205827</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca groenlandica</td>
-<td align="left">Phoca groenlandica growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205825</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla growth hormone receptor (GHR) gene, exon 10 and partial cds</td>
-<td align="left">EU448992</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KY661882</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Felis nigripes</td>
-<td align="left">Felis nigripes voucher NZG:BWP38761 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KX012677</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis margarita</td>
-<td align="left">Felis margarita voucher 198_Fe_mar cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KF297765</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes voucher BIOUG<can>:HBL008452 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</can>
-</td>
-<td align="left">JF443560</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes chama</td>
-<td align="left">Vulpes chama voucher NZG:BWP38701 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KX012672</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus voucher HBL008485 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443554</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox voucher ROM 105399 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443557</td>
-<td align="left">cytochrome oxidase subunit 1</td>
+<td align="left">Vulpes zerda cytochrome c oxidase subunit I (COI) gene, mitochondrial gene encoding mitochondrial protein, partial cds</td>
+<td align="left">AF028194</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
 <td align="left">Phoca vitulina</td>
-<td align="left">Phoca vitulina voucher HBL008389 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443364</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha voucher HBL008423 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443363</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca groenlandica</td>
-<td align="left">Phoca groenlandica voucher HBL008364 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443362</td>
-<td align="left">cytochrome oxidase subunit 1</td>
+<td align="left">Phoca vitulina vitulina isolate Atlantic harbor seal D cytochrome c oxidase subunit I (COX1) gene, partial cds; tRNA-Ser and tRNA-Asp genes, complete sequence; and cytochrome c oxidase subunit II (COX2) gene, complete cds; mitochondrial</td>
+<td align="left">GU733705</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
 <td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla isolate KFBG_HZ0050 cytochrome oxidase subunit 1 gene, partial cds; mitochondrial</td>
-<td align="left">KT428152</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus interphotoreceptor retinoid binding protein gene, exon 1</td>
-<td align="left">Z11811</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox interphotoreceptor retinoid binding protein gene, partial cds</td>
-<td align="left">AF179293</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla interphotoreceptor retinoid binding protein (IRBP) gene, exon 1 and partial cds</td>
-<td align="left">JN414784</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
+<td align="left">Manis pentadactyla pentadactyla isolate ASIZFZ002032 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">OM220069</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 </tbody>
 </table>
@@ -573,9 +482,9 @@
 <caption>Updated Table 2 with some minor corrections on species names. Other updates to this table include adding more sequences, using specific sequences (instead of the ones suggested by <code>phruta</code>).</caption>
 <colgroup>
 <col width="4%">
-<col width="86%">
+<col width="88%">
 <col width="1%">
-<col width="7%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Species</th>
@@ -801,161 +710,70 @@
 <td align="left">NADH dehydrogenase subunit 5</td>
 </tr>
 <tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205829</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis silvestris</td>
+<td align="left">Felis silvestris voucher 77_Fe_sil cytochrome c oxidase subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial gene</td>
+<td align="left">KF297804</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885401</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis catus</td>
+<td align="left">Felis catus voucher 191_Fe_cat cytochrome c oxidase subunit I (COX1) gene, partial sequence; nuclear copy of mitochondrial gene</td>
+<td align="left">KF297802</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
-<td align="left">Vulpes macrotis</td>
-<td align="left">Vulpes macrotis growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885400</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Felis chaus</td>
+<td align="left">Felis chaus cytochrome c oxidase subunit I (COI) gene, partial cds; mitochondrial</td>
+<td align="left">KJ634464</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
 <td align="left">Vulpes corsac</td>
-<td align="left">Vulpes corsac growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885399</td>
-<td align="left">growth hormone receptor</td>
+<td align="left">Vulpes corsac isolate MGL-316 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">ON377298</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Vulpes vulpes</td>
+<td align="left">Vulpes vulpes isolate EXT423_2020 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">OM980695</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes lagopus</td>
+<td align="left">Vulpes lagopus isolate VL1 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">MT731651</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="odd">
+<td align="left">Alopex lagopus</td>
+<td align="left">Alopex lagopus cytochrome c oxidase subunit I (COI) gene, partial cds; mitochondrial</td>
+<td align="left">AY894421</td>
+<td align="left">cytochrome c oxidase subunit I</td>
+</tr>
+<tr class="even">
+<td align="left">Vulpes macrotis</td>
+<td align="left">Vulpes macrotis cytochrome c oxidase subunit I (COI) gene, mitochondrial gene encoding mitochondrial protein, partial cds</td>
+<td align="left">AF028205</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
 <td align="left">Vulpes zerda</td>
-<td align="left">Vulpes zerda growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885393</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Alopex lagopus</td>
-<td align="left">Alopex lagopus growth hormone receptor gene, exon 10 and partial cds</td>
-<td align="left">AY885379</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205838</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205837</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca vitulina</td>
-<td align="left">Phoca vitulina growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">GU931127</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205827</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca groenlandica</td>
-<td align="left">Phoca groenlandica growth hormone receptor (GHR) gene, partial cds</td>
-<td align="left">DQ205825</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla growth hormone receptor (GHR) gene, exon 10 and partial cds</td>
-<td align="left">EU448992</td>
-<td align="left">growth hormone receptor</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KY661882</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Felis nigripes</td>
-<td align="left">Felis nigripes voucher NZG:BWP38761 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KX012677</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Felis margarita</td>
-<td align="left">Felis margarita voucher 198_Fe_mar cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KF297765</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes vulpes</td>
-<td align="left">Vulpes vulpes voucher BIOUG<can>:HBL008452 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</can>
-</td>
-<td align="left">JF443560</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes chama</td>
-<td align="left">Vulpes chama voucher NZG:BWP38701 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">KX012672</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Vulpes lagopus</td>
-<td align="left">Vulpes lagopus voucher HBL008485 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443554</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox voucher ROM 105399 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443557</td>
-<td align="left">cytochrome oxidase subunit 1</td>
+<td align="left">Vulpes zerda cytochrome c oxidase subunit I (COI) gene, mitochondrial gene encoding mitochondrial protein, partial cds</td>
+<td align="left">AF028194</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="even">
 <td align="left">Phoca vitulina</td>
-<td align="left">Phoca vitulina voucher HBL008389 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443364</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="odd">
-<td align="left">Phoca largha</td>
-<td align="left">Phoca largha voucher HBL008423 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443363</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Phoca groenlandica</td>
-<td align="left">Phoca groenlandica voucher HBL008364 cytochrome oxidase subunit 1 (COI) gene, partial cds; mitochondrial</td>
-<td align="left">JF443362</td>
-<td align="left">cytochrome oxidase subunit 1</td>
+<td align="left">Phoca vitulina vitulina isolate Atlantic harbor seal D cytochrome c oxidase subunit I (COX1) gene, partial cds; tRNA-Ser and tRNA-Asp genes, complete sequence; and cytochrome c oxidase subunit II (COX2) gene, complete cds; mitochondrial</td>
+<td align="left">GU733705</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 <tr class="odd">
 <td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla isolate KFBG_HZ0050 cytochrome oxidase subunit 1 gene, partial cds; mitochondrial</td>
-<td align="left">KT428152</td>
-<td align="left">cytochrome oxidase subunit 1</td>
-</tr>
-<tr class="even">
-<td align="left">Felis catus</td>
-<td align="left">Felis catus interphotoreceptor retinoid binding protein gene, exon 1</td>
-<td align="left">Z11811</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
-</tr>
-<tr class="odd">
-<td align="left">Vulpes velox</td>
-<td align="left">Vulpes velox interphotoreceptor retinoid binding protein gene, partial cds</td>
-<td align="left">AF179293</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
-</tr>
-<tr class="even">
-<td align="left">Manis pentadactyla</td>
-<td align="left">Manis pentadactyla interphotoreceptor retinoid binding protein (IRBP) gene, exon 1 and partial cds</td>
-<td align="left">JN414784</td>
-<td align="left">interphotoreceptor retinoid-binding protein</td>
+<td align="left">Manis pentadactyla pentadactyla isolate ASIZFZ002032 cytochrome c oxidase subunit I (COX1) gene, partial cds; mitochondrial</td>
+<td align="left">OM220069</td>
+<td align="left">cytochrome c oxidase subunit I</td>
 </tr>
 </tbody>
 </table>
@@ -975,10 +793,10 @@
 <table class="table">
 <caption>4. Preliminary accession number table</caption>
 <colgroup>
-<col width="24%">
+<col width="23%">
 <col width="7%">
 <col width="21%">
-<col width="30%">
+<col width="31%">
 <col width="16%">
 </colgroup>
 <thead><tr class="header">
@@ -1123,157 +941,73 @@
 <td align="left">Manis_pentadactyla</td>
 </tr>
 <tr class="even">
-<td align="left">KY661882 Felis catus</td>
-<td align="left">KY661882</td>
+<td align="left">KF297804 Felis silvestris</td>
+<td align="left">KF297804</td>
+<td align="left">Felis_silvestris</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
+<td align="left">Felis_silvestris</td>
+</tr>
+<tr class="odd">
+<td align="left">KF297802 Felis catus</td>
+<td align="left">KF297802</td>
 <td align="left">Felis_catus</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Felis_catus</td>
-</tr>
-<tr class="odd">
-<td align="left">KX012677 Felis nigripes</td>
-<td align="left">KX012677</td>
-<td align="left">Felis_nigripes</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Felis_nigripes</td>
-</tr>
-<tr class="even">
-<td align="left">KF297765 Felis margarita</td>
-<td align="left">KF297765</td>
-<td align="left">Felis_margarita</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Felis_margarita</td>
-</tr>
-<tr class="odd">
-<td align="left">JF443560 Vulpes vulpes</td>
-<td align="left">JF443560</td>
-<td align="left">Vulpes_vulpes</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Vulpes_vulpes</td>
-</tr>
-<tr class="even">
-<td align="left">KX012672 Vulpes chama</td>
-<td align="left">KX012672</td>
-<td align="left">Vulpes_chama</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Vulpes_chama</td>
-</tr>
-<tr class="odd">
-<td align="left">JF443554 Vulpes lagopus</td>
-<td align="left">JF443554</td>
-<td align="left">Vulpes_lagopus</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Vulpes_lagopus</td>
-</tr>
-<tr class="even">
-<td align="left">JF443557 Vulpes velox</td>
-<td align="left">JF443557</td>
-<td align="left">Vulpes_velox</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Vulpes_velox</td>
-</tr>
-<tr class="odd">
-<td align="left">JF443364 Phoca vitulina</td>
-<td align="left">JF443364</td>
-<td align="left">Phoca_vitulina</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Phoca_vitulina</td>
-</tr>
-<tr class="even">
-<td align="left">JF443363 Phoca largha</td>
-<td align="left">JF443363</td>
-<td align="left">Phoca_largha</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Phoca_largha</td>
-</tr>
-<tr class="odd">
-<td align="left">JF443362 Phoca groenlandica</td>
-<td align="left">JF443362</td>
-<td align="left">Pagophilus_groenlandicus</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Phoca_groenlandica</td>
-</tr>
-<tr class="even">
-<td align="left">KT428152 Manis pentadactyla</td>
-<td align="left">KT428152</td>
-<td align="left">Manis_pentadactyla</td>
-<td align="left">cytochrome oxidase subunit 1.fasta</td>
-<td align="left">Manis_pentadactyla</td>
-</tr>
-<tr class="odd">
-<td align="left">DQ205829 Felis catus</td>
-<td align="left">DQ205829</td>
-<td align="left">Felis_catus</td>
-<td align="left">growth hormone receptor.fasta</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
 <td align="left">Felis_catus</td>
 </tr>
 <tr class="even">
-<td align="left">AY885401 Vulpes vulpes</td>
-<td align="left">AY885401</td>
-<td align="left">Vulpes_vulpes</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Vulpes_vulpes</td>
+<td align="left">KJ634464 Felis chaus</td>
+<td align="left">KJ634464</td>
+<td align="left">Felis_chaus</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
+<td align="left">Felis_chaus</td>
 </tr>
 <tr class="odd">
-<td align="left">AY885400 Vulpes macrotis</td>
-<td align="left">AY885400</td>
-<td align="left">Vulpes_macrotis</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Vulpes_macrotis</td>
-</tr>
-<tr class="even">
-<td align="left">AY885399 Vulpes corsac</td>
-<td align="left">AY885399</td>
+<td align="left">ON377298 Vulpes corsac</td>
+<td align="left">ON377298</td>
 <td align="left">Vulpes_corsac</td>
-<td align="left">growth hormone receptor.fasta</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
 <td align="left">Vulpes_corsac</td>
 </tr>
+<tr class="even">
+<td align="left">OM980695 Vulpes vulpes</td>
+<td align="left">OM980695</td>
+<td align="left">Vulpes_vulpes</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
+<td align="left">Vulpes_vulpes</td>
+</tr>
 <tr class="odd">
-<td align="left">AY885393 Vulpes zerda</td>
-<td align="left">AY885393</td>
+<td align="left">MT731651 Vulpes lagopus</td>
+<td align="left">MT731651</td>
+<td align="left">Vulpes_lagopus</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
+<td align="left">Vulpes_lagopus</td>
+</tr>
+<tr class="even">
+<td align="left">AF028205 Vulpes macrotis</td>
+<td align="left">AF028205</td>
+<td align="left">Vulpes_macrotis</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
+<td align="left">Vulpes_macrotis</td>
+</tr>
+<tr class="odd">
+<td align="left">AF028194 Vulpes zerda</td>
+<td align="left">AF028194</td>
 <td align="left">Vulpes_zerda</td>
-<td align="left">growth hormone receptor.fasta</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
 <td align="left">Vulpes_zerda</td>
 </tr>
 <tr class="even">
-<td align="left">AY885379 Alopex lagopus</td>
-<td align="left">AY885379</td>
-<td align="left">Vulpes_lagopus</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Alopex_lagopus</td>
-</tr>
-<tr class="odd">
-<td align="left">DQ205838 Vulpes velox</td>
-<td align="left">DQ205838</td>
-<td align="left">Vulpes_velox</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Vulpes_velox</td>
-</tr>
-<tr class="even">
-<td align="left">GU931127 Phoca vitulina</td>
-<td align="left">GU931127</td>
+<td align="left">GU733705 Phoca vitulina</td>
+<td align="left">GU733705</td>
 <td align="left">Phoca_vitulina</td>
-<td align="left">growth hormone receptor.fasta</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
 <td align="left">Phoca_vitulina</td>
 </tr>
 <tr class="odd">
-<td align="left">DQ205827 Phoca largha</td>
-<td align="left">DQ205827</td>
-<td align="left">Phoca_largha</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Phoca_largha</td>
-</tr>
-<tr class="even">
-<td align="left">DQ205825 Phoca groenlandica</td>
-<td align="left">DQ205825</td>
-<td align="left">Pagophilus_groenlandicus</td>
-<td align="left">growth hormone receptor.fasta</td>
-<td align="left">Phoca_groenlandica</td>
-</tr>
-<tr class="odd">
-<td align="left">EU448992 Manis pentadactyla</td>
-<td align="left">EU448992</td>
+<td align="left">OM220069 Manis pentadactyla</td>
+<td align="left">OM220069</td>
 <td align="left">Manis_pentadactyla</td>
-<td align="left">growth hormone receptor.fasta</td>
+<td align="left">cytochrome c oxidase subunit I.fasta</td>
 <td align="left">Manis_pentadactyla</td>
 </tr>
 <tr class="even">
@@ -1347,7 +1081,7 @@
 <img src="EDF.Cur.jpeg" title="Curated alignments" alt=""><p class="caption">A figure showing curated alignments</p>
 </div>
 <p>And we’re done for now!! Thanks for following this tutorial…:)</p>
-<p>In total, this vignette took 9 minutes to render in my local machine. You can now try to run <code>phruta</code> using your favorite groups organisms! Don’t forget to check the other tutorials and get in touch if you find any issues…Buena suerte!</p>
+<p>In total, this vignette took 7 minutes to render in my local machine. You can now try to run <code>phruta</code> using your favorite groups organisms! Don’t forget to check the other tutorials and get in touch if you find any issues…Buena suerte!</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

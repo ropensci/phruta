@@ -84,7 +84,12 @@ for the target group(s) of interest.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gene.sampling.retrieve</span><span class="op">(</span><span class="va">organism</span>, speciesSampling <span class="op">=</span> <span class="cn">TRUE</span>, npar <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gene.sampling.retrieve</span><span class="op">(</span></span>
+<span>  <span class="va">organism</span>,</span>
+<span>  speciesSampling <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  npar <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  nSearchesBatch <span class="op">=</span> <span class="fl">499</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -101,6 +106,10 @@ for the target group(s) of interest.</p>
 <dd><p>Number of simultaneous searches (character; optional). The default 2 is
 generally fast enough and does not exceed the maximum number of connections
 to genbank.</p></dd>
+
+
+<dt>nSearchesBatch</dt>
+<dd><p>Number of searches per batch</p></dd>
 
 </dl></div>
     <div class="section level2">
