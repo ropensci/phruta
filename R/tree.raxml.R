@@ -83,7 +83,7 @@ tree.raxml <-
     on.exit(setwd(mainDir))
     setwd(paste0(mainDir, "/", "3.Phylogeny"))
 
-    if (partitioned == TRUE) {
+    if (length(seq) > 1 & partitioned == TRUE) {
       partitions <- do.call(raxml.partitions, seq)
 
       tryCatch({
