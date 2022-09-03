@@ -16,6 +16,7 @@
 #' @param npar Number of simultaneous searches (character; optional). The default 2 is
 #'             generally fast enough and does not exceed the maximum number of connections
 #'             to genbank.
+#' @param nSearchesBatch Number of searches per batch
 #'
 #' @return data.frame
 #'
@@ -32,7 +33,10 @@
 #' }
 #' @export
 
-gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
+gene.sampling.retrieve <- function(organism,
+                                   speciesSampling = TRUE,
+                                   npar = 2,
+                                   nSearchesBatch = 499){
 
   x <- NULL
   get_gene_list <- function(x, search, nObs, speciesSampling = speciesSampling){
@@ -100,7 +104,7 @@ gene.sampling.retrieve <- function(organism, speciesSampling = TRUE, npar = 2){
     message("\n Genes identified...")
 
     sys <- Sys.info()["sysname"]
-    by = 499
+    by = nSearchesBatch
     cuts <- seq(1, count, by)
 
     if(sys == "Darwin"){

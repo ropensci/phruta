@@ -4,7 +4,12 @@
 \alias{gene.sampling.retrieve}
 \title{Retrieve the distribution of genes for given organism in genbank}
 \usage{
-gene.sampling.retrieve(organism, speciesSampling = TRUE, npar = 2)
+gene.sampling.retrieve(
+  organism,
+  speciesSampling = TRUE,
+  npar = 2,
+  nSearchesBatch = 499
+)
 }
 \arguments{
 \item{organism}{A vector of taxonomic groups (character).}
@@ -14,6 +19,8 @@ gene.sampling.retrieve(organism, speciesSampling = TRUE, npar = 2)
 \item{npar}{Number of simultaneous searches (character; optional). The default 2 is
 generally fast enough and does not exceed the maximum number of connections
 to genbank.}
+
+\item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
 data.frame

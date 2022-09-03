@@ -4,7 +4,12 @@
 \alias{acc.table.retrieve}
 \title{Retrieve accession numbers and titles for a given combination of species and genes in genbank}
 \usage{
-acc.table.retrieve(clades, species, genes, speciesLevel)
+acc.table.retrieve(
+  clades = NULL,
+  species = NULL,
+  genes = NULL,
+  speciesLevel = NULL
+)
 }
 \arguments{
 \item{clades}{A vector of clade names (character). Note that this can either be

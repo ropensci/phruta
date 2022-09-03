@@ -44,7 +44,12 @@ library(devtools)
 install_github("cromanpa94/phruta")
 ```
 
-Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. 
+Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. If you are interested in using the development version of `phruta`, please install it using the following code:
+
+```
+library(devtools)
+install_github("cromanpa94/phruta", ref = "dev")
+```
 
 
 ## Installing RAxML <a name="paragraph1"></a>
