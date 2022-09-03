@@ -8,7 +8,9 @@ acc.table.retrieve(
   clades = NULL,
   species = NULL,
   genes = NULL,
-  speciesLevel = NULL
+  speciesLevel = NULL,
+  npar = 2,
+  nSearchesBatch = 499
 )
 }
 \arguments{
@@ -21,6 +23,10 @@ the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).}
 \item{genes}{A vector of gene names (character; optional).}
 
 \item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
+
+\item{npar}{Number of parallel searches (the default is probably the best option).}
+
+\item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
 data.frame
