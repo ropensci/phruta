@@ -34,7 +34,10 @@
 
 sq.retrieve.indirect <- function(acc.table, download.sqs = FALSE){
 
-
+    if (download.sqs) {
+      unlink("0.Sequences", recursive = TRUE)
+      dir.create("0.Sequences")
+    }
 
 
  su <- pblapply(unique(acc.table$gene), function(x){
@@ -42,10 +45,9 @@ sq.retrieve.indirect <- function(acc.table, download.sqs = FALSE){
     seqs <- read.GenBank(acc.table.sub$Acc, species.names = TRUE)
 
     names(seqs) <- paste0(names(seqs), " ", acc.table.sub$Species)
-    if (download.sqs) {
 
-      unlink("0.Sequences", recursive = TRUE)
-      dir.create("0.Sequences")
+    
+    if (download.sqs) {
 
       ##Over-writing?
       if( !isTRUE(pkg.env$.testMode) ) {

@@ -96,108 +96,58 @@
 <ol style="list-style-type: decimal">
 <li><a href="#paragraph1">Installing RAxML</a></li>
 <li><a href="#paragraph2">Installing PATHd-8 and treePL</a></li>
-<li><a href="#paragraph3">Phylogenetic inference with
-<code>phruta</code> and <code>RAxML</code></a></li>
+<li><a href="#paragraph3">Phylogenetic inference with <code>phruta</code> and <code>RAxML</code></a></li>
 <li><a href="#paragraph4">Tree dating in <code>phruta</code></a></li>
 </ol>
 <div class="section level3">
 <h3 id="installing-raxml">Installing RAxML <a name="paragraph1"></a><a class="anchor" aria-label="anchor" href="#installing-raxml"></a>
 </h3>
-<p>In <code>MacOS</code>, <code>RAxML</code> can be easily installed to
-the <code>PATH</code> using one of the two lines below in
-<code>conda</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda/label/cf201901 raxml </span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> bioconda raxml</span></code></pre></div>
-<p>For other <code>OS</code> (Windows, Linux), please follow the
-instructions listed in the official <code>RAxML</code> <a href="https://cme.h-its.org/exelixis/web/software/raxml/" class="external-link">website</a></p>
-<p>Once <code>RAxML</code> has been installed to your computer, open
-<code>R</code> and make sure that the following line doesn’t throw an
-error.</p>
+<p>In <code>MacOS</code>, <code>RAxML</code> can be easily installed to the <code>PATH</code> using one of the two lines below in <code>conda</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">conda</span> install -c bioconda/label/cf201901 raxml </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">conda</span> install -c bioconda raxml</span></code></pre></div>
+<p>For other <code>OS</code> (Windows, Linux), please follow the instructions listed in the official <code>RAxML</code> <a href="https://cme.h-its.org/exelixis/web/software/raxml/" class="external-link">website</a></p>
+<p>Once <code>RAxML</code> has been installed to your computer, open <code>R</code> and make sure that the following line doesn’t throw an error.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"raxmlHPC"</span><span class="op">)</span></code></pre></div>
-<p>Depending on how <code>RAxML</code> was installed, you may want to
-check if <code>RAxML</code> is called from the terminal using
-<code>raxmlHPC</code> or <code>raxmlHPC</code>. This string needs to be
-passed to <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> using the argument
-<code>raxml_exec</code>. Please note that this argument corresponds to
-the <code>exec</code> argument in <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml()</a></code>.</p>
-<p>Finally, note that <code>RStudio</code> sometimes has issues finding
-<em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>. If you’re
-using <code>macOS</code>, try starting <code>RStudio</code> from the
-command line by running the following line:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
-<p>In other <code>OS</code>, it might be better to simply avoid using
-<code>RStudio</code> if you’re interested in running the phylogenetic
-functions in <code>phruta</code>.</p>
+<p>Depending on how <code>RAxML</code> was installed, you may want to check if <code>RAxML</code> is called from the terminal using <code>raxmlHPC</code> or <code>raxmlHPC</code>. This string needs to be passed to <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> using the argument <code>raxml_exec</code>. Please note that this argument corresponds to the <code>exec</code> argument in <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml()</a></code>.</p>
+<p>Finally, note that <code>RStudio</code> sometimes has issues finding <em>stuff</em> in the path while using <code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code>. If you’re using <code>macOS</code>, try starting <code>RStudio</code> from the command line by running the following line:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="ex">open</span> /Applications/RStudio.app</span></code></pre></div>
+<p>In other <code>OS</code>, it might be better to simply avoid using <code>RStudio</code> if you’re interested in running the phylogenetic functions in <code>phruta</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="installing-pathd-8-and-treepl">Installing PATHd-8 and treePL <a name="paragraph2"></a><a class="anchor" aria-label="anchor" href="#installing-pathd-8-and-treepl"></a>
 </h3>
-<p>There are excellent guides for installing <code>PATHd-8</code> and
-<code>treePL</code>. Here, I summarize two potentially relevant
-options.</p>
-<p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile" class="external-link">Brian
-O’Meara’s</a> approach for installing <code>PATHd-8</code> in MacOs and
-linux. I summarize the code in the following <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">link</a>.
-For Windows users, please use the compiled version of the software
-provided in the following <a href="https://www2.math.su.se/PATHd8/" class="external-link">link</a>.</p>
-<p>Second, you can use homebrew to install <code>treePL</code> (Windows,
-MacOS, and Linux), thanks to Jonathan Chang.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
-<p>Please check the following <a href="https://docs.brew.sh/Homebrew-on-Linux" class="external-link">link</a>) if you’re
-interested in running <code>brew</code> from Windows and Linux.</p>
+<p>There are excellent guides for installing <code>PATHd-8</code> and <code>treePL</code>. Here, I summarize two potentially relevant options.</p>
+<p>First, you can use <a href="https://github.com/bomeara/phydocker/blob/master/Dockerfile" class="external-link">Brian O’Meara’s</a> approach for installing <code>PATHd-8</code> in MacOs and linux. I summarize the code in the following <a href="https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4" class="external-link">link</a>. For Windows users, please use the compiled version of the software provided in the following <a href="https://www2.math.su.se/PATHd8/" class="external-link">link</a>.</p>
+<p>Second, you can use homebrew to install <code>treePL</code> (Windows, MacOS, and Linux), thanks to Jonathan Chang.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="ex">brew</span> install brewsci/bio/treepl</span></code></pre></div>
+<p>Please check the following <a href="https://docs.brew.sh/Homebrew-on-Linux" class="external-link">link</a>) if you’re interested in running <code>brew</code> from Windows and Linux.</p>
 </div>
 <div class="section level3">
-<h3 id="phylogenetic-inference-with-phruta-and-raxml">Phylogenetic inference with <code>phruta</code> and
-<code>RAxML</code> <a name="paragraph3"></a><a class="anchor" aria-label="anchor" href="#phylogenetic-inference-with-phruta-and-raxml"></a>
+<h3 id="phylogenetic-inference-with-phruta-and-raxml">Phylogenetic inference with <code>phruta</code> and <code>RAxML</code> <a name="paragraph3"></a><a class="anchor" aria-label="anchor" href="#phylogenetic-inference-with-phruta-and-raxml"></a>
 </h3>
-<p>Phylogenetic inference is conducted using the
-<code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> function. We need to indicate where the
-aligned sequences are located (<code>folder</code> argument), the
-patterns of the files in the same folder (<code>FilePatterns</code>
-argument; “<code>Masked_</code>” in our case). We’ll run a total of 100
-boostrap replicates and set the outgroup to “Manis_pentadactyla”.</p>
+<p>Phylogenetic inference is conducted using the <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> function. We need to indicate where the aligned sequences are located (<code>folder</code> argument), the patterns of the files in the same folder (<code>FilePatterns</code> argument; “<code>Masked_</code>” in our case). We’ll run a total of 100 boostrap replicates and set the outgroup to “Manis_pentadactyla”.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.raxml.html">tree.raxml</a></span><span class="op">(</span>folder<span class="op">=</span><span class="st">'2.Alignments'</span>, 
            FilePatterns<span class="op">=</span> <span class="st">'Masked_'</span>, 
            raxml_exec<span class="op">=</span><span class="st">'raxmlHPC'</span>, 
            Bootstrap<span class="op">=</span><span class="fl">100</span>, 
            outgroup <span class="op">=</span><span class="st">"Manis_pentadactyla"</span><span class="op">)</span></code></pre></div>
-<p>The trees are saved in <code>3.Phylogeny</code>. Likely, the
-bipartitions tree, “RAxML_bipartitions.phruta”, is the most relevant.
-<code>3.Phylogeny</code> also includes additional
-<code>RAxML</code>-related input and output files.</p>
-<p>Finally, let’s perform tree dating in our phylogeny using secondary
-calibrations extracted from <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334" class="external-link">Scholl
-and Wiens (2016)</a>. This study curated potentially the most
-comprenhensive and reliable set of trees to summarize the temporal
-dimension in evolution across the tree of life. In <code>phruta</code>,
-the trees from Scholl and Wiens (2016) were renamed to match taxonomic
-groups.</p>
+<p>The trees are saved in <code>3.Phylogeny</code>. Likely, the bipartitions tree, “RAxML_bipartitions.phruta”, is the most relevant. <code>3.Phylogeny</code> also includes additional <code>RAxML</code>-related input and output files.</p>
+<p>Finally, let’s perform tree dating in our phylogeny using secondary calibrations extracted from <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334" class="external-link">Scholl and Wiens (2016)</a>. This study curated potentially the most comprenhensive and reliable set of trees to summarize the temporal dimension in evolution across the tree of life. In <code>phruta</code>, the trees from Scholl and Wiens (2016) were renamed to match taxonomic groups.</p>
 </div>
 <div class="section level3">
 <h3 id="tree-dating-in-phruta">Tree dating in <code>phruta</code> <a name="paragraph4"></a><a class="anchor" aria-label="anchor" href="#tree-dating-in-phruta"></a>
 </h3>
-<p>Tree dating is performed using the <code><a href="../reference/tree.dating.html">tree.dating()</a></code>
-function in <code>phruta</code>. We have to provide the name of the
-folder containing the <code>1.Taxonomy.csv</code> file created in
-<code><a href="../reference/sq.curate.html">sq.curate()</a></code>. We also have to indicate the name of the
-folder containing the <code>RAxML_bipartitions.phruta</code> file. We
-will scale our phylogeny using <code>treePL</code>.</p>
+<p>Tree dating is performed using the <code><a href="../reference/tree.dating.html">tree.dating()</a></code> function in <code>phruta</code>. We have to provide the name of the folder containing the <code>1.Taxonomy.csv</code> file created in <code><a href="../reference/sq.curate.html">sq.curate()</a></code>. We also have to indicate the name of the folder containing the <code>RAxML_bipartitions.phruta</code> file. We will scale our phylogeny using <code>treePL</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.dating.html">tree.dating</a></span><span class="op">(</span>taxonomyFolder<span class="op">=</span><span class="st">"1.CuratedSequences"</span>, 
             phylogenyFolder<span class="op">=</span><span class="st">"3.Phylogeny"</span>, 
             scale<span class="op">=</span><span class="st">'treePL'</span><span class="op">)</span></code></pre></div>
-<p>Running this line will result in a new folder
-<code>4.Timetree</code>, including the different time-calibrated
-phylogenies obained (if any) and associated secondary calibrations used
-in the analyses. We found only a few overlapping calibration points
-(family-level constraints):</p>
-<p>Here’s the resulting time-calibrated phylogeny. The whole process
-took ~20 minutes to complete on my computer (16 gb RAM, i5).</p>
+<p>Running this line will result in a new folder <code>4.Timetree</code>, including the different time-calibrated phylogenies obained (if any) and associated secondary calibrations used in the analyses. We found only a few overlapping calibration points (family-level constraints):</p>
+<p>Here’s the resulting time-calibrated phylogeny. The whole process took ~20 minutes to complete on my computer (16 gb RAM, i5).</p>
 <div class="figure">
-<img src="tree.png" alt=""><p class="caption">Time-calibrated phylogeny for the target taxa.
-Analyses performed within the phruta R package.</p>
+<img src="tree.png" alt=""><p class="caption">Time-calibrated phylogeny for the target taxa. Analyses performed within the phruta R package.</p>
 </div>
 </div>
 </div>

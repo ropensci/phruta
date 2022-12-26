@@ -94,82 +94,44 @@
 <h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><a href="#paragraph0">Working with non-animal/plant groups in
-<code>phruta</code></a></li>
-<li><a href="#paragraph1">Creating taxonomic constraints in
-<code>phruta</code></a></li>
-<li><a href="#paragraph2">Running PartitionFinder in
-<code>phruta</code></a></li>
+<li><a href="#paragraph0">Working with non-animal/plant groups in <code>phruta</code></a></li>
+<li><a href="#paragraph1">Creating taxonomic constraints in <code>phruta</code></a></li>
+<li><a href="#paragraph2">Running PartitionFinder in <code>phruta</code></a></li>
 <li><a href="#paragraph3">Partitioned analyses in RAxML</a></li>
 <li><a href="#paragraph4">Identifying rogue taxa</a></li>
 </ol>
 <div class="section level3">
-<h3 id="working-with-non-animal-nor-plant-groups-in-phruta">Working with non-animal nor plant groups in <code>phruta</code>
-<a name="paragraph0"></a><a class="anchor" aria-label="anchor" href="#working-with-non-animal-nor-plant-groups-in-phruta"></a>
+<h3 id="working-with-non-animal-nor-plant-groups-in-phruta">Working with non-animal nor plant groups in <code>phruta</code> <a name="paragraph0"></a><a class="anchor" aria-label="anchor" href="#working-with-non-animal-nor-plant-groups-in-phruta"></a>
 </h3>
-<p>As explained in the brief intro to <code>phruta</code>, the
-<code><a href="../reference/sq.curate.html">sq.curate()</a></code> function is primarily designed to curate
-taxonomic datasets using <code>gbif</code>. Alto <code>gbif</code> is
-extremely fast and efficient, it is largely designed to deal with
-animals and plants. If you’re interested in using the <code>gbif</code>
-backbone for curating sequence regardless of the kingdom use the
-following approach:</p>
+<p>As explained in the brief intro to <code>phruta</code>, the <code><a href="../reference/sq.curate.html">sq.curate()</a></code> function is primarily designed to curate taxonomic datasets using <code>gbif</code>. Alto <code>gbif</code> is extremely fast and efficient, it is largely designed to deal with animals and plants. If you’re interested in using the <code>gbif</code> backbone for curating sequence regardless of the kingdom use the following approach:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/taxonomy.retrieve.html">taxonomy.retrieve</a></span><span class="op">(</span>species_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis_catus"</span>, <span class="st">"PREDICTED:_Vulpes"</span>,
                   <span class="st">"Phoca_largha"</span>, <span class="st">"PREDICTED:_Phoca"</span> ,
                   <span class="st">"PREDICTED:_Manis"</span> , <span class="st">"Felis_silvestris"</span> , <span class="st">"Felis_nigripes"</span><span class="op">)</span>,
                   database<span class="op">=</span><span class="st">'gbif'</span>, kingdom<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<p>Note that the <code>kingdom</code> argument is set to
-<code>NULL</code>. However, as indicated in the first vignette,
-<code>gbif</code> is efficient for retrieving accurate taxonomy when we
-provide details on the <code>kingdom</code>. Given that all the species
-we’re interested in are animals, we could just use:</p>
+<p>Note that the <code>kingdom</code> argument is set to <code>NULL</code>. However, as indicated in the first vignette, <code>gbif</code> is efficient for retrieving accurate taxonomy when we provide details on the <code>kingdom</code>. Given that all the species we’re interested in are animals, we could just use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/taxonomy.retrieve.html">taxonomy.retrieve</a></span><span class="op">(</span>species_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis_catus"</span>, <span class="st">"PREDICTED:_Vulpes"</span>,
                   <span class="st">"Phoca_largha"</span>, <span class="st">"PREDICTED:_Phoca"</span> ,
                   <span class="st">"PREDICTED:_Manis"</span> , <span class="st">"Felis_silvestris"</span> , <span class="st">"Felis_nigripes"</span><span class="op">)</span>,
                   database<span class="op">=</span><span class="st">'gbif'</span>, kingdom<span class="op">=</span><span class="st">'animals'</span><span class="op">)</span></code></pre></div>
-<p>We could also do the same for plants by using <code>plants</code>
-instead of <code>animals</code> in the <code>kingdom</code> argument.
-Now, what if we were interested in following other databases to retrieve
-taxonomic information for the species in our database? The latest
-version of <code>phruta</code> allow users to select the desired
-database. The databases follow the <code><a href="https://docs.ropensci.org/taxize/reference/classification.html" class="external-link">taxize::classification()</a></code>
-function. Options are: <code>ncbi</code>, <code>itis</code>,
-<code>eol</code>, <code>tropicos</code>, <code>nbn</code>,
-<code>worms</code>, <code>natserv</code>, <code>bold</code>,
-<code>wiki</code>, and <code>pow</code>. Please select only one. Note
-that the <code>gbif</code> option in
-<code><a href="https://docs.ropensci.org/taxize/reference/classification.html" class="external-link">taxize::classification()</a></code> is replaced by the internal
-<code>gbif</code> in <code>phruta</code>.</p>
-<p>Now, let’s assume that we were interested in curating our database
-using <code>itis</code>:</p>
+<p>We could also do the same for plants by using <code>plants</code> instead of <code>animals</code> in the <code>kingdom</code> argument. Now, what if we were interested in following other databases to retrieve taxonomic information for the species in our database? The latest version of <code>phruta</code> allow users to select the desired database. The databases follow the <code><a href="https://docs.ropensci.org/taxize/reference/classification.html" class="external-link">taxize::classification()</a></code> function. Options are: <code>ncbi</code>, <code>itis</code>, <code>eol</code>, <code>tropicos</code>, <code>nbn</code>, <code>worms</code>, <code>natserv</code>, <code>bold</code>, <code>wiki</code>, and <code>pow</code>. Please select only one. Note that the <code>gbif</code> option in <code><a href="https://docs.ropensci.org/taxize/reference/classification.html" class="external-link">taxize::classification()</a></code> is replaced by the internal <code>gbif</code> in <code>phruta</code>.</p>
+<p>Now, let’s assume that we were interested in curating our database using <code>itis</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/taxonomy.retrieve.html">taxonomy.retrieve</a></span><span class="op">(</span>species_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis_catus"</span>, <span class="st">"PREDICTED:_Vulpes"</span>,
                   <span class="st">"Phoca_largha"</span>, <span class="st">"PREDICTED:_Phoca"</span> ,
                   <span class="st">"PREDICTED:_Manis"</span> , <span class="st">"Felis_silvestris"</span> , <span class="st">"Felis_nigripes"</span><span class="op">)</span>,
                   database<span class="op">=</span><span class="st">'itis'</span><span class="op">)</span></code></pre></div>
-<p>Using alternative databases is sometimes desirable. Please make sure
-you review which the best database is for your target group is before
-selecting one.</p>
+<p>Using alternative databases is sometimes desirable. Please make sure you review which the best database is for your target group is before selecting one.</p>
 </div>
 <div class="section level3">
-<h3 id="creating-taxonomic-constraints-in-phruta">Creating taxonomic constraints in <code>phruta</code>
-<a name="paragraph1"></a><a class="anchor" aria-label="anchor" href="#creating-taxonomic-constraints-in-phruta"></a>
+<h3 id="creating-taxonomic-constraints-in-phruta">Creating taxonomic constraints in <code>phruta</code> <a name="paragraph1"></a><a class="anchor" aria-label="anchor" href="#creating-taxonomic-constraints-in-phruta"></a>
 </h3>
-<p>For different reasons, phylogenetic analyses sometimes require of
-tree constraints. <code>phruta</code> can automatically generate trees
-in accordance to taxonomy and a backbone topology. We divide constraint
-trees into two: (1) ingroup+outgroup and (2) particular clades.</p>
+<p>For different reasons, phylogenetic analyses sometimes require of tree constraints. <code>phruta</code> can automatically generate trees in accordance to taxonomy and a backbone topology. We divide constraint trees into two: (1) ingroup+outgroup and (2) particular clades.</p>
 <div class="section level4">
 <h4 id="ingroup-outgroup">ingroup + outgroup<a class="anchor" aria-label="anchor" href="#ingroup-outgroup"></a>
 </h4>
-<p>In this constraint type, <code>phruta</code> will create monophyletic
-groups for each of the taxonomic groups in the database (for selected
-target columns). Finally, it will generate tree with the same topology
-provided in the <code>Topology</code> argument. The user will provide
-the species names of the outgroup taxa as a vector of string that should
-fully match the names in the taxonomy file.</p>
+<p>In this constraint type, <code>phruta</code> will create monophyletic groups for each of the taxonomic groups in the database (for selected target columns). Finally, it will generate tree with the same topology provided in the <code>Topology</code> argument. The user will provide the species names of the outgroup taxa as a vector of string that should fully match the names in the taxonomy file.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.constraint.html">tree.constraint</a></span><span class="op">(</span>
                 taxonomy_folder <span class="op">=</span> <span class="st">"1.CuratedSequences"</span>,
@@ -179,65 +141,40 @@ fully match the names in the taxonomy file.</p>
                 outgroup <span class="op">=</span> <span class="st">"Manis_pentadactyla"</span>
  <span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="IngroupOutgroup.jpg" alt=""><p class="caption">Tree constraints ingroup+outgroup (example shown
-based on a much limited number of genes; see the examples in the
-package).</p>
+<img src="IngroupOutgroup.jpg" alt=""><p class="caption">Tree constraints ingroup+outgroup (example shown based on a much limited number of genes; see the examples in the package).</p>
 </div>
 </div>
 <div class="section level4">
 <h4 id="particular-clades">Particular clades<a class="anchor" aria-label="anchor" href="#particular-clades"></a>
 </h4>
-<p>In this constraint type, <code>phruta</code> will create a constraint
-tree for particular clades. For instance, let’s assume that we only need
-to create a tree constraining the monophyly within two genera and their
-sister relationships:</p>
+<p>In this constraint type, <code>phruta</code> will create a constraint tree for particular clades. For instance, let’s assume that we only need to create a tree constraining the monophyly within two genera and their sister relationships:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.constraint.html">tree.constraint</a></span><span class="op">(</span> taxonomy_folder <span class="op">=</span> <span class="st">"1.CuratedSequences"</span>,
                  targetColumns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kingdom"</span>, <span class="st">"phylum"</span>, <span class="st">"class"</span>, 
                                    <span class="st">"order"</span>, <span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species_names"</span><span class="op">)</span>,
                  Topology <span class="op">=</span> <span class="st">"((Felis), (Phoca));"</span>
  <span class="op">)</span></code></pre></div>
-<p>Note that the key aspect in here is the <code>Topology</code>
-argument. It is a newick tree.</p>
+<p>Note that the key aspect in here is the <code>Topology</code> argument. It is a newick tree.</p>
 <div class="figure">
-<img src="byclade.jpg" alt=""><p class="caption">Tree constraints by clade (example shown based on a
-much limited number of genes; see the examples in the package).</p>
+<img src="byclade.jpg" alt=""><p class="caption">Tree constraints by clade (example shown based on a much limited number of genes; see the examples in the package).</p>
 </div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="running-partitionfinder-in-phruta">Running PartitionFinder in <code>phruta</code>
-<a name="paragraph2"></a><a class="anchor" aria-label="anchor" href="#running-partitionfinder-in-phruta"></a>
+<h3 id="running-partitionfinder-in-phruta">Running PartitionFinder in <code>phruta</code> <a name="paragraph2"></a><a class="anchor" aria-label="anchor" href="#running-partitionfinder-in-phruta"></a>
 </h3>
-<p>With the current version of <code>phruta</code>, users are able to
-run <code>PartitionFinder</code> v1 within <code>R</code>. For this,
-users should provide the name of the folder where the alignments are
-stored, a particular pattern in the file names (<code>masked</code> in
-our case), and which models will be run in <code>PartitionFinder</code>.
-This function will download <code>PartitionFinder</code>, generate the
-input files, and run it all within R. The output files will be in a new
-folder within the working directory.</p>
+<p>With the current version of <code>phruta</code>, users are able to run <code>PartitionFinder</code> v1 within <code>R</code>. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names (<code>masked</code> in our case), and which models will be run in <code>PartitionFinder</code>. This function will download <code>PartitionFinder</code>, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.partitionfinderv1.html">sq.partitionfinderv1</a></span><span class="op">(</span>folderAlignments <span class="op">=</span> <span class="st">"2.Alignments"</span>,
                     FilePatterns <span class="op">=</span> <span class="st">"Masked"</span>,
                     models <span class="op">=</span> <span class="st">"all"</span>
  <span class="op">)</span></code></pre></div>
-<p>Unfortunately, the output files are not integrated with the current
-<code>phruta</code> pipeline. This will be part of a new release.
-However, users can still perform gene-based partitioned analyses within
-<code>RAxML</code> or can use PartitionFinder’s output files to inform
-their own analyses outside <code>phruta</code>.</p>
+<p>Unfortunately, the output files are not integrated with the current <code>phruta</code> pipeline. This will be part of a new release. However, users can still perform gene-based partitioned analyses within <code>RAxML</code> or can use PartitionFinder’s output files to inform their own analyses outside <code>phruta</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="partitioned-analyses-in-raxml">Partitioned analyses in RAxML <a name="paragraph3"></a><a class="anchor" aria-label="anchor" href="#partitioned-analyses-in-raxml"></a>
 </h3>
-<p>Users can now run partitioned analyses in <code>RAxML</code> within
-<code>phruta</code>. This approach is implemented by setting the
-<code>partitioned</code> argument in <code>tree.raxml</code> to
-<code>TRUE</code>. For now, partitions are based on the genes are being
-analyzed. The same model is used to analyze each partition. More details
-on partitioned analyses can be customized by passing arguments in
-<code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code>.</p>
+<p>Users can now run partitioned analyses in <code>RAxML</code> within <code>phruta</code>. This approach is implemented by setting the <code>partitioned</code> argument in <code>tree.raxml</code> to <code>TRUE</code>. For now, partitions are based on the genes are being analyzed. The same model is used to analyze each partition. More details on partitioned analyses can be customized by passing arguments in <code><a href="https://rdrr.io/pkg/ips/man/raxml.html" class="external-link">ips::raxml</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.raxml.html">tree.raxml</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"2.Alignments"</span>, FilePatterns <span class="op">=</span> <span class="st">"Masked"</span>,
            raxml_exec <span class="op">=</span> <span class="st">"raxmlHPC"</span>, Bootstrap <span class="op">=</span> <span class="fl">100</span>,
@@ -248,12 +185,7 @@ on partitioned analyses can be customized by passing arguments in
 <div class="section level3">
 <h3 id="identifying-rogue-taxa">Identifying rogue taxa <a name="paragraph4"></a><a class="anchor" aria-label="anchor" href="#identifying-rogue-taxa"></a>
 </h3>
-<p><code>phruta</code> can help users run <code>RogueNaRok</code>
-implemented in the <code>Rogue</code> R package. Users can then examine
-whether rogue taxa should be excluded from the analyses.
-<code><a href="../reference/tree.roguetaxa.html">tree.roguetaxa()</a></code> uses the bootstrap trees generated using
-the <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> function along with the associated best
-tree to identify rogue taxa.</p>
+<p><code>phruta</code> can help users run <code>RogueNaRok</code> implemented in the <code>Rogue</code> R package. Users can then examine whether rogue taxa should be excluded from the analyses. <code><a href="../reference/tree.roguetaxa.html">tree.roguetaxa()</a></code> uses the bootstrap trees generated using the <code><a href="../reference/tree.raxml.html">tree.raxml()</a></code> function along with the associated best tree to identify rogue taxa.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/tree.roguetaxa.html">tree.roguetaxa</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">"3.Phylogeny"</span><span class="op">)</span></code></pre></div>
 </div>
