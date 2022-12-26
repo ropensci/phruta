@@ -9,7 +9,8 @@ acc.retrieve(
   acc.num = FALSE,
   gene = NULL,
   speciesLevel = FALSE,
-  npar = 2
+  npar = 2,
+  nSearchesBatch = 499
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ is actually a vector or accession numbers.}
 \item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
 
 \item{npar}{Number of parallel searches (the default is probably the best option).}
+
+\item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
 data.frame

@@ -72,7 +72,7 @@ tree.raxml <-
       list.files(folder, FilePatterns, full.names = TRUE)
     files <- list.files(folder, FilePatterns)
     seq <- lapply(lapply(files_fullNames, read.FASTA), function(x) x[!duplicated(names(x))] )
-    seq <- lapply(seq, as.matrix)
+    seq <- lapply(seq, base::as.matrix)
     names(seq) <- files
 
     concatenated <- do.call(cbind.DNAbin, c(seq,
@@ -83,7 +83,7 @@ tree.raxml <-
     on.exit(setwd(mainDir))
     setwd(paste0(mainDir, "/", "3.Phylogeny"))
 
-    if (partitioned == TRUE) {
+    if (length(seq) > 1 & partitioned == TRUE) {
       partitions <- do.call(raxml.partitions, seq)
 
       tryCatch({

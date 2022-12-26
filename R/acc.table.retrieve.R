@@ -10,6 +10,8 @@
 #'               the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).
 #' @param genes A vector of gene names (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
+#' @param npar Number of parallel searches (the default is probably the best option).
+#' @param nSearchesBatch Number of searches per batch
 #'
 #' @return data.frame
 #'
@@ -40,14 +42,26 @@
 #' @export
 
 
-acc.table.retrieve <- function(clades, species, genes, speciesLevel){
+acc.table.retrieve <- function(clades = NULL,
+                               species = NULL,
+                               genes = NULL,
+                               speciesLevel = NULL,
+                               npar = 2,
+                               nSearchesBatch = 499){
+
   fullTerms <- expand.grid(c(clades,species), genes, stringsAsFactors = FALSE)
   fullSearch <-
     Map(acc.retrieve,
-        organism=fullTerms[,1],
-        gene=fullTerms[,2],
-        speciesLevel=speciesLevel)
+        organism = fullTerms[,1],
+        gene = fullTerms[,2],
+        speciesLevel = speciesLevel,
+        npar = npar,
+        nSearchesBatch = nSearchesBatch)
+if(length(fullSearch) >0){
   fullSearch.df <- do.call(rbind.data.frame, fullSearch)
   row.names(fullSearch.df) <- NULL
   fullSearch.df
+}else{
+  message("\nNo genes accession numners identified for the combination of genes and taxa...")
+}
 }

@@ -7,13 +7,11 @@
 
 # The `phruta` `R` package <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
 
-### Assembling phylogenetic trees from taxonomic names.
+### Assembling phylogenetic trees from taxonomic names
 
 ## What is `phruta`?
 
-The `phruta` R package is designed to simplify the basic phylogenetic pipeline. Specifically, all code is run within the same program and data from intermediate steps are saved in independent folders. Furthrmore, all code is run within the same environment which increases the reproducibility of your analysis. `phruta` retrieves gene sequences, combines newly downloaded and local gene sequences, and performs sequence alignments. 
-
-`phruta` is also able to perform basic phylogenetic inference under `RAxML` on the resulting sequence alignments. The current release allows users to conduct tree dating based on secondary calibrations. `phruta` is essentially a wrapper for alternative R packages and software.
+The `phruta` R package is designed to simplify the basic phylogenetic pipeline. All the code is run within the same program and data from intermediate steps are saved in independent folders (optional). `phruta` retrieves gene sequences, combines newly downloaded to local gene sequences, performs sequence alignments, and basic phylogenetic inference. 
 
 ## Who should consider using `phruta`
 
@@ -44,7 +42,16 @@ library(devtools)
 install_github("cromanpa94/phruta")
 ```
 
-Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. 
+Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. If you are interested in using the development version of `phruta`, please install it using the following code:
+
+```
+library(devtools)
+install_github("cromanpa94/phruta", ref = "dev")
+```
+
+## Running `phruta` from shiny
+
+I have constructed a shiny app that hosts `phruta` and enables users to run the basic functions in a less-code intensive environment. The app, `salphycon` is currently available in the following [GitHub repo](https://github.com/cromanpa94/salphycon). The shiny app will be live at some point in 2023.
 
 
 ## Installing RAxML <a name="paragraph1"></a>
@@ -102,9 +109,10 @@ open /Applications/RStudio.app
 ```
 
 ## Dedication
-My package is dedicated to my mom and every single Black woman. I still have lots of things to learn from you. You will always have all my admiration.
 
-The [logo](https://www.flickr.com/photos/gufomusike/3462117620/in/photolist-6NFiPi-xoLbca-FtC6yJ-4nk6wS-x2AZV-b3MUv8-e2B7qj-4uCwwa-e3PJxi-2ePGmUM-b2wBVi-obHf1x-5iP26P-4juoE6-z881E-z88t3-9GmTbQ-dGvrFe-22APdBs-p2t5Zv-8DWQw8-6fAJ2G-7jQhu2-7LEkkL-7vBdyF-jTdXSR-kcntD1-aWGfnx-bk59CK-5JfhKt-6gWfX7-reVehy-bjk7Ki-2xnGjv-dLJbq9-e3VjY3-ugz6U-FGVagm-iqVRuD-YE5pLe-2kPkt84-2kHhswd) features a Palenquera in Cartagena (Colombia). For many folks, Palenqueras are just the Black woman ones who sell fruits in particular Colombian turistic areas. However, palenqueras and Palenque are central to Black identity in Colombia, Latin America, and America. ["Palenque was the first free African town in the Americas"](https://en.wikipedia.org/wiki/San_Basilio_de_Palenque).
+My package is dedicated to my mom. I still have lots of things to learn from you. You will always have all my admiration. The [logo](https://www.flickr.com/photos/gufomusike/3462117620/in/photolist-6NFiPi-xoLbca-FtC6yJ-4nk6wS-x2AZV-b3MUv8-e2B7qj-4uCwwa-e3PJxi-2ePGmUM-b2wBVi-obHf1x-5iP26P-4juoE6-z881E-z88t3-9GmTbQ-dGvrFe-22APdBs-p2t5Zv-8DWQw8-6fAJ2G-7jQhu2-7LEkkL-7vBdyF-jTdXSR-kcntD1-aWGfnx-bk59CK-5JfhKt-6gWfX7-reVehy-bjk7Ki-2xnGjv-dLJbq9-e3VjY3-ugz6U-FGVagm-iqVRuD-YE5pLe-2kPkt84-2kHhswd) features a Palenquera in Cartagena (Colombia). For many folks, Palenqueras are just the Black woman ones who sell fruits in particular Colombian turistic areas. However, palenqueras and Palenque are central to Black identity in Colombia, Latin America, and across the America: "Palenque was the first free African town in the Americas"](https://en.wikipedia.org/wiki/San_Basilio_de_Palenque).
+
+## Etymology
 
 _Fruta_ is the Spanish word for _Fruit_. English _ph_ sounds the same as _F_ in Spanish. In `phruta`, _ph_ is relative to phylogenetics. I pronounce `phruta` just as _fruta_ in Spanish.
 

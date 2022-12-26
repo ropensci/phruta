@@ -71,7 +71,8 @@ in genbank.</p>
   acc.num <span class="op">=</span> <span class="cn">FALSE</span>,
   gene <span class="op">=</span> <span class="cn">NULL</span>,
   speciesLevel <span class="op">=</span> <span class="cn">FALSE</span>,
-  npar <span class="op">=</span> <span class="fl">2</span>
+  npar <span class="op">=</span> <span class="fl">2</span>,
+  nSearchesBatch <span class="op">=</span> <span class="fl">499</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -88,6 +89,8 @@ is actually a vector or accession numbers.</p></dd>
 <dd><p>Whether the result should be a species-level dataset (logical).</p></dd>
 <dt>npar</dt>
 <dd><p>Number of parallel searches (the default is probably the best option).</p></dd>
+<dt>nSearchesBatch</dt>
+<dd><p>Number of searches per batch</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>

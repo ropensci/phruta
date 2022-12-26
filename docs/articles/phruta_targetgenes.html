@@ -90,24 +90,8 @@
 
     
     
-<p>In this vignette, we will be retrieving sequences from genbank using
-<code>phruta</code>. We will need a list of taxa and the names of
-particular gene regions that need to be sampled. If you have no idea on
-what genes you should sample - <code>phruta</code>’ve got your back.
-Just check the “Introduction to the `phruta` R package” and “To export
-or not export `phruta` outputs” vignettes.</p>
-<p>Now, given that we already have some target genes in mind, we can
-avoid using <code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code>. We won’t generate an
-accession table using <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> at the
-beginning, mostly because the sampling that we’re using in
-<code>phruta</code> this time. Therefore,
-<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> is less flexible than
-<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. As noted before,
-<code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does its best to directly
-(i.e. without input from the user) retrieve sequences for a target set
-of taxa and set of gene regions. You are more likely to catch errors
-using <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. However, mistakes will be
-harder to spot and fix when using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>.</p>
+<p>In this vignette, we will be retrieving sequences from genbank using <code>phruta</code>. We will need a list of taxa and the names of particular gene regions that need to be sampled. If you have no idea on what genes you should sample - <code>phruta</code>’ve got your back. Just check the “Introduction to the `phruta` R package” and “To export or not export `phruta` outputs” vignettes.</p>
+<p>Now, given that we already have some target genes in mind, we can avoid using <code><a href="../reference/gene.sampling.retrieve.html">gene.sampling.retrieve()</a></code>. We won’t generate an accession table using <code><a href="../reference/acc.table.retrieve.html">acc.table.retrieve()</a></code> at the beginning, mostly because the sampling that we’re using in <code>phruta</code> this time. Therefore, <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> is less flexible than <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. As noted before, <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does its best to directly (i.e. without input from the user) retrieve sequences for a target set of taxa and set of gene regions. You are more likely to catch errors using <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. However, mistakes will be harder to spot and fix when using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>.</p>
 <p>Let’s first start by loading <code>phruta</code>!</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cromanpa94/phruta" class="external-link">phruta</a></span><span class="op">)</span></code></pre></div>
@@ -120,14 +104,7 @@ harder to spot and fix when using <code><a href="../reference/sq.retrieve.direct
 <span class="co">## </span>
 <span class="co">##                         🙂Happy coding!!🙂</span>
 <span class="co">##                        🍊🍍🍐🥝🥥🌶🥑🍒🥭</span></code></pre>
-<p>Let’s download gene sequences for the taxa in <em>Felis</em>,
-<em>Vulpes</em>, and <em>Phoca</em>. Tjhis species-level sampling
-corresponds with the one in other vignettes. We will be sampling only
-two gene regions using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>. Note that
-we’re going to be using the list of species for the target genera from
-the gbif taxonomic backbone (hence <code>db = "gbif"</code>). There are
-more databases available for this (please check
-<code><a href="https://docs.ropensci.org/taxize/reference/downstream.html" class="external-link">taxize::downstream()</a></code>).</p>
+<p>Let’s download gene sequences for the taxa in <em>Felis</em>, <em>Vulpes</em>, and <em>Phoca</em>. Tjhis species-level sampling corresponds with the one in other vignettes. We will be sampling only two gene regions using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code>. Note that we’re going to be using the list of species for the target genera from the gbif taxonomic backbone (hence <code>db = "gbif"</code>). There are more databases available for this (please check <code><a href="https://docs.ropensci.org/taxize/reference/downstream.html" class="external-link">taxize::downstream()</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct</a></span><span class="op">(</span>
   clades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Felis"</span>, <span class="st">"Vulpes"</span>, <span class="st">"Phoca"</span><span class="op">)</span>,
@@ -135,15 +112,8 @@ more databases available for this (please check
   genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ADORA3"</span>, <span class="st">"CYTB"</span><span class="op">)</span>,
   db <span class="op">=</span> <span class="st">"gbif"</span>
 <span class="op">)</span></code></pre></div>
-<p>The code above will create a folder <code>0.Sequences</code> in your
-working directory. Note that <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does not
-return objects to the environment. The rest of this tutorial follow the
-same structure as the “To export or not export `phruta` outputs”
-vignette.</p>
-<p>For instance, we can use the <code><a href="../reference/sq.curate.html">sq.curate()</a></code> function to
-remove highly divergent sequences. This function will also remove
-observations from species that are not within our target taxonomic
-groups.</p>
+<p>The code above will create a folder <code>0.Sequences</code> in your working directory. Note that <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> does not return objects to the environment. The rest of this tutorial follow the same structure as the “To export or not export `phruta` outputs” vignette.</p>
+<p>For instance, we can use the <code><a href="../reference/sq.curate.html">sq.curate()</a></code> function to remove highly divergent sequences. This function will also remove observations from species that are not within our target taxonomic groups.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.curate.html">sq.curate</a></span><span class="op">(</span>filterTaxonomicCriteria <span class="op">=</span> <span class="st">'Felis|Vulpes|Phoca|Manis'</span>,
                          kingdom <span class="op">=</span> <span class="st">'animals'</span>, 
@@ -169,203 +139,170 @@ groups.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">AY011246.1 Felis catus adenosine A3 receptor (ADORA3)
-gene, partial cds</td>
+<td align="left">AY011246.1 Felis catus adenosine A3 receptor (ADORA3) gene, partial cds</td>
 <td align="left">AY011246</td>
 <td align="left">Felis_catus</td>
 <td align="left">ADORA3.fasta</td>
 <td align="left">Felis_catus</td>
 </tr>
 <tr class="even">
-<td align="left">GU167614.1 Vulpes lagopus adenosine A3 receptor
-(ADORA3) gene, exon 2 and partial cds</td>
+<td align="left">GU167614.1 Vulpes lagopus adenosine A3 receptor (ADORA3) gene, exon 2 and partial cds</td>
 <td align="left">GU167614</td>
 <td align="left">Vulpes_lagopus</td>
 <td align="left">ADORA3.fasta</td>
 <td align="left">Vulpes_lagopus</td>
 </tr>
 <tr class="odd">
-<td align="left">GU167677.1 Phoca largha adenosine A3 receptor (ADORA3)
-gene, exon 2 and partial cds</td>
+<td align="left">GU167677.1 Phoca largha adenosine A3 receptor (ADORA3) gene, exon 2 and partial cds</td>
 <td align="left">GU167677</td>
 <td align="left">Phoca_largha</td>
 <td align="left">ADORA3.fasta</td>
 <td align="left">Phoca_largha</td>
 </tr>
 <tr class="even">
-<td align="left">GU930874.1 Phoca vitulina adenosine A3 receptor
-(ADORA3) gene, partial cds</td>
+<td align="left">GU930874.1 Phoca vitulina adenosine A3 receptor (ADORA3) gene, partial cds</td>
 <td align="left">GU930874</td>
 <td align="left">Phoca_vitulina</td>
 <td align="left">ADORA3.fasta</td>
 <td align="left">Phoca_vitulina</td>
 </tr>
 <tr class="odd">
-<td align="left">AY011251.1 Manis pentadactyla adenosine A3 receptor
-(ADORA3) gene, partial cds</td>
+<td align="left">AY011251.1 Manis pentadactyla adenosine A3 receptor (ADORA3) gene, partial cds</td>
 <td align="left">AY011251</td>
 <td align="left">Manis_pentadactyla</td>
 <td align="left">ADORA3.fasta</td>
 <td align="left">Manis_pentadactyla</td>
 </tr>
 <tr class="even">
-<td align="left">MH558234.1 Felis silvestris bieti isolate FBIPHap2 NADH
-dehydrogenase subunit 5 (ND5) and NADH dehydrogenase subunit 6 (ND6)
-genes, complete cds; tRNA-Glu gene, complete sequence; and cytochrome b
-(CytB) gene, partial cds; mitochondrial</td>
+<td align="left">MH558234.1 Felis silvestris bieti isolate FBIPHap2 NADH dehydrogenase subunit 5 (ND5) and NADH dehydrogenase subunit 6 (ND6) genes, complete cds; tRNA-Glu gene, complete sequence; and cytochrome b (CytB) gene, partial cds; mitochondrial</td>
 <td align="left">MH558234</td>
 <td align="left">Felis_silvestris</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Felis_silvestris</td>
 </tr>
 <tr class="odd">
-<td align="left">MW267829.1 Felis catus isolate VA79_2017 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
+<td align="left">MW267829.1 Felis catus isolate VA79_2017 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">MW267829</td>
 <td align="left">Felis_catus</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Felis_catus</td>
 </tr>
 <tr class="even">
-<td align="left">MN370575.1 Felis chaus isolate Jungle Cat 5 cytochrome
-b (cytb) gene, partial cds; mitochondrial</td>
+<td align="left">MN370575.1 Felis chaus isolate Jungle Cat 5 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">MN370575</td>
 <td align="left">Felis_chaus</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Felis_chaus</td>
 </tr>
 <tr class="odd">
-<td align="left">MF997607.1 Otocolobus manul cytochrome b (CYTB) gene,
-partial cds; mitochondrial</td>
-<td align="left">MF997607</td>
+<td align="left">OM970983.1 Otocolobus manul isolate 6-1-11B cytochrome b (cytb) gene, partial cds; mitochondrial</td>
+<td align="left">OM970983</td>
 <td align="left">Felis_manul</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Otocolobus_manul</td>
 </tr>
 <tr class="even">
-<td align="left">MK606132.1 Felis margarita haplotype AH NADH
-dehydrogenase subunit 5 (ND5) and cytochrome b (cytb) genes, partial
-cds; and tRNA-Thr gene and D-loop, partial sequence; mitochondrial</td>
+<td align="left">MK606132.1 Felis margarita haplotype AH NADH dehydrogenase subunit 5 (ND5) and cytochrome b (cytb) genes, partial cds; and tRNA-Thr gene and D-loop, partial sequence; mitochondrial</td>
 <td align="left">MK606132</td>
 <td align="left">Felis_margarita</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Felis_margarita</td>
 </tr>
 <tr class="odd">
-<td align="left">KU378587.1 Vulpes cana isolate B.F.Y3 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
+<td align="left">KU378587.1 Vulpes cana isolate B.F.Y3 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">KU378587</td>
 <td align="left">Vulpes_cana</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_cana</td>
 </tr>
 <tr class="even">
-<td align="left">MT795179.1 Vulpes corsac isolate SH21 cytochrome b
-(CYTB) gene, complete cds; mitochondrial</td>
+<td align="left">MT795179.1 Vulpes corsac isolate SH21 cytochrome b (CYTB) gene, complete cds; mitochondrial</td>
 <td align="left">MT795179</td>
 <td align="left">Vulpes_corsac</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_corsac</td>
 </tr>
 <tr class="odd">
-<td align="left">EU872065.1 Vulpes ferrilata haplotype 1 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
+<td align="left">EU872065.1 Vulpes ferrilata haplotype 1 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">EU872065</td>
 <td align="left">Vulpes_ferrilata</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_ferrilata</td>
 </tr>
 <tr class="even">
-<td align="left">KX093945.1 Vulpes lagopus haplotype 5 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
+<td align="left">KX093945.1 Vulpes lagopus haplotype 5 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">KX093945</td>
 <td align="left">Vulpes_lagopus</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_lagopus</td>
 </tr>
 <tr class="odd">
-<td align="left">AF028157.1 Vulpes macrotis cytochrome b (cytb) gene,
-mitochondrial gene encoding mitochondrial protein, partial cds</td>
+<td align="left">AF028157.1 Vulpes macrotis cytochrome b (cytb) gene, mitochondrial gene encoding mitochondrial protein, partial cds</td>
 <td align="left">AF028157</td>
 <td align="left">Vulpes_macrotis</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_macrotis</td>
 </tr>
 <tr class="even">
-<td align="left">KJ597964.1 Vulpes pallida haplotype PMa2 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
+<td align="left">KJ597964.1 Vulpes pallida haplotype PMa2 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">KJ597964</td>
 <td align="left">Vulpes_pallida</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_pallida</td>
 </tr>
 <tr class="odd">
-<td align="left">KU378373.1 Vulpes rueppellii isolate R.F.Y6 cytochrome
-b (cytb) gene, partial cds; mitochondrial</td>
+<td align="left">KU378373.1 Vulpes rueppellii isolate R.F.Y6 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
 <td align="left">KU378373</td>
 <td align="left">Vulpes_rueppellii</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_rueppellii</td>
 </tr>
 <tr class="even">
-<td align="left">MZ293057.1 Vulpes vulpes isolate HRF1 cytochrome B
-(CytB) gene, complete sequence; nuclear copy of mitochondrial gene</td>
-<td align="left">MZ293057</td>
+<td align="left">MK244494.1 Vulpes vulpes isolate LD124 haplotype FOX cytochrome b (CYTB) gene, partial cds; mitochondrial</td>
+<td align="left">MK244494</td>
 <td align="left">Vulpes_vulpes</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_vulpes</td>
 </tr>
 <tr class="odd">
-<td align="left">MH854561.1 Vulpes zerda isolate X161349 cytochrome b
-(Cytb) gene, partial cds; mitochondrial</td>
+<td align="left">MH854561.1 Vulpes zerda isolate X161349 cytochrome b (Cytb) gene, partial cds; mitochondrial</td>
 <td align="left">MH854561</td>
 <td align="left">Vulpes_zerda</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Vulpes_zerda</td>
 </tr>
 <tr class="even">
-<td align="left">LC466150.1 Phoca largha PLCBNo6 mitochondrial cytb gene
-for cytochrome b, partial cds</td>
+<td align="left">LC466150.1 Phoca largha PLCBNo6 mitochondrial cytb gene for cytochrome b, partial cds</td>
 <td align="left">LC466150</td>
 <td align="left">Phoca_largha</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Phoca_largha</td>
 </tr>
 <tr class="odd">
-<td align="left">AB510422.1 Phoca vitulina stejnegeri mitochondrial cytb
-gene for cytochrome b, complete cds, isolate: Pvs15</td>
+<td align="left">AB510422.1 Phoca vitulina stejnegeri mitochondrial cytb gene for cytochrome b, complete cds, isolate: Pvs15</td>
 <td align="left">AB510422</td>
 <td align="left">Phoca_vitulina</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Phoca_vitulina</td>
 </tr>
 <tr class="even">
-<td align="left">MW197469.1 Manis pentadactyla isolate ST08 cytochrome b
-(cytb) gene, partial cds; mitochondrial</td>
-<td align="left">MW197469</td>
+<td align="left">OP748355.1 Manis pentadactyla voucher MBSV033 cytochrome b (cytb) gene, partial cds; mitochondrial</td>
+<td align="left">OP748355</td>
 <td align="left">Manis_pentadactyla</td>
 <td align="left">CYTB.fasta</td>
 <td align="left">Manis_pentadactyla</td>
 </tr>
 </tbody>
 </table>
-<p>Now, we’ll align the sequences that we just curated. For this, we use
-<code><a href="../reference/sq.aln.html">sq.aln()</a></code> with under default parameters.</p>
+<p>Now, we’ll align the sequences that we just curated. For this, we use <code><a href="../reference/sq.aln.html">sq.aln()</a></code> with under default parameters.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sq.aln.html">sq.aln</a></span><span class="op">(</span>folder <span class="op">=</span> <span class="st">'1.CuratedSequences'</span>, FilePatterns <span class="op">=</span> <span class="st">"renamed"</span><span class="op">)</span></code></pre></div>
-<p>The resulting multiple sequence alignments will be saved to
-<code>sqs.aln()</code> object, a list. For each of the gene regions, we
-will have access to the original alignment (<code>Aln.Original</code>),
-the masked one (<code>Aln.Masked</code>), and information on the masking
-process. Let’s first check the raw alignments…</p>
+<p>The resulting multiple sequence alignments will be saved to <code>sqs.aln()</code> object, a list. For each of the gene regions, we will have access to the original alignment (<code>Aln.Original</code>), the masked one (<code>Aln.Masked</code>), and information on the masking process. Let’s first check the raw alignments…</p>
 <p><img src="PTG.Raw.jpeg" title="Raw alignments" alt="A figure showing raw alignments"> Now, the masked alignments…</p>
 <div class="figure">
 <img src="PTG.Cur.jpeg" title="Curated alignments" alt=""><p class="caption">A figure showing curated alignments</p>
 </div>
-<p>And we’re done for now!! You can compare the sampling between the
-main three tutorials using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> and
-<code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. In total, this vignette took 4
-minutes to render in my local machine.</p>
+<p>And we’re done for now!! You can compare the sampling between the main three tutorials using <code><a href="../reference/sq.retrieve.direct.html">sq.retrieve.direct()</a></code> and <code><a href="../reference/sq.retrieve.indirect.html">sq.retrieve.indirect()</a></code>. In total, this vignette took 4 minutes to render in my local machine.</p>
   </main>
 </div>
 

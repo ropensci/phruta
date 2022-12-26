@@ -4,7 +4,14 @@
 \alias{acc.table.retrieve}
 \title{Retrieve accession numbers and titles for a given combination of species and genes in genbank}
 \usage{
-acc.table.retrieve(clades, species, genes, speciesLevel)
+acc.table.retrieve(
+  clades = NULL,
+  species = NULL,
+  genes = NULL,
+  speciesLevel = NULL,
+  npar = 2,
+  nSearchesBatch = 499
+)
 }
 \arguments{
 \item{clades}{A vector of clade names (character). Note that this can either be
@@ -16,6 +23,10 @@ the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).}
 \item{genes}{A vector of gene names (character; optional).}
 
 \item{speciesLevel}{Whether the result should be a species-level dataset (logical).}
+
+\item{npar}{Number of parallel searches (the default is probably the best option).}
+
+\item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
 data.frame

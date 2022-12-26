@@ -10,6 +10,7 @@
 #' @param gene The name of a single gene region (character; optional).
 #' @param speciesLevel Whether the result should be a species-level dataset (logical).
 #' @param npar Number of parallel searches (the default is probably the best option).
+#' @param nSearchesBatch Number of searches per batch
 #'
 #' @return data.frame
 #'
@@ -29,7 +30,12 @@
 #' acc.retrieve(organism="Vulpes", gene = 'cytb', species=TRUE)
 #' }
 
-acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALSE, npar = 2){
+acc.retrieve <- function(organism,
+                         acc.num = FALSE,
+                         gene=NULL,
+                         speciesLevel=FALSE,
+                         npar = 2,
+                         nSearchesBatch = 499){
 
   if (is.null(gene) & speciesLevel ) {stop("\nPlease provide the name of a gene region or disable the species-level filtering")}
 
@@ -76,7 +82,7 @@ acc.retrieve <- function(organism, acc.num = FALSE, gene=NULL, speciesLevel=FALS
 
     sys <- Sys.info()["sysname"]
 
-    by = 499
+    by = nSearchesBatch
     cuts <- seq(1, count, by)
 
     if(sys == "Darwin"){

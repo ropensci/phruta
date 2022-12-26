@@ -74,7 +74,7 @@ tree.dating <-
       congruify.phylo(
         reference = SW.phruta,
         target = TargetTree,
-        taxonomy = as.matrix(taxonomy),
+        taxonomy = base::as.matrix(taxonomy),
         ...
       )
     names(resphy) <- c("family", "order", "class", "phyla", "kingdom")

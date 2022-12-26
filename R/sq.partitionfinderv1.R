@@ -59,7 +59,7 @@ sq.partitionfinderv1 <- function(folderAlignments = "2.Alignments",
   files_fullNames <- list.files(folderAlignments, FilePatterns,
                                 full.names = TRUE)
   files <- list.files(folderAlignments, FilePatterns)
-  seq <- lapply(lapply(files_fullNames, read.FASTA), as.matrix)
+  seq <- lapply(lapply(files_fullNames, read.FASTA), base::as.matrix)
   names(seq) <- files
 
   concatenated <- do.call(cbind.DNAbin, c(seq,
