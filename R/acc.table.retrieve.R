@@ -57,8 +57,11 @@ acc.table.retrieve <- function(clades = NULL,
         speciesLevel = speciesLevel,
         npar = npar,
         nSearchesBatch = nSearchesBatch)
+if(length(fullSearch) >0){
   fullSearch.df <- do.call(rbind.data.frame, fullSearch)
   row.names(fullSearch.df) <- NULL
   fullSearch.df
-
+}else{
+  message("\nNo genes accession numners identified for the combination of genes and taxa...")
+}
 }
