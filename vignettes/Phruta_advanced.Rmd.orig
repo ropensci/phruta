@@ -14,7 +14,10 @@ output:
 ---
 
 
-
+```{r include = FALSE}
+library(phruta)
+assign(".testMode", TRUE, envir = phruta:::pkg.env)
+```
 
 
 # Table of Contents
@@ -29,8 +32,7 @@ output:
 
 As explained in the brief intro to `phruta`, the `sq.curate()` function is primarily designed to curate taxonomic datasets using `gbif`. Alto `gbif` is extremely fast and efficient, it is largely designed to deal with animals and plants. If you're interested in using the `gbif` backbone for curating sequence regardless of the kingdom use the following approach:
 
-
-```r
+```{r eval=FALSE}
 taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                   "Phoca_largha", "PREDICTED:_Phoca" ,
                   "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
@@ -39,8 +41,7 @@ taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
 
 Note that the `kingdom` argument is set to `NULL`. However, as indicated in the first vignette, `gbif` is efficient for retrieving accurate taxonomy when we provide details on the `kingdom`. Given that all the species we're interested in are animals, we could just use:
 
-
-```r
+```{r eval=FALSE}
 taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                   "Phoca_largha", "PREDICTED:_Phoca" ,
                   "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
@@ -51,8 +52,7 @@ We could also do the same for plants by using `plants` instead of `animals` in t
 
 Now, let's assume that we were interested in curating our database using `itis`:
 
-
-```r
+```{r eval=FALSE}
 taxonomy.retrieve(species_names=c("Felis_catus", "PREDICTED:_Vulpes",
                   "Phoca_largha", "PREDICTED:_Phoca" ,
                   "PREDICTED:_Manis" , "Felis_silvestris" , "Felis_nigripes"),
@@ -71,8 +71,7 @@ For different reasons, phylogenetic analyses sometimes require of tree constrain
 In this constraint type, `phruta` will create monophyletic groups for each of the taxonomic groups in the database (for selected target columns). Finally, it will generate tree with the same topology provided in the `Topology` argument. The user will provide the species names of the outgroup taxa as a vector of string that should fully match the names in the taxonomy file.
 
 
-
-```r
+```{r eval=FALSE}
 tree.constraint(
                 taxonomy_folder = "1.CuratedSequences",
                 targetColumns = c("kingdom", "phylum", "class", "order", 
@@ -89,8 +88,7 @@ tree.constraint(
 
 In this constraint type, `phruta` will create a constraint tree for particular clades. For instance, let's assume that we only need to create a tree constraining the monophyly within two genera and their sister relationships:
 
-
-```r
+```{r eval=FALSE}
 tree.constraint( taxonomy_folder = "1.CuratedSequences",
                  targetColumns = c("kingdom", "phylum", "class", 
                                    "order", "family", "genus", "species_names"),
@@ -106,8 +104,7 @@ Note that the key aspect in here is the `Topology` argument. It is a newick tree
 
 With the current version of `phruta`, users are able to run `PartitionFinder` v1 within `R`. For this, users should provide the name of the folder where the alignments are stored, a particular pattern in the file names (`masked` in our case), and which models will be run in `PartitionFinder`. This function will download `PartitionFinder`, generate the input files, and run it all within R. The output files will be in a new folder within the working directory.
 
-
-```r
+```{r eval=FALSE}
 sq.partitionfinderv1(folderAlignments = "2.Alignments",
                     FilePatterns = "Masked",
                     models = "all"
@@ -122,8 +119,7 @@ Unfortunately, the output files are not integrated with the current `phruta` pip
 Users can now run partitioned analyses in `RAxML` within `phruta`. This approach is implemented by setting the `partitioned` argument in `tree.raxml` to `TRUE`. For now, partitions are based on the genes are being analyzed. The same model is used to analyze each partition. More details on partitioned analyses can be customized by passing arguments in `ips::raxml`.
 
 
-
-```r
+```{r eval=FALSE}
 tree.raxml(folder = "2.Alignments", FilePatterns = "Masked",
            raxml_exec = "raxmlHPC", Bootstrap = 100,
            outgroup = "Manis_pentadactyla",
@@ -137,8 +133,7 @@ tree.raxml(folder = "2.Alignments", FilePatterns = "Masked",
 `phruta` can help users run `RogueNaRok` implemented in the `Rogue` R package. Users can then examine whether rogue taxa should be excluded from the analyses. `tree.roguetaxa()` uses the bootstrap trees generated using the `tree.raxml()` function along with the associated best tree to identify rogue taxa.  
 
 
-
-```r
+```{r eval=FALSE}
 tree.roguetaxa(folder = "3.Phylogeny")
 ```
 

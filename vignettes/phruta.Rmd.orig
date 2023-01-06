@@ -13,7 +13,9 @@ output:
     fig_caption: yes
 ---
 
-
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = TRUE, warning = FALSE, message = FALSE, progress = FALSE)
+```
 
 # Table of Contents
 

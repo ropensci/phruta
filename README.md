@@ -1,13 +1,13 @@
   <!-- badges: start -->
-  [![Codecov test coverage](https://codecov.io/gh/cromanpa94/phruta/branch/main/graph/badge.svg)](https://codecov.io/gh/cromanpa94/phruta?branch=main)
-  [![R-CMD-check](https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/cromanpa94/phruta/actions)
+  [![Codecov test coverage](https://codecov.io/gh/ropensci/phruta/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/phruta?branch=main)
+  [![R-CMD-check](https://github.com/ropensci/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/phruta/actions)
   [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)  
-  [![](https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg)](https://github.com/cromanpa94/phruta)
-  [![CodeFactor](https://www.codefactor.io/repository/github/cromanpa94/phruta/badge)](https://www.codefactor.io/repository/github/cromanpa94/phruta)  
+  [![](https://img.shields.io/github/languages/code-size/ropensci/phruta.svg)](https://github.com/ropensci/phruta)
+  [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/phruta/badge)](https://www.codefactor.io/repository/github/ropensci/phruta)  
  [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/458_status.svg)](https://github.com/ropensci/software-review/issues/458)
   <!-- badges: end -->
 
-# The `phruta` `R` package <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
+# The `phruta` `R` package <a href='https://ropensci.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
 
 ### Assembling phylogenetic trees from taxonomic names
 
@@ -41,14 +41,20 @@ In addition to these two main functions, users will be able to align the downloa
 
 ```
 library(devtools) 
-install_github("cromanpa94/phruta")
+install_github("ropensci/phruta")
 ```
 
-Please make sure that the R packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. If you are interested in using the development version of `phruta`, please install it using the following code:
+Alternatively, you can install `phruta` using:
+
+```
+install.packages("phruta", repos = "https://ropensci.r-universe.dev")
+```
+
+Please make sure that the `R` packages `msa`, `DECIPHER`, `Biostrings`, and `odseq` are correctly installed. If you are interested in using the development version of `phruta`, please install it using the following code:
 
 ```
 library(devtools)
-install_github("cromanpa94/phruta", ref = "dev")
+install_github("ropensci/phruta", ref = "dev")
 ```
 
 ## Running `phruta` from shiny
@@ -85,7 +91,7 @@ Finally, note that `RStudio` sometimes has issues finding *stuff* in the path wh
 open /Applications/RStudio.app
 ```
 
-In other OS, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
+VS code does not suffer of the same issues. In other OS, it might be better to simply avoid using `RStudio` if you're interested in running the phylogenetic functions in `phruta`.
 
 ## Installing `PATHd-8` and `treePL` <a name="paragraph2"></a>
 
@@ -120,7 +126,7 @@ _Fruta_ is the Spanish word for _Fruit_. English _ph_ sounds the same as _F_ in 
 
 ## Additional resources
 
-More details about the functions implemented in `phruta` can be found in the different vignettes associated with the package or in our [website](https://cromanpa94.github.io/phruta/).
+More details about the functions implemented in `phruta` can be found in the different vignettes associated with the package or in our [website](https://ropensci.github.io/phruta/).
 
 ## Alternatives to `phruta`
 
@@ -135,4 +141,7 @@ Please see our [contributing guide](CONTRIBUTING).
 
 Please see the package [DESCRIPTION](DESCRIPTION) for package authors.
 
+## Code of conduct
+
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 

@@ -25,13 +25,11 @@ output:
 
 In `MacOS`, `RAxML` can be easily installed to the `PATH` using one of the two lines below in `conda`:
 
-
-```bash
+```{bash eval=FALSE}
 conda install -c bioconda/label/cf201901 raxml 
 ```
 
-
-```bash
+```{bash eval=FALSE}
 conda install -c bioconda raxml
 ```
 
@@ -39,8 +37,7 @@ For other `OS` (Windows, Linux), please follow the instructions listed in the of
 
 Once `RAxML` has been installed to your computer, open `R` and make sure that the following line doesn't throw an error.
 
-
-```r
+```{r eval=FALSE}
 system("raxmlHPC")
 ```
 
@@ -48,8 +45,7 @@ Depending on how `RAxML` was installed, you may want to check if `RAxML` is call
 
 Finally, note that `RStudio` sometimes has issues finding *stuff* in the path while using `system()`. If you're using `macOS`, try starting `RStudio` from the command line by running the following line:
 
-
-```bash
+```{bash eval=FALSE}
 open /Applications/RStudio.app
 ```
 
@@ -64,8 +60,7 @@ First, you can use [Brian O'Meara's](https://github.com/bomeara/phydocker/blob/m
 
 Second, you can use homebrew to install `treePL` (Windows, MacOS, and Linux), thanks to Jonathan Chang.
 
-
-```bash
+```{bash eval = F}
 brew install brewsci/bio/treepl
 ```
 
@@ -75,8 +70,7 @@ Please check the following [link](https://docs.brew.sh/Homebrew-on-Linux)) if yo
 
 Phylogenetic inference is conducted using the `tree.raxml()` function. We need to indicate where the aligned sequences are located (`folder` argument), the patterns of the files in the same folder (`FilePatterns` argument; "`Masked_`" in our case). We'll run a total of 100 boostrap replicates and set the outgroup to "Manis_pentadactyla".
 
-
-```r
+```{r eval=FALSE}
 tree.raxml(folder='2.Alignments', 
            FilePatterns= 'Masked_', 
            raxml_exec='raxmlHPC', 
@@ -92,8 +86,7 @@ Finally, let's perform tree dating in our phylogeny using secondary calibrations
 
 Tree dating is performed using the `tree.dating()` function in `phruta`. We have to provide the name of the folder containing the `1.Taxonomy.csv` file created in `sq.curate()`. We also have to indicate the name of the folder containing the `RAxML_bipartitions.phruta` file. We will scale our phylogeny using `treePL`.
 
-
-```r
+```{r eval=FALSE}
 tree.dating(taxonomyFolder="1.CuratedSequences", 
             phylogenyFolder="3.Phylogeny", 
             scale='treePL')

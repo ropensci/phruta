@@ -1,108 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://cromanpa94.github.io/phruta/404.html</loc>
+    <loc>https://ropensci.github.io/phruta/404.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/LICENSE-text.html</loc>
+    <loc>https://ropensci.github.io/phruta/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Brief_Intro_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Brief_Intro_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Exporting_data_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Exporting_data_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Future_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Future_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Phruta_advanced.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Phruta_advanced.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Phylogenetics_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Phylogenetics_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/Using_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/Using_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/index.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/phruta_targetgenes.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/phruta_targetgenes.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/phruta_vignette.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/phruta_vignette.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/usando_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/usando_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/articles/what_is_phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/articles/what_is_phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/authors.html</loc>
+    <loc>https://ropensci.github.io/phruta/authors.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/index.html</loc>
+    <loc>https://ropensci.github.io/phruta/index.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/SW.phruta.html</loc>
+    <loc>https://ropensci.github.io/phruta/news/index.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/TTOL.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/SW.phruta.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/acc.retrieve.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/TTOL.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/acc.table.retrieve.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/acc.retrieve.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/gene.sampling.retrieve.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/acc.table.retrieve.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/getListConstraints.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/gene.sampling.retrieve.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/index.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/getListConstraints.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.add.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.aln.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.add.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.curate.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.aln.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.partitionfinderv1.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.curate.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.retrieve.direct.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.partitionfinderv1.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.retrieve.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.retrieve.direct.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/sq.retrieve.indirect.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.retrieve.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/taxonomy.retrieve.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/sq.retrieve.indirect.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/tree.constraint.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/taxonomy.retrieve.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/tree.dating.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/tree.constraint.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/tree.raxml.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/tree.dating.html</loc>
   </url>
   <url>
-    <loc>https://cromanpa94.github.io/phruta/reference/tree.roguetaxa.html</loc>
+    <loc>https://ropensci.github.io/phruta/reference/tree.raxml.html</loc>
+  </url>
+  <url>
+    <loc>https://ropensci.github.io/phruta/reference/tree.roguetaxa.html</loc>
   </url>
 </urlset>
