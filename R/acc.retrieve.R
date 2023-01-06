@@ -117,7 +117,7 @@ acc.retrieve <- function(organism,
       AccDS <- do.call(rbind, AccDS)
     }
 
-    Species <- sapply(AccDS[,1], function(z) paste(strsplit(z, " ")[[1]][c(1:2)], collapse = " " ))
+    Species <- sapply(AccDS[,1], function(z) paste(strsplit(z, " ")[[1]][1:2], collapse = " " ))
     AccDS <- cbind.data.frame(Species, AccDS)
     if (!is.null(gene)) {AccDS$gene <- gene}
     row.names(AccDS) <- NULL

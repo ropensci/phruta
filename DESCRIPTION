@@ -15,7 +15,7 @@ Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
           family = "Boehm",
           role = c("rev"))
            )
-URL: https://github.com/ropensci/phruta, https://ropensci.github.io/phruta/
+URL: https://docs.ropensci.org/phruta/index.html, https://github.com/ropensci/phruta, https://ropensci.github.io/phruta/
 BugReports: https://github.com/ropensci/phruta/issues
 Description: The phruta R package is designed to simplify the basic
             phylogenetic pipeline. Specifically, all code is run within

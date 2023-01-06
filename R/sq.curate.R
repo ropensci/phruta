@@ -143,7 +143,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
                             function(x){
-    paste0(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
+    paste0(strsplit(x, " ")[[1]][2:3], collapse = "_")
     }))
 
   seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x){
@@ -264,7 +264,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
       newNames <-
         unlist(lapply(names(ta.cu),
                       function(x) {
-                        paste(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
+                        paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
                         }
                       ))
 
@@ -357,7 +357,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
     seqNames <- unlist(lapply(fastaSeqs,
                               function(x){
-                                lapply(strsplit(names(x), " "), function(z) paste0(z[c(2:3)], collapse = "_"))
+                                lapply(strsplit(names(x), " "), function(z) paste0(z[2:3], collapse = "_"))
                               }))
 
     seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x){
@@ -478,7 +478,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
         newNames <-
           unlist(lapply(names(ta.cu),
                         function(x) {
-                          paste(strsplit(x, " ")[[1]][c(2:3)], collapse = "_")
+                          paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
                         }
           ))
 
