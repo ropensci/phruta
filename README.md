@@ -3,7 +3,9 @@
   [![R-CMD-check](https://github.com/cromanpa94/phruta/workflows/R-CMD-check/badge.svg)](https://github.com/cromanpa94/phruta/actions)
   [![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)  
   [![](https://img.shields.io/github/languages/code-size/cromanpa94/phruta.svg)](https://github.com/cromanpa94/phruta)
-  [![CodeFactor](https://www.codefactor.io/repository/github/cromanpa94/phruta/badge)](https://www.codefactor.io/repository/github/cromanpa94/phruta)  <!-- badges: end -->
+  [![CodeFactor](https://www.codefactor.io/repository/github/cromanpa94/phruta/badge)](https://www.codefactor.io/repository/github/cromanpa94/phruta)  
+ [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/458_status.svg)](https://github.com/ropensci/software-review/issues/458)
+  <!-- badges: end -->
 
 # The `phruta` `R` package <a href='https://cromanpa94.github.io/phruta'><img src='man/figures/logo.png' align="right" height="300" /></a>
 
