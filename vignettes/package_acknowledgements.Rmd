@@ -1,0 +1,63 @@
+---
+title: "phruta behind the scenes"
+author: Cristian Román-Palacios
+date: 'First created on 2021-07-30. Updated on 2023-05-02'
+vignette: >
+  %\VignetteIndexEntry{phruta behind the scenes}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+output:
+#  pdf_document:
+#    highlight: null
+#    number_sections: yes
+  knitr:::html_vignette:
+    toc: true
+    fig_caption: yes
+---
+
+## `phruta` behind the scenes
+
+`phruta` has a plethora of dependencies that enables the package to perform particular tasks in a (largely...) organized fashion. This vignette has the objective of acknowledging the maintainers and
+creators of the main R packages that `phruta` uses in different of it's steps. First, both `rgbif` (Chamberlain and Boettiger, 2017) and `taxize` (Chamberlain and Szöcs, 2013) are both used for either retrieving taxonomic information or curating it. Second, `ape` (Paradis and Schliep, 2019) is generally used for interacting with sequence- and tree-based files within `R` and relative to files in the working directory. Third, both `rentrez` (Winter, 2017) and `reutils` (Schöfl, 2016) are used to retrieve sequences from GenBank. We use functions from two packages to interact with GenBank given differences in the structure of search strings or expectations in the resulting objects. Fourth, we use `DECIPHER` (Wright, 2016), `Biostrings` (Pagès et al. 2022), `msa` (Bodenhofer et al. 2015), and `odseq` (Jiménez, 2022) mostly during sequence alignment-related steps involving both curation and effective alignment. Fifth, we use `ips` (Heibl, 2008) to interact with external software such as `RAxML` (Stamatakis, 2014). Finally, `geiger` (Harmon et al. 2008; Pennell et al. 2014) and `Rogue` (Aberer et al. 2013; Smith, 2021, 2022) are used to time-calibrate a phylogeny using a reference tree and identify rogue taxa in newly-inferred trees, respectively.   
+
+
+  
+  * Aberer, A. J., Krompass, D., & Stamatakis, A. (2013). Pruning rogue taxa improves phylogenetic accuracy: an efficient algorithm and webservice. Systematic biology, 62(1), 162-166.
+
+  * Bodenhofer, U., Bonatesta, E., Horejš-Kainrath, C., & Hochreiter, S. (2015). msa: an R package for multiple sequence alignment. Bioinformatics, 31(24), 3997-3999.
+
+  * Chamberlain, S. A., & Boettiger, C. (2017). R Python, and Ruby clients for GBIF species occurrence data (No. e3304v1). PeerJ Preprints.
+
+  * Chamberlain, S. A., & Szöcs, E. (2013). taxize: taxonomic search and retrieval in R. F1000Research, 2.  doi:10.5281/zenodo.5037327
+
+  * Harmon, L. J., Weir, J. T., Brock, C. D., Glor, R. E., & Challenger, W. (2008). GEIGER: investigating evolutionary radiations. Bioinformatics, 24(1), 129-131.
+
+  * Heibl, C. (2008). PHYLOCH: R language tree plotting tools and interfaces to d
+Jiménez, J. (2022). odseq: Outlier detection in multiple sequence alignments. R package version 1.24.0.
+
+  * Pagès, H., Aboyoun, P., Gentleman, R., DebRoy, S. (2022). Biostrings: Efficient manipulation of biological strings. R package version 2.64.0
+
+  * Paradis, E., & Schliep, K. (2019). ape 5.0: an environment for modern phylogenetics and evolutionary analyses in R. Bioinformatics, 35(3), 526-528.
+
+  * Pennell, M. W., Eastman, J. M., Slater, G. J., Brown, J. W., Uyeda, J. C., FitzJohn, R. G., ... & Harmon, L. J. (2014). geiger v2. 0: an expanded suite of methods for fitting macroevolutionary models to phylogenetic trees. Bioinformatics, 30(15), 2216-2218.
+
+  * Schöfl, G. (2016). reutils: Talk to the NCBI EUtils. R package version 0.2.3.
+
+  * Smith, M. R. (2022). Using information theory to detect rogue taxa and improve consensus trees. Systematic Biology, 71(5), 1088-1094.
+
+  * Smith, M.R. (2021): Rogue: Identify Rogue Taxa in Sets of Phylogenetic Trees, Zotero.
+
+  * Stamatakis, A. (2014). RAxML version 8: a tool for phylogenetic analysis and post-analysis of large phylogenies. Bioinformatics, 30(9), 1312-1313.
+
+  * Winter, D. J. (2017). rentrez: An R package for the NCBI eUtils API (No. e3179v2). PeerJ Preprints.
+
+  * Wright, E. S. (2016). Using DECIPHER v2. 0 to analyze big biological sequence data in R. R J., 8(1), 352.
+
+
+## General acknowledgements
+
+The author thanks Heidi E. Steiner for proofreading the vignettes and documentation in `phruta` in addition to early versions of this manuscript. Anna Krystalli, Rayna Harris, Frederick Boehm, and Maëlle Salmon provided excellent comments during the peer review process of `phruta` in ROpenSci. Wonkyiun Yim provided early support in `salphycon`. Finally, the author thanks the author and maintainers of all the packages used in `phruta` and `salphycon` for their constant support to the field.
+
+
+
+
