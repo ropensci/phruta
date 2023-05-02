@@ -20,7 +20,7 @@
 #' @importFrom taxize classification
 #' @importFrom pbapply pblapply
 #'
-#' @return data.frame of taxonomic information for the target species
+#' @return \code{data.frame} of taxonomic information for the target species
 #'         (valid in the database)
 #'
 #' @keywords internal

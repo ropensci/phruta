@@ -32,7 +32,9 @@ not interested in download sequences locally.}
 \item{...}{Arguments passed to \code{"DECIPHER::AlignSeqs"}.}
 }
 \value{
-list
+This function will return an object of class \code{list} including the
+original and renamed sequence alignments. Optionally, this object will
+also include the masked alignments.
 }
 \description{
 Perform multiple sequence alignment on all the fasta files

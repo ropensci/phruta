@@ -29,7 +29,9 @@
 #' @import DECIPHER
 #' @import msa
 #'
-#' @return list
+#' @return This function will return an object of class \code{list} including the
+#'         original and renamed sequence alignments. Optionally, this object will
+#'         also include the masked alignments.
 #'
 #' @examples
 #' \dontrun{

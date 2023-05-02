@@ -29,7 +29,11 @@ the name of a clade (e.g. Apis) or the code in NCBI (e.g. txid7459).}
 \item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
-data.frame
+This function returns an object of class \code{data.frame} that
+includes the following columns. First, \code{Species} with the
+species name listed in GenBank. Second, \code{Ti} including the title
+of the accession in GenBank. Third, \code{Acc} listing the accession
+number. Fourth, \code{gene} including the name of the target gene.
 }
 \description{
 Retrieve accession numbers and titles for complex searches conducted in genbank.

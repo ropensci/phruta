@@ -24,7 +24,7 @@ options: "animals" or "plants."}
 \item{ranks}{Taxonomic ranks to retrieve from the target species.}
 }
 \value{
-data.frame of taxonomic information for the target species
+\code{data.frame} of taxonomic information for the target species
 (valid in the database)
 }
 \description{

@@ -23,7 +23,13 @@ to genbank.}
 \item{nSearchesBatch}{Number of searches per batch}
 }
 \value{
-data.frame
+This function returns a \code{data.frame} that comprises the following
+columns. First, \code{Gene}, including the name of the relevant
+gene sampled in the target taxonomic groups. Second,
+\code{Sampled in N species} includes the number of species where the
+gene is sampled among the target taxa. Third, \code{PercentOfSampledSpecies}
+indicates the percentage of species where the gene is sampled (assuming
+GeneBank's taxonomic backbone).
 }
 \description{
 This function retrieves the gene names for given organism in genbank. This function is

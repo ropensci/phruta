@@ -13,7 +13,11 @@
 #' @param npar Number of parallel searches (the default is probably the best option).
 #' @param nSearchesBatch Number of searches per batch
 #'
-#' @return data.frame
+#' @return This function returns an object of class \code{data.frame} that
+#'        includes the following columns. First, \code{Species} with the 
+#'        species name listed in GenBank. Second, \code{Ti} including the title
+#'        of the accession in GenBank. Third, \code{Acc} listing the accession
+#'        number. Fourth, \code{gene} including the name of the target gene.
 #'
 #' @name acc.table.retrieve
 #'

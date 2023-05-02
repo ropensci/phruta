@@ -53,7 +53,11 @@ not interested in download sequences locally.}
 in the \code{0.Sequences} folder.}
 }
 \value{
-list
+This function will return an object of class \code{list} with the
+following elements. First, the curated sequences with original names.
+Second, the curated sequences with species-level names. Third,
+the accession numbers table. Fourth, a summary of taxonomic
+information for all the species sampled in the files.
 }
 \description{
 After downloading sequences from genbank, this function
