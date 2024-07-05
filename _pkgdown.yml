@@ -7,7 +7,7 @@ authors:
 navbar:
   structure:
     left:  [intro, reference, articles, tutorials, news]
-    right: [twitter, github]
+    right: [twitter, search, github]
   components:
     twitter:
       icon: fa-twitter
