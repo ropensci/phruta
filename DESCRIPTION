@@ -61,3 +61,4 @@ License: MIT + file LICENSE
 Config/testthat/edition: 3
 Language: en-US
 Roxygen: list(markdown = TRUE)
+Remotes: cran/reutils, cran/ips
