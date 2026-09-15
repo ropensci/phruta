@@ -1,8 +1,8 @@
 Package: phruta
 Type: Package
 Title: Phylogenetic Reconstruction and Time-dating
-Version: 0.1.3
-Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@g.ucla.edu",
+Version: 0.1.4
+Authors@R: c(person("Cristian", "Roman Palacios", email = "cromanpa@arizona.edu",
                   role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1696-4886")),
     person(given = "Anna",
@@ -47,7 +47,6 @@ Imports:
     odseq,
     XML,
     Rogue
-RoxygenNote: 7.2.0
 Suggests:
     testthat (>= 3.0.0),
     covr,
@@ -62,3 +61,4 @@ Config/testthat/edition: 3
 Language: en-US
 Roxygen: list(markdown = TRUE)
 Remotes: cran/reutils, cran/ips
+Config/roxygen2/version: 8.1.0

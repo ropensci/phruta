@@ -149,7 +149,7 @@ sq.retrieve.direct <-
       })
 
       invisible(lapply(seq_along(taxa), function(x) {
-        if (!is.na(ret_seqs[[x]]$sequences)) {
+        if (!is.null(ret_seqs[[x]]) && !is.na(ret_seqs[[x]]$sequences)) {
           write(
             ret_seqs[[x]]$sequences,
             paste0("0.Sequences/", gene, ".fasta"),
