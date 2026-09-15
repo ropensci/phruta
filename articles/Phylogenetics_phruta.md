@@ -1,0 +1,139 @@
+# Phylogenetics with phruta
+
+## Table of Contents
+
+1.  [Installing RAxML](#paragraph1)
+2.  [Installing PATHd-8 and treePL](#paragraph2)
+3.  [Phylogenetic inference with `phruta` and `RAxML`](#paragraph3)
+4.  [Tree dating in `phruta`](#paragraph4)
+
+### Installing RAxML 
+
+In `MacOS`, `RAxML` can be easily installed to the `PATH` using one of
+the two lines below in `conda`:
+
+``` bash
+conda install -c bioconda/label/cf201901 raxml 
+```
+
+``` bash
+conda install -c bioconda raxml
+```
+
+For other `OS` (Windows, Linux), please follow the instructions listed
+in the official `RAxML`
+[website](https://cme.h-its.org/exelixis/web/software/raxml/)
+
+Once `RAxML` has been installed to your computer, open `R` and make sure
+that the following line doesn’t throw an error.
+
+``` r
+
+system("raxmlHPC")
+```
+
+Depending on how `RAxML` was installed, you may want to check if `RAxML`
+is called from the terminal using `raxmlHPC` or `raxmlHPC`. This string
+needs to be passed to
+[`tree.raxml()`](https://ropensci.github.io/phruta/reference/tree.raxml.md)
+using the argument `raxml_exec`. Please note that this argument
+corresponds to the `exec` argument in
+[`ips::raxml()`](https://rdrr.io/pkg/ips/man/raxml.html).
+
+Finally, note that `RStudio` sometimes has issues finding *stuff* in the
+path while using [`system()`](https://rdrr.io/r/base/system.html). If
+you’re using `macOS`, try starting `RStudio` from the command line by
+running the following line:
+
+``` bash
+open /Applications/RStudio.app
+```
+
+In other `OS`, it might be better to simply avoid using `RStudio` if
+you’re interested in running the phylogenetic functions in `phruta`.
+
+### Installing PATHd-8 and treePL 
+
+There are excellent guides for installing `PATHd-8` and `treePL`. Here,
+I summarize two potentially relevant options.
+
+First, you can use [Brian
+O’Meara’s](https://github.com/bomeara/phydocker/blob/master/Dockerfile)
+approach for installing `PATHd-8` in MacOs and linux. I summarize the
+code in the following
+[link](https://gist.github.com/cromanpa94/a43bc710a17220f71d796d6590ea7fe4).
+For Windows users, please use the compiled version of the software
+provided in the following [link](https://www2.math.su.se/PATHd8/).
+
+Second, you can use homebrew to install `treePL` (Windows, MacOS, and
+Linux), thanks to Jonathan Chang.
+
+``` bash
+brew install brewsci/bio/treepl
+```
+
+Please check the following
+[link](https://docs.brew.sh/Homebrew-on-Linux)) if you’re interested in
+running `brew` from Windows and Linux.
+
+### Phylogenetic inference with `phruta` and `RAxML` 
+
+Phylogenetic inference is conducted using the
+[`tree.raxml()`](https://ropensci.github.io/phruta/reference/tree.raxml.md)
+function. We need to indicate where the aligned sequences are located
+(`folder` argument), the patterns of the files in the same folder
+(`FilePatterns` argument; “`Masked_`” in our case). We’ll run a total of
+100 boostrap replicates and set the outgroup to “Manis_pentadactyla”.
+
+``` r
+
+tree.raxml(folder='2.Alignments', 
+           FilePatterns= 'Masked_', 
+           raxml_exec='raxmlHPC', 
+           Bootstrap=100, 
+           outgroup ="Manis_pentadactyla")
+```
+
+The trees are saved in `3.Phylogeny`. Likely, the bipartitions tree,
+“RAxML_bipartitions.phruta”, is the most relevant. `3.Phylogeny` also
+includes additional `RAxML`-related input and output files.
+
+Finally, let’s perform tree dating in our phylogeny using secondary
+calibrations extracted from [Scholl and Wiens
+(2016)](https://royalsocietypublishing.org/doi/pdf/10.1098/rspb.2016.1334).
+This study curated potentially the most comprenhensive and reliable set
+of trees to summarize the temporal dimension in evolution across the
+tree of life. In `phruta`, the trees from Scholl and Wiens (2016) were
+renamed to match taxonomic groups.
+
+### Tree dating in `phruta` 
+
+Tree dating is performed using the
+[`tree.dating()`](https://ropensci.github.io/phruta/reference/tree.dating.md)
+function in `phruta`. We have to provide the name of the folder
+containing the `1.Taxonomy.csv` file created in
+[`sq.curate()`](https://ropensci.github.io/phruta/reference/sq.curate.md).
+We also have to indicate the name of the folder containing the
+`RAxML_bipartitions.phruta` file. We will scale our phylogeny using
+`treePL`.
+
+``` r
+
+tree.dating(taxonomyFolder="1.CuratedSequences", 
+            phylogenyFolder="3.Phylogeny", 
+            scale='treePL')
+```
+
+Running this line will result in a new folder `4.Timetree`, including
+the different time-calibrated phylogenies obained (if any) and
+associated secondary calibrations used in the analyses. We found only a
+few overlapping calibration points (family-level constraints):
+
+Here’s the resulting time-calibrated phylogeny. The whole process took
+~20 minutes to complete on my computer (16 gb RAM, i5).
+
+![Time-calibrated phylogeny for the target taxa. Analyses performed
+within the phruta R package.](tree.png)
+
+Time-calibrated phylogeny for the target taxa. Analyses performed within
+the phruta R package.

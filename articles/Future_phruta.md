@@ -1,0 +1,21 @@
+# Future directions for phruta
+
+## Future directions for `phruta` 
+
+I acknowledge that some of the functions in `phruta` are for now very
+limited and cover a few basic aspects of the modern phylogenetic
+pipeline. However, I’m actively working on improving `phruta.` Recent
+developments have included:
+
+- Expand taxonomic cleaning for non-animal/plant groups (implemented in
+  `v0.1.2`)
+- Taxonomic tree constraints (implemented in `v0.1.2`)
+- Partitioned analyses in RAxML
+- PartitionFinder (V2; V1 is implemented in `v0.1.2`)
+- Rogue taxa identification (implemented in `v0.1.2`)
+- Faster functions to mine genbank (implemented in `v0.1.2`)
+
+Please stay tuned for more updates. Get in touch if you have questions.
+Open issues if you find anything relevant in my code, have suggestions.
+Your input is very valuable! Feel free to get in touch as well if you
+want to request any new functionality.
