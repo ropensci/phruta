@@ -2,6 +2,8 @@ unlink(list.dirs("."), recursive = TRUE)
 
 
 test_that("Test if the direct pipeline works", {
+  skip_if_offline()
+  skip_on_ci()
 
   expect_output(sq.retrieve.direct(
     clades = c("Felis", "Vulpes", "Phoca"),

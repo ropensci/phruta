@@ -83,6 +83,8 @@ test_that("Generate an error when a vector with more than 1 element is provided 
 
 
 test_that("Silent sq.retrieve.direct", {
+  skip_if_offline()
+  skip_on_ci()
   expect_output(sq.retrieve.direct(
     clades = "Psocus",
     species = NULL,
