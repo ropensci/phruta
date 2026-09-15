@@ -94,70 +94,224 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   if (is.null(folder)) stop("Folder where curated
                             sequences are saved must be provided")
 
+  if (is.null(sqs.object)) {
 
-  if(is.null(sqs.object)){
-
-    ##Over-writing?
-    if( !isTRUE(pkg.env$.testMode) ) {
+    # Over-writing?
+    if ( !isTRUE(pkg.env$.testMode) ) {
       UI <- readline(paste0("This function might overwrite ",
                             "1.CuratedSequences", ". Are you sure you want to continue? (y/n)  "))
-      if(UI != 'y') stop('Exiting since you did not press y')
+      if (UI != 'y') stop('Exiting since you did not press y')
     }
-
 
     if (!is.null(mergeGeneFiles)) {
 
-      mergedSeqs <- lapply(mergeGeneFiles, function(x){
+      mergedSeqs <- lapply(mergeGeneFiles, function(x) {
         refF <- list.files(folder, pattern = '.fasta')
         targetF <- paste0(unlist(x), '.fasta')
         if (all(targetF %in% refF)) {
 
-          seqs <- lapply(x, function(z) read.FASTA(paste0(folder,"/", z, '.fasta')))
+          seqs <- lapply(x, function(z) read.FASTA(paste0(folder, "/", z, '.fasta')))
 
-          #unlink(paste0(folder,"/", x, '.fasta')) #remove original files
-          file.rename(paste0(folder,"/", x, '.fasta'), paste0(folder,"/", x, '.original.non.merged'))
+          file.rename(paste0(folder, "/", x, '.fasta'), paste0(folder, "/", x, '.original.non.merged'))
 
-          comS <- do.call(c,seqs)
+          comS <- do.call(c, seqs)
           comS[!duplicated(sub(".*? ", "", names(comS)))]
-        }else{
-          message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found in ", folder,"\n")
+        } else {
+          message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found in ", folder, "\n")
         }
       })
 
       names(mergedSeqs) <- names(mergeGeneFiles)
       invisible(
-        lapply(seq_along(mergedSeqs), function(y){
-          if(!is.null(mergedSeqs[[y]])){
+        lapply(seq_along(mergedSeqs), function(y) {
+          if (!is.null(mergedSeqs[[y]])) {
             write.FASTA(mergedSeqs[[y]],
-                        paste0(folder,"/", names(mergedSeqs)[y], ".fasta"))
+                        paste0(folder, "/", names(mergedSeqs)[y], ".fasta"))
           }
         })
       )
     }
 
+    fastaSeqs <- lapply(list.files(folder, pattern = '.fasta', full.names = TRUE), function(x) {
+      seqs <- read.FASTA(x)
+      seqs <- seqs[!duplicated(names(seqs))]
+      seqs[!duplicated(sub(".*? ", "", names(seqs)))]
+    })
 
+    names(fastaSeqs) <- list.files(folder, pattern = '.fasta', full.names = FALSE)
 
-  fastaSeqs <- lapply(list.files(folder, pattern = '.fasta', full.names = TRUE), function(x){
-    seqs <- read.FASTA(x)
-    seqs <- seqs[!duplicated(names(seqs))]
-    seqs[!duplicated(sub(".*? ", "", names(seqs)))]
-  })
+    fileNames <- list.files(folder, pattern = '.fasta', full.names = FALSE)
 
-  names(fastaSeqs) <- list.files(folder, pattern = '.fasta', full.names = F)
+    core <- curate.sequences.core(
+      fastaSeqs = fastaSeqs,
+      fileNames = fileNames,
+      filterTaxonomicCriteria = filterTaxonomicCriteria,
+      database = database,
+      kingdom = kingdom,
+      removeOutliers = removeOutliers,
+      minSeqs = minSeqs,
+      threshold = threshold,
+      ranks = ranks
+    )
 
-  seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
-                            function(x){
-    paste0(strsplit(x, " ")[[1]][2:3], collapse = "_")
+    # Export to disk
+    unlink("1.CuratedSequences", recursive = TRUE)
+    dir.create("1.CuratedSequences")
+    invisible(lapply(seq_along(core$curatedSeqs), function(y) {
+      if (length(names(core$curatedSeqs[[y]])) >= minSeqs) {
+        ta.cu <- core$curatedSeqs[[y]]
+        ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
+
+        write.FASTA(ta.cu,
+                    paste0("1.CuratedSequences/", names(core$curatedSeqs)[y]))
+
+        newNames <-
+          unlist(lapply(names(ta.cu),
+                        function(x) {
+                          paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
+                        }
+          ))
+
+        renamed <- ta.cu
+        if (nrow(core$toRename) > 0) {
+          newNames <- ifelse(newNames %in% core$toRename$originalSpeciesName,
+                             core$toRename$species_names, newNames)
+        }
+        names(renamed) <- newNames
+        renamed <- renamed[!duplicated(names(renamed))]
+
+        write.FASTA(renamed, paste0("1.CuratedSequences/renamed_",
+                                    names(core$curatedSeqs)[y]))
+      }
     }))
 
-  seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x){
-    paste0(strsplit(x, " ")[[1]][1], collapse = "_")}))
+    write.csv(core$AccDat, "1.CuratedSequences/0.AccessionTable.csv")
+    write.csv(core$Full_dataset, "1.CuratedSequences/1.Taxonomy.csv")
+    write.csv(core$TableCombined, "1.CuratedSequences/2.Taxonomy.Sampling.csv")
+
+  } else {
+
+    if (!is.null(mergeGeneFiles)) {
+      mergedSeqs <- lapply(mergeGeneFiles, function(x) {
+        refF <- names(sqs.object)
+        targetF <- unlist(x)
+        if (all(targetF %in% refF)) {
+          seqs <- sqs.object[which(refF %in% targetF)]
+          comS <- do.call(c, seqs)
+          names(comS) <- gsub("^.*\\.", "", names(comS))
+          comS[!duplicated(sub(".*? ", "", names(comS)))]
+        } else {
+          message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found \n")
+        }
+      })
+      names(mergedSeqs) <- names(mergeGeneFiles)
+
+      if (!is.null(mergedSeqs[[1]])) {
+        sqs.object <- sqs.object[-which(names(sqs.object) %in% unlist(mergeGeneFiles))]
+        sqs.object <- c(sqs.object, mergedSeqs)
+      }
+    }
+
+    fastaSeqs <- lapply(sqs.object, function(x) {
+      seqs <- x[!duplicated(names(x))]
+      seqs[!duplicated(sub(".*? ", "", names(seqs)))]
+    })
+
+    core <- curate.sequences.core(
+      fastaSeqs = fastaSeqs,
+      fileNames = names(fastaSeqs),
+      filterTaxonomicCriteria = filterTaxonomicCriteria,
+      database = database,
+      kingdom = kingdom,
+      removeOutliers = removeOutliers,
+      minSeqs = minSeqs,
+      threshold = threshold,
+      ranks = ranks
+    )
+
+    # Build the returned sequence list, with original and renamed versions
+    seqs.complete.genes <- lapply(seq_along(core$curatedSeqs), function(y) {
+      if (length(names(core$curatedSeqs[[y]])) >= minSeqs) {
+        ta.cu <- core$curatedSeqs[[y]]
+        ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
+
+        newNames <-
+          unlist(lapply(names(ta.cu),
+                        function(x) {
+                          paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
+                        }
+          ))
+
+        renamed <- ta.cu
+        if (nrow(core$toRename) > 0) {
+          newNames <- ifelse(newNames %in% core$toRename$originalSpeciesName,
+                             core$toRename$species_names, newNames)
+        }
+        names(renamed) <- newNames
+        renamed <- renamed[!duplicated(names(renamed))]
+
+        list(Original = ta.cu, Renamed = renamed)
+      }
+    })
+
+    names(seqs.complete.genes) <- names(core$curatedSeqs)
+
+    toRet <- list("AccessionTable" = core$AccDat,
+         "Taxonomy" = core$Full_dataset,
+         "Taxonomy.Sampling" = core$TableCombined,
+         "Sequences" = seqs.complete.genes)
+
+    return(toRet)
+  }
+}
+
+
+#' Shared curation logic for sq.curate
+#'
+#' Runs the taxonomy lookup, duplicate removal, outlier detection, and
+#' taxonomic filtering that sq.curate needs regardless of whether the
+#' input sequences come from disk (folder) or from an in-memory
+#' sqs.object. Both entry points in sq.curate build a named list of
+#' DNAbin sequences (fastaSeqs) and hand it here, then take care of their
+#' own export step (writing FASTA/CSV files, or returning a list).
+#'
+#' @param fastaSeqs A named list of DNAbin sequences, one element per gene file.
+#' @param fileNames The file (or gene) names associated with fastaSeqs, used
+#'                  to track which sequences came from which source.
+#' @param filterTaxonomicCriteria See \code{sq.curate}.
+#' @param database See \code{sq.curate}.
+#' @param kingdom See \code{sq.curate}.
+#' @param removeOutliers See \code{sq.curate}.
+#' @param minSeqs See \code{sq.curate}.
+#' @param threshold See \code{sq.curate}.
+#' @param ranks See \code{sq.curate}.
+#'
+#' @return A list with AccDat, Full_dataset, TableCombined, curatedSeqs, and toRename.
+#'
+#' @keywords internal
+curate.sequences.core <- function(fastaSeqs,
+                                  fileNames,
+                                  filterTaxonomicCriteria,
+                                  database,
+                                  kingdom,
+                                  removeOutliers,
+                                  minSeqs,
+                                  threshold,
+                                  ranks) {
+
+  seqNames <- unlist(lapply(unlist(lapply(fastaSeqs, names)),
+                            function(x) {
+                              paste0(strsplit(x, " ")[[1]][2:3], collapse = "_")
+                            }))
+
+  seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x) {
+    paste0(strsplit(x, " ")[[1]][1], collapse = "_")
+  }))
 
   AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)),
                        "AccN" = seqAccN,
                        "Species" = seqNames)
-  AccDat$file <- rep(list.files(folder,pattern = '.fasta', full.names = F),
-                     unlist(lapply(fastaSeqs, length)))
+  AccDat$file <- rep(fileNames, unlist(lapply(fastaSeqs, length)))
 
   species_names <- unique(AccDat$Species)
 
@@ -176,7 +330,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     fastaSeqs <- lapply(fastaSeqs, function(x) {
       x[!names(x) %in% dupDel]
     })
-    AccDat <- AccDat[ !AccDat$OriginalNames %in% dupDel  , ]
+    AccDat <- AccDat[!AccDat$OriginalNames %in% dupDel, ]
   }
 
   Full_dataset <- cbind.data.frame(Taxonomy_species, species_names)
@@ -186,7 +340,7 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
 
   "%nin%" <- Negate("%in%")
 
-  toDel<-AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1]
+  toDel <- AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1]
 
   # Remove any "non-species" species
   if (length(toDel) > 0) {
@@ -196,46 +350,40 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     AccDat <- AccDat[!AccDat$OriginalNames %in% toDel, ]
   }
 
-
-
-  ##Detect outliers...
-  if(isTRUE(removeOutliers)){
-  cat("\n Removing outliers...\n")
-  fastaSeqsOutDet <- lapply(fastaSeqs, function(x){
-    if(length(x) >= minSeqs){
-    seqs <- as.list(as.character(x))
-    seqs <- unlist(lapply(seqs,paste0,collapse=""))
-    seqs <- Biostrings::DNAStringSet(seqs)
-    return(seqs)
-    }
-  })
-
-  fastaSeqsOutDet <- Filter(Negate(is.null), fastaSeqsOutDet)
-  fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
-  resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = threshold)
-  names(resOut) <- NULL
-  seqsRemove <- names(which(unlist(resOut) == TRUE))
-  AccDel <- gsub("\\..*","",seqsRemove)
-  AccDat$AccN <- gsub("\\..*","",AccDat$AccN )
-  namesDel <- AccDat[AccDat$AccN  %in%  AccDel,'OriginalNames']
-
-  if (length(toDel) > 0) {
-    fastaSeqs <- lapply(fastaSeqs, function(x) {
-      x[!names(x) %in% namesDel]
+  # Detect outliers
+  if (isTRUE(removeOutliers)) {
+    cat("\n Removing outliers...\n")
+    fastaSeqsOutDet <- lapply(fastaSeqs, function(x) {
+      if (length(x) >= minSeqs) {
+        seqs <- as.list(as.character(x))
+        seqs <- unlist(lapply(seqs, paste0, collapse = ""))
+        seqs <- Biostrings::DNAStringSet(seqs)
+        return(seqs)
+      }
     })
-    AccDat <- AccDat[!AccDat$OriginalNames %in% namesDel, ]
-  }
+
+    fastaSeqsOutDet <- Filter(Negate(is.null), fastaSeqsOutDet)
+    fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
+    resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = threshold)
+    names(resOut) <- NULL
+    seqsRemove <- names(which(unlist(resOut) == TRUE))
+    AccDel <- gsub("\\..*", "", seqsRemove)
+    AccDat$AccN <- gsub("\\..*", "", AccDat$AccN)
+    namesDel <- AccDat[AccDat$AccN %in% AccDel, 'OriginalNames']
+
+    if (length(toDel) > 0) {
+      fastaSeqs <- lapply(fastaSeqs, function(x) {
+        x[!names(x) %in% namesDel]
+      })
+      AccDat <- AccDat[!AccDat$OriginalNames %in% namesDel, ]
+    }
   }
 
-  ##
   Full_dataset <-
-    Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
+    Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
   WrongSpecies <-
     Full_dataset[!apply(Full_dataset, 1,
-                        function(x) any(grepl(filterTaxonomicCriteria, x))),]
-  RightSpecies <-
-    Full_dataset[
-      apply(Full_dataset, 1,function(x) any(grepl(filterTaxonomicCriteria,x))),]
+                        function(x) any(grepl(filterTaxonomicCriteria, x))), ]
 
   if (nrow(WrongSpecies) > 0) {
     seqsToDel <- AccDat[AccDat$Species %in% WrongSpecies, "OriginalNames"]
@@ -248,59 +396,24 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
     curatedSeqs <- fastaSeqs
   }
 
-  ## Rename incorrect synonyms
+  # Rename incorrect synonyms
   toRename <-
-    Full_dataset[Full_dataset$originalSpeciesName != Full_dataset$species_names,]
+    Full_dataset[Full_dataset$originalSpeciesName != Full_dataset$species_names, ]
 
-
-  ## Export
-  unlink("1.CuratedSequences", recursive = TRUE)
-  dir.create("1.CuratedSequences")
-  invisible(lapply(seq_along(curatedSeqs), function(y) {
-    if (length(names(curatedSeqs[[y]])) >= minSeqs) {
-      ## Original
-      ta.cu <- curatedSeqs[[y]]
-      ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
-
-      write.FASTA(ta.cu,
-                  paste0("1.CuratedSequences/", names(curatedSeqs)[y]))
-      ## Renamed
-      newNames <-
-        unlist(lapply(names(ta.cu),
-                      function(x) {
-                        paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
-                        }
-                      ))
-
-      renamed <- ta.cu
-      if (nrow(toRename) > 0) {
-        newNames <- ifelse(newNames %in% toRename$originalSpeciesName,
-                           toRename$species_names, newNames)
-      }
-      names(renamed) <- newNames
-      renamed <- renamed[!duplicated(names(renamed))]
-
-      write.FASTA(renamed, paste0("1.CuratedSequences/renamed_",
-                                  names(curatedSeqs)[y]))
-    }
+  perDS <- unlist(lapply(curatedSeqs, function(x) {
+    spps <- sub(" ", "_", sub(".*? ", "", names(x)))
+    spps <- lapply(spps, function(y) strsplit(y, " ")[[1]][1])
+    spps <- sub(" ", "", spps)
+    spps <- unlist(lapply(spps, function(y) {
+      Full_dataset[Full_dataset$originalSpeciesName == y, "species_names"]
+    }))
+    codes <- sub(" .*", "", names(x))
+    codes <- gsub("\\..*", "", codes)
+    codes[!duplicated(spps)]
   }))
 
-  perDS <- unlist(lapply(curatedSeqs, function(x){
-   spps <- sub(" ", "_", sub(".*? ", "", names(x)))
-   spps <- lapply(spps, function(y) strsplit(y, " ")[[1]][1])
-   spps <- sub(" ", "", spps)
-   spps <- unlist(lapply(spps, function(y){
-   Full_dataset[Full_dataset$originalSpeciesName == y, "species_names"]
-   }))
-   codes <- sub(" .*", "", names(x))
-   codes <- gsub("\\..*","",codes)
-   codes[!duplicated(spps)]
-  } ))
-
-  AccDat$AccN <- gsub("\\..*","",AccDat$AccN)
-
-  AccDat <- AccDat[AccDat$AccN %in% perDS,]
-
+  AccDat$AccN <- gsub("\\..*", "", AccDat$AccN)
+  AccDat <- AccDat[AccDat$AccN %in% perDS, ]
   AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) >= minSeqs)), ]
   Full_dataset <-
     Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
@@ -313,236 +426,18 @@ sq.curate <- function(filterTaxonomicCriteria = NULL,
   AccDat$Species <- newspp
   row.names(AccDat) <- NULL
 
-  Full_dataset <- Full_dataset[!duplicated(Full_dataset$species_names),]
+  Full_dataset <- Full_dataset[!duplicated(Full_dataset$species_names), ]
 
-
-  ##Create a summary of the dataset
-  sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
+  # Create a summary of the dataset
+  sumTable <- as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
   sumTable$species_names <- row.names(sumTable)
-  TableCombined <- merge(Full_dataset,sumTable, by = 'species_names', all.y = TRUE)
+  TableCombined <- merge(Full_dataset, sumTable, by = 'species_names', all.y = TRUE)
 
-  write.csv(AccDat, "1.CuratedSequences/0.AccessionTable.csv")
-  write.csv(Full_dataset, "1.CuratedSequences/1.Taxonomy.csv")
-  write.csv(TableCombined, "1.CuratedSequences/2.Taxonomy.Sampling.csv")
-
-  }else{
-
-    if (!is.null(mergeGeneFiles)) {
-      mergedSeqs <- lapply(mergeGeneFiles, function(x){
-        refF <- names(sqs.object)
-        targetF <- unlist(x)
-        if (all(targetF %in% refF)) {
-          seqs <- sqs.object[which(refF %in% targetF)]
-          comS <- do.call(c,seqs)
-          names(comS) <- gsub("^.*\\.","", names(comS))
-          comS[!duplicated(sub(".*? ", "", names(comS)))]
-        }else{
-          message("\nFiles ", paste(targetF, collapse = " AND "), ", expected to be merged, not found \n")
-        }
-      })
-      names(mergedSeqs) <- names(mergeGeneFiles)
-
-      if(! is.null(mergedSeqs[[1]]) ){
-      sqs.object <- sqs.object[-which(names(sqs.object) %in% unlist(mergeGeneFiles))]
-      sqs.object <- c(sqs.object, mergedSeqs)
-      }else{
-        sqs.object
-      }
-
-    }
-
-
-
-    fastaSeqs <- lapply(sqs.object, function(x){
-      seqs <- x[!duplicated(names(x))]
-      seqs[!duplicated(sub(".*? ", "", names(seqs)))]
-    })
-
-
-    seqNames <- unlist(lapply(fastaSeqs,
-                              function(x){
-                                lapply(strsplit(names(x), " "), function(z) paste0(z[2:3], collapse = "_"))
-                              }))
-
-    seqAccN <- unlist(lapply(unlist(lapply(fastaSeqs, names)), function(x){
-      paste0(strsplit(x, " ")[[1]][1], collapse = "_")}))
-
-    AccDat <- data.frame("OriginalNames" = unlist(lapply(fastaSeqs, names)),
-                         "AccN" = seqAccN,
-                         "Species" = seqNames)
-    AccDat$file <- rep(names(fastaSeqs),
-                       unlist(lapply(fastaSeqs, length)))
-
-    species_names <- unique(AccDat$Species)
-
-    Taxonomy_species <- if (database == "gbif") {
-      taxonomy.retrieve(
-        species_names = species_names, database = "gbif",
-        kingdom = kingdom, ranks = ranks
-      )
-    } else {
-      taxonomy.retrieve(species_names = species_names, database = "itis", ranks = ranks)
-    }
-
-    # Remove duplicated species
-    if (any(duplicated(AccDat[, c(3:4)]))) {
-      dupDel <- AccDat[duplicated(AccDat[, c(3:4)]), "OriginalNames"]
-      fastaSeqs <- lapply(fastaSeqs, function(x) {
-        x[!names(x) %in% dupDel]
-      })
-      AccDat <- AccDat[ !AccDat$OriginalNames %in% dupDel  , ]
-    }
-
-    Full_dataset <- cbind.data.frame(Taxonomy_species, species_names)
-    Full_dataset$originalSpeciesName <- Full_dataset$species_names
-    Full_dataset$species_names <- sub(" ", "_", Full_dataset$species)
-    Full_dataset <- na.omit(Full_dataset)
-
-    "%nin%" <- Negate("%in%")
-
-    toDel<-AccDat[which(AccDat$Species %nin% Full_dataset$originalSpeciesName), 1]
-
-    # Remove any "non-species" species
-    if (length(toDel) > 0) {
-      fastaSeqs <- lapply(fastaSeqs, function(x) {
-        x[!names(x) %in% toDel]
-      })
-      AccDat <- AccDat[!AccDat$OriginalNames %in% toDel, ]
-    }
-
-
-
-    ##Detect outliers...
-    if(isTRUE(removeOutliers)){
-      cat("\n Removing outliers...\n")
-      fastaSeqsOutDet <- lapply(fastaSeqs, function(x){
-        if(length(x) >= minSeqs){
-          seqs <- as.list(as.character(x))
-          seqs <- unlist(lapply(seqs,paste0,collapse=""))
-          seqs <- Biostrings::DNAStringSet(seqs)
-          return(seqs)
-        }
-      })
-
-      fastaSeqsOutDet <- Filter(Negate(is.null), fastaSeqsOutDet)
-      fastaSeqsOutDetaln <- lapply(fastaSeqsOutDet, msa::msa)
-      resOut <- lapply(fastaSeqsOutDetaln, odseq::odseq, distance_metric = "affine", B = 1000, threshold = threshold)
-      names(resOut) <- NULL
-      seqsRemove <- names(which(unlist(resOut) == TRUE))
-      AccDel <- gsub("\\..*","",seqsRemove)
-      AccDat$AccN <- gsub("\\..*","",AccDat$AccN )
-      namesDel <- AccDat[AccDat$AccN  %in%  AccDel,'OriginalNames']
-
-      if (length(toDel) > 0) {
-        fastaSeqs <- lapply(fastaSeqs, function(x) {
-          x[!names(x) %in% namesDel]
-        })
-        AccDat <- AccDat[!AccDat$OriginalNames %in% namesDel, ]
-      }
-    }
-
-    ##
-    Full_dataset <-
-      Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species,]
-    WrongSpecies <-
-      Full_dataset[!apply(Full_dataset, 1,
-                          function(x) any(grepl(filterTaxonomicCriteria, x))),]
-    RightSpecies <-
-      Full_dataset[
-        apply(Full_dataset, 1,function(x) any(grepl(filterTaxonomicCriteria,x))),]
-
-    if (nrow(WrongSpecies) > 0) {
-      seqsToDel <- AccDat[AccDat$Species %in% WrongSpecies, "OriginalNames"]
-      AccDat <- AccDat[!AccDat$Species %in% WrongSpecies, ]
-      curatedSeqs <- lapply(fastaSeqs, function(x) {
-        x[!names(x) %in% seqsToDel]
-      })
-      names(curatedSeqs) <- names(fastaSeqs)
-    } else {
-      curatedSeqs <- fastaSeqs
-    }
-
-    ## Rename incorrect synonyms
-    toRename <-
-      Full_dataset[Full_dataset$originalSpeciesName != Full_dataset$species_names,]
-
-
-    ## Export
-
-    seqs.complete.genes <- lapply(seq_along(curatedSeqs), function(y) {
-      if (length(names(curatedSeqs[[y]])) >= minSeqs) {
-        ## Original
-        ta.cu <- curatedSeqs[[y]]
-        ta.cu <- ta.cu[!duplicated(sub(".*? ", "", names(ta.cu)))]
-
-
-
-
-        ## Renamed
-        newNames <-
-          unlist(lapply(names(ta.cu),
-                        function(x) {
-                          paste(strsplit(x, " ")[[1]][2:3], collapse = "_")
-                        }
-          ))
-
-        renamed <- ta.cu
-        if (nrow(toRename) > 0) {
-          newNames <- ifelse(newNames %in% toRename$originalSpeciesName,
-                             toRename$species_names, newNames)
-        }
-        names(renamed) <- newNames
-        renamed <- renamed[!duplicated(names(renamed))]
-
-        seqsGene <- list(Original = ta.cu, Renamed = renamed )
-        return(seqsGene)
-      }
-    })
-
-    names(seqs.complete.genes) <- names(curatedSeqs)
-
-    perDS <- unlist(lapply(curatedSeqs, function(x){
-      spps <- sub(" ", "_", sub(".*? ", "", names(x)))
-      spps <- lapply(spps, function(y) strsplit(y, " ")[[1]][1])
-      spps <- sub(" ", "", spps)
-      spps <- unlist(lapply(spps, function(y){
-        Full_dataset[Full_dataset$originalSpeciesName == y, "species_names"]
-      }))
-      codes <- sub(" .*", "", names(x))
-      codes <- gsub("\\..*","",codes)
-      codes[!duplicated(spps)]
-    } ))
-
-    AccDat$AccN <- gsub("\\..*","",AccDat$AccN)
-    AccDat <- AccDat[AccDat$AccN %in% perDS,]
-
-    AccDat <- AccDat[AccDat$file %in% names(which(table(AccDat$file) >= minSeqs)), ]
-    Full_dataset <-
-      Full_dataset[Full_dataset$originalSpeciesName %in% AccDat$Species, ]
-
-    newspp <- unlist(lapply(AccDat$Species, function(x) {
-      Full_dataset[Full_dataset$originalSpeciesName == x, "species_names"]
-    }))
-
-    Full_dataset <- Full_dataset[!duplicated(Full_dataset$species_names),]
-
-    AccDat$OldSpecies <- AccDat$Species
-    AccDat$Species <- newspp
-    row.names(AccDat) <- NULL
-
-    ##Create a summary of the dataset
-    sumTable <-  as.data.frame.matrix(t(table(AccDat$file, AccDat$Species)))
-    sumTable$species_names <- row.names(sumTable)
-    TableCombined <- merge(Full_dataset,sumTable, by = 'species_names', all.y = TRUE)
-
-    toRet <- list("AccessionTable" = AccDat,
-         "Taxonomy" = Full_dataset,
-         "Taxonomy.Sampling" = TableCombined,
-         "Sequences" = seqs.complete.genes)
-
-    return(toRet)
-
-  }
-
-
+  list(
+    AccDat = AccDat,
+    Full_dataset = Full_dataset,
+    TableCombined = TableCombined,
+    curatedSeqs = curatedSeqs,
+    toRename = toRename
+  )
 }

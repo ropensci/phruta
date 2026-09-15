@@ -103,21 +103,12 @@ acc.retrieve <- function(organism,
                      ,.combine = 'rbind'
     ) %dopar% get_gene(x, search = base.search, nObs = count)
     stopCluster(cl)
-    }
+    } else {
 
-    if(sys == "Linux"){
-
+      # Linux, Windows, and any other platform fall back to pblapply
       AccDS <- pblapply(cuts, function(x){
         get_gene(x, search = base.search, nObs = count
         )})
-      AccDS <- do.call(rbind, AccDS)
-    }
-
-    if(sys == "Windows"){
-
-      AccDS <- pblapply(cuts, function(x){
-        get_gene(x, search = base.search, nObs = count
-                 )})
       AccDS <- do.call(rbind, AccDS)
     }
 
