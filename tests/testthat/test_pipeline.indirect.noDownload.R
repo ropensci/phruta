@@ -1,5 +1,6 @@
 
 test_that("Test if the full indirect pipeline works without downloading sequences", {
+  skip_if_offline()
 
   gs.seqs <- gene.sampling.retrieve(organism = "Phoca", speciesSampling = TRUE)
   targetGenes <- gs.seqs[1,]

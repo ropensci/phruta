@@ -2,6 +2,8 @@ unlink(list.dirs("."), recursive = TRUE)
 
 
 test_that("Test if the full indirect pipeline works", {
+  skip_if_offline()
+
   gs.seqs <- gene.sampling.retrieve(organism = "Phoca", speciesSampling = TRUE)
   targetGenes <- gs.seqs[1,]
 
